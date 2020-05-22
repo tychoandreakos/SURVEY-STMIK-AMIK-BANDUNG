@@ -1,0 +1,54 @@
+$merriweather: 'Merriweather', serif;
+$size-notif-wrapper: 35px;
+
+.user-account {
+  display: flex;
+  align-self: center;
+
+  .notif {
+    margin: {
+      right: 1.2rem;
+    }
+    cursor: pointer;
+
+    .notif-wrapper {
+      height: $size-notif-wrapper;
+      width: $size-notif-wrapper;
+      background: #5661b6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: #fff;
+      position: relative;
+
+      .notification {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        border: 2px solid #fff;
+        background: #ea4c89;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: -5px;
+        right: 0;
+      }
+    }
+  }
+
+  .email {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    h3 {
+      font: {
+        size: 0.9rem;
+        family: $merriweather;
+        weight: 300;
+      }
+    }
+  }
+}

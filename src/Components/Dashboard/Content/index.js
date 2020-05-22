@@ -4,9 +4,11 @@ import Header from '../Header';
 import Welcome from '../Welcome';
 import SurveyList from '../SurveyList';
 
+import './style.scss';
+
 const Content = () => {
   return (
-    <div id='content'>
+    <div id='content-dashboard'>
       <Header />
       <Welcome />
       <SurveyList />
