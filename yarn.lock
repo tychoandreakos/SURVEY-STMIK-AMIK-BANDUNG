@@ -8836,6 +8836,11 @@ react-is@^16.12.0, react-is@^16.8.1, react-is@^16.8.4:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-props@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/react-props/-/react-props-0.0.3.tgz#836fb887b155fbd7f7814d8eef12872b914b7c8f"
+  integrity sha1-g2+4h7FV+9f3gU2O7xKHK5FLfI8=
+
 react-scripts@3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-3.4.1.tgz#f551298b5c71985cc491b9acf3c8e8c0ae3ada0a"

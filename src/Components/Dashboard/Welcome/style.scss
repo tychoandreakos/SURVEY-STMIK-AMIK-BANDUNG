@@ -1,0 +1,50 @@
+$Merriweather: 'Merriweather', sans-serif;
+$Nunito: 'Nunito', sans-serif;
+
+.welcome {
+  width: 100%;
+  padding: 0 1.4em;
+
+  .panel {
+    margin-top: 1rem;
+    .start {
+      text-transform: capitalize;
+      color: #274472;
+      font: {
+        size: 1rem;
+        weight: bold;
+        family: $Merriweather;
+      }
+    }
+
+    .panel-element {
+      margin-top: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 0 1rem;
+      column-gap: 3rem;
+    }
+  }
+
+  .title {
+    width: 50%;
+
+    h3 {
+      color: #3c517d;
+      text-transform: capitalize;
+      margin-bottom: 0.5rem;
+      font: {
+        size: 1.5rem;
+        family: $Merriweather;
+      }
+    }
+
+    span {
+      color: #686f7a;
+      font: {
+        family: $Nunito;
+        size: 1rem;
+      }
+    }
+  }
+}

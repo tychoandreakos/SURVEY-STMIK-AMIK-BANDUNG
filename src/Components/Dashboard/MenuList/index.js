@@ -37,7 +37,7 @@ const MenuList = () => {
     if (menu.active) {
       return (
         <li key={i}>
-          <a class='active' href={menu.link}>
+          <a className='active' href={menu.link}>
             <Icon icon={menu.icon} />
           </a>
         </li>

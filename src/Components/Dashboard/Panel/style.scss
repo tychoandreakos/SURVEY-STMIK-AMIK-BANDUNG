@@ -1,0 +1,55 @@
+$Merriweather: 'Merriweather', sans-serif;
+$Roboto: 'Roboto', sans-serif;
+
+.panel-dashboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+
+  &:first-child {
+    background: #5661b6;
+    border-radius: 5px;
+    color: #fff !important;
+  }
+
+  .icon-wrapper {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    background: #e6f2ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .icon {
+      color: #274472;
+      font: {
+        size: 1rem;
+        family: $Roboto;
+        weight: 500;
+      }
+    }
+  }
+
+  h3 {
+    text-transform: capitalize;
+    margin-top: 0.9rem;
+    font: {
+      size: 1.1rem;
+      family: $Merriweather;
+      weight: 400;
+    }
+  }
+
+  .desc {
+    text-transform: capitalize;
+    text-align: center;
+    margin-top: 0.5rem;
+    color: #686f7a;
+    font: {
+      size: 0.9rem;
+    }
+  }
+}
