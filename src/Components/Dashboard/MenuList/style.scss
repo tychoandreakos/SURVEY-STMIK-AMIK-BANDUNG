@@ -1,19 +1,32 @@
 .menu-list {
-  margin-top: 3.5rem;
+  margin-top: 3rem;
   width: 100%;
   list-style: none;
 
   li {
     width: 100%;
-    background: red;
+
+    .active {
+      background: #f2f8ff;
+      border-right: 1px solid #5661b6;
+    }
 
     a {
       text-decoration: none;
       text-transform: capitalize;
-      padding: 2rem 0;
+      padding: 1.7rem 0;
       width: 100%;
       display: flex;
       justify-content: center;
+      color: #575fb2e0;
+      font: {
+        weight: light;
+        size: 1.9rem;
+      }
+
+      &:hover {
+        background: #f2f8ff;
+      }
     }
   }
 }
