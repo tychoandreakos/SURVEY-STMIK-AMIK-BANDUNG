@@ -6,18 +6,19 @@ import PropTypes from 'prop-types';
 import './style.scss';
 
 const Panel = ({ active, title, desc, icon }) => {
-  const size = 20;
+  const size = 35;
+  const color = '#5661b6';
   return (
     <div className='panel-dashboard'>
       <div className='icon-wrapper'>
         {active ? (
-          <Icon width={size} height={size} icon={icon} />
+          <Icon color={color} width={size} height={size} icon={icon} />
         ) : (
           <span className='icon'>{icon}</span>
         )}
       </div>
       <h3>{title}</h3>
-      <span className="desc">{desc}</span>
+      <span className='desc'>{desc}</span>
     </div>
   );
 };

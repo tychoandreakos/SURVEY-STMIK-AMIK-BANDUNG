@@ -1,9 +1,17 @@
 import React from 'react';
 
+import Survey from '../Survey';
+
+import './style.scss';
+
 const SurveyList = () => {
   return (
     <div id='survey-list'>
-      <h3>Survey List Component</h3>
+      <h3 className="title">Recent Survey</h3>
+      <div className='survey-list-survey'>
+        <Survey />
+        <Survey />
+      </div>
     </div>
   );
 };

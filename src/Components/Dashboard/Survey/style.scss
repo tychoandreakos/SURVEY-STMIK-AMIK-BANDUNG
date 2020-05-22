@@ -1,0 +1,83 @@
+$Roboto: 'Roboto', sans-serif;
+
+.survey {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  border: 1px solid #f3f4f5;
+  margin-bottom: 1.5rem;
+  background: #fff;
+  justify-content: space-between;
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.034);
+
+  .first,
+  .second {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .second {
+    padding-right: 3rem;
+  }
+
+  .logo {
+    padding: 0.8rem;
+    .logo-wrapper {
+      width: 75px;
+      height: 75px;
+      background: #edf0f0;
+      border-radius: 50%;
+    }
+  }
+
+  .status {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 1rem;
+    text-align: center;
+    font-family: $Roboto;
+    margin-right: 1rem;
+    font-weight: 300;
+
+    h4 {
+      font-size: 1.2rem;
+    }
+
+    span {
+      text-transform: capitalize;
+      font-size: 0.9rem;
+    }
+  }
+
+  .settings {
+    cursor: pointer;
+    margin-left: 2rem;
+    color: #5661b6;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      text-transform: capitalize;
+      margin-bottom: 0.4rem;
+      font: {
+        size: 1.4rem;
+        weight: 400;
+        family: $Roboto;
+      }
+    }
+
+    span {
+      text-transform: capitalize;
+      font: {
+        size: 0.8rem;
+        family: $Roboto;
+        weight: 300;
+      }
+    }
+  }
+}

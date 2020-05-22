@@ -1,0 +1,20 @@
+$Merriweather: 'Merriweather', sans-serif;
+
+#survey-list {
+  margin-top: 2rem;
+  padding: 0 1.2rem;
+
+  .survey-list-survey {
+    padding: 0 0.9rem;
+    margin-top: 1rem;
+  }
+
+  .title {
+    color: #274472;
+    text-transform: capitalize;
+    font: {
+      size: 1.2rem;
+      family: $Merriweather;
+    }
+  }
+}

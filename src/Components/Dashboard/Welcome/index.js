@@ -1,6 +1,6 @@
 import React from 'react';
 
-import smiley from '@iconify/icons-mdi/smiley';
+import plus from '@iconify/icons-mdi/plus';
 import Panel from '../Panel';
 
 import './style.scss';
@@ -13,7 +13,7 @@ const Welcome = () => {
 
   const panelState = [
     {
-      icon: smiley,
+      icon: plus,
       title: 'buat survey',
       desc: 'rancang survey sekarang juga',
       active: true,
