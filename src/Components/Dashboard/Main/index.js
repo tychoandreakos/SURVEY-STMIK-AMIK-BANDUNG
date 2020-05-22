@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Sidebar from '../Sidebar';
+import Content from '../Content';
 
 import './style.scss';
 
@@ -11,7 +12,7 @@ function Dashboard() {
         <Sidebar />
       </section>
       <section id='main'>
-        <h3>Main</h3>
+        <Content />
       </section>
     </div>
   );
