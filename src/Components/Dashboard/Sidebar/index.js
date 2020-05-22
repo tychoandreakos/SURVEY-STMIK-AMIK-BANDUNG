@@ -1,9 +1,13 @@
 import React from 'react';
 
+import UserProfile from '../UserProfile';
+
+import './style.scss';
+
 const Sidebar = () => {
   return (
     <div id='sidebar'>
-      <h3>Halo Dunia</h3>
+      <UserProfile />
     </div>
   );
 };

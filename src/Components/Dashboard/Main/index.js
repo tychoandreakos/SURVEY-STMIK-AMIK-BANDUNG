@@ -1,6 +1,8 @@
 import React from 'react';
 
-import Sidebar from './Sidebar';
+import Sidebar from '../Sidebar';
+
+import './style.scss';
 
 function Dashboard() {
   return (
