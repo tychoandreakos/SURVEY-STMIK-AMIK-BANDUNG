@@ -7,7 +7,12 @@ import './style.scss';
 function Dashboard() {
   return (
     <div id='dashboard-survey'>
-      <Sidebar />
+      <section id='sidebar-wrapper'>
+        <Sidebar />
+      </section>
+      <section id='main'>
+        <h3>Main</h3>
+      </section>
     </div>
   );
 }

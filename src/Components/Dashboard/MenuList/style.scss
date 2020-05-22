@@ -1,0 +1,19 @@
+.menu-list {
+  margin-top: 3.5rem;
+  width: 100%;
+  list-style: none;
+
+  li {
+    width: 100%;
+    background: red;
+
+    a {
+      text-decoration: none;
+      text-transform: capitalize;
+      padding: 2rem 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
