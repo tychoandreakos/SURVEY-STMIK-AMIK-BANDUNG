@@ -7,8 +7,14 @@ $roboto: 'Roboto', sans-serif;
   align-items: center;
   border-radius: 15px;
   background: #f2f4f5;
+  transition: box-shadow 0.2s ease;
+  border: 1px solid transparent;
 
-  
+  &:focus-within {
+    border: 1px solid #a7b4cc;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  }
+
   input {
     border: none;
     background: transparent;
