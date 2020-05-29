@@ -2,6 +2,8 @@ import React from 'react';
 
 import './style.scss';
 
+import DropdownUser from './DropdownUser';
+
 import { Icon } from '@iconify/react';
 import caret from '@iconify/icons-mdi/caret-down';
 import notif from '@iconify/icons-mdi/notifications';
@@ -21,6 +23,7 @@ const UserAccount = () => {
       <div className='email'>
         <h3>{email}</h3>
         <Icon icon={caret} />
+        <DropdownUser />
       </div>
     </div>
   );
