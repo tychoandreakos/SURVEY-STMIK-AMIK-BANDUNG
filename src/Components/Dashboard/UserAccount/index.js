@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './style.scss';
 
@@ -12,6 +12,17 @@ const UserAccount = () => {
   const email = 'ranimulyanik14@gmail.com';
   const notifState = true;
 
+  const [userList, setUserList] = useState({
+    showList: false,
+  });
+
+  const handleDropdownList = () => {
+    setUserList({
+      ...userList,
+      showList: !userList.showList,
+    });
+  };
+
   return (
     <div className='user-account'>
       <div className='notif'>
@@ -20,10 +31,14 @@ const UserAccount = () => {
           {notifState ? <div className='notification'></div> : ''}
         </div>
       </div>
-      <div className='email'>
+      <div
+        className='email'
+        onMouseLeave={handleDropdownList}
+        onMouseEnter={handleDropdownList}
+      >
         <h3>{email}</h3>
         <Icon icon={caret} />
-        <DropdownUser />
+        <DropdownUser open={userList.showList} />
       </div>
     </div>
   );

@@ -6,25 +6,32 @@ $Roboto: 'Roboto', serif;
   width: 25px;
   height: 25px;
   right: 1rem;
-  top: 2.3rem;
+  top: 2.5rem;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
   transform: rotate(140deg);
+  display: none;
 }
+
+.show {
+  display: block !important;
+}
+
 .dropdown {
-  background: #fff;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-  border: {
-    bottom: 6px solid #fff;
-  }
-  border-radius: 5px;
+  display: none;
   position: absolute;
-  top: 120%;
+  top: 75%;
   width: 210px;
 
   ul {
+    border-radius: 5px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    border: {
+      bottom: 6px solid #fff;
+    }
     width: 100%;
     list-style: none;
     color: rgb(110, 109, 122);
+    background: #fff;
 
     font: {
       size: 0.95rem;

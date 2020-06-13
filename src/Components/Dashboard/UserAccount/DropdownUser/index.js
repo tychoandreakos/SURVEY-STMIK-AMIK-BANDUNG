@@ -1,13 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Icon } from '@iconify/react';
 import heart from '@iconify/icons-mdi/heart';
 import settingAccount from '@iconify/icons-mdi/cog-outline';
-import logout from '@iconify/icons-mdi/logout-variant';
 
 import './style.scss';
 
-const DropdownUser = () => {
+const DropdownUser = ({ open }) => {
   const data = [
     {
       title: 'profile',
@@ -32,14 +32,26 @@ const DropdownUser = () => {
     </li>
   ));
 
+  let dropdown = ['dropdown'];
+  let caret = ['caret'];
+
+  if (open) {
+    caret = [...caret, 'show'].join(' ');
+    dropdown = [...dropdown, 'show'].join(' ');
+  }
+
   return (
     <>
-      <div className='caret'></div>
-      <div className='dropdown'>
+      <div className={caret}></div>
+      <div className={dropdown}>
         <ul>{dropdownEl}</ul>
       </div>
     </>
   );
+};
+
+DropdownUser.propTypes = {
+  open: PropTypes.bool.isRequired,
 };
 
 export default DropdownUser;
