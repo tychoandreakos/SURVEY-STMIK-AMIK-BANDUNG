@@ -14,6 +14,11 @@ $Roboto: 'Roboto', sans-serif;
     color: #fff !important;
     cursor: pointer;
     box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.4s ease;
+
+    &:active:hover {
+      transform: scale(0.98);
+    }
   }
 
   .icon-wrapper {
