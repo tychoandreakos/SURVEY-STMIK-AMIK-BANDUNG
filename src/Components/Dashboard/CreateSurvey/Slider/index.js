@@ -3,7 +3,7 @@ import React from 'react';
 import SlidersCreate from './Sliders';
 
 import clumsy from '@iconify/icons-mdi/fish';
-import money from '@iconify/icons-mdi/money-usd';
+import money from '@iconify/icons-mdi/dollar';
 import love from '@iconify/icons-mdi/heart';
 
 import './style.scss';
