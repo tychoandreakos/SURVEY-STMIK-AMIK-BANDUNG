@@ -2,6 +2,14 @@ $Merriweather: 'Merriweather', sans-serif;
 $Roboto: 'Roboto', sans-serif;
 
 .main-center {
+  .button-create {
+    margin-top: 0.8rem;
+    width: 66%;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .title {
     display: flex;
     flex-direction: column;

@@ -1,0 +1,48 @@
+$Roboto: 'Roboto', sans-serif;
+
+.btn-right {
+  display: flex;
+  padding: 0.7rem 1.2rem;
+  align-items: center;
+  background: #5661b6;
+  color: #fff;
+  justify-content: space-between;
+  border-radius: 0.3rem;
+  cursor: pointer;
+
+  span {
+    text-transform: uppercase;
+    font: {
+      family: $Roboto;
+      size: 0.86rem;
+    }
+  }
+}
+
+.btn-left {
+  display: flex;
+  padding: {
+    left: 0.5rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    right: 1rem;
+  }
+  align-items: center;
+  color: #a6a8ac;
+  cursor: pointer;
+
+  .icon-btn {
+    font: {
+      size: 1.2rem;
+    }
+  }
+
+  span {
+    text-transform: capitalize;
+    margin-left: 1.5rem;
+    font: {
+      family: $Roboto;
+      size: 1rem;
+    }
+  }
+}
