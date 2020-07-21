@@ -1,0 +1,24 @@
+$MerriWeather: 'MerriWeather', sans-serif;
+
+.slider {
+  width: 100%;
+
+  .sliders {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+    margin-top: 0.4rem;
+  }
+
+  .title-sliders {
+    text-transform: capitalize;
+    margin: {
+      left: 0.4rem;
+    }
+    color: #555;
+    font: {
+      family: $MerriWeather;
+      size: 0.9rem;
+    }
+  }
+}

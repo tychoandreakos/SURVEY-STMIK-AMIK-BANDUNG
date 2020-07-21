@@ -1,0 +1,60 @@
+$Roboto: 'Roboto', sans-serif;
+
+.active-create-sliders {
+  border: 1.5px solid #5661b6 !important;
+  color: #5661b6;
+}
+
+.sliders-create {
+  width: 13rem;
+  height: 9.5rem;
+  border-radius: 0.2rem;
+  border: 1.5px solid #a6a8ac;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: border 0.4s ease-in, color 0.3s ease-in;
+
+  &:hover {
+    border: 1.5px solid #5661b6;
+    color: #5661b6;
+  }
+
+  .icon {
+    font: {
+      size: 5rem;
+    }
+  }
+
+  .active-sliders {
+    position: absolute;
+    top: 0.3rem;
+    right: 0.6rem;
+    background: #5661b6;
+    color: #fff;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .panel-sliders {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h3 {
+      text-transform: capitalize;
+      margin-top: -.8rem;
+      font: {
+        family: $Roboto;
+        weight: 400;
+        size: 0.98rem;
+      }
+    }
+  }
+}
