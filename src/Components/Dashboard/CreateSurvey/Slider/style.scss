@@ -2,6 +2,7 @@ $MerriWeather: 'MerriWeather', sans-serif;
 
 .slider {
   width: 100%;
+  margin-top: 1rem;
 
   .sliders {
     display: grid;
@@ -14,11 +15,12 @@ $MerriWeather: 'MerriWeather', sans-serif;
     text-transform: capitalize;
     margin: {
       left: 0.4rem;
+      bottom: 0.5rem;
     }
     color: #555;
     font: {
       family: $MerriWeather;
-      size: 0.9rem;
+      size: 1rem;
     }
   }
 }

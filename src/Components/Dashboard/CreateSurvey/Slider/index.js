@@ -2,9 +2,9 @@ import React from 'react';
 
 import SlidersCreate from './Sliders';
 
-import clumsy from '@iconify/icons-mdi/1up';
-import money from '@iconify/icons-mdi/money'
-import love from '@iconify/icons-mdi/love'
+import clumsy from '@iconify/icons-mdi/fish';
+import money from '@iconify/icons-mdi/money-usd';
+import love from '@iconify/icons-mdi/heart';
 
 import './style.scss';
 
@@ -12,7 +12,7 @@ const SliderCreate = () => {
     const slider = [
         {
             icon: clumsy,
-            title: 'clumsy',
+            title: 'fishy business',
             active: false,
         },
         {
@@ -27,7 +27,7 @@ const SliderCreate = () => {
         },
     ];
     const slidersComponent = [];
-    
+
     slider.forEach((item, i) => {
         const itemToPush = <SlidersCreate key={i} icon={item.icon} title={item.title} active={item.active} />;
 

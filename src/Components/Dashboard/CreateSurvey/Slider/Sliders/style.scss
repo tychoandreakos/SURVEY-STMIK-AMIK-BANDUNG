@@ -24,7 +24,7 @@ $Roboto: 'Roboto', sans-serif;
 
   .icon {
     font: {
-      size: 5rem;
+      size: 4.5rem;
     }
   }
 
@@ -40,6 +40,9 @@ $Roboto: 'Roboto', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
+    font: {
+      size: 1.14rem;
+    }
   }
 
   .panel-sliders {
@@ -49,7 +52,7 @@ $Roboto: 'Roboto', sans-serif;
 
     h3 {
       text-transform: capitalize;
-      margin-top: -.8rem;
+      margin-top: -0.8rem;
       font: {
         family: $Roboto;
         weight: 400;
