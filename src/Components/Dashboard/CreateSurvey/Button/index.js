@@ -7,7 +7,8 @@ import './style.scss';
 const ButtonCreate = ({ type, icon }) => {
     const TYPE = {
         LEFT: 'left',
-        RIGHT: 'right'
+        RIGHT: 'right',
+        ANOTHER: 'another'
     }
 
     let btn;
@@ -21,13 +22,22 @@ const ButtonCreate = ({ type, icon }) => {
             </div>
         )
     }
-    else {
+
+    if (type == TYPE.RIGHT) {
         btn = (
             <div className="btn-right">
                 <span>next</span>
                 <div className="icon-btn">
                     <Icon icon={icon} />
                 </div>
+            </div>
+        )
+    }
+
+    if (type == TYPE.ANOTHER) {
+        btn = (
+            <div className="btn-another">
+                <span>Create Survey!</span>
             </div>
         )
     }

@@ -20,6 +20,9 @@ const MainCreateSurvey = () => {
                 <Button type="left" icon={arrowLeft} />
                 <Button type="right" icon={arrowRight} />
             </div>
+            <div className="create">
+                <Button type="another" />
+            </div>
         </div>
     )
 }

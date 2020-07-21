@@ -19,6 +19,24 @@ $Roboto: 'Roboto', sans-serif;
   }
 }
 
+.btn-another {
+  display: flex;
+  padding: 0.7rem 1.2rem;
+  background: #a6a8ac;
+  color: #444;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.3rem;
+
+  span {
+    text-transform: capitalize;
+    font: {
+      family: $Roboto;
+      size: 1rem;
+    }
+  }
+}
+
 .btn-left {
   display: flex;
   padding: {

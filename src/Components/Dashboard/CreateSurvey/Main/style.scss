@@ -10,6 +10,12 @@ $Roboto: 'Roboto', sans-serif;
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .create {
+    width: 28%;
+    margin-top: 5rem;
+    float: right;
+  }
+
   .title {
     display: flex;
     flex-direction: column;
