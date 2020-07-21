@@ -1,7 +1,9 @@
 import React from 'react';
 
 import Sidebar from '../Sidebar';
-import Content from '../Content';
+// import Content from '../Content';
+
+import Content from '../CreateSurvey/SectionOne';
 
 import './style.scss';
 

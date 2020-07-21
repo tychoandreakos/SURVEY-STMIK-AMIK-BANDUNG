@@ -1,0 +1,28 @@
+$Merriweather: 'Merriweather', sans-serif;
+$Roboto: 'Roboto', sans-serif;
+
+.main-center {
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .main-title {
+      font: {
+        family: $Roboto;
+        size: 1.6rem;
+      }
+      margin-top: 0.5rem;
+      color: #333;
+    }
+
+    .little-title {
+      font: {
+        family: $Merriweather;
+        size: 0.9rem;
+      }
+      text-transform: capitalize;
+      color: #999;
+    }
+  }
+}
