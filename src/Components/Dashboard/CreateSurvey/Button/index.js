@@ -14,12 +14,12 @@ const ButtonCreate = ({ type, icon, clicked }) => {
     let btn;
     if (type == TYPE.LEFT) {
         btn = (
-            <div className="btn-left">
+            <button onClick={clicked} className="btn-left">
                 <div className="icon-btn">
                     <Icon icon={icon} />
                 </div>
                 <span>previous</span>
-            </div>
+            </button>
         )
     }
 

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState} from 'react';
 
 import SlidersCreate from './Sliders';
 import arrowLeft from '@iconify/icons-mdi/arrow-left'
@@ -17,6 +17,7 @@ const SliderCreate = () => {
         count: 1,
         width: 0
     })
+    let countUpdate;
     const slider = [
         {
             icon: clumsy,
@@ -49,6 +50,12 @@ const SliderCreate = () => {
             active: false,
             current: false,
         },
+        {
+            icon: clumsy,
+            title: 'fishy business',
+            active: false,
+            current: false,
+        },
     ];
     const slidersComponent = [];
 
@@ -58,24 +65,11 @@ const SliderCreate = () => {
         slidersComponent.push(itemToPush)
     });
 
-    const moveBack = () => {
-        // const elem = slidersRef.current.querySelector('.current-sliders');
-        // const el = elem.prevSibling;
-        // const move = elem.getBoundingClientRect().width - 10;
-        // const moveSlider = `${move * elemState.count}px`;
-        // carousel(elem, el, moveSlider);
-        console.log('back')
-    }
-
     const carousel = (elem, el, move) => {
         const className = 'current-sliders';
 
         if (el) {
             slidersRef.current.style.left = move;
-            setElemState({
-                count: elemState.count + 1,
-            })
-
             elem.classList.remove(className);
             el.classList.add(className);
         } else {
@@ -88,11 +82,33 @@ const SliderCreate = () => {
         }
     }
 
+    const moveBack = () => {
+        const elem = slidersRef.current.querySelector('.current-sliders');
+        const el = elem.previousSibling;
+
+        if (el == slidersRef.current.children[0] || el == slidersRef.current.children[1]) {
+
+        } else {
+            const move = elem.getBoundingClientRect().width + 15;
+            const moveSlider = `-${move * (elemState.count - 1) - move}px`;
+            setElemState({
+                ...elemState.count,
+                count: elemState.count - 1,
+            })
+            carousel(elem, el, moveSlider);
+        }
+
+
+    }
+
     const moveFoward = () => {
         const elem = slidersRef.current.querySelector('.current-sliders');
         const el = elem.nextSibling;
-        const move = elem.getBoundingClientRect().width + 10;
+        const move = elem.getBoundingClientRect().width + 15;
         const moveSlider = `-${move * elemState.count}px`;
+        setElemState({
+            count: elemState.count + 1,
+        })
         carousel(elem, el, moveSlider);
     }
 
