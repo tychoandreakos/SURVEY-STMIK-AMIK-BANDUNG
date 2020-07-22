@@ -4,7 +4,7 @@ import Icon from '@iconify/react'
 
 import './style.scss';
 
-const ButtonCreate = ({ type, icon }) => {
+const ButtonCreate = ({ type, icon, clicked }) => {
     const TYPE = {
         LEFT: 'left',
         RIGHT: 'right',
@@ -25,12 +25,12 @@ const ButtonCreate = ({ type, icon }) => {
 
     if (type == TYPE.RIGHT) {
         btn = (
-            <div className="btn-right">
+            <button onClick={clicked} className="btn-right">
                 <span>next</span>
                 <div className="icon-btn">
                     <Icon icon={icon} />
                 </div>
-            </div>
+            </button>
         )
     }
 

@@ -4,11 +4,24 @@ $MerriWeather: 'MerriWeather', sans-serif;
   width: 100%;
   margin-top: 1rem;
 
-  .sliders {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 1rem;
-    margin-top: 0.4rem;
+  .sliders-wrapper {
+    display: flex;
+    justify-content: center;
+    height: 10rem;
+    position: relative;
+    width: 42rem;
+    overflow: hidden;
+
+    .sliders {
+      top: 0;
+      left: 0;
+      right: 0;
+      position: absolute;
+      display: flex;
+      grid-gap: 1rem;
+      margin-top: 0.4rem;
+      transition: left 0.4s ease-in;
+    }
   }
 
   .title-sliders {
