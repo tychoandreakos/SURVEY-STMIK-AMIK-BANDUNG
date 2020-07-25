@@ -1,4 +1,4 @@
-import React, { useRef, useState} from 'react';
+import React, { useRef, useState } from 'react';
 
 import SlidersCreate from './Sliders';
 import arrowLeft from '@iconify/icons-mdi/arrow-left'
@@ -17,7 +17,6 @@ const SliderCreate = () => {
         count: 1,
         width: 0
     })
-    let countUpdate;
     const slider = [
         {
             icon: clumsy,
@@ -86,9 +85,9 @@ const SliderCreate = () => {
         const elem = slidersRef.current.querySelector('.current-sliders');
         const el = elem.previousSibling;
 
-        if (el == slidersRef.current.children[0] || el == slidersRef.current.children[1]) {
-
-        } else {
+        if (el == slidersRef.current.children[0] || el == slidersRef.current.children[1])
+            return false
+        else {
             const move = elem.getBoundingClientRect().width + 15;
             const moveSlider = `-${move * (elemState.count - 1) - move}px`;
             setElemState({
@@ -97,8 +96,6 @@ const SliderCreate = () => {
             })
             carousel(elem, el, moveSlider);
         }
-
-
     }
 
     const moveFoward = () => {
