@@ -1,4 +1,14 @@
 .header-survey-form {
+  padding: 1.5rem;
+  margin: {
+    top: 0.5rem;
+    left: 2rem;
+    right: 2rem;
+  }
+  border-radius: 1.25rem;
+  background-color: #5661b6;
+  color: #fff;
+
   .top-header {
     display: flex;
     justify-content: space-between;
