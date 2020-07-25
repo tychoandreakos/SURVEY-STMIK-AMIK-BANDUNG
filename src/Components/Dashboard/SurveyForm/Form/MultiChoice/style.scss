@@ -1,0 +1,60 @@
+$Roboto: 'Roboto', sans-serif;
+$MerriWeather: 'MerriWeather', sans-serif;
+
+.selected {
+  background: #5661b6;
+  box-shadow: 0 10px 14px rgba(0, 0, 0, 0.15);
+  color: #fff;
+  padding: 1rem 3rem;
+}
+
+.not-selected {
+  border: 2px solid #5661b6;
+  color: #5661b6;
+  padding: 0.8rem 3rem;
+}
+
+.multichoice {
+  border-radius: 0.5rem;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 1.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .icon {
+    background: #fff;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    left: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .icon-circle {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #5661b6;
+    }
+  }
+
+  span {
+    text-transform: capitalize;
+    text-align: center;
+    font: {
+      family: $Roboto;
+      weight: 500;
+      size: 1rem;
+    }
+  }
+}
