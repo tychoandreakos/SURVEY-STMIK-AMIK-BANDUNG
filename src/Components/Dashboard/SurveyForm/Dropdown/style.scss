@@ -1,0 +1,69 @@
+$Roboto: 'Roboto', sans-serif;
+$MerrriWeather: 'MerriWeather', sans-serif;
+
+.dropdown-form {
+  position: absolute;
+  background: #fff;
+  box-shadow: 0 10px 14px rgba(0, 0, 0, 0.15);
+  border-radius: 0.5rem;
+  right: 0;
+  width: 14rem;
+  margin-top: 0.8rem;
+  padding: {
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    bottom: 0.5rem;
+  }
+
+  .chev {
+    width: 100%;
+    padding-top: 0.5rem;
+    text-align: center;
+  }
+
+  ul {
+    list-style-type: none;
+    margin-top: 1rem;
+    width: 100%;
+
+    li {
+      display: flex;
+      align-items: center;
+      padding: 0.3rem 0.5rem;
+      margin: 0.3rem 0;
+      cursor: pointer;
+
+      &:hover {
+        background: #f8f9fb;
+        color: #5661b6;
+      }
+
+      .icon {
+        color: #5661b6;
+        display: flex;
+        align-items: center;
+        font: {
+          size: 1.4rem;
+        }
+      }
+
+      span {
+        margin-left: 0.5rem;
+        text-transform: capitalize;
+        font: {
+          size: 0.88rem;
+          family: $Roboto;
+        }
+      }
+    }
+  }
+
+  h3 {
+    font: {
+      family: $Roboto;
+      size: 0.9rem;
+      weight: 500;
+    }
+  }
+}
