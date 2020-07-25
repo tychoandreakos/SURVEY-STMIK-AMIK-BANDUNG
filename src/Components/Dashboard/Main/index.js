@@ -3,7 +3,8 @@ import React from 'react';
 import Sidebar from '../Sidebar';
 // import Content from '../Content';
 
-import Content from '../CreateSurvey/SectionOne';
+// import Content from '../CreateSurvey/SectionOne';
+import SurveyForm from '../SurveyForm/Main';
 
 import './style.scss';
 
@@ -14,7 +15,7 @@ function Dashboard() {
         <Sidebar />
       </section>
       <section id='main'>
-        <Content />
+        <SurveyForm />
       </section>
     </div>
   );
