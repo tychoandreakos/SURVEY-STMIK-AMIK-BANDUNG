@@ -17,12 +17,18 @@ $Merriweather: 'MerriWeather', sans-serif;
     margin-top: 2rem;
   }
 
-  .btn-handler {
-    position: absolute;
-    right: 2%;
+  .btn-wrapper {
+    position: fixed;
+    right: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 65vh;
 
-    .plus {
-      position: relative;
+    .btn-handler {
+      .plus {
+        position: relative;
+      }
     }
   }
 

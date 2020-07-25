@@ -1,6 +1,14 @@
 $Roboto: 'Roboto', sans-serif;
 $MerrriWeather: 'MerriWeather', sans-serif;
 
+.active {
+  height: 230px;
+}
+
+.not-active {
+  height: 0;
+}
+
 .dropdown-form {
   position: absolute;
   background: #fff;
@@ -9,11 +17,16 @@ $MerrriWeather: 'MerriWeather', sans-serif;
   right: 0;
   width: 14rem;
   margin-top: 0.8rem;
-  padding: {
-    top: 1rem;
-    left: 1rem;
-    right: 1rem;
-    bottom: 0.5rem;
+  transition: height 0.5s ease-in;
+  overflow: hidden;
+
+  .dropdown-wrapper {
+    padding: {
+      top: 1rem;
+      left: 1rem;
+      right: 1rem;
+      bottom: 0.5rem;
+    }
   }
 
   .chev {

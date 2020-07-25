@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import MultiChoice from '../Form/MultiChoice';
 import BtnOpt from '../BtnOpt';
@@ -8,13 +8,26 @@ import './style.scss';
 
 
 const ContentSurveyForm = () => {
+    const TYPE = {
+        OK: 'OK',
+        PLUS: 'PLUS'
+    }
+    const [dropdown, setDropdown] = useState(false);
+
+    const dropdownHandler = () => {
+        setDropdown(!dropdown)
+    }
+
     return (
         <div className="content-survey-form">
-            <div className="btn-handler">
-                <div className="plus">
-                    <BtnOpt />
-                    <Dropdown />
+            <div className="btn-wrapper">
+                <div className="btn-handler">
+                    <div onClick={dropdownHandler} className="plus">
+                        <BtnOpt type={TYPE.PLUS} />
+                        <Dropdown dropdownState={dropdown} />
+                    </div>
                 </div>
+                <BtnOpt type={TYPE.OK} />
             </div>
             <div className="survey-wrapper">
                 <h3>what is your favorite band?</h3>
