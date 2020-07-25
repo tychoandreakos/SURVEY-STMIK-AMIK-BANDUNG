@@ -1,3 +1,6 @@
+$Nunito: 'Nunito', sans-serif;
+$Roboto: 'Roboto', sans-serif;
+
 .header-survey-form {
   padding: 1.5rem;
   margin: {
@@ -8,6 +11,69 @@
   border-radius: 1.25rem;
   background-color: #5661b6;
   color: #fff;
+
+  .bottom-header {
+    display: flex;
+    margin-top: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: {
+      left: 0.4rem;
+      right: 1rem;
+    }
+
+    .icon {
+      display: flex;
+      align-items: center;
+    }
+
+    .btn-result {
+      display: flex;
+      align-items: center;
+      background: #ea4c89;
+      padding: 0.7rem 1rem;
+      border-radius: 0.8rem;
+      cursor: pointer;
+
+      span {
+        margin-left: 0.8rem;
+        font: {
+          family: $Roboto;
+          size: 0.9rem;
+        }
+      }
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      span {
+        text-transform: capitalize;
+        font: {
+          family: $Roboto;
+          weight: 500;
+          size: 0.9rem;
+        }
+      }
+
+      .icon {
+        font: {
+          size: 2rem !important;
+        }
+      }
+    }
+
+    h2 {
+      text-transform: capitalize;
+      font: {
+        family: $Nunito;
+        weight: 400;
+        size: 1.6rem;
+      }
+    }
+  }
 
   .top-header {
     display: flex;
