@@ -1,0 +1,26 @@
+$Roboto: 'Roboto', sans-serif;
+
+.single-text-box {
+  margin-bottom: 3.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .text-box-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      margin-right: 1rem;
+      text-transform: uppercase;
+      color: #5661b6;
+      font: {
+        family: $Roboto;
+        size: 1rem;
+        weight: 500;
+      }
+    }
+  }
+}

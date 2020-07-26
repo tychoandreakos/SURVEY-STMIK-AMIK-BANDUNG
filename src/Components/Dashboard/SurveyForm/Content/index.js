@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 
-import MultiChoice from '../Form/MultiChoice';
+// formBUilder
+// import MultiChoice from '../Form/MultiChoice';
+import SingleTextBox from '../Form/SingleTextBox';
+
 import BtnOpt from '../BtnOpt';
 import Dropdown from '../Dropdown';
 
@@ -21,6 +24,7 @@ const ContentSurveyForm = () => {
         setDropdown(!dropdown);
     }
 
+
     return (
         <div className="content-survey-form">
             <div className="btn-wrapper">
@@ -40,10 +44,11 @@ const ContentSurveyForm = () => {
                 <h3>what is your favorite band?</h3>
                 <span className="desc">Who is your favorite band all the time? Please answer the question if your ready. We really appreciate your answer :)</span>
                 <div className="form-builder">
-                    <MultiChoice title="the 1975" selected={true} />
+                    {/* <MultiChoice title="the 1975" selected={true} />
                     <MultiChoice title="one direction" selected={false} />
                     <MultiChoice title="paramore" selected={false} />
-                    <MultiChoice title="radiohead" selected={false} />
+                    <MultiChoice title="radiohead" selected={false} /> */}
+                    {[1, 2, 3].map((_, index) => <SingleTextBox key="index" title={`q${index + 1}`} />)}
                 </div>
             </div>
 
