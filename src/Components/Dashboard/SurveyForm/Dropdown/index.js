@@ -1,6 +1,7 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 
 import DropdownContext from '../../../../Store/Context/dropdown'
+import FormBuilderContext from '../../../../Store/Context/formBuilder';
 
 import Icon from '@iconify/react';
 import ShortText from '@iconify/icons-mdi/text-short'
@@ -13,34 +14,41 @@ import ArrowDown from '@iconify/icons-mdi/chevron-down'
 import './style.scss';
 
 const DropdownForm = () => {
+
+    const TYPEQUESTION = {
+        SHORT: 'SHORT',
+        LONG: 'LONG',
+        MULTIPLE: 'MULTIPLE',
+        CHECKBOX: 'CHECKBOX'
+    }
+
     const stateDropdown = [
         {
             icon: ShortText,
-            title: 'short text'
+            title: 'short text',
+            type: TYPEQUESTION.SHORT
         },
         {
             icon: LongText,
-            title: 'long text'
+            title: 'long text',
+            type: TYPEQUESTION.LONG
         },
         {
             icon: MultipleChoice,
-            title: 'multiple choice'
+            title: 'multiple choice',
+            type: TYPEQUESTION.MULTIPLE
         },
         {
             icon: Checkbox,
-            title: 'checkbox'
+            title: 'checkbox',
+            type: TYPEQUESTION.CHECKBOX
         }
     ]
 
 
     // initialize of useContext
     const { dropdown, dropdownHandler } = useContext(DropdownContext)
-
-    useEffect(() => {
-        console.log(dropdown)
-    }, [dropdown])
-
-
+    const { typeHandler } = useContext(FormBuilderContext)
     let backdrop;
 
     const dropdownForm = ['dropdown-form']
@@ -56,11 +64,11 @@ const DropdownForm = () => {
     }
 
     const liElem = stateDropdown.map((item, index) => (
-        <li key={index}>
+        <li onClick={() => typeHandler(item.type)} key={index}>
             <div className="icon">
                 <Icon icon={item.icon} />
             </div>
-            <span>{item.title}</span>
+            <span  >{item.title}</span>
         </li>
     ))
 

@@ -1,8 +1,12 @@
 import React from 'react';
 
+
+
 const formBuilder = React.createContext({
     question: [],
     questionHandler: (val) => { },
+    typeQuestion: "",
+    typeHandler: (val) => { },
     headTitle: '',
     headTitleHandler: (val) => { },
     titleSurvey: '',
