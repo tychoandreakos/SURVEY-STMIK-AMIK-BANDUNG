@@ -67,8 +67,8 @@ const ContentSurveyForm = () => {
                 <BtnOpt type={TYPE.OK} />
             </div>
             <div className="survey-wrapper">
-                {/* <h3>what is your favorite band?</h3>
-                <span className="desc">Who is your favorite band all the time? Please answer the question if your ready. We really appreciate your answer :)</span> */}
+                <h3>what is your favorite band?</h3>
+                <span className="desc">Who is your favorite band all the time? Please answer the question if your ready. We really appreciate your answer :)</span>
                 <div className="form-builder">
                     {/* <MultiChoice title="the 1975" selected={true} />
                     <MultiChoice title="one direction" selected={false} />
