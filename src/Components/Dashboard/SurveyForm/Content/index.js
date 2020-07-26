@@ -39,30 +39,17 @@ const ContentSurveyForm = () => {
         setDropdown(!dropdown);
     }
 
-
-    const sampleMulti = [
-        {
-            title: "the 1975",
-            selected: true,
-        },
-        {
-            title: "one direction",
-            selected: false,
-        },
-        {
-            title: "paramore",
-            selected: false,
-        },
-        {
-            title: "radiohead",
-            selected: false,
-        }
-    ]
-
     const questionHandler = (val) => {
         setElem([
             ...question,
             {
+                type: TYPEQUESTION.MULTIPLE,
+                desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse a omnis expedita non. Ad, dicta!",
+                title: "the 1975",
+                selected: false
+            },
+            {
+                type: TYPEQUESTION.SHORT,
                 title: val,
                 desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse a omnis expedita non. Ad, dicta!"
             }
@@ -70,21 +57,19 @@ const ContentSurveyForm = () => {
     }
 
     let renderQuestion = [];
-    if (typeQuestion == TYPEQUESTION.SHORT) {
-        renderQuestion = [
-            ...renderQuestion,
-            question.map((item, index) => <Result key={index} index={index + 1} title={item.title} desc={item.desc} />)
-        ]
-    }
+    question.forEach((item, index) => {
+        if (item.type === TYPEQUESTION.SHORT) {
+            renderQuestion.push((<Result key={index} index={index + 1} title={item.title} desc={item.desc} />))
+        }
 
-
-    if (typeQuestion == TYPEQUESTION.MULTIPLE) {
-        renderQuestion = [
-            ...renderQuestion,
-            question.map((item, index) => <Result key={index} index={index + 1} title={item.title} desc={item.desc} />),
-            sampleMulti.map((item, key) => <MultiChoice key={key} title={item.title} selected={item.selected} />)
-        ]
-    }
+        if (item.type === TYPEQUESTION.MULTIPLE) {
+            renderQuestion.push((
+                <Result key={index} index={index + 1} title={item.title} desc={item.desc}>
+                    {<MultiChoice key={index} title={item.title} selected={item.selected} />}
+                </Result>
+            ))
+        }
+    })
 
     return (
         <div className="content-survey-form">
