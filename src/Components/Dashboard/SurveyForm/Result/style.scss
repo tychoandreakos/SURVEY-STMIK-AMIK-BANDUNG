@@ -1,0 +1,46 @@
+$Roboto: 'Roboto', sans-serif;
+
+.result-survey {
+  width: 100%;
+  cursor: pointer;
+  padding: 0.5rem;
+
+  &:hover {
+    background: #ea4c89;
+    color: #fff;
+  }
+
+  .descr {
+    color: #444;
+    font: {
+      size: 0.9rem;
+    }
+  }
+
+  .title {
+    text-transform: capitalize;
+    line-height: 1.4rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #222;
+    font: {
+      weight: 500;
+      size: 1rem;
+      family: $Roboto;
+    }
+  }
+
+  .placeholder {
+    background: #d4d4d4;
+    width: 100%;
+    margin-top: 0.9rem;
+    height: 1.5rem;
+  }
+}
+
+.separator-survey {
+  width: 100%;
+  height: 1px;
+  background: #d4d4d4;
+  margin: 3rem 0;
+}
