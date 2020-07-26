@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
+
+import DropdownContext from '../../../../Store/Context/dropdown'
 
 import Icon from '@iconify/react';
 import ShortText from '@iconify/icons-mdi/text-short'
@@ -10,7 +12,7 @@ import ArrowDown from '@iconify/icons-mdi/chevron-down'
 
 import './style.scss';
 
-const DropdownForm = ({ dropdownState }) => {
+const DropdownForm = () => {
     const stateDropdown = [
         {
             icon: ShortText,
@@ -30,14 +32,28 @@ const DropdownForm = ({ dropdownState }) => {
         }
     ]
 
-    const dropdownForm = ['dropdown-form']
-    if (dropdownState) dropdownForm.push('active')
-    else dropdownForm.push('not-active')
 
+    // initialize of useContext
+    const { dropdown, dropdownHandler } = useContext(DropdownContext)
 
     useEffect(() => {
-        console.log(dropdownState)
-    }, [dropdownState])
+        console.log(dropdown)
+    }, [dropdown])
+
+
+    let backdrop;
+
+    const dropdownForm = ['dropdown-form']
+    if (dropdown) {
+        dropdownForm.push('active-dropdown')
+        backdrop = (
+            <div onClick={dropdownHandler} className="backdrop-dropdown"></div>
+        )
+    }
+    else {
+        dropdownForm.push('not-active-dropdown')
+        backdrop = undefined
+    }
 
     const liElem = stateDropdown.map((item, index) => (
         <li key={index}>
@@ -48,12 +64,13 @@ const DropdownForm = ({ dropdownState }) => {
         </li>
     ))
 
+
     const dropdownFormEl = dropdownForm.join(' ')
 
     return (
         <div className={dropdownFormEl}>
             <div className="dropdown-wrapper">
-                <h3>Choose Question Format</h3>
+                <h3 >Choose Question Format</h3>
                 <ul>
                     {liElem}
                 </ul>
@@ -61,6 +78,7 @@ const DropdownForm = ({ dropdownState }) => {
                     <Icon icon={ArrowDown} />
                 </div>
             </div>
+            {backdrop}
         </div>
     )
 }

@@ -39,7 +39,7 @@ const BreadcrumbsHeader = () => {
                 </div>
                 <h5>{item.title}</h5>
             </div>
-            {(breadcrumbs.length - 1) != index ? arrowElem : undefined}
+            {(breadcrumbs.length - 1) !== index ? arrowElem : undefined}
         </div>
     ))
 

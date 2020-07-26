@@ -37,8 +37,9 @@ $Merriweather: 'MerriWeather', sans-serif;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-top: 2rem;
 
-    span {
+    .desc {
       color: #454552;
       font: {
         family: $Merriweather;

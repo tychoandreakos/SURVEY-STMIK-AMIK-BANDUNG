@@ -15,7 +15,7 @@ const BtnOpt = ({ type }) => {
     let btn;
 
 
-    if (type == TYPE.OK) {
+    if (type === TYPE.OK) {
         btn = (
             <div className="btn-ok">
                 <Icon icon={OK} />
@@ -23,7 +23,7 @@ const BtnOpt = ({ type }) => {
         )
     }
 
-    if (type == TYPE.PLUS) {
+    if (type === TYPE.PLUS) {
         btn = (
             <div className="btn-opt">
                 <Icon icon={Plus} />

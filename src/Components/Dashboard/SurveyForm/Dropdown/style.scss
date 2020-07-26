@@ -1,17 +1,17 @@
 $Roboto: 'Roboto', sans-serif;
 $MerrriWeather: 'MerriWeather', sans-serif;
 
-.active {
+.active-dropdown {
   height: 230px;
 }
 
-.not-active {
+.not-active-dropdown {
   height: 0;
 }
 
 .dropdown-form {
   position: absolute;
-  background: #fff;
+
   box-shadow: 0 10px 14px rgba(0, 0, 0, 0.15);
   border-radius: 0.5rem;
   right: 0;
@@ -19,8 +19,22 @@ $MerrriWeather: 'MerriWeather', sans-serif;
   margin-top: 0.8rem;
   transition: height 0.5s ease-in;
   overflow: hidden;
+  z-index: 100;
+
+  .backdrop-dropdown {
+    position: fixed;
+    background: transparent;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+  }
 
   .dropdown-wrapper {
+    background: #fff;
+    position: relative;
+    z-index: 100;
     padding: {
       top: 1rem;
       left: 1rem;
