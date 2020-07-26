@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // // formBUilder
-// import MultiChoice from '../Form/MultiChoice';
+import MultiChoice from '../Form/MultiChoice';
 import SingleTextBox from '../Form/SingleTextBox';
 import Result from '../Result';
 
@@ -70,16 +70,15 @@ const ContentSurveyForm = () => {
                 <h3>what is your favorite band?</h3>
                 <span className="desc">Who is your favorite band all the time? Please answer the question if your ready. We really appreciate your answer :)</span>
                 <div className="form-builder">
-                    {/* <MultiChoice title="the 1975" selected={true} />
-                    <MultiChoice title="one direction" selected={false} />
-                    <MultiChoice title="paramore" selected={false} />
-                    <MultiChoice title="radiohead" selected={false} />
-                    
-                    {[1].map((_, index) => <SingleTextBox key="index" title={`q${index + 1}`} />)} */}
                     {question.map((item, index) => <Result key={index} index={index + 1} title={item.title} desc={item.desc} />)}
                     <FormBuilderContext.Provider value={{ question, questionHandler }}>
                         {<SingleTextBox title={`q${question.length + 1}`} />}
                     </FormBuilderContext.Provider>
+
+                    <MultiChoice title="the 1975" selected={true} />
+                    <MultiChoice title="one direction" selected={false} />
+                    <MultiChoice title="paramore" selected={false} />
+                    <MultiChoice title="radiohead" selected={false} />
                 </div>
             </div>
 
