@@ -5,17 +5,18 @@ import './style.scss'
 import Icon from '@iconify/react';
 import ArrowDown from '@iconify/icons-mdi/dots-horizontal'
 import FormBuilderContext from '../../../Store/Context/formBuilder';
-import { useRef } from 'react';
 
-const InputFormSimple = () => {
+const InputFormSimple = ({ typeQuestion }) => {
 
     const [inputBox, setInputBox] = useState('')
     const { questionHandler } = useContext(FormBuilderContext)
 
     const test = ({ keyCode }) => {
         if (keyCode === 13) {
-            questionHandler(inputBox)
-            setInputBox('alsklaslka')
+            questionHandler({
+                type: typeQuestion,
+                title: inputBox
+            })
         }
     }
 

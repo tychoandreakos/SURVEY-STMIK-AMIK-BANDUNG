@@ -42,15 +42,14 @@ const ContentSurveyForm = () => {
     const questionHandler = (val) => {
         setElem([
             ...question,
+            // {
+            //     type: TYPEQUESTION.MULTIPLE,
+            //     desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse a omnis expedita non. Ad, dicta!",
+            //     title: "the 1975",
+            //     selected: false
+            // },
             {
-                type: TYPEQUESTION.MULTIPLE,
-                desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse a omnis expedita non. Ad, dicta!",
-                title: "the 1975",
-                selected: false
-            },
-            {
-                type: TYPEQUESTION.SHORT,
-                title: val,
+                ...val,
                 desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse a omnis expedita non. Ad, dicta!"
             }
         ])
@@ -92,7 +91,7 @@ const ContentSurveyForm = () => {
                 <div className="form-builder">
                     {renderQuestion}
                     <FormBuilderContext.Provider value={{ question, questionHandler }}>
-                        {<SingleTextBox title={`q${question.length + 1}`} />}
+                        {<SingleTextBox title={`q${question.length + 1}`} typeQuestion={typeQuestion} />}
                     </FormBuilderContext.Provider>
                 </div>
             </div>
