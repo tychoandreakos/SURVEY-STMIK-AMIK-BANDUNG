@@ -78,7 +78,7 @@ const ContentSurveyForm = () => {
                     {[1].map((_, index) => <SingleTextBox key="index" title={`q${index + 1}`} />)} */}
                     {question.map((item, index) => <Result key={index} index={index + 1} title={item.title} desc={item.desc} />)}
                     <FormBuilderContext.Provider value={{ question, questionHandler }}>
-                        {[1].map((_, index) => <SingleTextBox key="index" title={`q${index + 1}`} />)}
+                        {<SingleTextBox title={`q${question.length + 1}`} />}
                     </FormBuilderContext.Provider>
                 </div>
             </div>
