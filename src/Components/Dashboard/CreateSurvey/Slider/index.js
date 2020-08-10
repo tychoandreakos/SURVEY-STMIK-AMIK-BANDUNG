@@ -1,61 +1,21 @@
 import React, { useRef, useState } from 'react';
+import { connect } from 'react-redux';
 
 import SlidersCreate from './Sliders';
 import arrowLeft from '@iconify/icons-mdi/arrow-left'
 import arrowRight from '@iconify/icons-mdi/arrow-right'
 import Button from '../Button';
 
-import clumsy from '@iconify/icons-mdi/fish';
-import money from '@iconify/icons-mdi/dollar';
-import love from '@iconify/icons-mdi/heart';
-
 import './style.scss';
 
-const SliderCreate = () => {
+const SliderCreate = (props) => {
     const slidersRef = useRef()
     const [elemState, setElemState] = useState({
         count: 1,
         width: 0
     })
-    const slider = [
-        {
-            icon: clumsy,
-            title: 'fishy business',
-            active: false,
-            current: false,
-        },
-        {
-            icon: money,
-            title: 'money',
-            active: true,
-            current: false,
-        },
-        {
-            icon: love,
-            title: 'love',
-            active: false,
-            current: true,
-        },
-        {
-            icon: love,
-            title: 'love',
-            active: false,
-            current: false,
 
-        },
-        {
-            icon: clumsy,
-            title: 'fishy business',
-            active: false,
-            current: false,
-        },
-        {
-            icon: clumsy,
-            title: 'fishy business',
-            active: false,
-            current: false,
-        },
-    ];
+    const { slider } = props;
     const slidersComponent = [];
 
     slider.forEach((item, i) => {
@@ -130,4 +90,12 @@ const SliderCreate = () => {
     )
 }
 
-export default SliderCreate;
+const mapStateToProps = state => {
+    return {
+        slider: state.surveyCategory
+    }
+}
+
+const sliderWrap = connect(mapStateToProps)(SliderCreate);
+
+export default sliderWrap;

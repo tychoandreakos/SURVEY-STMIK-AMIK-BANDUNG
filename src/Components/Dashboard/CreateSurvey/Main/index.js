@@ -20,7 +20,6 @@ const MainCreateSurvey = (props) => {
             <div className="title">
                 <h5 className="little-title">Create Survey</h5>
                 <input placeholder={placeholder} className="main-title" value={title} onChange={titleHandler} />
-                {/* <h1 className="main-title">{title}</h1> */}
             </div>
             <Slider />
         </div>
