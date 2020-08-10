@@ -1,6 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
-
+import { Route, Switch } from 'react-router-dom';
 import Sidebar from '../Sidebar';
 import Content from '../Content';
 
@@ -24,5 +23,6 @@ function Dashboard() {
     </div>
   );
 }
+
 
 export default Dashboard;

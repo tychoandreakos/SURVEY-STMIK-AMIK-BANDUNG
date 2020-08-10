@@ -1,14 +1,21 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import rootReducer from './Store/redux'
 
 import Dashboard from './Components/Dashboard/Main';
+
+const store = createStore(rootReducer)
 
 function App() {
   return (
     <div id='app'>
-      <BrowserRouter>
-        <Dashboard />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Dashboard />
+        </BrowserRouter>
+      </Provider>
     </div>
   );
 }

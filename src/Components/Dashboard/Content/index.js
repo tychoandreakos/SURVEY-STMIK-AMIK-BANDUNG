@@ -1,17 +1,20 @@
-import React from 'react';
-
-import Header from '../Header';
-import Welcome from '../Welcome';
-import SurveyList from '../SurveyList';
+import React, { Suspense, lazy } from 'react';
 
 import './style.scss';
+
+const Header = lazy(() => import("../Header"))
+const Welcome = lazy(() => import("../Welcome"))
+const SurveyList = lazy(() => import("../SurveyList"))
+
 
 const Content = () => {
   return (
     <div id='content-dashboard'>
-      <Header />
-      <Welcome />
-      <SurveyList />
+      <Suspense fallback="loading...">
+        <Header />
+        <Welcome />
+        <SurveyList />
+      </Suspense>
     </div>
   );
 };
