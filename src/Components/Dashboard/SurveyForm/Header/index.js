@@ -20,7 +20,7 @@ const SurveyHeaderForm = (props) => {
     const { title, history } = props;
     useEffect(() => {
         if (title) setHeadTitle(title)
-        else history.push('/create')
+        // else history.push('/create')
     }, [title])
     const placeholderText = "Survey Title"
     const headTitleHandler = (val) => {

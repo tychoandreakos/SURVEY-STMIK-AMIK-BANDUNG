@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { TYPE_QUESTION } from '../../../../util/varTypes'
 
 // // formBUilder
 import MultiChoice from '../Form/MultiChoice';
@@ -20,16 +21,9 @@ const ContentSurveyForm = () => {
         PLUS: 'PLUS'
     }
 
-    const TYPEQUESTION = {
-        SHORT: 'SHORT',
-        LONG: 'LONG',
-        MULTIPLE: 'MULTIPLE',
-        CHECKBOX: 'CHECKBOX'
-    }
-
     const [dropdown, setDropdown] = useState(false)
     const [question, setElem] = useState([])
-    const [typeQuestion, setTypeQuestion] = useState(TYPEQUESTION.SHORT)
+    const [typeQuestion, setTypeQuestion] = useState(TYPE_QUESTION.SHORT)
 
     const typeHandler = (val) => {
         setTypeQuestion(val)
@@ -48,11 +42,11 @@ const ContentSurveyForm = () => {
 
     let renderQuestion = [];
     question.forEach((item, index) => {
-        if (item.type === TYPEQUESTION.SHORT) {
+        if (item.type === TYPE_QUESTION.SHORT) {
             renderQuestion.push((<Result key={item.id} index={index + 1} title={item.title} desc={item.desc} />))
         }
 
-        if (item.type === TYPEQUESTION.MULTIPLE) {
+        if (item.type === TYPE_QUESTION.MULTIPLE) {
             renderQuestion.push((
                 <Result key={item.id} index={index + 1} title={item.title} desc={item.desc}>
                     <div className="multichoice">
@@ -82,7 +76,7 @@ const ContentSurveyForm = () => {
                 <BtnOpt type={TYPE.OK} />
             </div>
             <div className="survey-wrapper">
-                <h3>what is your favorite band?</h3>
+                {/* <h3>what is your favorite band?</h3> */}
                 <span className="desc">Who is your favorite band all the time? Please answer the question if your ready. We really appreciate your answer :)</span>
                 <div className="form-builder">
                     {renderQuestion}

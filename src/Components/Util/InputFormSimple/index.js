@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { v4 as uuid } from 'uuid';
+import { TYPE_QUESTION } from '../../../util/varTypes'
 
 import './style.scss'
 
@@ -12,13 +13,6 @@ const InputFormSimple = ({ typeQuestion }) => {
     const [inputBox, setInputBox] = useState('')
     const { questionHandler } = useContext(FormBuilderContext)
 
-    const TYPEQUESTION = {
-        SHORT: 'SHORT',
-        LONG: 'LONG',
-        MULTIPLE: 'MULTIPLE',
-        CHECKBOX: 'CHECKBOX'
-    }
-
     const test = ({ keyCode }) => {
         let temp =
             [
@@ -29,7 +23,7 @@ const InputFormSimple = ({ typeQuestion }) => {
                 }
             ]
 
-        if (typeQuestion == TYPEQUESTION.MULTIPLE) {
+        if (typeQuestion == TYPE_QUESTION.MULTIPLE) {
             temp[0] = {
                 ...temp[0],
                 choices: [],
@@ -39,12 +33,17 @@ const InputFormSimple = ({ typeQuestion }) => {
 
         if (keyCode === 13) {
             questionHandler(temp)
+            setInputBox('')
         }
+    }
+
+    const inputHandler = (e) => {
+        setInputBox(e.target.value)
     }
 
     return (
         <div className="input-form-wrapper">
-            <input onKeyDown={test} onChange={(e) => setInputBox(e.target.value)} placeholder="Please write your question" type="text" />
+            <input onKeyDown={test} value={inputBox} onChange={inputHandler} placeholder="Please write your question" type="text" />
             <div className="icon">
                 <Icon icon={ArrowDown} />
             </div>
