@@ -39,7 +39,7 @@ const ButtonCreate = ({ type, icon, clicked, status }) => {
 
     if (type == TYPE.ANOTHER) {
         btn = (
-            <div className="btn-another">
+            <div className="btn-create-survey">
                 <span>Create Survey!</span>
             </div>
         )

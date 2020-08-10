@@ -20,7 +20,7 @@ $Roboto: 'Roboto', sans-serif;
   }
 }
 
-.btn-another {
+.btn-create-survey {
   display: flex;
   padding: 0.7rem 1.2rem;
   background: #a6a8ac;
@@ -28,6 +28,7 @@ $Roboto: 'Roboto', sans-serif;
   justify-content: center;
   align-items: center;
   border-radius: 0.3rem;
+  cursor: pointer;
 
   span {
     text-transform: capitalize;
