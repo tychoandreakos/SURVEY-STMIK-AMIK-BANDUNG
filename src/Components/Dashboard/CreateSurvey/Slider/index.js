@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { SURVEY_CATEGORY } from '../../../../util/varTypes';
+import { SURVEY_CATEGORY, SURVEY_FORM_BUILDER } from '../../../../util/varTypes';
+import { withRouter } from 'react-router-dom';
 
 import SlidersCreate from './Sliders';
 import arrowLeft from '@iconify/icons-mdi/arrow-left'
@@ -17,9 +18,9 @@ const SliderCreate = (props) => {
     })
 
     const [previous, setPrevious] = useState(false);
+    const [createStatus, setCreateStatus] = useState(false);
 
-
-    const { slider } = props;
+    const { slider, formSurvey, history } = props;
     const slidersComponent = [];
 
     slider.forEach(item => {
@@ -33,6 +34,11 @@ const SliderCreate = (props) => {
             setPrevious(!previous)
         }
     }, [elemState, previous])
+
+    useEffect(() => {
+        const checkObj = Object.keys(formSurvey).length >= 2 ?? false;
+        if (checkObj) setCreateStatus(true)
+    }, [formSurvey])
 
     const carousel = (elem, el, move) => {
         const className = 'current-sliders';
@@ -82,8 +88,12 @@ const SliderCreate = (props) => {
         carousel(elem, el, moveSlider);
     }
 
+    const checkIfObjectNotEmpty = () => Object.keys(formSurvey).length >= 2 ?? false;
+
     const createSurveyHandler = () => {
-        console.log('its working')
+        if (checkIfObjectNotEmpty()) {
+            history.push('/create/survey-form')
+        }
     }
 
     return (
@@ -101,7 +111,7 @@ const SliderCreate = (props) => {
                 <Button type="right" clicked={moveFoward} icon={arrowRight} />
             </div>
             <div className="create">
-                <Button clicked={createSurveyHandler} type="another" />
+                <Button status={createStatus} clicked={createSurveyHandler} type="another" />
             </div>
         </>
     )
@@ -109,11 +119,12 @@ const SliderCreate = (props) => {
 
 const mapStateToProps = state => {
     return {
-        slider: state[SURVEY_CATEGORY]
+        slider: state[SURVEY_CATEGORY],
+        formSurvey: state[SURVEY_FORM_BUILDER]
     }
 }
 
 
-const sliderWrap = connect(mapStateToProps)(SliderCreate);
+const sliderWrap = connect(mapStateToProps)(withRouter(SliderCreate));
 
 export default sliderWrap;

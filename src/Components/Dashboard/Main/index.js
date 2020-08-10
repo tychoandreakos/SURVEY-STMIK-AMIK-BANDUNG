@@ -4,7 +4,7 @@ import Sidebar from '../Sidebar';
 import Content from '../Content';
 
 import SectionOne from '../CreateSurvey/SectionOne';
-// import SurveyForm from '../SurveyForm/Main';
+import SurveyForm from '../SurveyForm/Main';
 
 import './style.scss';
 
@@ -17,7 +17,8 @@ function Dashboard() {
       <section id='main'>
         <Switch>
           <Route path="/" exact component={Content} />
-          <Route path="/create" component={SectionOne} />
+          <Route path="/create" exact component={SectionOne} />
+          <Route path="/create/survey-form" component={SurveyForm} />
         </Switch>
       </section>
     </div>

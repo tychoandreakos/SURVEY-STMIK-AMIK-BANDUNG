@@ -38,10 +38,13 @@ const ButtonCreate = ({ type, icon, clicked, status }) => {
     }
 
     if (type === TYPE.ANOTHER) {
+        const cls = ['btn-create-survey'];
+        if (status) cls.push('btn-create-active')
+        const joinCls = cls.join(' ')
         btn = (
-            <div onClick={clicked} className="btn-create-survey">
+            <button onClick={clicked} className={joinCls}>
                 <span>Create Survey!</span>
-            </div>
+            </button>
         )
     }
 
