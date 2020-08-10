@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import SlidersCreate from './Sliders';
@@ -15,6 +15,11 @@ const SliderCreate = (props) => {
         width: 0
     })
 
+    const [previous, setPrevious] = useState(false);
+    useEffect(() => {
+        if (previous && elemState.count === 1) previouseHandler()
+    }, [elemState])
+
     const { slider } = props;
     const slidersComponent = [];
 
@@ -23,6 +28,10 @@ const SliderCreate = (props) => {
 
         slidersComponent.push(itemToPush)
     });
+
+    const previouseHandler = () => {
+        setPrevious(!previous)
+    }
 
     const carousel = (elem, el, move) => {
         const className = 'current-sliders';
@@ -42,19 +51,21 @@ const SliderCreate = (props) => {
     }
 
     const moveBack = () => {
-        const elem = slidersRef.current.querySelector('.current-sliders');
-        const el = elem.previousSibling;
+        if (previous) {
+            const elem = slidersRef.current.querySelector('.current-sliders');
+            const el = elem.previousSibling;
 
-        if (el == slidersRef.current.children[0] || el == slidersRef.current.children[1])
-            return false
-        else {
-            const move = elem.getBoundingClientRect().width + 15;
-            const moveSlider = `-${move * (elemState.count - 1) - move}px`;
-            setElemState({
-                ...elemState.count,
-                count: elemState.count - 1,
-            })
-            carousel(elem, el, moveSlider);
+            if (el == slidersRef.current.children[0] || el == slidersRef.current.children[1])
+                return false
+            else {
+                const move = elem.getBoundingClientRect().width + 15;
+                const moveSlider = `-${move * (elemState.count - 1) - move}px`;
+                setElemState({
+                    ...elemState.count,
+                    count: elemState.count - 1,
+                })
+                carousel(elem, el, moveSlider);
+            }
         }
     }
 
@@ -63,6 +74,7 @@ const SliderCreate = (props) => {
         const el = elem.nextSibling;
         const move = elem.getBoundingClientRect().width + 15;
         const moveSlider = `-${move * elemState.count}px`;
+        if (!previous) previouseHandler()
         setElemState({
             count: elemState.count + 1,
         })
@@ -80,7 +92,7 @@ const SliderCreate = (props) => {
                 </div>
             </div>
             <div className="button-create">
-                <Button type="left" clicked={moveBack} icon={arrowLeft} />
+                <Button status={previous} type="left" clicked={moveBack} icon={arrowLeft} />
                 <Button type="right" clicked={moveFoward} icon={arrowRight} />
             </div>
             <div className="create">

@@ -4,7 +4,7 @@ import Icon from '@iconify/react'
 
 import './style.scss';
 
-const ButtonCreate = ({ type, icon, clicked }) => {
+const ButtonCreate = ({ type, icon, clicked, status }) => {
     const TYPE = {
         LEFT: 'left',
         RIGHT: 'right',
@@ -13,8 +13,11 @@ const ButtonCreate = ({ type, icon, clicked }) => {
 
     let btn;
     if (type == TYPE.LEFT) {
+        const cls = ['btn-left'];
+        if (status) cls.push('btn-previous-active')
+        const joinCls = cls.join(' ')
         btn = (
-            <button onClick={clicked} className="btn-left">
+            <button onClick={clicked} className={joinCls}>
                 <div className="icon-btn">
                     <Icon icon={icon} />
                 </div>
