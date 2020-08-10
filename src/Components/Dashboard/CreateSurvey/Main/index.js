@@ -1,18 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { setTileSurvey } from '../../../../Store/redux/action';
 
 import Slider from '../Slider';
 import './style.scss';
 
-const MainCreateSurvey = () => {
+const MainCreateSurvey = (props) => {
+
+    const [title, setTitle] = useState('');
+    const { addTitle } = props;
+    const placeholder = "Type something here..."
+
+    const titleHandler = (e) => {
+        setTitle(e.target.value)
+    }
+
     return (
         <div id="main-create">
             <div className="title">
                 <h5 className="little-title">Create Survey</h5>
-                <h1 className="main-title">Name Of Survey</h1>
+                <input placeholder={placeholder} className="main-title" value={title} onChange={titleHandler} />
+                {/* <h1 className="main-title">{title}</h1> */}
             </div>
             <Slider />
         </div>
     )
 }
 
-export default MainCreateSurvey;
+const mapDispatchToProps = dispatch => {
+    return {
+        addTitle: title => dispatch(setTileSurvey(title))
+    }
+}
+
+const MainCreateSurveyJoinRedux = connect(null, mapDispatchToProps)(MainCreateSurvey)
+
+export default MainCreateSurveyJoinRedux;

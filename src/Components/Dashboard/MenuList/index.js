@@ -2,6 +2,7 @@ import React from 'react';
 
 import './style.scss';
 import { Icon } from '@iconify/react';
+import { Link } from 'react-router-dom';
 
 import home from '@iconify/icons-mdi/home';
 import settings from '@iconify/icons-mdi/settings-outline';
@@ -13,7 +14,7 @@ const MenuList = () => {
     {
       title: 'home',
       icon: home,
-      link: '#',
+      link: '/',
       active: true,
     },
     {
@@ -37,17 +38,17 @@ const MenuList = () => {
     if (menu.active) {
       return (
         <li key={i}>
-          <a className='active' href={menu.link}>
+          <Link className='active' to={menu.link}>
             <Icon icon={menu.icon} />
-          </a>
+          </Link>
         </li>
       );
     } else {
       return (
         <li key={i}>
-          <a href={menu.link}>
+          <Link to={menu.link}>
             <Icon icon={menu.icon} />
-          </a>
+          </Link>
         </li>
       );
     }
