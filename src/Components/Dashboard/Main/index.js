@@ -1,10 +1,11 @@
 import React from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Sidebar from '../Sidebar';
-// import Content from '../Content';
+import Content from '../Content';
 
-// import Content from '../CreateSurvey/SectionOne';
-import SurveyForm from '../SurveyForm/Main';
+import SectionOne from '../CreateSurvey/SectionOne';
+// import SurveyForm from '../SurveyForm/Main';
 
 import './style.scss';
 
@@ -15,7 +16,10 @@ function Dashboard() {
         <Sidebar />
       </section>
       <section id='main'>
-        <SurveyForm />
+        <Switch>
+          <Route path="/" exact component={Content} />
+          <Route path="/create" component={SectionOne} />
+        </Switch>
       </section>
     </div>
   );

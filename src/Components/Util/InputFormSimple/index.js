@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import './style.scss'
 
@@ -11,12 +12,33 @@ const InputFormSimple = ({ typeQuestion }) => {
     const [inputBox, setInputBox] = useState('')
     const { questionHandler } = useContext(FormBuilderContext)
 
+    const TYPEQUESTION = {
+        SHORT: 'SHORT',
+        LONG: 'LONG',
+        MULTIPLE: 'MULTIPLE',
+        CHECKBOX: 'CHECKBOX'
+    }
+
     const test = ({ keyCode }) => {
+        let temp =
+            [
+                {
+                    id: uuid(),
+                    type: typeQuestion,
+                    title: inputBox
+                }
+            ]
+
+        if (typeQuestion == TYPEQUESTION.MULTIPLE) {
+            temp[0] = {
+                ...temp[0],
+                choices: [],
+            }
+        }
+
+
         if (keyCode === 13) {
-            questionHandler({
-                type: typeQuestion,
-                title: inputBox
-            })
+            questionHandler(temp)
         }
     }
 

@@ -42,29 +42,25 @@ const ContentSurveyForm = () => {
     const questionHandler = (val) => {
         setElem([
             ...question,
-            // {
-            //     type: TYPEQUESTION.MULTIPLE,
-            //     desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse a omnis expedita non. Ad, dicta!",
-            //     title: "the 1975",
-            //     selected: false
-            // },
-            {
-                ...val,
-                desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse a omnis expedita non. Ad, dicta!"
-            }
+            ...val,
         ])
     }
 
     let renderQuestion = [];
     question.forEach((item, index) => {
         if (item.type === TYPEQUESTION.SHORT) {
-            renderQuestion.push((<Result key={index} index={index + 1} title={item.title} desc={item.desc} />))
+            renderQuestion.push((<Result key={item.id} index={index + 1} title={item.title} desc={item.desc} />))
         }
 
         if (item.type === TYPEQUESTION.MULTIPLE) {
             renderQuestion.push((
-                <Result key={index} index={index + 1} title={item.title} desc={item.desc}>
-                    {<MultiChoice key={index} title={item.title} selected={item.selected} />}
+                <Result key={item.id} index={index + 1} title={item.title} desc={item.desc}>
+                    <div className="multichoice">
+                        <FormBuilderContext.Provider value={{ question, questionHandler }}>
+                            {<MultiChoice index={index} id={item.id} key={item.id} />}
+                        </FormBuilderContext.Provider>
+                        {/* {item.choices.length > 0 ? <h3>exist</h3> : <h3>not exists</h3>} */}
+                    </div>
                 </Result>
             ))
         }
