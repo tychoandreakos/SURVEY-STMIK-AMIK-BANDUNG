@@ -4,8 +4,8 @@ import { setTileSurvey } from '../../../../Store/redux/action';
 
 import Slider from '../Slider';
 import './style.scss';
-
 const MainCreateSurvey = (props) => {
+
 
     const [title, setTitle] = useState('');
     const { addTitle } = props;
@@ -15,11 +15,15 @@ const MainCreateSurvey = (props) => {
         setTitle(e.target.value)
     }
 
+    const saveTitleToRedux = () => {
+        addTitle(title)
+    }
+
     return (
         <div id="main-create">
             <div className="title">
                 <h5 className="little-title">Create Survey</h5>
-                <input placeholder={placeholder} className="main-title" value={title} onChange={titleHandler} />
+                <input onBlur={saveTitleToRedux} placeholder={placeholder} className="main-title" value={title} onChange={titleHandler} />
             </div>
             <Slider />
         </div>

@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { SURVEY_CATEGORY } from '../../../../util/varTypes';
 
 import SlidersCreate from './Sliders';
 import arrowLeft from '@iconify/icons-mdi/arrow-left'
@@ -81,6 +82,10 @@ const SliderCreate = (props) => {
         carousel(elem, el, moveSlider);
     }
 
+    const createSurveyHandler = () => {
+        console.log('its working')
+    }
+
     return (
         <>
             <div className="slider">
@@ -96,7 +101,7 @@ const SliderCreate = (props) => {
                 <Button type="right" clicked={moveFoward} icon={arrowRight} />
             </div>
             <div className="create">
-                <Button type="another" />
+                <Button clicked={createSurveyHandler} type="another" />
             </div>
         </>
     )
@@ -104,7 +109,7 @@ const SliderCreate = (props) => {
 
 const mapStateToProps = state => {
     return {
-        slider: state.surveyCategory
+        slider: state[SURVEY_CATEGORY]
     }
 }
 
