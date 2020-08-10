@@ -6,6 +6,7 @@ import './style.scss';
 
 import { Icon } from '@iconify/react';
 import checkIcon from '@iconify/icons-mdi/check';
+// import CheckMark from '../../../../Util/CheckMark';
 
 const SlidersCreate = (props) => {
 
@@ -19,6 +20,7 @@ const SlidersCreate = (props) => {
         check = (
             <div className="active-sliders">
                 <Icon icon={checkIcon} />
+                {/* <CheckMark /> */}
             </div>
         )
 
