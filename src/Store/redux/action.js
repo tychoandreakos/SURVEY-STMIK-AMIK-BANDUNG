@@ -1,12 +1,15 @@
-import { ADD_ARTICLE, SET_TITLE_SURVEY } from '../../util/actionTypes';
-
-export function addArticle(payload) {
-    return { type: ADD_ARTICLE, payload }
-};
+import * as actionType from '../../util/actionTypes';
 
 export function setTileSurvey(payload) {
     return {
-        type: SET_TITLE_SURVEY,
+        type: actionType.SET_TITLE_SURVEY,
+        payload
+    }
+}
+
+export function setSurveyCategory(payload) {
+    return {
+        type: actionType.SET_SURVEY_CATEGORY,
         payload
     }
 }

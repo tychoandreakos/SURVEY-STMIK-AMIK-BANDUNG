@@ -18,8 +18,8 @@ const SliderCreate = (props) => {
     const { slider } = props;
     const slidersComponent = [];
 
-    slider.forEach((item, i) => {
-        const itemToPush = <SlidersCreate key={i} icon={item.icon} title={item.title} current={item.current} active={item.active} />;
+    slider.forEach(item => {
+        const itemToPush = <SlidersCreate key={item._id} _id={item._id} icon={item.icon} title={item.title} current={item.current} active={item.active} />;
 
         slidersComponent.push(itemToPush)
     });
@@ -95,6 +95,7 @@ const mapStateToProps = state => {
         slider: state.surveyCategory
     }
 }
+
 
 const sliderWrap = connect(mapStateToProps)(SliderCreate);
 

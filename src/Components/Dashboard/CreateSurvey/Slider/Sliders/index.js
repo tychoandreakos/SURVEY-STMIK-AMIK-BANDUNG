@@ -1,11 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { setSurveyCategory } from '../../../../../Store/redux/action';
 
 import './style.scss';
 
 import { Icon } from '@iconify/react';
 import checkIcon from '@iconify/icons-mdi/check';
 
-const SlidersCreate = ({ icon, title, current, active }) => {
+const SlidersCreate = (props) => {
+
+    const { icon, title, current, active, _id, setSlider } = props;
 
     let check;
     const sliders = ['sliders-create'];
@@ -27,9 +31,12 @@ const SlidersCreate = ({ icon, title, current, active }) => {
     const slidersClass = sliders.join(' ')
     const slidersOuter = slidersOuterStack.join(' ');
 
+    const slidersHandler = () => {
+        setSlider(_id)
+    }
 
     return (
-        <div className={slidersOuter}>
+        <div onClick={slidersHandler} className={slidersOuter}>
             <div className={slidersClass}>
                 <div className="panel-sliders">
                     <div className="icon">
@@ -43,4 +50,12 @@ const SlidersCreate = ({ icon, title, current, active }) => {
     )
 }
 
-export default SlidersCreate;
+const mapDispatchToProps = dispatch => {
+    return {
+        setSlider: item => dispatch(setSurveyCategory(item)),
+    }
+}
+
+const SlidersCreateWrap = connect(null, mapDispatchToProps)(SlidersCreate)
+
+export default SlidersCreateWrap;
