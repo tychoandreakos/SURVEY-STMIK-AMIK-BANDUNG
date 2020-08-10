@@ -70,7 +70,7 @@ function rootReducer(state = initialState, action) {
     if (action.type === actionTypes.SET_SURVEY_CATEGORY) {
         const newSurvey = state.surveyCategory.map(item => {
             if (item.active) item.active = false
-            if (item._id == action.payload) item.active = true
+            if (item._id === action.payload) item.active = true
             return item;
         });
 

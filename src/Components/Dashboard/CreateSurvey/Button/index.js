@@ -12,7 +12,7 @@ const ButtonCreate = ({ type, icon, clicked, status }) => {
     }
 
     let btn;
-    if (type == TYPE.LEFT) {
+    if (type === TYPE.LEFT) {
         const cls = ['btn-left'];
         if (status) cls.push('btn-previous-active')
         const joinCls = cls.join(' ')
@@ -26,7 +26,7 @@ const ButtonCreate = ({ type, icon, clicked, status }) => {
         )
     }
 
-    if (type == TYPE.RIGHT) {
+    if (type === TYPE.RIGHT) {
         btn = (
             <button onClick={clicked} className="btn-right">
                 <span>next</span>
@@ -37,7 +37,7 @@ const ButtonCreate = ({ type, icon, clicked, status }) => {
         )
     }
 
-    if (type == TYPE.ANOTHER) {
+    if (type === TYPE.ANOTHER) {
         btn = (
             <div className="btn-create-survey">
                 <span>Create Survey!</span>

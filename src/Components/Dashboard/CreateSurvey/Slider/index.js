@@ -16,9 +16,7 @@ const SliderCreate = (props) => {
     })
 
     const [previous, setPrevious] = useState(false);
-    useEffect(() => {
-        if (previous && elemState.count === 1) previouseHandler()
-    }, [elemState])
+
 
     const { slider } = props;
     const slidersComponent = [];
@@ -29,9 +27,11 @@ const SliderCreate = (props) => {
         slidersComponent.push(itemToPush)
     });
 
-    const previouseHandler = () => {
-        setPrevious(!previous)
-    }
+    useEffect(() => {
+        if (previous && elemState.count === 1) {
+            setPrevious(!previous)
+        }
+    }, [elemState, previous])
 
     const carousel = (elem, el, move) => {
         const className = 'current-sliders';
@@ -55,7 +55,7 @@ const SliderCreate = (props) => {
             const elem = slidersRef.current.querySelector('.current-sliders');
             const el = elem.previousSibling;
 
-            if (el == slidersRef.current.children[0] || el == slidersRef.current.children[1])
+            if (el === slidersRef.current.children[0] || el === slidersRef.current.children[1])
                 return false
             else {
                 const move = elem.getBoundingClientRect().width + 15;
@@ -74,7 +74,7 @@ const SliderCreate = (props) => {
         const el = elem.nextSibling;
         const move = elem.getBoundingClientRect().width + 15;
         const moveSlider = `-${move * elemState.count}px`;
-        if (!previous) previouseHandler()
+        if (!previous) setPrevious(!previous)
         setElemState({
             count: elemState.count + 1,
         })
