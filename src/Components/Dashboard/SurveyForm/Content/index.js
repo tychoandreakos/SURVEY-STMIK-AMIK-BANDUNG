@@ -30,8 +30,6 @@ const ContentSurveyForm = () => {
         setDropdown(!dropdown);
     }
 
-    useEffect(() => console.log(question), [question])
-
     const questionHandler = (val) => {
         setQuestion([
             ...question,
@@ -39,6 +37,14 @@ const ContentSurveyForm = () => {
                 _id: uuid(),
                 ...val
             },
+        ])
+    }
+
+    useEffect(() => console.log(question), [question])
+
+    const multiChoiceHandler = (val) => {
+        setQuestion([
+            ...val
         ])
     }
 
@@ -51,9 +57,12 @@ const ContentSurveyForm = () => {
         if (item.type === TYPE_QUESTION.MULTIPLE) {
             renderQuestion.push((
                 <Result key={item._id} index={index + 1} title={item.title} desc={item.desc}>
+                    {item.choices.map(choice => (
+                        <MultiChoice key={choice._id} selected={choice.selected} title={choice.title} />
+                    ))}
                     <div className="multichoice">
-                        <FormBuilderContext.Provider value={{ question, questionHandler }}>
-                            {<MultiChoice index={index} id={item._id} key={item._id} />}
+                        <FormBuilderContext.Provider value={{ question, multiChoiceHandler }}>
+                            <MultiChoice _id={item._id} key={item._id} />
                         </FormBuilderContext.Provider>
                     </div>
                 </Result>

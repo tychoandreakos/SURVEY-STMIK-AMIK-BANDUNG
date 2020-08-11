@@ -1,16 +1,39 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import { v4 as uuid } from 'uuid';
 import FormBuilderContext from '../../../../../Store/Context/formBuilder';
 
 import './style.scss'
 
-const MultiChoice = ({ selected = false, title = "hahha", id, index }) => {
+const MultiChoice = ({ selected = false, _id, title }) => {
     const [choice, setChoice] = useState("");
-    const { question, questionHandler } = useContext(FormBuilderContext);
+    const { question, multiChoiceHandler } = useContext(FormBuilderContext);
+    const [newQuestion, setNewQuestion] = useState([]);
 
-    let circleElem;
+    useEffect(() => {
+        if (newQuestion.length > 0) multiChoiceHandler(newQuestion)
+    }, [newQuestion])
+
+    const choiceHandler = ({ keyCode }) => {
+
+        if (keyCode === 13) {
+            const mapQuestion = question.map(item => {
+                if (item._id === _id) {
+                    item.choices.push({
+                        _id: uuid(),
+                        title: choice,
+                        selected: false,
+                    })
+                };
+                return item
+            })
+            setNewQuestion(mapQuestion)
+            setChoice('')
+        }
+    }
+
     const multichoice = ['multichoice']
+    let circleElem;
     if (selected) {
         circleElem = (
             <div className="icon">
@@ -23,42 +46,25 @@ const MultiChoice = ({ selected = false, title = "hahha", id, index }) => {
         multichoice.push('not-selected')
     }
 
-    const multichoiceClass = multichoice.join(' ');
-
-    const choiceHandler = ({ keyCode }) => {
-
-        if (keyCode === 13) {
-            const quest = question.find(item => item.id === id)
-            const updateQuestion = [
-                { ...quest }
-            ]
-            updateQuestion[0].choices = [
-                ...updateQuestion[0].choices,
-                {
-                    [uuid()]: {
-                        title: choice,
-                        active: false,
-                    }
-                }
-            ]
-            console.log("this is from multichoce", [
-                ...question,
-                ...updateQuestion
-            ])
-            // questionHandler([
-            //     ...question,
-            //     {
-            //         ...updateQuestion
-            //     }
-            // ]);
-        }
+    let multiChoiceEl;
+    if (title) {
+        multiChoiceEl = (
+            <span>{title}</span>
+        )
+    } else {
+        multiChoiceEl = (
+            <input onKeyDown={choiceHandler} value={choice} onChange={e => setChoice(e.target.value)} className="choice-input" placeholder="Write the multichoice question here ..." />
+        )
+        multichoice.push('as-input')
     }
+
+
+    const multichoiceClass = multichoice.join(' ');
 
     return (
         <div className={multichoiceClass}>
             {circleElem}
-            {/* <span>{title}</span> */}
-            <input onKeyDown={choiceHandler} onChange={e => setChoice(e.target.value)} className="choice-input" placeholder="Write here" />
+            {multiChoiceEl}
         </div>
     )
 }

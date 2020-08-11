@@ -5,13 +5,20 @@ $MerriWeather: 'MerriWeather', sans-serif;
   background: #5661b6;
   box-shadow: 0 10px 14px rgba(0, 0, 0, 0.15);
   color: #fff;
-  padding: 1rem 3rem;
+  padding: 1rem 2rem;
 }
 
 .not-selected {
   border: 2px solid #5661b6;
   color: #5661b6;
-  padding: 0.8rem 3rem;
+  padding: 0.8rem 2rem;
+}
+
+.as-input {
+  cursor: text !important;
+  border: none !important;
+  border-bottom: 1px solid #a5a5ad !important;
+  padding: 0.5rem 2rem !important;
 }
 
 .multichoice {
