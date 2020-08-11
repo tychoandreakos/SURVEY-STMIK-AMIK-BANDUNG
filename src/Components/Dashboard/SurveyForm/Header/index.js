@@ -26,6 +26,11 @@ const SurveyHeaderForm = (props) => {
     const headTitleHandler = (val) => {
         setHeadTitle(val)
     }
+
+    const goBack = () => {
+        history.goBack()
+    }
+
     return (
         <div className="header-survey-form">
             <div className="top-header">
@@ -33,11 +38,11 @@ const SurveyHeaderForm = (props) => {
                 <UserAcccount />
             </div>
             <div className="bottom-header">
-                <div className="back-btn">
+                <div onClick={goBack} className="back-btn">
                     <div className="icon">
                         <Icon icon={ArrowLeft} />
                     </div>
-                    <span>form builder</span>
+                    <span>create survey</span>
                 </div>
                 <h2 className="title">
                     <FormBuilderContext.Provider value={{
