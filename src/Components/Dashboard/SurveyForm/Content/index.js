@@ -43,7 +43,7 @@ const ContentSurveyForm = () => {
     let renderQuestion = [];
     question.forEach((item, index) => {
         if (item.type === TYPE_QUESTION.SHORT) {
-            renderQuestion.push((<Result key={item.id} index={index + 1} title={item.title} desc={item.desc} />))
+            renderQuestion.push((<Result key={item._id} index={index + 1} title={item.title} desc={item.desc} />))
         }
 
         if (item.type === TYPE_QUESTION.MULTIPLE) {
@@ -51,7 +51,7 @@ const ContentSurveyForm = () => {
                 <Result key={item.id} index={index + 1} title={item.title} desc={item.desc}>
                     <div className="multichoice">
                         <FormBuilderContext.Provider value={{ question, questionHandler }}>
-                            {<MultiChoice index={index} id={item.id} key={item.id} />}
+                            {<MultiChoice index={index} id={item._id} key={item._id} />}
                         </FormBuilderContext.Provider>
                         {/* {item.choices.length > 0 ? <h3>exist</h3> : <h3>not exists</h3>} */}
                     </div>

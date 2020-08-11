@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useReducer, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 import { TYPE_QUESTION } from '../../../util/varTypes'
 
@@ -13,26 +13,42 @@ const InputFormSimple = ({ typeQuestion }) => {
     const [inputBox, setInputBox] = useState('')
     const { questionHandler } = useContext(FormBuilderContext)
 
-    const test = ({ keyCode }) => {
-        let temp =
-            [
-                {
-                    id: uuid(),
-                    type: typeQuestion,
-                    title: inputBox
+    let initialState = {
+        _id: uuid(),
+        type: typeQuestion,
+        title: ""
+    }
+
+    const reducer = (state, action) => {
+        switch (action.type) {
+            case TYPE_QUESTION.SHORT:
+                return {
+                    ...state,
+                    title: action.title
                 }
-            ]
-
-        if (typeQuestion == TYPE_QUESTION.MULTIPLE) {
-            temp[0] = {
-                ...temp[0],
-                choices: [],
-            }
+            case TYPE_QUESTION.MULTIPLE:
+                return {
+                    ...state,
+                    title: action.title,
+                    choices: [],
+                };
+            default:
+                return state
         }
+    }
 
 
+    const [state, dispatch] = useReducer(reducer, initialState);
+    useEffect(() => {
+        if (state.title.length > 0) questionHandler([state])
+    }, [state])
+
+    const test = ({ keyCode }) => {
         if (keyCode === 13) {
-            questionHandler(temp)
+            dispatch({
+                type: typeQuestion,
+                title: inputBox
+            })
             setInputBox('')
         }
     }
