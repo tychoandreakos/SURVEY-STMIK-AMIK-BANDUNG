@@ -8,3 +8,7 @@ export const TYPE_QUESTION = {
     MULTIPLE: 'MULTIPLE',
     CHECKBOX: 'CHECKBOX'
 }
+export const TYPE_BUTTON = {
+    OK: 'OK',
+    PLUS: 'PLUS'
+}

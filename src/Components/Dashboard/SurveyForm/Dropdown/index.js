@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 
+import { TYPE_QUESTION } from '../../../../util/varTypes'
 import DropdownContext from '../../../../Store/Context/dropdown'
 import FormBuilderContext from '../../../../Store/Context/formBuilder';
 
@@ -15,36 +16,28 @@ import './style.scss';
 
 const DropdownForm = () => {
 
-    const TYPEQUESTION = {
-        SHORT: 'SHORT',
-        LONG: 'LONG',
-        MULTIPLE: 'MULTIPLE',
-        CHECKBOX: 'CHECKBOX'
-    }
-
     const stateDropdown = [
         {
             icon: ShortText,
             title: 'short text',
-            type: TYPEQUESTION.SHORT
+            type: TYPE_QUESTION.SHORT
         },
         {
             icon: LongText,
             title: 'long text',
-            type: TYPEQUESTION.LONG
+            type: TYPE_QUESTION.LONG
         },
         {
             icon: MultipleChoice,
             title: 'multiple choice',
-            type: TYPEQUESTION.MULTIPLE
+            type: TYPE_QUESTION.MULTIPLE
         },
         {
             icon: Checkbox,
             title: 'checkbox',
-            type: TYPEQUESTION.CHECKBOX
+            type: TYPE_QUESTION.CHECKBOX
         }
     ]
-
 
     // initialize of useContext
     const { dropdown, dropdownHandler } = useContext(DropdownContext)
@@ -63,17 +56,22 @@ const DropdownForm = () => {
         backdrop = undefined
     }
 
+    const dropdownTypeHandler = (type) => {
+        typeHandler(type)
+    }
+
     const liElem = stateDropdown.map((item, index) => (
-        <li onClick={() => typeHandler(item.type)} key={index}>
+        <li onClick={() => dropdownTypeHandler(item.type)} key={index} >
             <div className="icon">
                 <Icon icon={item.icon} />
             </div>
             <span  >{item.title}</span>
-        </li>
+        </li >
     ))
 
 
     const dropdownFormEl = dropdownForm.join(' ')
+
 
     return (
         <div className={dropdownFormEl}>

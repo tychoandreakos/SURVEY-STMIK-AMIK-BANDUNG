@@ -1,5 +1,4 @@
 import React, { useState, useContext, useReducer, useEffect } from 'react';
-import { v4 as uuid } from 'uuid';
 import { TYPE_QUESTION } from '../../../util/varTypes'
 
 import './style.scss'
@@ -14,7 +13,6 @@ const InputFormSimple = ({ typeQuestion }) => {
     const { questionHandler } = useContext(FormBuilderContext)
 
     let initialState = {
-        _id: uuid(),
         type: typeQuestion,
         title: ""
     }
@@ -24,12 +22,12 @@ const InputFormSimple = ({ typeQuestion }) => {
             case TYPE_QUESTION.SHORT:
                 return {
                     ...state,
-                    title: action.title
+                    ...action
                 }
             case TYPE_QUESTION.MULTIPLE:
                 return {
                     ...state,
-                    title: action.title,
+                    ...action,
                     choices: [],
                 };
             default:
@@ -40,7 +38,7 @@ const InputFormSimple = ({ typeQuestion }) => {
 
     const [state, dispatch] = useReducer(reducer, initialState);
     useEffect(() => {
-        if (state.title.length > 0) questionHandler([state])
+        if (state.title.length > 0) questionHandler(state)
     }, [state])
 
     const test = ({ keyCode }) => {

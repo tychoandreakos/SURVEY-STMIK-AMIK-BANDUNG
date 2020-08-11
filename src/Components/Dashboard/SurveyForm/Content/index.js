@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { TYPE_QUESTION } from '../../../../util/varTypes'
+import React, { useState, useEffect } from 'react';
+import { TYPE_QUESTION, TYPE_BUTTON } from '../../../../util/varTypes'
+import { v4 as uuid } from 'uuid';
 
 // // formBUilder
 import MultiChoice from '../Form/MultiChoice';
@@ -16,27 +17,28 @@ import './style.scss';
 
 
 const ContentSurveyForm = () => {
-    const TYPE = {
-        OK: 'OK',
-        PLUS: 'PLUS'
-    }
-
     const [dropdown, setDropdown] = useState(false)
-    const [question, setElem] = useState([])
+    const [question, setQuestion] = useState([])
     const [typeQuestion, setTypeQuestion] = useState(TYPE_QUESTION.SHORT)
 
     const typeHandler = (val) => {
         setTypeQuestion(val)
     }
 
+
     const dropdownHandler = () => {
         setDropdown(!dropdown);
     }
 
+    useEffect(() => console.log(question), [question])
+
     const questionHandler = (val) => {
-        setElem([
+        setQuestion([
             ...question,
-            ...val,
+            {
+                _id: uuid(),
+                ...val
+            },
         ])
     }
 
@@ -48,12 +50,11 @@ const ContentSurveyForm = () => {
 
         if (item.type === TYPE_QUESTION.MULTIPLE) {
             renderQuestion.push((
-                <Result key={item.id} index={index + 1} title={item.title} desc={item.desc}>
+                <Result key={item._id} index={index + 1} title={item.title} desc={item.desc}>
                     <div className="multichoice">
                         <FormBuilderContext.Provider value={{ question, questionHandler }}>
                             {<MultiChoice index={index} id={item._id} key={item._id} />}
                         </FormBuilderContext.Provider>
-                        {/* {item.choices.length > 0 ? <h3>exist</h3> : <h3>not exists</h3>} */}
                     </div>
                 </Result>
             ))
@@ -65,7 +66,7 @@ const ContentSurveyForm = () => {
             <div className="btn-wrapper">
                 <div className="btn-handler">
                     <div onClick={dropdownHandler} className="plus">
-                        <BtnOpt type={TYPE.PLUS} />
+                        <BtnOpt type={TYPE_BUTTON.PLUS} />
                         <DropdownContext.Provider value={{ dropdown, dropdownHandler }}>
                             <FormBuilderContext.Provider value={{ typeQuestion, typeHandler }}>
                                 {<Dropdown />}
@@ -73,7 +74,7 @@ const ContentSurveyForm = () => {
                         </DropdownContext.Provider>
                     </div>
                 </div>
-                <BtnOpt type={TYPE.OK} />
+                <BtnOpt type={TYPE_BUTTON.OK} />
             </div>
             <div className="survey-wrapper">
                 {/* <h3>what is your favorite band?</h3> */}
