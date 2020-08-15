@@ -39,7 +39,8 @@ const InputFormSimple = ({ typeQuestion }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     useEffect(() => {
         if (state.title.length > 0) questionHandler(state)
-    }, [state, questionHandler])
+        else return undefined
+    }, [state])
 
     const test = ({ keyCode }) => {
         if (keyCode === 13) {

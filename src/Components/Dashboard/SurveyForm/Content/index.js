@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { TYPE_QUESTION, TYPE_BUTTON } from '../../../../util/varTypes'
 import { v4 as uuid } from 'uuid';
 
@@ -40,8 +40,6 @@ const ContentSurveyForm = () => {
             },
         ])
     }
-
-    useEffect(() => console.log(question), [question])
 
     const multiChoiceHandler = (val) => {
         setQuestion([
