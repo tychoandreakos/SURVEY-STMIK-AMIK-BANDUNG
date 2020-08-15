@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Button from './Button';
+import Dropdown from './Dropdown';
 
 import './style.scss';
 
@@ -9,6 +10,7 @@ const NewQuestionFirst = () => {
         <div className="new-question-first">
             <Button title="new question" />
             <span className="desc">or <a href="/">Copy and paste questions</a></span>
+            <Dropdown />
         </div>
     )
 }

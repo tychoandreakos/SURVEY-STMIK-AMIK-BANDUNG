@@ -1,0 +1,59 @@
+$Roboto: 'Roboto', sans-serif;
+
+.dropdown-question-first {
+  position: absolute;
+  background: #fff;
+  width: 80%;
+  padding: 1rem 0;
+  top: 60%;
+  box-shadow: 0 10px 14px rgba(0, 0, 0, 0.15);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: 0.4s height 0.5s;
+
+  .scroll-dropdown {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    font: {
+      size: 1.2rem;
+    }
+  }
+
+  .dropdown-title-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    .title-dropdown {
+      padding: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+
+      &:nth-child(odd) {
+        padding-left: 1rem;
+      }
+
+      &:hover {
+        background: #f8f9fb;
+      }
+
+      span {
+        margin-left: 0.7rem;
+        text-transform: capitalize;
+        font: {
+          size: 0.92rem;
+          family: $Roboto;
+        }
+      }
+
+      .icon-dropdown {
+        font: {
+          size: 1.4rem;
+        }
+      }
+    }
+  }
+}
