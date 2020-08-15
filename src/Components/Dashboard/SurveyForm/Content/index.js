@@ -92,7 +92,7 @@ const ContentSurveyForm = () => {
                     <FormBuilderContext.Provider value={{ question, questionHandler }}>
                         {<SingleTextBox title={`q${question.length + 1}`} typeQuestion={typeQuestion} />}
                     </FormBuilderContext.Provider>
-                    <NewQuestion typeHandler={typeHandler} />
+                    <NewQuestion formatHandler={typeHandler} />
                 </div>
             </div>
 

@@ -10,9 +10,14 @@ import './style.scss';
 const NewQuestionFirst = (props) => {
     const [dropdown, setDropdown] = useState(false)
 
-    const { typeHandler } = props;
+    const { formatHandler } = props;
 
     const { elementDropdown } = useContext(DropdownContext);
+
+    const typeHandler = type => {
+        formatHandler(type);
+        dropdownHandler();
+    }
 
     const dropdownHandler = () => {
         setDropdown(!dropdown)
