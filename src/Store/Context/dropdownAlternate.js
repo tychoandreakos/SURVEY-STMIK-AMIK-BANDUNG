@@ -11,57 +11,68 @@ import Ranking from '@iconify/icons-mdi/award';
 import DateAndTime from '@iconify/icons-mdi/calendar-range';
 import CommentBox from '@iconify/icons-mdi/comment-text-multiple';
 
+import { TYPE_QUESTION } from '../../util/varTypes';
 
 const sampleData = [
     {
         _id: uuid(),
         title: "Multiple Choice",
-        icon: MultipleChoice
+        icon: MultipleChoice,
+        type: TYPE_QUESTION.MULTIPLE
     },
     {
         _id: uuid(),
         title: "Checkboxes",
-        icon: Checkboxes
+        icon: Checkboxes,
+        type: TYPE_QUESTION.CHECKBOX
     },
     {
         _id: uuid(),
         title: "Star Rating",
-        icon: StarRating
+        icon: StarRating,
+        type: TYPE_QUESTION.STAR
     },
     {
         _id: uuid(),
         title: "dropdown",
         icon: DropdownIcon,
+        type: TYPE_QUESTION.DROPDOWNFORMAT,
     },
     {
         _id: uuid(),
         title: "single textbox",
-        icon: SingleTextBox
+        icon: SingleTextBox,
+        type: TYPE_QUESTION.SINGLETEXTBOX,
     },
     {
         _id: uuid(),
         title: "multiple textbox",
-        icon: MultipleTextBox
+        icon: MultipleTextBox,
+        type: TYPE_QUESTION.MULTIPLETEXTBOX,
     },
     {
         _id: uuid(),
         title: "text",
-        icon: TextIcon
+        icon: TextIcon,
+        type: TYPE_QUESTION.TEXTFORMAT
     },
     {
         _id: uuid(),
         title: "ranking",
-        icon: Ranking
+        icon: Ranking,
+        type: TYPE_QUESTION.RANKING
     },
     {
         _id: uuid(),
         title: "date / time",
-        icon: DateAndTime
+        icon: DateAndTime,
+        type: TYPE_QUESTION.DATEANDTIME
     },
     {
         _id: uuid(),
         title: "comment box",
-        icon: CommentBox
+        icon: CommentBox,
+        type: TYPE_QUESTION.COMMENTBOX
     }
 ]
 

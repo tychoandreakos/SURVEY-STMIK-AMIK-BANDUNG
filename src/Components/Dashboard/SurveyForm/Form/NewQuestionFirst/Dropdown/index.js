@@ -4,19 +4,28 @@ import Icon from '@iconify/react'
 import DefaultIcon from '@iconify/icons-mdi/text-short';
 import ChevronDown from '@iconify/icons-mdi/chevron-down'
 import DropdownContext from '../../../../../../Store/Context/dropdownAlternate'
+import FormBuilderContext from '../../../../../../Store/Context/formBuilder'
 
 import './style.scss';
 
-const DropdownNewQuestionFirst = (props) => {
-    const { title = "Default Menu", iconDefault = DefaultIcon } = props;
-
-
+const DropdownNewQuestionFirst = () => {
     const { elementDropdown, dropdown } = useContext(DropdownContext);
+    const defaultData = {
+        title: "Default Menu",
+        iconDefault: DefaultIcon
+    }
+
+    const { typeHandler } = useContext(FormBuilderContext)
+
+    const dropdownTypeHandler = (type) => {
+        typeHandler(type)
+    }
+
     let dropdownEl = elementDropdown.map(item => {
         return (
-            <div key={item._id} className="title-dropdown">
-                <Icon className="icon-dropdown" icon={item.icon ? item.icon : iconDefault} />
-                <span>{item.title}</span>
+            <div key={item._id} onClick={() => dropdownTypeHandler(item.type)} className="title-dropdown">
+                <Icon className="icon-dropdown" icon={item.icon ? item.icon : defaultData.iconDefault} />
+                <span>{item.title ? item.title : defaultData.title}</span>
             </div>
         )
     })
