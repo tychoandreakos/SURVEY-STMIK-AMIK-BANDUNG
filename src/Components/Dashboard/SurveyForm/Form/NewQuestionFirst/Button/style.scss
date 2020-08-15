@@ -1,0 +1,35 @@
+$Roboto: 'Roboto', sans-serif;
+
+.new-question-btn {
+  background: #5661b6;
+  color: #fff;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.7rem 3.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  transition: 0.2s background ease-out;
+
+  &:hover {
+    background: #717ccf;
+  }
+
+  .icon-new-question {
+    font: {
+      size: 1.3rem;
+    }
+    margin-right: 0.9rem;
+  }
+
+  span {
+    color: #fff;
+    text-transform: capitalize;
+    font: {
+      family: $Roboto;
+      weight: 500;
+      size: 1rem;
+    }
+  }
+}

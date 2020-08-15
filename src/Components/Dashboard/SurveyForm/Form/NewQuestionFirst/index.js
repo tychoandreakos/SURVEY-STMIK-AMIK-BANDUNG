@@ -7,7 +7,7 @@ import './style.scss';
 const NewQuestionFirst = () => {
     return (
         <div className="new-question-first">
-            <Button />
+            <Button title="new question" />
             <span className="desc">or <a href="#">Copy and paste questions</a></span>
         </div>
     )

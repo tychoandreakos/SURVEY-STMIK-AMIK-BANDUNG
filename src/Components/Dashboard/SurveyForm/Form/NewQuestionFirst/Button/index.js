@@ -1,11 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Icon from '@iconify/react'
+
+import DefaultIcon from '@iconify/icons-mdi/plus'
+
+import './style.scss'
 
 const ButtonInNewQuestionFirst = (props) => {
     const defaultButtonTitle = "Default!"
-    const { title = defaultButtonTitle } = props;
+    const {
+        title = defaultButtonTitle,
+        icon = DefaultIcon
+    } = props;
     return (
-        <button>{title}</button>
+        <button className="new-question-btn">
+            <Icon className="icon-new-question" icon={icon} />
+            <span>{title}</span>
+        </button>
     )
 }
 
