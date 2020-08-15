@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TYPE_QUESTION, TYPE_BUTTON } from '../../../../util/varTypes'
 import { v4 as uuid } from 'uuid';
 
@@ -20,12 +20,11 @@ import './style.scss';
 const ContentSurveyForm = () => {
     const [dropdown, setDropdown] = useState(false)
     const [question, setQuestion] = useState([])
-    const [typeQuestion, setTypeQuestion] = useState(TYPE_QUESTION.SHORT)
+    const [typeQuestion, setTypeQuestion] = useState()
 
     const typeHandler = (val) => {
         setTypeQuestion(val)
     }
-
 
     const dropdownHandler = () => {
         setDropdown(!dropdown);
@@ -69,10 +68,35 @@ const ContentSurveyForm = () => {
         }
     })
 
+    const [initial, setInitial] = useState(false)
+    const [formBuilder, setFormBuilder] = useState(false);
+
+    const formBuilderHidden = () => {
+        setFormBuilder(false)
+    }
+
+    useEffect(() => {
+        if (!initial) {
+            setInitial(true)
+        } else {
+            setFormBuilder(true)
+        }
+    }, [typeQuestion]);
+
+
+    let questionEl;
+    if (formBuilder) {
+        questionEl = (
+            <FormBuilderContext.Provider value={{ question, questionHandler, formBuilderHidden }}>
+                <SingleTextBox title={`q${question.length + 1}`} typeQuestion={typeQuestion} />
+            </FormBuilderContext.Provider>
+        )
+    }
+
     return (
         <div className="content-survey-form">
             <div className="btn-wrapper">
-                <div className="btn-handler">
+                {/* <div className="btn-handler">
                     <div onClick={dropdownHandler} className="plus">
                         <BtnOpt type={TYPE_BUTTON.PLUS} />
                         <DropdownContext.Provider value={{ dropdown, dropdownHandler }}>
@@ -81,17 +105,15 @@ const ContentSurveyForm = () => {
                             </FormBuilderContext.Provider>
                         </DropdownContext.Provider>
                     </div>
-                </div>
+                </div> */}
                 <BtnOpt type={TYPE_BUTTON.OK} />
             </div>
             <div className="survey-wrapper">
-                {/* <h3>what is your favorite band?</h3> */}
+                <h3>what is your favorite band?</h3>
                 <span className="desc">Who is your favorite band all the time? Please answer the question if your ready. We really appreciate your answer :)</span>
                 <div className="form-builder">
                     {renderQuestion}
-                    <FormBuilderContext.Provider value={{ question, questionHandler }}>
-                        {<SingleTextBox title={`q${question.length + 1}`} typeQuestion={typeQuestion} />}
-                    </FormBuilderContext.Provider>
+                    {questionEl}
                     <NewQuestion formatHandler={typeHandler} />
                 </div>
             </div>

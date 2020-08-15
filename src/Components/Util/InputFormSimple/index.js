@@ -10,7 +10,7 @@ import FormBuilderContext from '../../../Store/Context/formBuilder';
 const InputFormSimple = ({ typeQuestion }) => {
 
     const [inputBox, setInputBox] = useState('')
-    const { questionHandler } = useContext(FormBuilderContext)
+    const { questionHandler, formBuilderHidden } = useContext(FormBuilderContext)
 
     let initialState = {
         type: typeQuestion,
@@ -38,7 +38,10 @@ const InputFormSimple = ({ typeQuestion }) => {
 
     const [state, dispatch] = useReducer(reducer, initialState);
     useEffect(() => {
-        if (state.title.length > 0) questionHandler(state)
+        if (state.title.length > 0) {
+            questionHandler(state)
+            formBuilderHidden()
+        }
         else return undefined
     }, [state])
 

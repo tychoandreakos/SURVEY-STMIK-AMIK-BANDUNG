@@ -10,6 +10,7 @@ const formBuilder = React.createContext({
     headTitleHandler: (val) => { },
     titleSurvey: '',
     descSurvey: '',
+    formBuilderHidden: () => {}
 });
 
 export default formBuilder
