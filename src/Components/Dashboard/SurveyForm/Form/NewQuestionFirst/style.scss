@@ -1,0 +1,30 @@
+$Roboto: 'Roboto', sans-serif;
+
+.new-question-first {
+  background: #e5e5e5;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem;
+  border-radius: 0.3rem;
+
+  .desc {
+    font: {
+      family: $Roboto;
+      size: 0.98rem;
+    }
+    color: #555;
+  }
+
+  a {
+    text-decoration: none;
+    color: #16269e;
+    font: {
+      family: $Roboto;
+      size: 0.97rem;
+    }
+    margin-left: 0.1rem;
+  }
+}

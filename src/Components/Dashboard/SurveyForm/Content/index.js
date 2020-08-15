@@ -3,6 +3,7 @@ import { TYPE_QUESTION, TYPE_BUTTON } from '../../../../util/varTypes'
 import { v4 as uuid } from 'uuid';
 
 // // formBUilder
+import NewQuestion from '../Form/NewQuestionFirst';
 import MultiChoice from '../Form/MultiChoice';
 import SingleTextBox from '../Form/SingleTextBox';
 import Result from '../Result';
@@ -93,6 +94,7 @@ const ContentSurveyForm = () => {
                     <FormBuilderContext.Provider value={{ question, questionHandler }}>
                         {<SingleTextBox title={`q${question.length + 1}`} typeQuestion={typeQuestion} />}
                     </FormBuilderContext.Provider>
+                    <NewQuestion />
                 </div>
             </div>
 
