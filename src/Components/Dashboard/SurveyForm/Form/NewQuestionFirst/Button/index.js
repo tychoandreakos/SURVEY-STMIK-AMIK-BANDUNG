@@ -10,10 +10,11 @@ const ButtonInNewQuestionFirst = (props) => {
     const defaultButtonTitle = "Default!"
     const {
         title = defaultButtonTitle,
-        icon = DefaultIcon
+        icon = DefaultIcon,
+        clicked = () => { }
     } = props;
     return (
-        <button className="new-question-btn">
+        <button onClick={clicked} className="new-question-btn">
             <Icon className="icon-new-question" icon={icon} />
             <span>{title}</span>
         </button>

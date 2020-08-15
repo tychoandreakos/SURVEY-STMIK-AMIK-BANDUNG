@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import Icon from '@iconify/react'
 import DefaultIcon from '@iconify/icons-mdi/text-short';
@@ -12,7 +12,6 @@ const DropdownNewQuestionFirst = (props) => {
 
 
     const { elementDropdown, dropdown } = useContext(DropdownContext);
-
     let dropdownEl = elementDropdown.map(item => {
         return (
             <div key={item._id} className="title-dropdown">
@@ -24,14 +23,19 @@ const DropdownNewQuestionFirst = (props) => {
 
     let styleDrop;
     if (dropdown) {
+        const height = 315.2;
         styleDrop = {
-            display: ' block',
-            height: '315.2px'
+            height: `${height}px`
         }
+        setTimeout(() => {
+            window.scrollTo({
+                top: window.screenY + height,
+                behavior: 'smooth'
+            })
+        }, 650)
     } else {
         styleDrop = {
             height: '0px',
-            padding: 0
         }
     }
 
