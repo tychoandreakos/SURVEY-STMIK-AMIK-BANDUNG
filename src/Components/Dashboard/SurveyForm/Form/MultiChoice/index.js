@@ -12,7 +12,7 @@ const MultiChoice = ({ selected = false, _id, title }) => {
 
     useEffect(() => {
         if (newQuestion.length > 0) multiChoiceHandler(newQuestion)
-    }, [newQuestion])
+    }, [newQuestion, multiChoiceHandler])
 
     const choiceHandler = ({ keyCode }) => {
 
