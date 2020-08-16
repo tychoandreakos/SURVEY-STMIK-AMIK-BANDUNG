@@ -19,7 +19,7 @@ const DescriptionHeader = () => {
     const [titleHeight, setTitleHeight] = useState('')
     useEffect(() => {
         if (titleRef.current !== null) {
-            setTitleHeight(`${titleRef.current.clientHeight}px`)
+            setTitleHeight(titleRef.current.clientHeight)
         }
     }, [edit, pageTitle])
 
@@ -56,6 +56,12 @@ const DescriptionHeader = () => {
         setpageTitle(e.target.value)
     }
 
+    const titleHandlerKeyPress = (e) => {
+        if (e.charCode === 13) {
+            setTitleHeight(titleHeight + 35)
+        }
+    }
+
 
     let [classDescription, classDesc, classTitle] = [
         ['description-survey-header'],
@@ -78,7 +84,7 @@ const DescriptionHeader = () => {
             'edited-desc'
         ]
         btnEl = <button className="finish" onClick={saveHandler} >SAVE</button>;
-        headerPageEl = <textarea style={{ height: titleHeight }} type="text" onChange={titleHandler} value={pageTitle} className="page-title-input" placeholder="Please insert your page title" />
+        headerPageEl = <textarea onKeyPress={titleHandlerKeyPress} style={{ height: `${titleHeight}px` }} type="text" onChange={titleHandler} value={pageTitle} className="page-title-input" placeholder="Please insert your page title" />
 
     } else {
         btnEl = <button className="edit" onClick={editHandler} >EDIT</button>
