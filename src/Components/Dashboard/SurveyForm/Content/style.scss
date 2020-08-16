@@ -40,11 +40,6 @@ $Merriweather: 'MerriWeather', sans-serif;
 
     .desc {
       color: #454552;
-      font: {
-        family: $Merriweather;
-        weight: 400;
-        size: 0.88rem;
-      }
       width: 45%;
       text-align: center;
       margin-top: 0.5rem;
@@ -52,11 +47,6 @@ $Merriweather: 'MerriWeather', sans-serif;
 
     h3 {
       text-transform: capitalize;
-      font: {
-        family: $Roboto;
-        weight: 500;
-        size: 1.35rem;
-      }
     }
   }
 }

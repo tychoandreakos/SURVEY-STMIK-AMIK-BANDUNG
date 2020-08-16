@@ -1,0 +1,72 @@
+$MerriWeather: 'MerriWeather', sans-serif;
+$Roboto: 'Roboto', sans-serif;
+
+.description-survey-header {
+  padding: {
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    bottom: 0.9rem;
+  }
+  max-width: 50rem;
+  position: relative;
+
+  &:hover {
+    background: #e5e5e5;
+  }
+
+  &:hover > .top {
+    visibility: visible;
+  }
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    visibility: hidden;
+
+    .title {
+      color: #5661b6;
+      font: {
+        size: 0.95rem;
+        weight: 500;
+        family: $MerriWeather;
+      }
+      user-select: none;
+    }
+
+    .handling {
+      button {
+        background: #6b787f;
+        border: none;
+        color: #fff;
+        padding: 0.5rem 1.5rem;
+        cursor: pointer;
+        font: {
+          family: $Roboto;
+          weight: 500;
+        }
+      }
+    }
+  }
+
+  .desc {
+    font: {
+      family: $Roboto;
+      weight: 400;
+      size: 1rem;
+    }
+  }
+
+  h3 {
+    width: 90%;
+    font: {
+      family: $MerriWeather !important;
+      size: 1.5rem !important;
+    }
+    margin: {
+      top: 0.6rem;
+      bottom: 0.8rem;
+    }
+  }
+}
