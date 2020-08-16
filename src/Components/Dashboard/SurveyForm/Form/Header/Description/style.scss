@@ -1,6 +1,11 @@
 $MerriWeather: 'MerriWeather', sans-serif;
 $Roboto: 'Roboto', sans-serif;
 
+.edited {
+  background: #5661b6 !important;
+  color: #fff !important;
+}
+
 .description-survey-header {
   padding: {
     top: 1rem;
@@ -25,8 +30,13 @@ $Roboto: 'Roboto', sans-serif;
     justify-content: space-between;
     visibility: hidden;
 
-    .title {
+    .edited-title {
+      color: #eee !important;
+    }
+
+    .title-survey-master {
       color: #5661b6;
+      text-transform: capitalize;
       font: {
         size: 0.95rem;
         weight: 500;
@@ -36,8 +46,14 @@ $Roboto: 'Roboto', sans-serif;
     }
 
     .handling {
-      button {
+      .finish {
+        background: #ea4c89;
+      }
+
+      .edit {
         background: #6b787f;
+      }
+      button {
         border: none;
         color: #fff;
         padding: 0.5rem 1.5rem;
@@ -50,11 +66,37 @@ $Roboto: 'Roboto', sans-serif;
     }
   }
 
-  .desc {
+  .edited-desc {
+    color: #eee !important;
+  }
+
+  .desc-survey-master {
     font: {
       family: $Roboto;
       weight: 400;
-      size: 1rem;
+      size: 1.02rem;
+    }
+    text-align: justify;
+    width: 89%;
+    margin: auto;
+    display: inline-block;
+    color: #333;
+  }
+
+  .page-title-input {
+    background: none;
+    border: none;
+    width: 90%;
+    color: #fff;
+    overflow: hidden;
+    word-break: break-word;
+    font: {
+      family: $MerriWeather !important;
+      size: 1.5rem !important;
+    }
+    margin: {
+      top: 0.6rem;
+      bottom: 0.8rem;
     }
   }
 

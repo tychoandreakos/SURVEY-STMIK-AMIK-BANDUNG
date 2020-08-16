@@ -20,3 +20,8 @@ export const TYPE_BUTTON = {
     OK: 'OK',
     PLUS: 'PLUS'
 }
+
+export const DESCRIPTION_HEADER = {
+    EDIT: 'EDIT',
+    SAVE: 'SAVE'
+}
