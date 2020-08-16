@@ -1,0 +1,31 @@
+$Roboto: 'Roboto', sans-serif;
+
+.btn-add-header {
+  margin-bottom: 0.7rem;
+  display: flex;
+  border: none;
+  border-radius: 0.2rem;
+  align-items: center;
+  justify-content: center;
+  background: #ea4c89;
+  color: #fff;
+  font: {
+    family: $Roboto;
+    size: 0.88rem;
+    weight: 500;
+  }
+  cursor: pointer;
+  padding: 0.7rem 1rem;
+  transition: .3s background ease-in-out;
+
+  &:hover {
+    background: #ee6a9c;
+  }
+
+  .icon-add-header {
+    font: {
+      size: 1.2rem;
+    }
+    margin-right: 0.4rem;
+  }
+}

@@ -3,6 +3,7 @@ import { TYPE_QUESTION, TYPE_BUTTON } from '../../../../util/varTypes'
 import { v4 as uuid } from 'uuid';
 
 // // formBuilder
+import HeaderForm from '../Form/Header';
 import NewQuestion from '../Form/NewQuestionFirst';
 import MultiChoice from '../Form/MultiChoice';
 import SingleTextBox from '../Form/SingleTextBox';
@@ -96,8 +97,7 @@ const ContentSurveyForm = () => {
                 <BtnOpt type={TYPE_BUTTON.OK} />
             </div>
             <div className="survey-wrapper">
-                <h3>what is your favorite band?</h3>
-                <span className="desc">Who is your favorite band all the time? Please answer the question if your ready. We really appreciate your answer :)</span>
+                <HeaderForm />
                 <div className="form-builder">
                     {renderQuestion}
                     {questionEl}
