@@ -45,7 +45,7 @@ const InputFormSimple = ({ typeQuestion }) => {
         else return undefined
     }, [state])
 
-    const test = ({ keyCode }) => {
+    const formOnSubmit = ({ keyCode }) => {
         if (keyCode === 13) {
             dispatch({
                 type: typeQuestion,
@@ -61,7 +61,7 @@ const InputFormSimple = ({ typeQuestion }) => {
 
     return (
         <div className="input-form-wrapper">
-            <input onKeyDown={test} value={inputBox} onChange={inputHandler} placeholder="Please write your question" type="text" />
+            <input onKeyDown={formOnSubmit} value={inputBox} onChange={inputHandler} placeholder="Please write your question" type="text" />
             <div className="icon">
                 <Icon icon={ArrowDown} />
             </div>

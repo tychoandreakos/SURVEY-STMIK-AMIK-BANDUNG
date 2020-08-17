@@ -41,7 +41,7 @@ const DropdownNewQuestionFirst = () => {
                 top: window.screenY + height,
                 behavior: 'smooth'
             })
-        }, 650)
+        }, 550)
     } else {
         styleDrop = {
             height: '0px',
