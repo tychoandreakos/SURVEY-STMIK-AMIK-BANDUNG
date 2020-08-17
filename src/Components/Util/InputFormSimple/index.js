@@ -7,7 +7,7 @@ import Icon from '@iconify/react';
 import ArrowDown from '@iconify/icons-mdi/dots-horizontal'
 import FormBuilderContext from '../../../Store/Context/formBuilder';
 
-const InputFormSimple = ({ typeQuestion }) => {
+const InputFormSimple = ({ typeQuestion, typeHandler }) => {
 
     const [inputBox, setInputBox] = useState('')
     const { questionHandler, formBuilderHidden } = useContext(FormBuilderContext)
@@ -52,6 +52,7 @@ const InputFormSimple = ({ typeQuestion }) => {
                 title: inputBox
             })
             setInputBox('')
+            typeHandler('')
         }
     }
 
