@@ -49,7 +49,7 @@ const MultiChoice = ({ selected = false, _id, title }) => {
     let multiChoiceEl;
     if (title) {
         multiChoiceEl = (
-            <span>{title}</span>
+            <span className="dropdown-title">{title}</span>
         )
     } else {
         multiChoiceEl = (

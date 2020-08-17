@@ -8,6 +8,7 @@ import MultiChoice from '../Form/MultiChoice'
 import SingleTextBox from '../Form/SingleTextBox'
 import Result from '../Result'
 import NewQuestion from '../Form/NewQuestionFirst'
+import QuestionAnsweredForm from '../Form/QuestionAnsweredForm';
 
 import BtnOpt from '../BtnOpt';
 import FormBuilderContext from '../../../../Store/Context/formBuilder'
@@ -83,7 +84,8 @@ const ContentSurveyForm = () => {
     if (formBuilder) {
         questionEl = (
             <FormBuilderContext.Provider value={{ question, questionHandler, formBuilderHidden }}>
-                <SingleTextBox typeHandler={typeHandler} title={`q${question.length + 1}`} typeQuestion={typeQuestion} />
+                {/* <SingleTextBox typeHandler={typeHandler} title={`q${question.length + 1}`} typeQuestion={typeQuestion} /> */}
+                <QuestionAnsweredForm />
             </FormBuilderContext.Provider>
         )
     }

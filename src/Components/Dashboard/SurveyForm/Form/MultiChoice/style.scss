@@ -9,9 +9,9 @@ $MerriWeather: 'MerriWeather', sans-serif;
 }
 
 .not-selected {
-  border: 2px solid #5661b6;
-  color: #5661b6;
-  padding: 0.8rem 2rem;
+  border: 1px solid #5661b6;
+  color: #4456da;
+  padding: 0.6rem 1.5rem;
 }
 
 .as-input {
@@ -66,12 +66,12 @@ $MerriWeather: 'MerriWeather', sans-serif;
     }
   }
 
-  span {
+  .dropdown-title {
     text-transform: capitalize;
-    text-align: center;
+    // text-align: center;
     font: {
       family: $Roboto;
-      weight: 500;
+      weight: 400;
       size: 1rem;
     }
   }

@@ -1,0 +1,69 @@
+$Roboto: 'Roboto', sans-serif;
+$Nunito: 'Nunito', sans-serif;
+
+@mixin input_like_border {
+  border: 1px solid #b0b4df;
+}
+
+@mixin input_like {
+  background: #fff;
+  font: {
+    family: $Roboto;
+    size: 0.9rem;
+  }
+}
+
+.question-answered-form {
+  display: flex;
+  width: 100%;
+  border: 1px solid #5661b6;
+  padding: 1rem 1.2rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  height: auto;
+  background: #f2f8ff;
+
+  .input {
+    @include input_like_border;
+
+    margin: 0 0.9rem;
+    width: 100%;
+    textarea {
+      @include input_like;
+
+      padding: 0.5rem;
+      resize: none;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  }
+
+  .dropdown-choice {
+    @include input_like;
+    @include input_like_border;
+
+    width: 45%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.4rem 1rem;
+    justify-content: space-between;
+
+    .icon {
+      display: flex;
+      align-items: center;
+      font: {
+        size: 1.3rem;
+      }
+    }
+  }
+
+  .numbered {
+    font: {
+      family: $Roboto;
+      weight: 500;
+      size: 0.95rem;
+    }
+  }
+}
