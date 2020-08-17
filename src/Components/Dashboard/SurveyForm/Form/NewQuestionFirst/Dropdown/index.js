@@ -32,13 +32,14 @@ const DropdownNewQuestionFirst = () => {
 
     let styleDrop;
     if (dropdown) {
+        console.log(window.outerHeight)
         const height = 315.2;
         styleDrop = {
             height: `${height}px`
         }
         setTimeout(() => {
             window.scrollTo({
-                top: window.screenY + height,
+                top: document.getElementById('main').clientHeight,
                 behavior: 'smooth'
             })
         }, 550)
