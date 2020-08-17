@@ -14,6 +14,7 @@ $Roboto: 'Roboto', sans-serif;
     bottom: 0.9rem;
   }
   max-width: 50rem;
+  min-width: 50rem;
   position: relative;
 
   &:hover {
@@ -68,6 +69,10 @@ $Roboto: 'Roboto', sans-serif;
 
   .edited-desc {
     color: #eee !important;
+    background: none;
+    border: none;
+    overflow: auto;
+    word-break: break-word;
   }
 
   .desc-survey-master {
@@ -88,11 +93,11 @@ $Roboto: 'Roboto', sans-serif;
     border: none;
     width: 90%;
     color: #fff;
-    overflow: hidden;
+    overflow: auto;
     word-break: break-word;
     font: {
       family: $MerriWeather !important;
-      size: 1.5rem !important;
+      size: 1.6rem !important;
     }
     margin: {
       top: 0.6rem;
