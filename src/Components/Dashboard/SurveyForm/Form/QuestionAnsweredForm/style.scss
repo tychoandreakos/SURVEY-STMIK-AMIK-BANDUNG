@@ -14,14 +14,18 @@ $Nunito: 'Nunito', sans-serif;
 }
 
 .question-answered-form {
-  display: flex;
   width: 100%;
   border: 1px solid #5661b6;
   padding: 1rem 1.2rem;
-  align-items: center;
+
   margin-bottom: 2.5rem;
   height: auto;
   background: #f2f8ff;
+
+  .input-answered-form {
+    display: flex;
+    align-items: center;
+  }
 
   .input {
     @include input_like_border;
@@ -52,6 +56,10 @@ $Nunito: 'Nunito', sans-serif;
     justify-content: space-between;
     position: relative;
 
+    .title-dropdown {
+      text-transform: capitalize;
+    }
+
     .icon {
       display: flex;
       align-items: center;
@@ -62,6 +70,7 @@ $Nunito: 'Nunito', sans-serif;
   }
 
   .numbered {
+    text-transform: uppercase;
     font: {
       family: $Roboto;
       weight: 500;

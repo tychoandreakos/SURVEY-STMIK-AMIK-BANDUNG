@@ -83,9 +83,9 @@ const ContentSurveyForm = () => {
     let questionEl;
     if (formBuilder) {
         questionEl = (
-            <FormBuilderContext.Provider value={{ question, questionHandler, formBuilderHidden }}>
+            <FormBuilderContext.Provider value={{ typeQuestion, question, questionHandler, formBuilderHidden }}>
                 {/* <SingleTextBox typeHandler={typeHandler} title={`q${question.length + 1}`} typeQuestion={typeQuestion} /> */}
-                <QuestionAnsweredForm />
+                <QuestionAnsweredForm numbered={`q${question.length + 1}`} />
             </FormBuilderContext.Provider>
         )
     }
