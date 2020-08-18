@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useReducer, useEffect } from 'react';
 
 import Icon from '@iconify/react';
 import ChevronDown from '@iconify/icons-mdi/chevron-down';
@@ -8,20 +8,75 @@ import DropdownQuestion from './DropdownQuestion';
 import DropdownContext from '../../../../../Store/Context/dropdownAlternate';
 import FormBuilderContext from '../../../../../Store/Context/formBuilder';
 
+import { TYPE_QUESTION } from '../../../../../util/varTypes'
+
 import './style.scss';
 
 const QuestionAnsweredForm = (props) => {
     const [dropdown, setDropdown] = useState(false);
+    const [questionInput, setQuestionInput] = useState('');
 
     const { numbered } = props;
 
     const { elementDropdown } = useContext(DropdownContext);
-    const { typeQuestion } = useContext(FormBuilderContext);
+    const { typeQuestion, typeHandler, questionHandler, formBuilderHidden } = useContext(FormBuilderContext);
 
-    const titleDropdown = elementDropdown.find(item => item.type === typeQuestion)
+    const titleDropdown = elementDropdown.find(item => item.type === typeQuestion) ?? "Loading ..."
+
+    let initialState = {
+        type: typeQuestion,
+        title: ""
+    }
+
+    const reducer = (state, action) => {
+        switch (action.type) {
+            case TYPE_QUESTION.SHORT:
+                return {
+                    ...state,
+                    ...action
+                }
+            case TYPE_QUESTION.MULTIPLE:
+                return {
+                    ...state,
+                    ...action,
+                    choices: [],
+                };
+            default:
+                return state
+        }
+    }
+
+    const [state, dispatch] = useReducer(reducer, initialState);
+
+    useEffect(() => {
+        if (state.title.length > 0) {
+            questionHandler(state)
+            formBuilderHidden()
+            return;
+        }
+
+        return undefined
+    }, [state])
+
 
     const dropdonHandler = () => {
         setDropdown(!dropdown);
+    }
+
+    const questionInputChangeHandler = (e) => {
+        setQuestionInput(e.target.value);
+    }
+
+    const questionInputHandler = (e) => {
+        if (e.charCode === 13) {
+            e.preventDefault();
+            dispatch({
+                type: typeQuestion,
+                title: questionInput
+            })
+            setQuestionInput('')
+            typeHandler('')
+        }
     }
 
     const placeholder = "Please type a question ..."
@@ -30,7 +85,12 @@ const QuestionAnsweredForm = (props) => {
             <div className="input-answered-form">
                 <div className="numbered">{numbered}</div>
                 <div className="input">
-                    <TextArea placeholder={placeholder} />
+                    <TextArea
+                        value={questionInput}
+                        placeholder={placeholder}
+                        onChange={questionInputChangeHandler}
+                        onKeyPress={questionInputHandler}
+                    />
                 </div>
                 <div onClick={dropdonHandler} className="dropdown-choice">
                     <span className="title-dropdown">{titleDropdown.title}</span>

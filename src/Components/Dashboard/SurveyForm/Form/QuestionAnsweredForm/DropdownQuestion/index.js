@@ -12,8 +12,8 @@ const DropdownQuestion = () => {
 
     const { elementDropdown } = useContext(DropdownContext);
     const { typeQuestion } = useContext(FormBuilder);
-
     const dropdownRef = useRef();
+    
     useEffect(() => {
         dropdownRef.current.scrollTo({
             top: 0,

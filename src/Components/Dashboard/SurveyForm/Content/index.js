@@ -5,7 +5,6 @@ import { v4 as uuid } from 'uuid';
 // formBuilder
 import HeaderForm from '../Form/Header'
 import MultiChoice from '../Form/MultiChoice'
-import SingleTextBox from '../Form/SingleTextBox'
 import Result from '../Result'
 import NewQuestion from '../Form/NewQuestionFirst'
 import QuestionAnsweredForm from '../Form/QuestionAnsweredForm';
@@ -83,8 +82,7 @@ const ContentSurveyForm = () => {
     let questionEl;
     if (formBuilder) {
         questionEl = (
-            <FormBuilderContext.Provider value={{ typeQuestion, question, questionHandler, formBuilderHidden }}>
-                {/* <SingleTextBox typeHandler={typeHandler} title={`q${question.length + 1}`} typeQuestion={typeQuestion} /> */}
+            <FormBuilderContext.Provider value={{ typeHandler, typeQuestion, question, questionHandler, formBuilderHidden }}>
                 <QuestionAnsweredForm numbered={`q${question.length + 1}`} />
             </FormBuilderContext.Provider>
         )
