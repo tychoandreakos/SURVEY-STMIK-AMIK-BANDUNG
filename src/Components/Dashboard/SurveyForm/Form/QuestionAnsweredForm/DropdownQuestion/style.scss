@@ -1,5 +1,15 @@
 $Roboto: 'Roboto', sans-serif;
 
+.backdrop-dropdown-question {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  z-index: 55;
+}
+
 .dropdown-question {
   position: absolute;
   background: #fff;

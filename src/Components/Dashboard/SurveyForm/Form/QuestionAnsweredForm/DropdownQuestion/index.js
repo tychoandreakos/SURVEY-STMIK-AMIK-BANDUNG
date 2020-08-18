@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from 'react';
+import React, { useContext, useRef, useEffect, useState } from 'react';
 
 import Icon from '@iconify/react';
 import Check from '@iconify/icons-mdi/check';
@@ -13,7 +13,8 @@ const DropdownQuestion = () => {
     const { elementDropdown } = useContext(DropdownContext);
     const { typeQuestion } = useContext(FormBuilder);
     const dropdownRef = useRef();
-    
+    const [backdrop, setBackdrop] = useState(true)
+
     useEffect(() => {
         dropdownRef.current.scrollTo({
             top: 0,
@@ -43,13 +44,25 @@ const DropdownQuestion = () => {
         </li>
     )
 
+    const backdropHandler = () => {
+        setBackdrop(false)
+    }
+
     const newElementDropdown = Array.from(elementDropdown);
     const elDropdown = newElementDropdown.sort(sortByChecked).map(renderElementToReact)
 
+    let backdropEl;
+    if (backdrop) {
+        backdropEl = <div onClick={backdropHandler} className="backdrop-dropdown-question"></div>
+    }
+
     return (
-        <ul ref={dropdownRef} className="dropdown-question">
-            {elDropdown}
-        </ul>
+        <>
+            <ul ref={dropdownRef} className="dropdown-question">
+                {elDropdown}
+            </ul>
+            {backdropEl}
+        </>
     )
 }
 

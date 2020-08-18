@@ -8,8 +8,9 @@ import FormBuilderContext from '../../../../../../Store/Context/formBuilder'
 
 import './style.scss';
 
-const DropdownNewQuestionFirst = () => {
+const DropdownNewQuestionFirst = (props) => {
     const { elementDropdown, dropdown } = useContext(DropdownContext);
+    const { dropdownState, dropdownHandler } = props;
     const defaultData = {
         title: "Default Menu",
         iconDefault: DefaultIcon
@@ -18,7 +19,17 @@ const DropdownNewQuestionFirst = () => {
     const { typeHandler } = useContext(FormBuilderContext)
 
     const dropdownTypeHandler = (type) => {
-        typeHandler(type)
+        typeHandler(type);
+    }
+
+    const backdropHandler = () => {
+        dropdownHandler();
+    }
+
+
+    let backdropEl;
+    if (dropdownState) {
+        backdropEl = <div onClick={backdropHandler} className="backdrop-dropdown-question-first"></div>
     }
 
     let dropdownEl = elementDropdown.map(item => {
@@ -32,7 +43,6 @@ const DropdownNewQuestionFirst = () => {
 
     let styleDrop;
     if (dropdown) {
-        console.log(window.outerHeight)
         const height = 315.2;
         styleDrop = {
             height: `${height}px`
@@ -49,15 +59,19 @@ const DropdownNewQuestionFirst = () => {
         }
     }
 
+
     return (
-        <div style={styleDrop} className="dropdown-question-first" >
-            <div className="dropdown-title-wrapper">
-                {dropdownEl}
+        <>
+            <div style={styleDrop} className="dropdown-question-first" >
+                <div className="dropdown-title-wrapper">
+                    {dropdownEl}
+                </div>
+                <div className="scroll-dropdown">
+                    <Icon icon={ChevronDown} />
+                </div>
             </div>
-            <div className="scroll-dropdown">
-                <Icon icon={ChevronDown} />
-            </div>
-        </div >
+            {backdropEl}
+        </>
     )
 }
 

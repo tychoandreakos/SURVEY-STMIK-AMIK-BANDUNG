@@ -29,7 +29,7 @@ const NewQuestionFirst = (props) => {
             <span className="desc">or <a href="/">Copy and paste questions</a></span>
             <DropdownContext.Provider value={{ elementDropdown, dropdown, setDropdown }}>
                 <FormBuilderContext.Provider value={{ typeHandler }}  >
-                    <Dropdown />
+                    <Dropdown dropdownHandler={dropdownHandler} dropdownState={dropdown} />
                 </FormBuilderContext.Provider>
             </DropdownContext.Provider>
         </div>
