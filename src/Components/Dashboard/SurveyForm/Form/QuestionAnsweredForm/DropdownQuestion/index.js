@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 
 import Icon from '@iconify/react';
 import Check from '@iconify/icons-mdi/check';
@@ -13,7 +13,12 @@ const DropdownQuestion = () => {
     const { elementDropdown } = useContext(DropdownContext);
     const { typeQuestion } = useContext(FormBuilder);
 
-    console.log(typeQuestion)
+    const dropdownRef = useRef();
+    useEffect(() => {
+        dropdownRef.current.scrollTo({
+            top: 0,
+        })
+    }, []);
 
     const checkedEl = (
         <div className="icon-dropdown">
@@ -21,7 +26,12 @@ const DropdownQuestion = () => {
         </div>
     )
 
-    const elDropdown = elementDropdown.map(item => (
+    const sortByChecked = (item) => {
+        return item.type === typeQuestion ? -1 : 1;
+    }
+
+
+    const renderElementToReact = (item) => (
         <li key={item._id}>
             <div className="dropdown-wrapper">
                 <div className="icon-dropdown">
@@ -30,12 +40,14 @@ const DropdownQuestion = () => {
                 <span>{item.title}</span>
             </div>
             {item.type === typeQuestion ? checkedEl : undefined}
-
         </li>
-    ))
+    )
+
+    const newElementDropdown = Array.from(elementDropdown);
+    const elDropdown = newElementDropdown.sort(sortByChecked).map(renderElementToReact)
 
     return (
-        <ul className="dropdown-question">
+        <ul ref={dropdownRef} className="dropdown-question">
             {elDropdown}
         </ul>
     )
