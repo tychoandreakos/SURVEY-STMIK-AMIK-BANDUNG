@@ -5,6 +5,10 @@ import ChevronDown from '@iconify/icons-mdi/chevron-down';
 import TextArea from 'react-expanding-textarea';
 import DropdownQuestion from './DropdownQuestion';
 
+
+// form builder
+import MultiChoiceV2 from '../../Form/MultiChoiceV2';
+
 import DropdownContext from '../../../../../Store/Context/dropdownAlternate';
 import FormBuilderContext from '../../../../../Store/Context/formBuilder';
 
@@ -100,6 +104,15 @@ const QuestionAnsweredForm = (props) => {
                     {dropdown ? <DropdownQuestion /> : undefined}
                 </div>
                 <div className="help"></div>
+            </div>
+            <div className="form-builder-question">
+                <MultiChoiceV2 />
+                <MultiChoiceV2 />
+                <MultiChoiceV2 />
+                <div className="action-form-builder">
+                    <button className="btn btn-cancel">cancel</button>
+                    <button className="btn btn-save">save</button>
+                </div>
             </div>
         </div>
     )

@@ -13,6 +13,49 @@ $Nunito: 'Nunito', sans-serif;
   }
 }
 
+.form-builder-question {
+  width: 100%;
+  margin-top: 2rem;
+  border-top: 1px solid #c2cfdf;
+  padding-top: 2rem;
+
+  .action-form-builder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    padding-right: 1rem;
+
+    .btn-save {
+      background: #5661b6;
+      color: #fff;
+      box-shadow: 0 7px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-cancel {
+      border: 1px solid #5661b6 !important;
+      background: transparent;
+      color: #5661b6;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      border-radius: 0.1rem;
+      padding: 0.5rem 2.6rem;
+      text-transform: capitalize;
+      font: {
+        family: $Roboto;
+        size: 1rem;
+      }
+
+      &:first-child {
+        margin-right: 1.5rem;
+      }
+    }
+  }
+}
+
 .question-answered-form {
   width: 100%;
   border: 1px solid #5661b6;

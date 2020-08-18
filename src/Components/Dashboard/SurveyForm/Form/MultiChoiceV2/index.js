@@ -1,6 +1,10 @@
 import React from 'react';
 
 import TextArea from 'react-expanding-textarea';
+import Icon from '@iconify/react';
+import plus from '@iconify/icons-mdi/plus';
+import minus from '@iconify/icons-mdi/minus';
+
 
 import './style.scss';
 
@@ -15,8 +19,12 @@ const MultiChoiceV2 = () => {
                 <TextArea placeholder={placeholder} />
             </div>
             <div className="action">
-                <div className="btn-add"></div>
-                <div className="btn-remove"></div>
+                <button className="btn btn-add">
+                    <Icon icon={plus} />
+                </button>
+                <button className="btn btn-remove">
+                    <Icon icon={minus} />
+                </button>
             </div>
         </div>
     )
