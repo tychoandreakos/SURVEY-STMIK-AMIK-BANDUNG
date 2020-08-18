@@ -13,6 +13,7 @@ $Roboto: 'Roboto', sans-serif;
   transition: 0.2s background ease-out;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   margin-bottom: 0.4rem;
+  z-index: 55;
 
   &:hover {
     background: #717ccf;
