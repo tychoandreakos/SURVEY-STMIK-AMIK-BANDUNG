@@ -5,7 +5,6 @@ import ChevronDown from '@iconify/icons-mdi/chevron-down';
 import TextArea from 'react-expanding-textarea';
 import DropdownQuestion from './DropdownQuestion';
 
-
 // form builder
 import MultiChoiceV2 from '../../Form/MultiChoiceV2';
 
@@ -19,6 +18,7 @@ import './style.scss';
 const QuestionAnsweredForm = (props) => {
     const [dropdown, setDropdown] = useState(false);
     const [questionInput, setQuestionInput] = useState('');
+    const [inputState, setInputState] = useState([])
 
     const { numbered } = props;
 
@@ -26,6 +26,10 @@ const QuestionAnsweredForm = (props) => {
     const { typeQuestion, typeHandler, questionHandler, formBuilderHidden } = useContext(FormBuilderContext);
 
     const titleDropdown = elementDropdown.find(item => item.type === typeQuestion) ?? "Loading ..."
+
+    useEffect(() => {
+        console.log(inputState)
+    }, [inputState])
 
     let initialState = {
         type: typeQuestion,
@@ -67,6 +71,34 @@ const QuestionAnsweredForm = (props) => {
         setDropdown(!dropdown);
     }
 
+    const inputStateHandler = (val) => {
+        setInputState([
+            ...inputState,
+            ...val
+        ])
+    }
+
+    const handlerNewDataEdit = (val) => {
+        const newData = inputState.map((item) => {
+            if (item._id === val._id) {
+                item = {
+                    ...item,
+                    title: val.title
+                }
+            }
+            return item;
+        })
+
+        return newData;
+    }
+
+    const inputStateHandlerEdit = (val) => {
+        const newData = handlerNewDataEdit(val)
+        setInputState([
+            ...newData
+        ])
+    }
+
     const questionInputChangeHandler = (e) => {
         setQuestionInput(e.target.value);
     }
@@ -106,9 +138,14 @@ const QuestionAnsweredForm = (props) => {
                 <div className="help"></div>
             </div>
             <div className="form-builder-question">
-                <MultiChoiceV2 />
-                <MultiChoiceV2 />
-                <MultiChoiceV2 />
+                <MultiChoiceV2
+                    inputStateHandlerEdit={inputStateHandlerEdit}
+                    inputStateHandler={inputStateHandler}
+                />
+                <MultiChoiceV2
+                    inputStateHandlerEdit={inputStateHandlerEdit}
+                    inputStateHandler={inputStateHandler}
+                />
                 <div className="action-form-builder">
                     <button className="btn btn-cancel">cancel</button>
                     <button className="btn btn-save">save</button>
