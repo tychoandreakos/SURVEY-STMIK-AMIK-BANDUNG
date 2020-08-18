@@ -4,14 +4,14 @@ import Icon from '@iconify/react';
 import Check from '@iconify/icons-mdi/check';
 
 import DropdownContext from '../../../../../../Store/Context/dropdownAlternate';
-import FormBuilder from '../../../../../../Store/Context/formBuilder';
+import FormBuilderContext from '../../../../../../Store/Context/formBuilder';
 
 import './style.scss';
 
 const DropdownQuestion = () => {
 
     const { elementDropdown } = useContext(DropdownContext);
-    const { typeQuestion } = useContext(FormBuilder);
+    const { typeQuestion, typeHandler } = useContext(FormBuilderContext);
     const dropdownRef = useRef();
     const [backdrop, setBackdrop] = useState(true)
 
@@ -31,9 +31,12 @@ const DropdownQuestion = () => {
         return item.type === typeQuestion ? -1 : 1;
     }
 
+    const dropdownHandler = (type) => {
+        typeHandler(type)
+    }
 
     const renderElementToReact = (item) => (
-        <li key={item._id}>
+        <li onClick={() => dropdownHandler(item.type)} key={item._id}>
             <div className="dropdown-wrapper">
                 <div className="icon-dropdown">
                     <Icon icon={item.icon} />
@@ -47,6 +50,8 @@ const DropdownQuestion = () => {
     const backdropHandler = () => {
         setBackdrop(false)
     }
+
+
 
     const newElementDropdown = Array.from(elementDropdown);
     const elDropdown = newElementDropdown.sort(sortByChecked).map(renderElementToReact)
