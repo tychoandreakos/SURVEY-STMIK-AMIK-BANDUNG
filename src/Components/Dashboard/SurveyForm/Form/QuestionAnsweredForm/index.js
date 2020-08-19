@@ -6,12 +6,10 @@ import TextArea from 'react-expanding-textarea';
 import DropdownQuestion from './DropdownQuestion';
 
 // form builder
-import MultiChoiceV2 from '../../Form/MultiChoiceV2';
+import MultiChoiceV2 from './MultiChoiceWrapper';
 
 import DropdownContext from '../../../../../Store/Context/dropdownAlternate';
 import FormBuilderContext from '../../../../../Store/Context/formBuilder';
-
-import { v4 as uuid } from 'uuid';
 
 import { TYPE_QUESTION } from '../../../../../util/varTypes'
 
@@ -20,9 +18,6 @@ import './style.scss';
 const QuestionAnsweredForm = (props) => {
     const [dropdown, setDropdown] = useState(false);
     const [questionInput, setQuestionInput] = useState('');
-    const [inputState, setInputState] = useState([{}])
-    const [multiChoiceId, setMultiChoiceId] = useState([])
-
     const { numbered } = props;
 
     const { elementDropdown } = useContext(DropdownContext);
@@ -35,12 +30,6 @@ const QuestionAnsweredForm = (props) => {
         title: ""
     }
 
-    useEffect(() => {
-        setMultiChoiceId([
-            ...multiChoiceId,
-            uuid()
-        ])
-    }, [])
 
     const reducer = (state, action) => {
         switch (action.type) {
@@ -77,60 +66,13 @@ const QuestionAnsweredForm = (props) => {
         setDropdown(!dropdown);
     }
 
-    const inputStateHandler = (val, _id) => {
-        setInputState([{
-            ...inputState[0],
-            [_id]: {
-                ...val
-            }
-        }])
-    }
-
-    const inputStateHandlerEdit = (val, _id) => {
-        setInputState([
-            ...inputState,
-            {
-                [_id]: val
-            }
-        ])
-    }
-
     const questionInputChangeHandler = (e) => {
         setQuestionInput(e.target.value);
     }
 
-    const addNewMultiChoice = (_id) => {
-        const index = multiChoiceId.findIndex(id => id === _id)
-        const newArray = Array.from(multiChoiceId)
-        const start = index + 1;
-        if (newArray[start] !== undefined) {
-            for (let i = newArray.length; i > index; i--) newArray[i] = newArray[i - 1]
-            newArray[start] = uuid()
-        } else {
-            newArray.push(uuid())
-        }
-
-        setMultiChoiceId(newArray);
-    }
-
-    const removeNewMultiChoise = (_id) => {
-        if (multiChoiceId.length > 1) {
-            const newArr = multiChoiceId.filter(id => {
-                if (id !== _id) return id;
-            });
-            setMultiChoiceId(newArr);
-        }
-    }
 
     const onSubmit = () => {
-        const [inputObj] = inputState;
-        let newArr = []
-        for (const key of multiChoiceId) {
-            if (inputObj[key] !== undefined) {
-                newArr.push(inputObj[key])
-            }
-        }
-        const result = [newArr].reverse();
+        console.log("")
     }
 
     const questionInputHandler = (e) => {
@@ -144,17 +86,6 @@ const QuestionAnsweredForm = (props) => {
             typeHandler('')
         }
     }
-
-    const multiChoiceEL = multiChoiceId.map(id => (
-        <MultiChoiceV2
-            key={id}
-            _id={id}
-            removeNewMultiChoise={removeNewMultiChoise}
-            addNewMultiChoice={addNewMultiChoice}
-            inputStateHandlerEdit={inputStateHandlerEdit}
-            inputStateHandler={inputStateHandler}
-        />
-    ))
 
     const placeholder = "Please type a question ..."
     return (
@@ -179,7 +110,7 @@ const QuestionAnsweredForm = (props) => {
                 <div className="help"></div>
             </div>
             <div className="form-builder-question">
-                {multiChoiceEL}
+                <MultiChoiceV2 />
                 <div className="action-form-builder">
                     <button className="btn btn-cancel">cancel</button>
                     <button onClick={onSubmit} className="btn btn-save">save</button>

@@ -11,7 +11,7 @@ import './style.scss';
 
 const MultiChoiceV2 = (props) => {
 
-    const { inputStateHandler, inputStateHandlerEdit, addNewMultiChoice, _id, removeNewMultiChoise } = props;
+    const { inputStateHandler, addNewMultiChoice, _id, removeNewMultiChoise } = props;
     const [value, setValue] = useState('')
     const [valueCache, setValueCache] = useState({});
     const [lockSubmit, setLockSubmit] = useState(true);

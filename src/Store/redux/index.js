@@ -4,7 +4,9 @@ import slider from '../../util/sliderDummyData'
 
 const initialState = {
     [varTypes.SURVEY_CATEGORY]: slider,
-    [varTypes.SURVEY_FORM_BUILDER]: {}
+    [varTypes.SURVEY_FORM_BUILDER]: {},
+    [varTypes.MULTICHOICE.MULTICHOICEID]: [],
+    [varTypes.MULTICHOICE.INPUTSTATE]: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -12,6 +14,39 @@ function rootReducer(state = initialState, action) {
         return {
             ...state,
             [varTypes.SURVEY_TITLE]: action.payload
+        }
+    }
+
+    if (action.type === actionTypes.SET_MULTICHOICE_INPUTSTATE) {
+        return {
+            ...state,
+            [varTypes.MULTICHOICE.INPUTSTATE]: action.payload
+        }
+    }
+
+    if (action.type === actionTypes.SET_MULTICHOICE_ID) {
+        return {
+            ...state,
+            [varTypes.MULTICHOICE.MULTICHOICEID]: action.payload
+        }
+    }
+
+    if (action.type === actionTypes.SAVE_MULTICHOICE_STATE) {
+        const inputState = state[varTypes.MULTICHOICE.INPUTSTATE];
+        const multiChoiceId = state[varTypes.MULTICHOICE.MULTICHOICEID];
+
+        const [inputObj] = inputState;
+        let newArr = []
+        for (const key of multiChoiceId) {
+            if (inputObj[key] !== undefined) {
+                newArr.push(inputObj[key])
+            }
+        }
+        const result = [newArr].reverse();
+
+        return {
+            ...state,
+            [varTypes.FORM_ELEMENT.MULTICHOICEV2]: result
         }
     }
 

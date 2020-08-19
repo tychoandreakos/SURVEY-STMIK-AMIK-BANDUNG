@@ -25,3 +25,12 @@ export const DESCRIPTION_HEADER = {
     EDIT: 'EDIT',
     SAVE: 'SAVE'
 }
+
+export const MULTICHOICE = {
+    INPUTSTATE: 'INPUTSTATE',
+    MULTICHOICEID: 'MULTICHOICEID'
+}
+
+export const FORM_ELEMENT = {
+    MULTICHOICEV2: 'MULTICHOICEV2',
+}
