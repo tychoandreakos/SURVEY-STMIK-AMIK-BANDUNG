@@ -25,10 +25,7 @@ function rootReducer(state = initialState, action) {
             ...state,
             [varTypes.MULTICHOICE.SELF]: {
                 ...state[varTypes.MULTICHOICE.SELF],
-                [varTypes.MULTICHOICE.INPUTSTATE]: [
-                    ...state[varTypes.MULTICHOICE.SELF][varTypes.MULTICHOICE.INPUTSTATE],
-                    action.payload
-                ]
+                [varTypes.MULTICHOICE.INPUTSTATE]: action.payload
             }
         }
     }
@@ -38,17 +35,14 @@ function rootReducer(state = initialState, action) {
             ...state,
             [varTypes.MULTICHOICE.SELF]: {
                 ...state[varTypes.MULTICHOICE.SELF],
-                [varTypes.MULTICHOICE.MULTICHOICEID]: [
-                    ...state[varTypes.MULTICHOICE.SELF][varTypes.MULTICHOICE.MULTICHOICEID],
-                    action.payload
-                ]
+                [varTypes.MULTICHOICE.MULTICHOICEID]: action.payload
             }
         }
     }
 
     if (action.type === actionTypes.SAVE_MULTICHOICE_STATE) {
-        const inputState = state[varTypes.MULTICHOICE.INPUTSTATE];
-        const multiChoiceId = state[varTypes.MULTICHOICE.MULTICHOICEID];
+        const inputState = state[varTypes.MULTICHOICE.SELF][varTypes.MULTICHOICE.INPUTSTATE];
+        const multiChoiceId = state[varTypes.MULTICHOICE.SELF][varTypes.MULTICHOICE.MULTICHOICEID];
 
         const [inputObj] = inputState;
         let newArr = []
@@ -58,6 +52,7 @@ function rootReducer(state = initialState, action) {
             }
         }
         const result = [newArr].reverse();
+        console.log(result);
 
         return {
             ...state,
