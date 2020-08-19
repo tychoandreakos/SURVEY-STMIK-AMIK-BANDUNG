@@ -41,24 +41,33 @@ const ContentSurveyForm = () => {
 
     let renderQuestion = [];
     question.forEach((item, index) => {
-        if (item.type === TYPE_QUESTION.SHORT) {
-            renderQuestion.push((<Result key={item._id} index={index + 1} title={item.title} desc={item.desc} />))
-        }
+        renderQuestion = [
+            ...renderQuestion,
+            (
+                <Result
+                    key={item._id}
+                    index={index + 1}
+                    title={item.title}
+                    desc={item.desc}
+                    type={item.type}
+                />
+            )
+        ]
 
-        if (item.type === TYPE_QUESTION.MULTIPLE) {
-            renderQuestion.push((
-                <Result key={item._id} index={index + 1} title={item.title} desc={item.desc}>
-                    {item.choices.map(choice => (
-                        <MultiChoice key={choice._id} selected={choice.selected} title={choice.title} />
-                    ))}
-                    <div className="multichoice">
-                        <FormBuilderContext.Provider value={{ question, multiChoiceHandler }}>
-                            <MultiChoice _id={item._id} key={item._id} />
-                        </FormBuilderContext.Provider>
-                    </div>
-                </Result>
-            ))
-        }
+        // if (item.type === TYPE_QUESTION.MULTIPLE) {
+        //     renderQuestion.push((
+        //         <Result key={item._id} index={index + 1} title={item.title} desc={item.desc}>
+        //             {item.choices.map(choice => (
+        //                 <MultiChoice key={choice._id} selected={choice.selected} title={choice.title} />
+        //             ))}
+        //             <div className="multichoice">
+        //                 <FormBuilderContext.Provider value={{ question, multiChoiceHandler }}>
+        //                     <MultiChoice _id={item._id} key={item._id} />
+        //                 </FormBuilderContext.Provider>
+        //             </div>
+        //         </Result>
+        //     ))
+        // }
     })
 
     const [initial, setInitial] = useState(false)
