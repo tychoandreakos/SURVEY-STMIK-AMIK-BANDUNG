@@ -4,11 +4,14 @@ import slider from '../../util/sliderDummyData'
 
 const initialState = {
     [varTypes.SURVEY_CATEGORY]: slider,
-    [varTypes.SURVEY_FORM_BUILDER]: {},
+    [varTypes.SURVEY_FORM_BUILDER]: {
+        title: "",
+        [varTypes.SURVEY_CATEGORY_BUILDER]: {},
+        [varTypes.SURVEY_FORM_QUESTION]: []
+    },
     [varTypes.MULTICHOICE.SELF]: {
         [varTypes.MULTICHOICE.MULTICHOICEID]: [],
         [varTypes.MULTICHOICE.INPUTSTATE]: [],
-        [varTypes.MULTICHOICE.RESULT]: [],
     }
 };
 
@@ -52,11 +55,15 @@ function rootReducer(state = initialState, action) {
             }
         }
         const result = [newArr].reverse();
-        console.log(result);
-
         return {
             ...state,
-            [varTypes.MULTICHOICE.SELF[varTypes.MULTICHOICE.RESULT]]: result
+            [varTypes.SURVEY_FORM_BUILDER]: {
+                ...state[varTypes.SURVEY_FORM_BUILDER],
+                [varTypes.SURVEY_FORM_QUESTION]: [
+                    ...state[varTypes.SURVEY_FORM_BUILDER][varTypes.SURVEY_FORM_QUESTION],
+                    ...result
+                ]
+            }
         }
     }
 

@@ -1,0 +1,23 @@
+$Roboto: 'Roboto', sans-serif;
+
+.multi-choice-answered-form {
+  display: flex;
+  width: 90%;
+  background: red;
+  padding: 0.5rem;
+  align-items: center;
+
+  .bullet {
+    width: 22px;
+    height: 22px;
+    background: blue;
+    border-radius: 50%;
+  }
+
+  span {
+    font: {
+      family: $Roboto;
+      size: 1rem;
+    }
+  }
+}

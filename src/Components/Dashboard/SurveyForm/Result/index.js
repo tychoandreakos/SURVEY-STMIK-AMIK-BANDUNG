@@ -7,7 +7,7 @@ import './style.scss';
 const ResultSurvey = (props) => {
 
     const { index, title, desc, type } = props;
-    
+
     let renderingForm;
     if (type === TYPE_QUESTION.SHORT) {
         renderingForm = <div className="placeholder"></div>
