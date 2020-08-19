@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import MultiChoiceV2 from '../../../Form/MultiChoiceV2';
 import { v4 as uuid } from 'uuid';
@@ -7,14 +7,13 @@ import { setMultichoiceID, setMultichoiceInputstate } from '../../../../../../St
 import { MULTICHOICE } from '../../../../../../util/varTypes';
 
 const MultiChoiceWrapper = (props) => {
-    // const [inputState, setInputState] = useState([{}])
-    // const [multiChoiceId, setMultiChoiceId] = useState([])
 
     const { inputState, multiChoiceId, setId, setInput } = props
 
     useEffect(() => {
         const initialize = [uuid()]
         setId(initialize)
+        setInput([]);
     }, [])
 
     const inputStateHandler = (val, _id) => {
@@ -37,8 +36,6 @@ const MultiChoiceWrapper = (props) => {
         } else {
             newArray.push(uuid())
         }
-
-        // setMultiChoiceId(newArray);
         setId(newArray)
     }
 
@@ -47,7 +44,6 @@ const MultiChoiceWrapper = (props) => {
             const newArr = multiChoiceId.filter(id => {
                 if (id !== _id) return id;
             });
-            // setMultiChoiceId(newArr);
             setId(newArr)
         }
     }
@@ -83,8 +79,8 @@ const MultiChoiceWrapper = (props) => {
 
 const mapStateToProps = state => {
     return {
-        inputState: state[MULTICHOICE.INPUTSTATE],
-        multiChoiceId: state[MULTICHOICE.MULTICHOICEID],
+        inputState: state[MULTICHOICE.SELF][MULTICHOICE.INPUTSTATE],
+        multiChoiceId: state[MULTICHOICE.SELF][MULTICHOICE.MULTICHOICEID],
     }
 }
 

@@ -5,8 +5,11 @@ import slider from '../../util/sliderDummyData'
 const initialState = {
     [varTypes.SURVEY_CATEGORY]: slider,
     [varTypes.SURVEY_FORM_BUILDER]: {},
-    [varTypes.MULTICHOICE.MULTICHOICEID]: [],
-    [varTypes.MULTICHOICE.INPUTSTATE]: [],
+    [varTypes.MULTICHOICE.SELF]: {
+        [varTypes.MULTICHOICE.MULTICHOICEID]: [],
+        [varTypes.MULTICHOICE.INPUTSTATE]: [],
+        [varTypes.MULTICHOICE.RESULT]: [],
+    }
 };
 
 function rootReducer(state = initialState, action) {
@@ -20,14 +23,26 @@ function rootReducer(state = initialState, action) {
     if (action.type === actionTypes.SET_MULTICHOICE_INPUTSTATE) {
         return {
             ...state,
-            [varTypes.MULTICHOICE.INPUTSTATE]: action.payload
+            [varTypes.MULTICHOICE.SELF]: {
+                ...state[varTypes.MULTICHOICE.SELF],
+                [varTypes.MULTICHOICE.INPUTSTATE]: [
+                    ...state[varTypes.MULTICHOICE.SELF][varTypes.MULTICHOICE.INPUTSTATE],
+                    action.payload
+                ]
+            }
         }
     }
 
     if (action.type === actionTypes.SET_MULTICHOICE_ID) {
         return {
             ...state,
-            [varTypes.MULTICHOICE.MULTICHOICEID]: action.payload
+            [varTypes.MULTICHOICE.SELF]: {
+                ...state[varTypes.MULTICHOICE.SELF],
+                [varTypes.MULTICHOICE.MULTICHOICEID]: [
+                    ...state[varTypes.MULTICHOICE.SELF][varTypes.MULTICHOICE.MULTICHOICEID],
+                    action.payload
+                ]
+            }
         }
     }
 
@@ -46,7 +61,7 @@ function rootReducer(state = initialState, action) {
 
         return {
             ...state,
-            [varTypes.FORM_ELEMENT.MULTICHOICEV2]: result
+            [varTypes.MULTICHOICE.SELF[varTypes.MULTICHOICE.RESULT]]: result
         }
     }
 

@@ -1,4 +1,5 @@
 import React, { useState, useContext, useReducer, useEffect } from 'react';
+import { connect } from 'react-redux'
 
 import Icon from '@iconify/react';
 import ChevronDown from '@iconify/icons-mdi/chevron-down';
@@ -12,13 +13,14 @@ import DropdownContext from '../../../../../Store/Context/dropdownAlternate';
 import FormBuilderContext from '../../../../../Store/Context/formBuilder';
 
 import { TYPE_QUESTION } from '../../../../../util/varTypes'
+import { saveMultichoiceState } from '../../../../../Store/redux/action';
 
 import './style.scss';
 
 const QuestionAnsweredForm = (props) => {
     const [dropdown, setDropdown] = useState(false);
     const [questionInput, setQuestionInput] = useState('');
-    const { numbered } = props;
+    const { numbered, onSubmit } = props;
 
     const { elementDropdown } = useContext(DropdownContext);
     const { typeQuestion, typeHandler, questionHandler, formBuilderHidden } = useContext(FormBuilderContext);
@@ -71,10 +73,6 @@ const QuestionAnsweredForm = (props) => {
     }
 
 
-    const onSubmit = () => {
-        console.log("")
-    }
-
     const questionInputHandler = (e) => {
         if (e.charCode === 13) {
             e.preventDefault();
@@ -85,6 +83,10 @@ const QuestionAnsweredForm = (props) => {
             setQuestionInput('')
             typeHandler('')
         }
+    }
+
+    const onSubmitHandler = () => {
+        onSubmit();
     }
 
     const placeholder = "Please type a question ..."
@@ -113,11 +115,19 @@ const QuestionAnsweredForm = (props) => {
                 <MultiChoiceV2 />
                 <div className="action-form-builder">
                     <button className="btn btn-cancel">cancel</button>
-                    <button onClick={onSubmit} className="btn btn-save">save</button>
+                    <button onClick={onSubmitHandler} className="btn btn-save">save</button>
                 </div>
             </div>
         </div>
     )
 }
 
-export default QuestionAnsweredForm;
+const mapDispatchToProps = dispatch => {
+    return {
+        onSubmit: () => dispatch(saveMultichoiceState())
+    }
+}
+
+const QuestionAnsweredFormJoinRedux = connect(null, mapDispatchToProps)(QuestionAnsweredForm);
+
+export default QuestionAnsweredFormJoinRedux;

@@ -21,10 +21,9 @@ export function setMultichoiceInputstate(payload) {
     }
 }
 
-export function saveMultichoiceState(payload) {
+export function saveMultichoiceState() {
     return {
-        type: actionType.SAVE_MULTICHOICE_STATE,
-        payload
+        type: actionType.SAVE_MULTICHOICE_STATE
     }
 }
 
