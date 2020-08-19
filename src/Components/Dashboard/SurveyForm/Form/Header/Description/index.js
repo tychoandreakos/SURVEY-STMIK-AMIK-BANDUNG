@@ -1,5 +1,6 @@
-import React, { useReducer, useState, useRef, useEffect } from 'react';
+import React, { useReducer, useState } from 'react';
 import { DESCRIPTION_HEADER } from '../../../../../../util/varTypes';
+import Textarea from 'react-expanding-textarea';
 
 import './style.scss';
 
@@ -14,22 +15,6 @@ const DescriptionHeader = () => {
 
     const [state, dispatch] = useReducer(reducer, initialState)
     const { edit, title } = state;
-
-
-    const titleRef = useRef({});
-    const descRef = useRef({});
-    const [titleHeight, setTitleHeight] = useState('')
-    const [descHeight, setDescHeight] = useState('')
-    useEffect(() => {
-        if (titleRef.current !== null) {
-            setTitleHeight(titleRef.current.clientHeight + 15)
-        }
-
-        if (descRef.current !== null) {
-            setDescHeight(descRef.current.clientHeight + 15)
-        }
-    }, [edit])
-
 
     function reducer(state, action) {
         switch (action.type) {
@@ -86,9 +71,8 @@ const DescriptionHeader = () => {
     }
 
 
-    let [classDescription, classDesc, classTitle] = [
+    let [classDescription, classTitle] = [
         ['description-survey-header'],
-        ['desc-survey-master'],
         ['title-survey-master']
     ];
     let btnEl;
@@ -102,25 +86,19 @@ const DescriptionHeader = () => {
             ...classTitle,
             'edited-title'
         ]
-        classDesc = [
-            ...classDesc,
-            'edited-desc'
-        ]
         btnEl = <button className="finish" onClick={saveHandler} >SAVE</button>;
         headerPageEl = (
             <>
-                <textarea
+                <Textarea
                     onKeyPress={titleHandlerKeyPress}
-                    style={{ height: `${titleHeight}px` }}
                     type="text" onChange={titleHandler}
                     value={pageTitle}
                     className="page-title-input"
                     placeholder="Please insert your page title"
                 />
-                <textarea
+                <Textarea
                     className="desc-survey-master edited-desc"
                     onKeyPress={descHandlerKeyPress}
-                    style={{ height: `${descHeight}px` }}
                     type="text" onChange={descHandler}
                     value={pageDesc}
                     placeholder="Please insert your page description"
@@ -131,14 +109,14 @@ const DescriptionHeader = () => {
         btnEl = <button className="edit" onClick={editHandler} >EDIT</button>
         headerPageEl = (
             <>
-                <h3 ref={titleRef}>{pageTitle}</h3>
-                <span ref={descRef} className="desc-survey-master">{pageDesc}</span>
+                <h3>{pageTitle}</h3>
+                <span className="desc-survey-master">{pageDesc}</span>
             </>
         )
     }
 
-    const pollClass = [classDescription, classDesc, classTitle];
-    const [descriptionSurveyClass, descClass, titleClass] = pollClass.map(item => [item.join(' ')])
+    const pollClass = [classDescription, classTitle];
+    const [descriptionSurveyClass, titleClass] = pollClass.map(item => [item.join(' ')])
 
 
     return (
@@ -150,7 +128,6 @@ const DescriptionHeader = () => {
                 </div>
             </div>
             {headerPageEl}
-
         </div>
     )
 }

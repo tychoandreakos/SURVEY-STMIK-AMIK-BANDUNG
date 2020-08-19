@@ -17,6 +17,10 @@ $Roboto: 'Roboto', sans-serif;
   min-width: 50rem;
   position: relative;
 
+  text-area {
+    word-break: break-all;
+  }
+
   &:hover {
     background: #e5e5e5;
   }
