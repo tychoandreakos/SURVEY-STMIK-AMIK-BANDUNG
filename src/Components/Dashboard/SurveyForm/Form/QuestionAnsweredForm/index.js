@@ -20,7 +20,7 @@ import './style.scss';
 const QuestionAnsweredForm = (props) => {
     const [dropdown, setDropdown] = useState(false);
     const [questionInput, setQuestionInput] = useState('');
-    const { numbered, onSubmit } = props;
+    const { numbered, onSubmitMultiple } = props;
 
     const { elementDropdown } = useContext(DropdownContext);
     const { typeQuestion, typeHandler, questionHandler, formBuilderHidden } = useContext(FormBuilderContext);
@@ -31,6 +31,9 @@ const QuestionAnsweredForm = (props) => {
         type: typeQuestion,
         title: ""
     }
+
+    let answeredForm;
+    let actionButtonComponent;
 
 
     const reducer = (state, action) => {
@@ -59,9 +62,20 @@ const QuestionAnsweredForm = (props) => {
             formBuilderHidden()
             return;
         }
-
         return undefined
     }, [state])
+
+
+    if (typeQuestion === TYPE_QUESTION.MULTIPLE) {
+        answeredForm = <MultiChoiceV2 />
+    }
+
+    if (typeQuestion !== TYPE_QUESTION.SHORT) {
+        actionButtonComponent = <div className="action-form-builder">
+            <button onClick={onCancelHandler} className="btn btn-cancel">cancel</button>
+            <button onClick={onSubmitHandler} className="btn btn-save">save</button>
+        </div>
+    }
 
 
     const dropdownHandler = () => {
@@ -85,8 +99,12 @@ const QuestionAnsweredForm = (props) => {
         }
     }
 
-    const onSubmitHandler = () => {
-        onSubmit();
+    function onSubmitHandler() {
+        onSubmitMultiple();
+    }
+
+    function onCancelHandler() {
+        console.log('its working');
     }
 
     const placeholder = "Please type a question ..."
@@ -112,11 +130,8 @@ const QuestionAnsweredForm = (props) => {
                 <div className="help"></div>
             </div>
             <div className="form-builder-question">
-                <MultiChoiceV2 />
-                <div className="action-form-builder">
-                    <button className="btn btn-cancel">cancel</button>
-                    <button onClick={onSubmitHandler} className="btn btn-save">save</button>
-                </div>
+                {answeredForm}
+                {actionButtonComponent}
             </div>
         </div>
     )
@@ -124,7 +139,7 @@ const QuestionAnsweredForm = (props) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSubmit: () => dispatch(saveMultichoiceState())
+        onSubmitMultiple: () => dispatch(saveMultichoiceState())
     }
 }
 
