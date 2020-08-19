@@ -11,7 +11,7 @@ import './style.scss';
 
 const MultiChoiceV2 = (props) => {
 
-    const { inputStateHandler, inputStateHandlerEdit } = props;
+    const { inputStateHandler, inputStateHandlerEdit, addNewMultiChoice, _id, removeNewMultiChoise } = props;
     const [value, setValue] = useState('')
     const [valueCache, setValueCache] = useState({});
     const [lockSubmit, setLockSubmit] = useState(true);
@@ -26,29 +26,38 @@ const MultiChoiceV2 = (props) => {
 
     const onSubmit = () => {
         if (!lockSubmit) {
+            let data;
             if (valueCache.hasOwnProperty('_id')) {
-                inputStateHandlerEdit({
+                data = {
                     _id: valueCache._id,
                     title: value,
                     selected: valueCache.selected,
-                })
+                }
+                inputStateHandler(data, _id)
             } else {
-                const data = {
+                data = {
                     _id: uuid(),
                     title: value,
                     selected: false,
                 }
-
-                inputStateHandler([data])
                 setValueCache(data)
             }
 
+            inputStateHandler(data, _id)
             setLockSubmit(true)
         }
     }
 
     const preventDefaultHandler = (e) => {
         if (e.charCode === 13) e.preventDefault();
+    }
+
+    const addNewMulti = () => {
+        addNewMultiChoice(_id);
+    }
+
+    const removeNewMulti = () => {
+        removeNewMultiChoise(_id);
     }
 
     return (
@@ -58,10 +67,10 @@ const MultiChoiceV2 = (props) => {
                 <TextArea onKeyPress={preventDefaultHandler} onBlur={onSubmit} value={value} onChange={valueHandler} placeholder={placeholder} />
             </div>
             <div className="action">
-                <button className="btn btn-add">
+                <button onClick={addNewMulti} className="btn btn-add">
                     <Icon icon={plus} />
                 </button>
-                <button className="btn btn-remove">
+                <button onClick={removeNewMulti} className="btn btn-remove">
                     <Icon icon={minus} />
                 </button>
             </div>
