@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import MultiChoiceAnwered from '../Form/AnsweredForm/MultiChoice';
 
@@ -9,7 +8,7 @@ import './style.scss';
 
 const ResultSurvey = (props) => {
 
-    const { index, title, desc, type, surveyData } = props;
+    const { index, title, desc, type} = props;
 
     let renderingForm;
     if (type === TYPE_QUESTION.SHORT) {
@@ -26,8 +25,6 @@ const ResultSurvey = (props) => {
         )
     }
 
-    console.log(surveyData)
-
     return (
         <>
             <div className="result-survey">
@@ -40,12 +37,5 @@ const ResultSurvey = (props) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        surveyData: state[SURVEY_FORM_BUILDER][SURVEY_FORM_QUESTION]
-    }
-}
 
-const ResultSurveyJoinRedux = connect(mapStateToProps)(ResultSurvey);
-
-export default ResultSurveyJoinRedux;
+export default ResultSurvey;

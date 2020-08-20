@@ -14,58 +14,22 @@ import DropdownContext from '../../../../../Store/Context/dropdownAlternate';
 import FormBuilderContext from '../../../../../Store/Context/formBuilder';
 
 import { TYPE_QUESTION } from '../../../../../util/varTypes'
-import { saveMultichoiceState } from '../../../../../Store/redux/action';
+import { saveMultichoiceState, saveSingleTextBoxState } from '../../../../../Store/redux/action';
 
 import './style.scss';
 
 const QuestionAnsweredForm = (props) => {
     const [dropdown, setDropdown] = useState(false);
     const [questionInput, setQuestionInput] = useState('');
-    const { numbered, onSubmitMultiple } = props;
+    const { numbered, onSubmitMultiple, onSubmitSingleTextBox } = props;
 
     const { elementDropdown } = useContext(DropdownContext);
-    const { typeQuestion, typeHandler, questionHandler, formBuilderHidden } = useContext(FormBuilderContext);
+    const { typeQuestion, typeHandler, formBuilderHidden } = useContext(FormBuilderContext);
 
     const titleDropdown = elementDropdown.find(item => item.type === typeQuestion) ?? "Loading ..."
 
-    let initialState = {
-        type: typeQuestion,
-        title: ""
-    }
-
     let answeredForm;
     let actionButtonComponent;
-
-
-    const reducer = (state, action) => {
-        switch (action.type) {
-            case TYPE_QUESTION.SHORT:
-                return {
-                    ...state,
-                    ...action
-                }
-            case TYPE_QUESTION.MULTIPLE:
-                return {
-                    ...state,
-                    ...action,
-                    choices: [],
-                };
-            default:
-                return state
-        }
-    }
-
-    const [state, dispatch] = useReducer(reducer, initialState);
-
-    useEffect(() => {
-        if (state.title.length > 0) {
-            questionHandler(state)
-            formBuilderHidden()
-            return;
-        }
-        return undefined
-    }, [state])
-
 
     if (typeQuestion === TYPE_QUESTION.MULTIPLE) {
         answeredForm = <MultiChoiceV2 />
@@ -91,23 +55,30 @@ const QuestionAnsweredForm = (props) => {
     const questionInputHandler = (e) => {
         if (e.charCode === 13) {
             e.preventDefault();
-            if (state.type === TYPE_QUESTION.SHORT) {
-                dispatch({
-                    type: typeQuestion,
-                    title: questionInput
-                })
-                setQuestionInput('')
-                typeHandler('')
-            }
+            onSubmitHandler();
         }
     }
 
     function onSubmitHandler() {
-        onSubmitMultiple({
-            _id: uuid(),
-            type: TYPE_QUESTION.MULTIPLE,
-            title: questionInput.toLowerCase(),
-        });
+        if (typeQuestion === TYPE_QUESTION.SHORT) {
+            onSubmitSingleTextBox({
+                _id: uuid(),
+                type: typeQuestion,
+                title: questionInput.toLocaleLowerCase()
+            })
+        }
+
+        if (typeQuestion === TYPE_QUESTION.MULTIPLE) {
+            onSubmitMultiple({
+                _id: uuid(),
+                type: typeQuestion,
+                title: questionInput.toLowerCase(),
+            });
+        }
+
+        formBuilderHidden();
+        setQuestionInput('')
+        typeHandler('')
     }
 
     function onCancelHandler() {
@@ -144,9 +115,11 @@ const QuestionAnsweredForm = (props) => {
     )
 }
 
+
 const mapDispatchToProps = dispatch => {
     return {
-        onSubmitMultiple: (title) => dispatch(saveMultichoiceState(title))
+        onSubmitMultiple: (title) => dispatch(saveMultichoiceState(title)),
+        onSubmitSingleTextBox: (title) => dispatch(saveSingleTextBoxState(title))
     }
 }
 

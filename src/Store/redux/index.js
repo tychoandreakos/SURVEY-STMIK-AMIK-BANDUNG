@@ -44,6 +44,29 @@ function rootReducer(state = initialState, action) {
         }
     }
 
+    if (action.type === actionTypes.SAVE_SINGLETEXTBOX_STATE) {
+        const { title, _id, type } = action.payload;
+        const result = {
+            _id,
+            title,
+            type,
+        }
+
+        // const newArrQuestion = [...state[varTypes.SURVEY_FORM_BUILDER][varTypes.SURVEY_FORM_QUESTION]];
+        // newArrQuestion.push(result)
+
+        return {
+            ...state,
+            [varTypes.SURVEY_FORM_BUILDER]: {
+                ...state[varTypes.SURVEY_FORM_BUILDER],
+                [varTypes.SURVEY_FORM_QUESTION]: [
+                    ...state[varTypes.SURVEY_FORM_BUILDER][varTypes.SURVEY_FORM_QUESTION],
+                    result
+                ]
+            }
+        }
+    }
+
     if (action.type === actionTypes.SAVE_MULTICHOICE_STATE) {
         const inputState = state[varTypes.MULTICHOICE.SELF][varTypes.MULTICHOICE.INPUTSTATE];
         const multiChoiceId = state[varTypes.MULTICHOICE.SELF][varTypes.MULTICHOICE.MULTICHOICEID];
@@ -63,8 +86,6 @@ function rootReducer(state = initialState, action) {
             item: newArr.reverse()
         }
 
-        const newArrQuestion = [...state[varTypes.SURVEY_FORM_BUILDER][varTypes.SURVEY_FORM_QUESTION]];
-        newArrQuestion.push(result)
 
         return {
             ...state,
@@ -72,7 +93,7 @@ function rootReducer(state = initialState, action) {
                 ...state[varTypes.SURVEY_FORM_BUILDER],
                 [varTypes.SURVEY_FORM_QUESTION]: [
                     ...state[varTypes.SURVEY_FORM_BUILDER][varTypes.SURVEY_FORM_QUESTION],
-                    ...newArrQuestion
+                   result
                 ]
             }
         }

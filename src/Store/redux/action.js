@@ -21,6 +21,13 @@ export function setMultichoiceInputstate(payload) {
     }
 }
 
+export function saveSingleTextBoxState(payload) {
+    return {
+        type: actionType.SAVE_SINGLETEXTBOX_STATE,
+        payload
+    }
+}
+
 export function saveMultichoiceState(payload) {
     return {
         type: actionType.SAVE_MULTICHOICE_STATE,

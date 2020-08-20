@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { TYPE_QUESTION, TYPE_BUTTON } from '../../../../util/varTypes'
-import { v4 as uuid } from 'uuid';
+import { TYPE_BUTTON, SURVEY_FORM_BUILDER, SURVEY_FORM_QUESTION } from '../../../../util/varTypes'
+// import { v4 as uuid } from 'uuid';
+import { connect } from 'react-redux';
 
 // formBuilder
 import HeaderForm from '../Form/Header'
-import MultiChoice from '../Form/MultiChoice'
 import Result from '../Result'
 import NewQuestion from '../Form/NewQuestionFirst'
 import QuestionAnsweredForm from '../Form/QuestionAnsweredForm';
@@ -15,30 +15,15 @@ import FormBuilderContext from '../../../../Store/Context/formBuilder'
 import './style.scss';
 
 
-const ContentSurveyForm = () => {
-    const [question, setQuestion] = useState([])
+const ContentSurveyForm = (props) => {
     const [typeQuestion, setTypeQuestion] = useState()
+
+    const { question } = props;
 
     const typeHandler = (val) => {
         setTypeQuestion(val)
     }
-
-    const questionHandler = (val) => {
-        setQuestion([
-            ...question,
-            {
-                _id: uuid(),
-                ...val
-            },
-        ])
-    }
-
-    const multiChoiceHandler = (val) => {
-        setQuestion([
-            ...val
-        ])
-    }
-
+    
     let renderQuestion = [];
     question.forEach((item, index) => {
         renderQuestion = [
@@ -53,21 +38,6 @@ const ContentSurveyForm = () => {
                 />
             )
         ]
-
-        // if (item.type === TYPE_QUESTION.MULTIPLE) {
-        //     renderQuestion.push((
-        //         <Result key={item._id} index={index + 1} title={item.title} desc={item.desc}>
-        //             {item.choices.map(choice => (
-        //                 <MultiChoice key={choice._id} selected={choice.selected} title={choice.title} />
-        //             ))}
-        //             <div className="multichoice">
-        //                 <FormBuilderContext.Provider value={{ question, multiChoiceHandler }}>
-        //                     <MultiChoice _id={item._id} key={item._id} />
-        //                 </FormBuilderContext.Provider>
-        //             </div>
-        //         </Result>
-        //     ))
-        // }
     })
 
     const [initial, setInitial] = useState(false)
@@ -91,7 +61,7 @@ const ContentSurveyForm = () => {
     let questionEl;
     if (formBuilder) {
         questionEl = (
-            <FormBuilderContext.Provider value={{ typeHandler, typeQuestion, question, questionHandler, formBuilderHidden }}>
+            <FormBuilderContext.Provider value={{ typeHandler, typeQuestion, question, formBuilderHidden }}>
                 <QuestionAnsweredForm numbered={`q${question.length + 1}`} />
             </FormBuilderContext.Provider>
         )
@@ -115,4 +85,12 @@ const ContentSurveyForm = () => {
     )
 }
 
-export default ContentSurveyForm;
+const mapStateToProps = (state) => {
+    return {
+        question: state[SURVEY_FORM_BUILDER][SURVEY_FORM_QUESTION]
+    }
+}
+
+const ContentSurveyFormJoinRedux = connect(mapStateToProps)(ContentSurveyForm)
+
+export default ContentSurveyFormJoinRedux;
