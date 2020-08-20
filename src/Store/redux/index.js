@@ -2,6 +2,7 @@ import * as actionTypes from '../../util/actionTypes';
 import * as varTypes from '../../util/varTypes';
 import slider from '../../util/sliderDummyData'
 
+
 const initialState = {
     [varTypes.SURVEY_CATEGORY]: slider,
     [varTypes.SURVEY_FORM_BUILDER]: {
@@ -46,6 +47,7 @@ function rootReducer(state = initialState, action) {
     if (action.type === actionTypes.SAVE_MULTICHOICE_STATE) {
         const inputState = state[varTypes.MULTICHOICE.SELF][varTypes.MULTICHOICE.INPUTSTATE];
         const multiChoiceId = state[varTypes.MULTICHOICE.SELF][varTypes.MULTICHOICE.MULTICHOICEID];
+        const { title, _id } = action.payload;
 
         const [inputObj] = inputState;
         let newArr = []
@@ -54,14 +56,22 @@ function rootReducer(state = initialState, action) {
                 newArr.push(inputObj[key])
             }
         }
-        const result = [newArr].reverse();
+        const result = {
+            _id,
+            title,
+            item: newArr.reverse()
+        }
+
+        const newArrQuestion = [...state[varTypes.SURVEY_FORM_BUILDER][varTypes.SURVEY_FORM_QUESTION]];
+        newArrQuestion.push(result)
+
         return {
             ...state,
             [varTypes.SURVEY_FORM_BUILDER]: {
                 ...state[varTypes.SURVEY_FORM_BUILDER],
                 [varTypes.SURVEY_FORM_QUESTION]: [
                     ...state[varTypes.SURVEY_FORM_BUILDER][varTypes.SURVEY_FORM_QUESTION],
-                    ...result
+                    ...newArrQuestion
                 ]
             }
         }

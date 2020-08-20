@@ -1,5 +1,6 @@
 import React, { useState, useContext, useReducer, useEffect } from 'react';
 import { connect } from 'react-redux'
+import { v4 as uuid } from 'uuid';
 
 import Icon from '@iconify/react';
 import ChevronDown from '@iconify/icons-mdi/chevron-down';
@@ -100,7 +101,10 @@ const QuestionAnsweredForm = (props) => {
     }
 
     function onSubmitHandler() {
-        onSubmitMultiple();
+        onSubmitMultiple({
+            _id: uuid(),
+            title: questionInput.toLowerCase()
+        });
     }
 
     function onCancelHandler() {
@@ -139,7 +143,7 @@ const QuestionAnsweredForm = (props) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSubmitMultiple: () => dispatch(saveMultichoiceState())
+        onSubmitMultiple: (title) => dispatch(saveMultichoiceState(title))
     }
 }
 
