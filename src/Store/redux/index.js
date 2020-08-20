@@ -93,7 +93,7 @@ function rootReducer(state = initialState, action) {
                 ...state[varTypes.SURVEY_FORM_BUILDER],
                 [varTypes.SURVEY_FORM_QUESTION]: [
                     ...state[varTypes.SURVEY_FORM_BUILDER][varTypes.SURVEY_FORM_QUESTION],
-                   result
+                    result
                 ]
             }
         }
@@ -115,6 +115,7 @@ function rootReducer(state = initialState, action) {
             ...state,
             [varTypes.SURVEY_CATEGORY]: newSurvey,
             [varTypes.SURVEY_FORM_BUILDER]: {
+                ...state[varTypes.SURVEY_FORM_BUILDER],
                 title: state[actionTypes.SET_TITLE_SURVEY],
                 [varTypes.SURVEY_CATEGORY_BUILDER]: {
                     ...data

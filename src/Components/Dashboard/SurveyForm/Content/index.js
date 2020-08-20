@@ -17,30 +17,32 @@ import './style.scss';
 const ContentSurveyForm = (props) => {
     const [typeQuestion, setTypeQuestion] = useState()
 
-    const { question = [] } = props;
+    const { question } = props;
 
     const typeHandler = (val) => {
         setTypeQuestion(val)
     }
 
     let renderQuestion = [];
-    question.forEach((survey, index) => {
-        renderQuestion = [
-            ...renderQuestion,
-            (
-                <Result
+    if (question) {
+        question.forEach((survey, index) => {
+            renderQuestion = [
+                ...renderQuestion,
+                (
+                    <Result
 
-                    key={survey._id}
-                    index={index + 1}
-                    title={survey.title}
-                    desc={survey.desc}
-                    type={survey.type}
-                    data={survey.item}
-                />
+                        key={survey._id}
+                        index={index + 1}
+                        title={survey.title}
+                        desc={survey.desc}
+                        type={survey.type}
+                        data={survey.item}
+                    />
 
-            )
-        ]
-    })
+                )
+            ]
+        })
+    }
 
     const [initial, setInitial] = useState(false)
     const [formBuilder, setFormBuilder] = useState(false);
@@ -63,8 +65,8 @@ const ContentSurveyForm = (props) => {
     let questionEl;
     if (formBuilder) {
         questionEl = (
-            <FormBuilderContext.Provider value={{ typeHandler, typeQuestion, question, formBuilderHidden }}>
-                <QuestionAnsweredForm numbered={`q${question.length + 1}`} />
+            <FormBuilderContext.Provider value={{ typeHandler, typeQuestion, formBuilderHidden }}>
+                <QuestionAnsweredForm numbered={`q${question ? question.length + 1 : 1}`} />
             </FormBuilderContext.Provider>
         )
     }
