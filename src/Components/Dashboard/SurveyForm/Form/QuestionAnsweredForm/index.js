@@ -91,19 +91,22 @@ const QuestionAnsweredForm = (props) => {
     const questionInputHandler = (e) => {
         if (e.charCode === 13) {
             e.preventDefault();
-            dispatch({
-                type: typeQuestion,
-                title: questionInput
-            })
-            setQuestionInput('')
-            typeHandler('')
+            if (state.type === TYPE_QUESTION.SHORT) {
+                dispatch({
+                    type: typeQuestion,
+                    title: questionInput
+                })
+                setQuestionInput('')
+                typeHandler('')
+            }
         }
     }
 
     function onSubmitHandler() {
         onSubmitMultiple({
             _id: uuid(),
-            title: questionInput.toLowerCase()
+            type: TYPE_QUESTION.MULTIPLE,
+            title: questionInput.toLowerCase(),
         });
     }
 

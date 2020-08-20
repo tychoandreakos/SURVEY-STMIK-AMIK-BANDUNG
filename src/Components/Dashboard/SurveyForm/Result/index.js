@@ -1,12 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-import { TYPE_QUESTION } from '../../../../util/varTypes'
+import MultiChoiceAnwered from '../Form/AnsweredForm/MultiChoice';
+
+import { TYPE_QUESTION, SURVEY_FORM_QUESTION, SURVEY_FORM_BUILDER } from '../../../../util/varTypes'
 
 import './style.scss';
 
 const ResultSurvey = (props) => {
 
-    const { index, title, desc, type } = props;
+    const { index, title, desc, type, surveyData } = props;
 
     let renderingForm;
     if (type === TYPE_QUESTION.SHORT) {
@@ -14,8 +17,16 @@ const ResultSurvey = (props) => {
     }
 
     if (type === TYPE_QUESTION.MULTIPLE) {
-        renderingForm = <h3>its work</h3>
+        renderingForm = (
+            <div className="multichoice-answered-question">
+                <MultiChoiceAnwered title="damn" />
+                <MultiChoiceAnwered title="you" />
+                <MultiChoiceAnwered title="stark" />
+            </div>
+        )
     }
+
+    console.log(surveyData)
 
     return (
         <>
@@ -29,4 +40,12 @@ const ResultSurvey = (props) => {
     )
 }
 
-export default ResultSurvey;
+const mapStateToProps = (state) => {
+    return {
+        surveyData: state[SURVEY_FORM_BUILDER][SURVEY_FORM_QUESTION]
+    }
+}
+
+const ResultSurveyJoinRedux = connect(mapStateToProps)(ResultSurvey);
+
+export default ResultSurveyJoinRedux;

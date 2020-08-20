@@ -3,21 +3,31 @@ $Roboto: 'Roboto', sans-serif;
 .multi-choice-answered-form {
   display: flex;
   width: 90%;
-  background: red;
   padding: 0.5rem;
   align-items: center;
+  margin: 0.6rem 0;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 
   .bullet {
-    width: 22px;
-    height: 22px;
-    background: blue;
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid #5661b6;
     border-radius: 50%;
+    margin-right: 0.6rem;
   }
 
   span {
+    text-transform: capitalize;
     font: {
       family: $Roboto;
-      size: 1rem;
+      size: 0.97rem;
     }
   }
 }

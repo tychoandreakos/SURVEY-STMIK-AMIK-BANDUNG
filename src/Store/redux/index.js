@@ -47,7 +47,7 @@ function rootReducer(state = initialState, action) {
     if (action.type === actionTypes.SAVE_MULTICHOICE_STATE) {
         const inputState = state[varTypes.MULTICHOICE.SELF][varTypes.MULTICHOICE.INPUTSTATE];
         const multiChoiceId = state[varTypes.MULTICHOICE.SELF][varTypes.MULTICHOICE.MULTICHOICEID];
-        const { title, _id } = action.payload;
+        const { title, _id, type } = action.payload;
 
         const [inputObj] = inputState;
         let newArr = []
@@ -59,6 +59,7 @@ function rootReducer(state = initialState, action) {
         const result = {
             _id,
             title,
+            type,
             item: newArr.reverse()
         }
 
