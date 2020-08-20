@@ -1,7 +1,8 @@
 $Roboto: 'Roboto', sans-serif;
 
 .multi-choice-answered-form {
-  display: flex;
+  display: grid;
+  grid-template-columns: 5% auto;
   width: 90%;
   padding: 0.5rem;
   align-items: center;
@@ -20,11 +21,11 @@ $Roboto: 'Roboto', sans-serif;
     height: 18px;
     border: 2.5px solid #5661b6;
     border-radius: 50%;
-    margin-right: 0.6rem;
   }
 
   span {
     text-transform: capitalize;
+    text-align: justify;
     font: {
       family: $Roboto;
       size: 0.97rem;

@@ -25,16 +25,17 @@ const ContentSurveyForm = (props) => {
     }
     
     let renderQuestion = [];
-    question.forEach((item, index) => {
+    question.forEach((survey, index) => {
         renderQuestion = [
             ...renderQuestion,
             (
                 <Result
-                    key={item._id}
+                    key={survey._id}
                     index={index + 1}
-                    title={item.title}
-                    desc={item.desc}
-                    type={item.type}
+                    title={survey.title}
+                    desc={survey.desc}
+                    type={survey.type}
+                    data={survey.item}
                 />
             )
         ]

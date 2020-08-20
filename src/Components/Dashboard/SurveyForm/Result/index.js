@@ -8,7 +8,7 @@ import './style.scss';
 
 const ResultSurvey = (props) => {
 
-    const { index, title, desc, type} = props;
+    const { index, title, desc, type, data } = props;
 
     let renderingForm;
     if (type === TYPE_QUESTION.SHORT) {
@@ -18,9 +18,14 @@ const ResultSurvey = (props) => {
     if (type === TYPE_QUESTION.MULTIPLE) {
         renderingForm = (
             <div className="multichoice-answered-question">
-                <MultiChoiceAnwered title="damn" />
-                <MultiChoiceAnwered title="you" />
-                <MultiChoiceAnwered title="stark" />
+                {data.map(item => (
+                    <MultiChoiceAnwered
+                        key={item._id} t
+                        title={item.title}
+                        selected={item.selected}
+                    />
+                ))}
+
             </div>
         )
     }
