@@ -17,7 +17,7 @@ import './style.scss';
 const ContentSurveyForm = (props) => {
     const [typeQuestion, setTypeQuestion] = useState()
 
-    const { question } = props;
+    const { question = [] } = props;
 
     const typeHandler = (val) => {
         setTypeQuestion(val)
