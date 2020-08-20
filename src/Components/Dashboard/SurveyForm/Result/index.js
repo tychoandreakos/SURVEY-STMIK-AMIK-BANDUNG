@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import MultiChoiceAnwered from '../Form/AnsweredForm/MultiChoice';
 
-import { TYPE_QUESTION, SURVEY_FORM_QUESTION, SURVEY_FORM_BUILDER } from '../../../../util/varTypes'
+import { TYPE_QUESTION } from '../../../../util/varTypes'
 
 import './style.scss';
 
 const ResultSurvey = (props) => {
 
     const { index, title, desc, type, data } = props;
+    const [showBtn, setShowBtn] = useState(false)
 
     let renderingForm;
     if (type === TYPE_QUESTION.SHORT) {
@@ -30,14 +31,27 @@ const ResultSurvey = (props) => {
         )
     }
 
+    let btnEl;
+    if (showBtn) {
+        btnEl = (
+            <div className="button-handler-form">
+                <button className="btn btn-edit">edit</button>
+                <button className="btn">move</button>
+                <button className="btn">copy</button>
+                <button className="btn btn-delete">delete</button>
+            </div>
+        )
+    }
+
     return (
         <>
-            <div className="result-survey">
+            <div onMouseEnter={() => setShowBtn(true)} onMouseLeave={() => setShowBtn(false)} className="result-survey">
                 <span className="title">{`${index}. ${title}`}</span>
                 <span className="descr">{desc}</span>
                 {renderingForm}
+                {btnEl}
             </div>
-            <div className="separator-survey"></div>
+
         </>
     )
 }

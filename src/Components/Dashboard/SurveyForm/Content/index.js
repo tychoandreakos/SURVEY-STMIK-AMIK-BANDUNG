@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { TYPE_BUTTON, SURVEY_FORM_BUILDER, SURVEY_FORM_QUESTION } from '../../../../util/varTypes'
-// import { v4 as uuid } from 'uuid';
 import { connect } from 'react-redux';
+import { TYPE_BUTTON, SURVEY_FORM_BUILDER, SURVEY_FORM_QUESTION } from '../../../../util/varTypes'
 
 // formBuilder
 import HeaderForm from '../Form/Header'
@@ -23,13 +22,14 @@ const ContentSurveyForm = (props) => {
     const typeHandler = (val) => {
         setTypeQuestion(val)
     }
-    
+
     let renderQuestion = [];
     question.forEach((survey, index) => {
         renderQuestion = [
             ...renderQuestion,
             (
                 <Result
+
                     key={survey._id}
                     index={index + 1}
                     title={survey.title}
@@ -37,6 +37,7 @@ const ContentSurveyForm = (props) => {
                     type={survey.type}
                     data={survey.item}
                 />
+
             )
         ]
     })
