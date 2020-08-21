@@ -48,18 +48,6 @@ const MultiChoiceWrapper = (props) => {
         }
     }
 
-    // const onSubmitHandler = () => {
-    //     const [inputObj] = inputState;
-    //     let newArr = []
-    //     for (const key of multiChoiceId) {
-    //         if (inputObj[key] !== undefined) {
-    //             newArr.push(inputObj[key])
-    //         }
-    //     }
-    //     const result = [newArr].reverse();
-    // }
-
-
     const multiChoiceEL = multiChoiceId.map(id => (
         <MultiChoiceV2
             key={id}

@@ -9,6 +9,7 @@ import DropdownQuestion from './DropdownQuestion';
 
 // form builder
 import MultiChoiceV2 from './MultiChoiceWrapper';
+import StarRating from '../../Form/StarRating';
 
 import DropdownContext from '../../../../../Store/Context/dropdownAlternate';
 import FormBuilderContext from '../../../../../Store/Context/formBuilder';
@@ -33,6 +34,10 @@ const QuestionAnsweredForm = (props) => {
 
     if (typeQuestion === TYPE_QUESTION.MULTIPLE) {
         answeredForm = <MultiChoiceV2 />
+    }
+
+    if (typeQuestion === TYPE_QUESTION.STAR) {
+        answeredForm = <StarRating />
     }
 
     if (typeQuestion !== TYPE_QUESTION.SHORT) {
