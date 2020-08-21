@@ -53,7 +53,13 @@ const LogoButton = (props) => {
     return (
         <div className="upload-logo">
             {renderEl}
-            <input type="file" onChange={readFile} hidden ref={inputFileRef} />
+            <input
+                type="file"
+                onChange={readFile}
+                hidden
+                ref={inputFileRef}
+                accept="image/*"
+            />
         </div>
     )
 }
