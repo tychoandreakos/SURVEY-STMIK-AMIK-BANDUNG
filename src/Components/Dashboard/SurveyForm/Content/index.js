@@ -30,7 +30,6 @@ const ContentSurveyForm = (props) => {
                 ...renderQuestion,
                 (
                     <Result
-
                         key={survey._id}
                         index={index + 1}
                         title={survey.title}

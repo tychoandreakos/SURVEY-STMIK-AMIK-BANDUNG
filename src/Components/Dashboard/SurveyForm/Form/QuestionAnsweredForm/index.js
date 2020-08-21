@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, Suspense, lazy } from 'react';
 import { connect } from 'react-redux'
 import { v4 as uuid } from 'uuid';
 
@@ -7,10 +7,6 @@ import ChevronDown from '@iconify/icons-mdi/chevron-down';
 import TextArea from 'react-expanding-textarea';
 import DropdownQuestion from './DropdownQuestion';
 
-// form builder
-import MultiChoiceV2 from './MultiChoiceWrapper';
-import StarRating from '../../Form/StarRating';
-
 import DropdownContext from '../../../../../Store/Context/dropdownAlternate';
 import FormBuilderContext from '../../../../../Store/Context/formBuilder';
 
@@ -18,6 +14,20 @@ import { TYPE_QUESTION } from '../../../../../util/varTypes'
 import { saveMultichoiceState, saveSingleTextBoxState } from '../../../../../Store/redux/action';
 
 import './style.scss';
+
+/**
+ * Import the form builder component
+ * using the react Lazy & Suspense
+ */
+const MultiChoiceV2 = lazy(() => import('./MultiChoiceWrapper'));
+const StarRating = lazy(() => import('../../Form/StarRating'));
+const TextForm = lazy(() => import('../../Form/Text'));
+const DateTimeForm = lazy(() => import('../../Form/DateTime'));
+const CheckBoxes = lazy(() => import('../../Form/CheckBoxes'));
+const DropdownForm = lazy(() => import('../../Form/Dropdown'));
+const MultipleTextBox = lazy(() => import('../../Form/MultipeTextBox'));
+const RankingForm = lazy(() => import('../../Form/Ranking'));
+const CommentBox = lazy(() => import('../../Form/CommentBox'));
 
 const QuestionAnsweredForm = (props) => {
     const [dropdown, setDropdown] = useState(false);
@@ -32,12 +42,36 @@ const QuestionAnsweredForm = (props) => {
     let answeredForm;
     let actionButtonComponent;
 
-    if (typeQuestion === TYPE_QUESTION.MULTIPLE) {
-        answeredForm = <MultiChoiceV2 />
-    }
-
-    if (typeQuestion === TYPE_QUESTION.STAR) {
-        answeredForm = <StarRating />
+    switch (typeQuestion) {
+        case TYPE_QUESTION.MULTIPLE:
+            answeredForm = <MultiChoiceV2 />
+            break;
+        case TYPE_QUESTION.STAR:
+            answeredForm = <StarRating />
+            break;
+        case TYPE_QUESTION.TEXTFORMAT:
+            answeredForm = <TextForm />
+            break;
+        case TYPE_QUESTION.DATEANDTIME:
+            answeredForm = <DateTimeForm />
+            break;
+        case TYPE_QUESTION.CHECKBOX:
+            answeredForm = <CheckBoxes />
+            break;
+        case TYPE_QUESTION.DROPDOWNFORMAT:
+            answeredForm = <DropdownForm />
+            break;
+        case TYPE_QUESTION.MULTIPLETEXTBOX:
+            answeredForm = <MultipleTextBox />
+            break;
+        case TYPE_QUESTION.RANKING:
+            answeredForm = <RankingForm />
+            break;
+        case TYPE_QUESTION.COMMENTBOX:
+            answeredForm = <CommentBox />
+            break;
+        default:
+            break;
     }
 
     if (typeQuestion !== TYPE_QUESTION.SHORT) {
@@ -69,7 +103,7 @@ const QuestionAnsweredForm = (props) => {
             onSubmitSingleTextBox({
                 _id: uuid(),
                 type: typeQuestion,
-                title: questionInput.toLocaleLowerCase()
+                title: questionInput.toLowerCase()
             })
         }
 
@@ -113,8 +147,10 @@ const QuestionAnsweredForm = (props) => {
                 <div className="help"></div>
             </div>
             <div className="form-builder-question">
-                {answeredForm}
-                {actionButtonComponent}
+                <Suspense fallback="loading ....">
+                    {answeredForm}
+                    {actionButtonComponent}
+                </Suspense>
             </div>
         </div>
     )
