@@ -129,8 +129,11 @@ const QuestionAnsweredForm = (props) => {
             setQuestionInput('')
             typeHandler('')
         } else {
-            console.log('its work')
-            onEdit("damn")
+            onEdit({
+                _id: resultData._id,
+                type: resultData.type,
+                title: questionInput.toLowerCase(),
+            })
             editedHandler();
         }
     }
@@ -147,7 +150,7 @@ const QuestionAnsweredForm = (props) => {
     return (
         <div className="question-answered-form">
             <div className="input-answered-form">
-                <div className="numbered">{numbered}</div>
+                <div className="numbered">{numbered ? numbered : `q${resultData.index}`}</div>
                 <div className="input">
                     <TextArea
                         value={questionInput}

@@ -64,16 +64,43 @@ function rootReducer(state = initialState, action) {
         }
     }
 
+    if (action.type === actionTypes.DELETE_SURVEY_FORM) {
+        const deletedData = action.payload;
+        if (deletedData.type === varTypes.TYPE_QUESTION.SHORT) {
+            const newArrData = state[varTypes.SURVEY_FORM_BUILDER][varTypes.SURVEY_FORM_QUESTION].filter(item => item._id !== deletedData._id
+            );
+            return {
+                ...state,
+                [varTypes.SURVEY_FORM_BUILDER]: {
+                    ...state[varTypes.SURVEY_FORM_BUILDER],
+                    [varTypes.SURVEY_FORM_QUESTION]: [
+                        ...newArrData
+                    ]
+                }
+            }
+        }
+    }
+
     if (action.type === actionTypes.EDIT_SURVEY_FORM) {
-        // if (action.type === varTypes.TYPE_QUESTION.SHORT) {
-        //     return {
-        //         ...state,
-
-        //     }
-        // }
-
-        console.log("its working");
-        return state;
+        const editedData = action.payload;
+        if (editedData.type === varTypes.TYPE_QUESTION.SHORT) {
+            const newArrData = state[varTypes.SURVEY_FORM_BUILDER][varTypes.SURVEY_FORM_QUESTION].map(item => {
+                if (item._id === editedData._id) {
+                    item = {
+                        ...item,
+                        ...editedData
+                    }
+                }
+                return item;
+            });
+            return {
+                ...state,
+                [varTypes.SURVEY_FORM_BUILDER]: {
+                    ...state[varTypes.SURVEY_FORM_BUILDER],
+                    [varTypes.SURVEY_FORM_QUESTION]: newArrData
+                }
+            }
+        }
     }
 
     if (action.type === actionTypes.SAVE_MULTICHOICE_STATE) {

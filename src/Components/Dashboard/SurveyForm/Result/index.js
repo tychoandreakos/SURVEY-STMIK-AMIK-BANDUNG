@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { connect } from 'react-redux';
 
 import MultiChoiceAnwered from '../Form/AnsweredForm/MultiChoice';
 import QuestionAnswerdForm from '../Form/QuestionAnsweredForm';
 import FormBuilderContext from '../../../../Store/Context/formBuilder';
+import { deleteSurveyForm } from '../../../../Store/redux/action';
 
 import { TYPE_QUESTION } from '../../../../util/varTypes'
 
 import './style.scss';
-import { useEffect } from 'react';
 
 const ResultSurvey = (props) => {
 
-    const { index, title, desc, type, data, _id } = props;
+    const { index, title, desc, type, data, _id, onDeleteHandler } = props;
     const [showBtn, setShowBtn] = useState(false)
     const [edited, setEdited] = useState(false);
     const [resultData, setResultData] = useState({});
@@ -29,7 +31,7 @@ const ResultSurvey = (props) => {
             type,
             data
         })
-    }, [])
+    }, [index, _id, title, desc, type, data])
 
     let renderingForm;
     if (type === TYPE_QUESTION.SHORT) {
@@ -57,8 +59,14 @@ const ResultSurvey = (props) => {
      * maka fungsi ini akan diinvoke
      */
     const editedHandler = () => {
-        // setEdited(false)
-        console.log('edited handler work')
+        setEdited(false)
+    }
+
+    const deleteHandler = () => {
+        onDeleteHandler({
+            _id,
+            type,
+        })
     }
 
 
@@ -68,7 +76,7 @@ const ResultSurvey = (props) => {
             <div className="button-handler-form">
                 <button onClick={() => setEdited(true)} className="btn btn-edit">edit</button>
                 <button className="btn">copy</button>
-                <button className="btn btn-delete">delete</button>
+                <button onClick={deleteHandler} className="btn btn-delete">delete</button>
             </div>
         )
     }
@@ -104,5 +112,13 @@ const ResultSurvey = (props) => {
     )
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onDeleteHandler: (id) => dispatch(deleteSurveyForm(id))
+    }
+}
 
-export default ResultSurvey;
+const ResultSurveyJoinRedux = connect(null, mapDispatchToProps)(ResultSurvey);
+
+
+export default ResultSurveyJoinRedux;

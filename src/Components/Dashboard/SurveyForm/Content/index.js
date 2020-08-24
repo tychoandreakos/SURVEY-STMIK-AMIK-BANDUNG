@@ -32,7 +32,7 @@ const ContentSurveyForm = (props) => {
                     <Result
                         key={survey._id}
                         index={index + 1}
-                        _key={survey._id}
+                        _id={survey._id}
                         title={survey.title}
                         desc={survey.desc}
                         type={survey.type}
