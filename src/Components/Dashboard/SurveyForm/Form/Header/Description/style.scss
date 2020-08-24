@@ -1,6 +1,19 @@
 $MerriWeather: 'MerriWeather', sans-serif;
 $Roboto: 'Roboto', sans-serif;
 
+@mixin title {
+  width: 95%;
+  margin: {
+    top: 0.6rem;
+    bottom: 0.8rem;
+  }
+  font: {
+    family: $MerriWeather !important;
+    size: 1.5rem !important;
+  }
+  text-transform: capitalize;
+}
+
 .edited {
   background: #5661b6 !important;
   color: #fff !important;
@@ -13,13 +26,12 @@ $Roboto: 'Roboto', sans-serif;
     right: 1rem;
     bottom: 0.9rem;
   }
-  max-width: 50rem;
-  min-width: 50rem;
+  width: 40rem;
   position: relative;
-
   text-area {
     word-break: break-all;
   }
+  transition: background .4s ease-in;
 
   &:hover {
     background: #e5e5e5;
@@ -86,7 +98,7 @@ $Roboto: 'Roboto', sans-serif;
       size: 1.02rem;
     }
     text-align: justify;
-    width: 89%;
+    width: 95%;
     margin: auto;
     display: inline-block;
     color: #333;
@@ -95,29 +107,12 @@ $Roboto: 'Roboto', sans-serif;
   .page-title-input {
     background: none;
     border: none;
-    width: 90%;
     color: #fff;
-    overflow: auto;
     word-break: break-word;
-    font: {
-      family: $MerriWeather !important;
-      size: 1.6rem !important;
-    }
-    margin: {
-      top: 0.6rem;
-      bottom: 0.8rem;
-    }
+    @include title;
   }
 
   h3 {
-    width: 90%;
-    font: {
-      family: $MerriWeather !important;
-      size: 1.5rem !important;
-    }
-    margin: {
-      top: 0.6rem;
-      bottom: 0.8rem;
-    }
+    @include title;
   }
 }
