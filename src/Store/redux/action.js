@@ -7,6 +7,13 @@ export function setTileSurvey(payload) {
     }
 }
 
+export function copiedSurveyForm(payload) {
+    return {
+        type: actionType.COPIED_SURVEY_FORM,
+        payload
+    }
+}
+
 export function editSurveyForm(payload) {
     return {
         type: actionType.EDIT_SURVEY_FORM,

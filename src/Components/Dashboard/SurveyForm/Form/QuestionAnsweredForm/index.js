@@ -10,7 +10,7 @@ import DropdownQuestion from './DropdownQuestion';
 import DropdownContext from '../../../../../Store/Context/dropdownAlternate';
 import FormBuilderContext from '../../../../../Store/Context/formBuilder';
 
-import { TYPE_QUESTION } from '../../../../../util/varTypes'
+import { TYPE_QUESTION, RESULT_ACTION } from '../../../../../util/varTypes'
 import { saveMultichoiceState, saveSingleTextBoxState, editSurveyForm } from '../../../../../Store/redux/action';
 
 import './style.scss';
@@ -35,7 +35,7 @@ const QuestionAnsweredForm = (props) => {
     const { numbered, onSubmitMultiple, onSubmitSingleTextBox, onEdit } = props;
 
     const { elementDropdown } = useContext(DropdownContext);
-    const { typeQuestion, typeHandler, formBuilderHidden, edited, editedHandler, resultData = [] } = useContext(FormBuilderContext);
+    const { typeQuestion, typeHandler, formBuilderHidden, action, actionHandler, resultData = [] } = useContext(FormBuilderContext);
     const titleDropdown = elementDropdown ? elementDropdown.find(item => {
         if (typeQuestion && item.type === typeQuestion) return true;
         if (resultData && item.type === resultData.type) return true;
@@ -43,10 +43,10 @@ const QuestionAnsweredForm = (props) => {
     }) : "Loading ..."
 
     useEffect(() => {
-        if (edited) {
+        if (action) {
             setQuestionInput(capitalize(resultData.title))
         }
-    }, [edited])
+    }, [action])
 
     let answeredForm;
     let actionButtonComponent;
@@ -108,33 +108,38 @@ const QuestionAnsweredForm = (props) => {
     }
 
     function onSubmitHandler() {
-        if (!edited) {
-            if (typeQuestion === TYPE_QUESTION.SHORT) {
-                onSubmitSingleTextBox({
-                    _id: uuid(),
-                    type: typeQuestion,
-                    title: questionInput.toLowerCase()
-                })
-            }
-
-            if (typeQuestion === TYPE_QUESTION.MULTIPLE) {
-                onSubmitMultiple({
-                    _id: uuid(),
-                    type: typeQuestion,
+        switch (action) {
+            case RESULT_ACTION.COPY:
+                break;
+            case RESULT_ACTION.EDIT:
+                onEdit({
+                    _id: resultData._id,
+                    type: resultData.type,
                     title: questionInput.toLowerCase(),
-                });
-            }
+                })
+                actionHandler();
+                break;
+            default:
+                if (typeQuestion === TYPE_QUESTION.SHORT) {
+                    onSubmitSingleTextBox({
+                        _id: uuid(),
+                        type: typeQuestion,
+                        title: questionInput.toLowerCase()
+                    })
+                }
 
-            formBuilderHidden();
-            setQuestionInput('')
-            typeHandler('')
-        } else {
-            onEdit({
-                _id: resultData._id,
-                type: resultData.type,
-                title: questionInput.toLowerCase(),
-            })
-            editedHandler();
+                if (typeQuestion === TYPE_QUESTION.MULTIPLE) {
+                    onSubmitMultiple({
+                        _id: uuid(),
+                        type: typeQuestion,
+                        title: questionInput.toLowerCase(),
+                    });
+                }
+
+                formBuilderHidden();
+                setQuestionInput('')
+                typeHandler('')
+                break;
         }
     }
 

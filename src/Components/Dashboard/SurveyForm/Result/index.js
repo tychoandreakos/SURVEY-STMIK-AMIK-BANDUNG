@@ -5,17 +5,17 @@ import { connect } from 'react-redux';
 import MultiChoiceAnwered from '../Form/AnsweredForm/MultiChoice';
 import QuestionAnswerdForm from '../Form/QuestionAnsweredForm';
 import FormBuilderContext from '../../../../Store/Context/formBuilder';
-import { deleteSurveyForm } from '../../../../Store/redux/action';
+import { deleteSurveyForm, copiedSurveyForm } from '../../../../Store/redux/action';
 
-import { TYPE_QUESTION } from '../../../../util/varTypes'
+import { TYPE_QUESTION, RESULT_ACTION } from '../../../../util/varTypes'
 
 import './style.scss';
 
 const ResultSurvey = (props) => {
 
-    const { index, title, desc, type, data, _id, onDeleteHandler } = props;
+    const { index, title, desc, type, data, _id, onDeleteHandler, onCopiedHandler } = props;
     const [showBtn, setShowBtn] = useState(false)
-    const [edited, setEdited] = useState(false);
+    const [action, setAction] = useState(false);
     const [resultData, setResultData] = useState({});
 
     /**
@@ -29,9 +29,27 @@ const ResultSurvey = (props) => {
             title,
             desc,
             type,
-            data
+            data,
         })
     }, [index, _id, title, desc, type, data])
+
+    /**
+     * Jika action state adalah atau sama dengan
+     * RESULT_ACTION.COPY maka data dari result akan
+     * disimpan didalam redux
+     */
+    useEffect(() => {
+        if (action === RESULT_ACTION.COPY) {
+            onCopiedHandler([{
+                _id,
+                title,
+                desc,
+                type,
+                data,
+            }]);
+            setAction(false)
+        }
+    }, [action])
 
     let renderingForm;
     if (type === TYPE_QUESTION.SHORT) {
@@ -58,8 +76,8 @@ const ResultSurvey = (props) => {
      * Ketika user menekan tombol simpan didalam componennAnsweredComponent
      * maka fungsi ini akan diinvoke
      */
-    const editedHandler = () => {
-        setEdited(false)
+    const actionHandler = () => {
+        setAction(false)
     }
 
     const deleteHandler = () => {
@@ -74,8 +92,8 @@ const ResultSurvey = (props) => {
     if (showBtn) {
         btnEl = (
             <div className="button-handler-form">
-                <button onClick={() => setEdited(true)} className="btn btn-edit">edit</button>
-                <button className="btn">copy</button>
+                <button onClick={() => setAction(RESULT_ACTION.EDIT)} className="btn btn-edit">edit</button>
+                <button onClick={() => setAction(RESULT_ACTION.COPY)} className="btn">copy</button>
                 <button onClick={deleteHandler} className="btn btn-delete">delete</button>
             </div>
         )
@@ -88,7 +106,13 @@ const ResultSurvey = (props) => {
      * ditampilkan.
      */
     let resultEl;
-    if (!edited) {
+    if (action === RESULT_ACTION.EDIT) {
+        resultEl = (
+            <FormBuilderContext.Provider value={{ action, actionHandler, resultData }}>
+                <QuestionAnswerdForm />
+            </FormBuilderContext.Provider>
+        )
+    } else {
         resultEl = (
             <div onMouseEnter={() => setShowBtn(true)} onMouseLeave={() => setShowBtn(false)} className="result-survey">
                 <span className="title">{`${index}. ${title}`}</span>
@@ -97,12 +121,7 @@ const ResultSurvey = (props) => {
                 {btnEl}
             </div>
         )
-    } else {
-        resultEl = (
-            <FormBuilderContext.Provider value={{ edited, editedHandler, resultData }}>
-                <QuestionAnswerdForm />
-            </FormBuilderContext.Provider>
-        )
+
     }
 
     return (
@@ -114,7 +133,8 @@ const ResultSurvey = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onDeleteHandler: (id) => dispatch(deleteSurveyForm(id))
+        onDeleteHandler: (id) => dispatch(deleteSurveyForm(id)),
+        onCopiedHandler: (item) => dispatch(copiedSurveyForm(item))
     }
 }
 

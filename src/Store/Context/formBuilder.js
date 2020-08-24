@@ -9,8 +9,8 @@ const formBuilder = React.createContext({
     titleSurvey: '',
     descSurvey: '',
     formBuilderHidden: () => {},
-    edited: false,
-    editedHandler: () => {},
+    action: false,
+    actionHandler: () => {},
     resultData: ''
 });
 

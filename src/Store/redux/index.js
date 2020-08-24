@@ -8,7 +8,8 @@ const initialState = {
     [varTypes.SURVEY_FORM_BUILDER]: {
         title: "",
         [varTypes.SURVEY_CATEGORY_BUILDER]: {},
-        [varTypes.SURVEY_FORM_QUESTION]: []
+        [varTypes.SURVEY_FORM_QUESTION]: [],
+        [varTypes.SURVEY_FORM_COPIED]: [],
     },
     [varTypes.MULTICHOICE.SELF]: {
         [varTypes.MULTICHOICE.MULTICHOICEID]: [],
@@ -40,6 +41,19 @@ function rootReducer(state = initialState, action) {
             [varTypes.MULTICHOICE.SELF]: {
                 ...state[varTypes.MULTICHOICE.SELF],
                 [varTypes.MULTICHOICE.MULTICHOICEID]: action.payload
+            }
+        }
+    }
+
+    if (action.type === actionTypes.COPIED_SURVEY_FORM) {
+        console.log('damn');
+        return {
+            ...state,
+            [varTypes.SURVEY_FORM_BUILDER]: {
+                ...state[varTypes.SURVEY_FORM_BUILDER],
+                [varTypes.SURVEY_FORM_COPIED]: [
+                    ...action.payload
+                ]
             }
         }
     }
