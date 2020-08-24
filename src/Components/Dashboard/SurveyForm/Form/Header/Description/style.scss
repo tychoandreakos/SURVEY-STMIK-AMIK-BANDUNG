@@ -2,7 +2,7 @@ $MerriWeather: 'MerriWeather', sans-serif;
 $Roboto: 'Roboto', sans-serif;
 
 @mixin title {
-  width: 95%;
+  width: 85%;
   margin: {
     top: 0.6rem;
     bottom: 0.8rem;
@@ -21,17 +21,17 @@ $Roboto: 'Roboto', sans-serif;
 
 .description-survey-header {
   padding: {
-    top: 1rem;
+    top: 0.5rem;
     left: 1rem;
     right: 1rem;
     bottom: 0.9rem;
   }
-  width: 35rem;
+  width: 50rem;
   position: relative;
   text-area {
     word-break: break-all;
   }
-  transition: background .4s ease-in;
+  transition: background 0.4s ease-in;
 
   &:hover {
     background: #e5e5e5;
@@ -100,7 +100,7 @@ $Roboto: 'Roboto', sans-serif;
       size: 1.02rem;
     }
     text-align: justify;
-    width: 95%;
+    width: 85%;
     margin: auto;
     display: inline-block;
     color: #333;
