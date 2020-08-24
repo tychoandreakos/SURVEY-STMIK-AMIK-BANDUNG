@@ -32,6 +32,10 @@ $Roboto: 'Roboto', sans-serif;
 
     .btn-edit {
       background: #5661b6 !important;
+
+      &:hover {
+        background: #717ccf !important;
+      }
     }
 
     .btn-delete {

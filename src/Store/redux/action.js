@@ -7,6 +7,13 @@ export function setTileSurvey(payload) {
     }
 }
 
+export function editSurveyForm(payload) {
+    return {
+        type: actionType.EDIT_SURVEY_FORM,
+        payload
+    }
+}
+
 export function setMultichoiceID(payload) {
     return {
         type: actionType.SET_MULTICHOICE_ID,

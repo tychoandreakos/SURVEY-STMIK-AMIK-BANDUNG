@@ -64,6 +64,18 @@ function rootReducer(state = initialState, action) {
         }
     }
 
+    if (action.type === actionTypes.EDIT_SURVEY_FORM) {
+        // if (action.type === varTypes.TYPE_QUESTION.SHORT) {
+        //     return {
+        //         ...state,
+
+        //     }
+        // }
+
+        console.log("its working");
+        return state;
+    }
+
     if (action.type === actionTypes.SAVE_MULTICHOICE_STATE) {
         const inputState = state[varTypes.MULTICHOICE.SELF][varTypes.MULTICHOICE.INPUTSTATE];
         const multiChoiceId = state[varTypes.MULTICHOICE.SELF][varTypes.MULTICHOICE.MULTICHOICEID];

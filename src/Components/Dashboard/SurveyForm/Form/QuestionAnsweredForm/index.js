@@ -1,4 +1,4 @@
-import React, { useState, useContext, Suspense, lazy } from 'react';
+import React, { useState, useContext, Suspense, lazy, useEffect } from 'react';
 import { connect } from 'react-redux'
 import { v4 as uuid } from 'uuid';
 
@@ -11,7 +11,7 @@ import DropdownContext from '../../../../../Store/Context/dropdownAlternate';
 import FormBuilderContext from '../../../../../Store/Context/formBuilder';
 
 import { TYPE_QUESTION } from '../../../../../util/varTypes'
-import { saveMultichoiceState, saveSingleTextBoxState } from '../../../../../Store/redux/action';
+import { saveMultichoiceState, saveSingleTextBoxState, editSurveyForm } from '../../../../../Store/redux/action';
 
 import './style.scss';
 
@@ -32,12 +32,21 @@ const CommentBox = lazy(() => import('../../Form/CommentBox'));
 const QuestionAnsweredForm = (props) => {
     const [dropdown, setDropdown] = useState(false);
     const [questionInput, setQuestionInput] = useState('');
-    const { numbered, onSubmitMultiple, onSubmitSingleTextBox } = props;
+    const { numbered, onSubmitMultiple, onSubmitSingleTextBox, onEdit } = props;
 
     const { elementDropdown } = useContext(DropdownContext);
-    const { typeQuestion, typeHandler, formBuilderHidden } = useContext(FormBuilderContext);
+    const { typeQuestion, typeHandler, formBuilderHidden, edited, editedHandler, resultData } = useContext(FormBuilderContext);
+    const titleDropdown = elementDropdown ? elementDropdown.find(item => {
+        if (typeQuestion && item.type === typeQuestion) return true;
+        if (resultData && item.type === resultData.type) return true;
+        return false;
+    }) : "Loading ..."
 
-    const titleDropdown = elementDropdown.find(item => item.type === typeQuestion) ?? "Loading ..."
+    useEffect(() => {
+        if (edited) {
+            setQuestionInput(capitalize(resultData.title))
+        }
+    }, [edited])
 
     let answeredForm;
     let actionButtonComponent;
@@ -74,7 +83,7 @@ const QuestionAnsweredForm = (props) => {
             break;
     }
 
-    if (typeQuestion !== TYPE_QUESTION.SHORT) {
+    if (typeQuestion !== TYPE_QUESTION.SHORT && resultData.type !== TYPE_QUESTION.SHORT) {
         actionButtonComponent = <div className="action-form-builder">
             <button onClick={onCancelHandler} className="btn btn-cancel">cancel</button>
             <button onClick={onSubmitHandler} className="btn btn-save">save</button>
@@ -99,25 +108,35 @@ const QuestionAnsweredForm = (props) => {
     }
 
     function onSubmitHandler() {
-        if (typeQuestion === TYPE_QUESTION.SHORT) {
-            onSubmitSingleTextBox({
-                _id: uuid(),
-                type: typeQuestion,
-                title: questionInput.toLowerCase()
-            })
-        }
+        if (!edited) {
+            if (typeQuestion === TYPE_QUESTION.SHORT) {
+                onSubmitSingleTextBox({
+                    _id: uuid(),
+                    type: typeQuestion,
+                    title: questionInput.toLowerCase()
+                })
+            }
 
-        if (typeQuestion === TYPE_QUESTION.MULTIPLE) {
-            onSubmitMultiple({
-                _id: uuid(),
-                type: typeQuestion,
-                title: questionInput.toLowerCase(),
-            });
-        }
+            if (typeQuestion === TYPE_QUESTION.MULTIPLE) {
+                onSubmitMultiple({
+                    _id: uuid(),
+                    type: typeQuestion,
+                    title: questionInput.toLowerCase(),
+                });
+            }
 
-        formBuilderHidden();
-        setQuestionInput('')
-        typeHandler('')
+            formBuilderHidden();
+            setQuestionInput('')
+            typeHandler('')
+        } else {
+            console.log('its work')
+            onEdit("damn")
+            editedHandler();
+        }
+    }
+
+    function capitalize(val) {
+        return val.charAt(0).toUpperCase() + val.slice(1, val.length);
     }
 
     function onCancelHandler() {
@@ -160,7 +179,8 @@ const QuestionAnsweredForm = (props) => {
 const mapDispatchToProps = dispatch => {
     return {
         onSubmitMultiple: (title) => dispatch(saveMultichoiceState(title)),
-        onSubmitSingleTextBox: (title) => dispatch(saveSingleTextBoxState(title))
+        onSubmitSingleTextBox: (title) => dispatch(saveSingleTextBoxState(title)),
+        onEdit: (item) => dispatch(editSurveyForm(item))
     }
 }
 

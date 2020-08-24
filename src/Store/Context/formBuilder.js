@@ -8,7 +8,10 @@ const formBuilder = React.createContext({
     headTitleHandler: (val) => { },
     titleSurvey: '',
     descSurvey: '',
-    formBuilderHidden: () => {}
+    formBuilderHidden: () => {},
+    edited: false,
+    editedHandler: () => {},
+    resultData: ''
 });
 
 export default formBuilder
