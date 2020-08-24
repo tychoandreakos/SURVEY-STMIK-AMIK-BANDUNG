@@ -26,7 +26,7 @@ $Roboto: 'Roboto', sans-serif;
     right: 1rem;
     bottom: 0.9rem;
   }
-  width: 40rem;
+  width: 35rem;
   position: relative;
   text-area {
     word-break: break-all;
@@ -89,6 +89,8 @@ $Roboto: 'Roboto', sans-serif;
     border: none;
     overflow: auto;
     word-break: break-word;
+    resize: none;
+    cursor: text !important;
   }
 
   .desc-survey-master {
@@ -102,6 +104,7 @@ $Roboto: 'Roboto', sans-serif;
     margin: auto;
     display: inline-block;
     color: #333;
+    cursor: default;
   }
 
   .page-title-input {
@@ -110,9 +113,11 @@ $Roboto: 'Roboto', sans-serif;
     color: #fff;
     word-break: break-word;
     @include title;
+    resize: none;
   }
 
   h3 {
     @include title;
+    cursor: default;
   }
 }
