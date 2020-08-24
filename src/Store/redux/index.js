@@ -52,9 +52,6 @@ function rootReducer(state = initialState, action) {
             type,
         }
 
-        // const newArrQuestion = [...state[varTypes.SURVEY_FORM_BUILDER][varTypes.SURVEY_FORM_QUESTION]];
-        // newArrQuestion.push(result)
-
         return {
             ...state,
             [varTypes.SURVEY_FORM_BUILDER]: {
@@ -83,7 +80,7 @@ function rootReducer(state = initialState, action) {
             _id,
             title,
             type,
-            item: newArr.reverse()
+            item: newArr
         }
 
 
