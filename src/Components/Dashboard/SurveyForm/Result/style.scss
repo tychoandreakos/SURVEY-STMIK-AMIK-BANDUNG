@@ -40,6 +40,10 @@ $Roboto: 'Roboto', sans-serif;
 
     .btn-delete {
       background: #ea4c89 !important;
+
+      &:hover {
+        background: #ee6a9c !important;
+      }
     }
 
     .btn {
