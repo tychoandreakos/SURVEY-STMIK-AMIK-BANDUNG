@@ -35,7 +35,7 @@ const QuestionAnsweredForm = (props) => {
     const { numbered, onSubmitMultiple, onSubmitSingleTextBox, onEdit } = props;
 
     const { elementDropdown } = useContext(DropdownContext);
-    const { typeQuestion, typeHandler, formBuilderHidden, edited, editedHandler, resultData } = useContext(FormBuilderContext);
+    const { typeQuestion, typeHandler, formBuilderHidden, edited, editedHandler, resultData = [] } = useContext(FormBuilderContext);
     const titleDropdown = elementDropdown ? elementDropdown.find(item => {
         if (typeQuestion && item.type === typeQuestion) return true;
         if (resultData && item.type === resultData.type) return true;
