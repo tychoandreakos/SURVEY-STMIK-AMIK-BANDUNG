@@ -50,6 +50,7 @@ const MainCreateSurvey = (props) => {
         </div>
       </div>
       <Slider />
+      
     </div>
   );
 };
