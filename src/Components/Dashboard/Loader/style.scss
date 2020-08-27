@@ -1,0 +1,37 @@
+$MerriWeather: "MerriWeather", sans-serif;
+
+.body-loader {
+  min-height: 100vh;
+  display: flex;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  background: #5661b6;
+  position: fixed;
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+
+  #loader {
+    canvas {
+      width: 240px;
+      height: 240px;
+    }
+  }
+
+  html {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  * {
+    box-sizing: inherit;
+    &:before,
+    &:after {
+      box-sizing: inherit;
+    }
+  }
+}
