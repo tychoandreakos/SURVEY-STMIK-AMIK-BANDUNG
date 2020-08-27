@@ -1,41 +1,56 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
 import { connect } from "react-redux";
-import { setTileSurvey } from "../../../../Store/redux/action";
-import Textarea from "react-expanding-textarea";
 import { withRouter } from "react-router-dom";
+import Loading from "react-loading";
 
-import Dialog from "../../Dialog";
+import { setTitleSurvey } from "../../../../Store/redux/action";
+import Textarea from "react-expanding-textarea";
+import { SURVEY_TITLE } from "../../../../util/varTypes";
+
 import Slider from "../Slider";
 
 import "./style.scss";
 const MainCreateSurvey = (props) => {
   const [title, setTitle] = useState("");
   const [btnDisabled, setBtnDisabled] = useState(true);
-  const [dialog, setDialog] = useState(false);
+  const [loader, setLoader] = useState(false);
   const titleRef = useRef({});
   const {
     addTitle,
     smallPlaceholder = "Create Survey Now",
     placeholder = "Insert the title of the survey here",
     history,
+    titleState,
   } = props;
 
-  const btn = useCallback(
-    (limit) => {
-      if (validation()) {
-        setBtnDisabled(false);
-      } else {
-        setBtnDisabled(true);
-      }
-    },
-    [title, btnDisabled]
-  );
-
-  useEffect(() => btn(formatTitle()), [btn]);
-
+  const titleMemo = useMemo(() => titleState, [titleState]);
   useEffect(() => {
-    titleRef.current.focus();
-  }, []);
+    if (titleMemo !== undefined) {
+      setTitle(capitalizeAlter(titleMemo));
+    } else {
+      titleRef.current.focus();
+    }
+  }, [titleMemo]);
+
+  const btnCallback = useCallback(() => {
+    if (validation()) {
+      setBtnDisabled(false);
+    } else {
+      setBtnDisabled(true);
+    }
+  }, [title, btnDisabled]);
+
+  useEffect(() => btnCallback(), [btnCallback]);
+
+  function capitalizeAlter(val) {
+    return val.charAt(0).toUpperCase() + val.slice(1, val.length);
+  }
 
   const capitalize = (val) => {
     return val.toUpperCase(val);
@@ -49,13 +64,13 @@ const MainCreateSurvey = (props) => {
     }
   };
 
-  const saveTitleToRedux = () => {
-    addTitle(title);
-  };
-
   const onSubmit = () => {
     if (validation()) {
-      history.push("/create/survey-form");
+      addTitle(title);
+      setLoader(true);
+      setTimeout(() => {
+        history.push("/create/survey-form");
+      }, 1000);
     }
   };
 
@@ -75,64 +90,58 @@ const MainCreateSurvey = (props) => {
     return false;
   }
 
-  const dialogHandler = () => {
-    setDialog(!dialog);
-  };
-
-  let DialogEl;
-  if (dialog) {
-    DialogEl = (
-      <Dialog
-        onCancelHandler={dialogHandler}
-        onConfirmHandler={onSubmit}
-        title='Yes, Continue'
-      />
-    );
+  let renderingLoading;
+  if (loader) {
+    renderingLoading = <Loading type='spin' width='25px' height='25px' />;
+  } else {
+    renderingLoading = "create now";
   }
 
   return (
-    <>
-      <div id='main-create'>
-        <div className='title'>
-          <h5 className='small-title'>{smallPlaceholder}</h5>
-          <div className='main-title-wrapper'>
-            <Textarea
-              ref={titleRef}
-              onBlur={saveTitleToRedux}
-              placeholder={placeholder}
-              className='main-title'
-              value={title}
-              onChange={titleHandler}
-            />
-          </div>
-        </div>
-        <Slider />
-        <div className='create-survey'>
-          <button onClick={onCancel} className='btn btn-cancel'>
-            back to home
-          </button>
-          <button
-            disabled={btnDisabled}
-            onClick={dialogHandler}
-            className='btn btn-create'
-          >
-            Create Now
-          </button>
+    <div id='main-create'>
+      <div className='title'>
+        <h5 className='small-title'>{smallPlaceholder}</h5>
+        <div className='main-title-wrapper'>
+          <Textarea
+            ref={titleRef}
+            placeholder={placeholder}
+            className='main-title'
+            value={title}
+            onChange={titleHandler}
+          />
         </div>
       </div>
-      {DialogEl}
-    </>
+      <Slider />
+      <div className='create-survey'>
+        <button onClick={onCancel} className='btn btn-cancel'>
+          back to home
+        </button>
+        <button
+          disabled={btnDisabled}
+          onClick={onSubmit}
+          className='btn btn-create'
+        >
+          {renderingLoading}
+        </button>
+      </div>
+    </div>
   );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    titleState: state[SURVEY_TITLE],
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addTitle: (title) => dispatch(setTileSurvey(title)),
+    addTitle: (title) => dispatch(setTitleSurvey(title)),
   };
 };
 
 const MainCreateSurveyJoinRedux = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withRouter(MainCreateSurvey));
 

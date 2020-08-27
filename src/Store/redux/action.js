@@ -1,6 +1,6 @@
 import * as actionType from '../../util/actionTypes';
 
-export function setTileSurvey(payload) {
+export function setTitleSurvey(payload) {
     return {
         type: actionType.SET_TITLE_SURVEY,
         payload
