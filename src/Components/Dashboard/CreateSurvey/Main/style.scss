@@ -1,5 +1,5 @@
-$Merriweather: 'Merriweather', sans-serif;
-$Roboto: 'Roboto', sans-serif;
+$Merriweather: "Merriweather", sans-serif;
+$Roboto: "Roboto", sans-serif;
 
 .main-center {
   .button-create {
@@ -21,26 +21,39 @@ $Roboto: 'Roboto', sans-serif;
     flex-direction: column;
     align-items: center;
 
-    .main-title {
-      font: {
-        family: $Roboto;
-        size: 1.5rem;
-      }
-      margin-top: 0.3rem;
-      color: #444;
-      background: none;
-      border: none;
-      text-align: center;
+    .main-title-wrapper {
       width: 100%;
+      margin-top: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .main-title {
+        font: {
+          family: $Roboto;
+          size: 1.33rem;
+        }
+        color: #444;
+        background: none;
+        border: none;
+        width: 90%;
+        text-align: center;
+        resize: none;
+      }
+
+      &::placeholder {
+        text-transform: capitalize;
+      }
     }
 
-    .little-title {
+    .small-title {
       font: {
-        family: $Merriweather;
-        size: 0.9rem;
+        family: $Roboto;
+        size: 1.15rem;
+        weight: 500;
       }
       text-transform: capitalize;
-      color: #999;
+      color: #555;
     }
   }
 }

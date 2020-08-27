@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { connect } from "react-redux";
 import {
   TYPE_BUTTON,
   SURVEY_FORM_BUILDER,
   SURVEY_FORM_QUESTION,
 } from "../../../../util/varTypes";
+
+import { gsap } from "gsap";
 
 // formBuilder
 import HeaderForm from "../Form/Header";
@@ -19,6 +21,7 @@ import "./style.scss";
 
 const ContentSurveyForm = (props) => {
   const [typeQuestion, setTypeQuestion] = useState();
+  const okButton = useRef({});
 
   const { question } = props;
 
@@ -61,7 +64,20 @@ const ContentSurveyForm = (props) => {
     }
   }, [initial, typeQuestion]);
 
-  useEffect(() => memoizedCallback(), [memoizedCallback]);
+  useEffect(() => {
+    const from = {
+      y: 150,
+    };
+    const to = {
+      delay: 0.5,
+      duration: 1.4,
+      y: -10,
+      rotation: 360,
+      autoAlpha: 1,
+    };
+    gsap.fromTo(okButton.current, from, to);
+    memoizedCallback();
+  }, [memoizedCallback]);
 
   let questionEl;
   if (formBuilder) {
@@ -77,13 +93,13 @@ const ContentSurveyForm = (props) => {
   }
 
   return (
-    <div className="content-survey-form">
-      <div className="btn-wrapper">
+    <div className='content-survey-form'>
+      <div ref={okButton} className='btn-wrapper'>
         <BtnOpt type={TYPE_BUTTON.OK} />
       </div>
-      <div className="survey-wrapper">
+      <div className='survey-wrapper'>
         <HeaderForm />
-        <div className="form-builder">
+        <div className='form-builder'>
           {renderQuestion}
           {questionEl}
           <NewQuestion formatHandler={typeHandler} />

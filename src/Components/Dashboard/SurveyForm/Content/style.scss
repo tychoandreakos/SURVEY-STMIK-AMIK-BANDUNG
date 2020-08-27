@@ -31,6 +31,7 @@ $Merriweather: 'MerriWeather', sans-serif;
     flex-direction: column;
     justify-content: space-between;
     bottom: 2rem;
+    visibility: hidden;
 
     .btn-handler {
       .plus {
