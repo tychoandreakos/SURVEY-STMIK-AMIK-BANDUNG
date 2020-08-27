@@ -3,7 +3,7 @@ import React from "react";
 import "./style.scss";
 
 const Dialog = (props) => {
-  const { onCancelHandler, title, onConfirmHandler } = props;
+  const { onCancelHandler, title = "Next", onConfirmHandler } = props;
   return (
     <>
       <div className='dialog'>

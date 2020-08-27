@@ -10,10 +10,42 @@ $Roboto: "Roboto", sans-serif;
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .create {
-    width: 28%;
-    margin-top: 5rem;
-    float: right;
+  .create-survey {
+    transform: translateY(7rem);
+    display: flex;
+    justify-content: flex-end;
+    width: 95%;
+    align-items: center;
+
+    .btn-create {
+      background: #ea4c89;
+      color: #fff;
+      border: 2px solid #ea4c89;
+      transition: 0.4s background, border ease-in-out;
+
+      &:disabled {
+        background: rgb(240, 125, 169);
+        border: 2px solid rgb(240, 125, 169);
+      }
+    }
+
+    .btn-cancel {
+      border: 2px solid #ea4c89;
+      color: #ea4c89;
+    }
+
+    .btn {
+      text-transform: capitalize;
+      cursor: pointer;
+      padding: 0.6rem 2rem;
+      border-radius: 0.5rem;
+      margin: 0 0.5rem;
+      font: {
+        size: 0.9rem;
+        family: $Roboto;
+        weight: 500;
+      }
+    }
   }
 
   .title {
