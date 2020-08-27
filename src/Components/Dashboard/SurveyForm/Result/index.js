@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 
 import { connect } from "react-redux";
 
+import Dialog from "../../Dialog";
 import MultiChoiceAnwered from "../Form/AnsweredForm/MultiChoice";
 import QuestionAnswerdForm from "../Form/QuestionAnsweredForm";
 import FormBuilderContext from "../../../../Store/Context/formBuilder";
@@ -28,6 +29,7 @@ const ResultSurvey = (props) => {
   const [showBtn, setShowBtn] = useState(false);
   const [action, setAction] = useState(false);
   const [resultData, setResultData] = useState({});
+  const [dialog, setDialog] = useState(false);
 
   /**
    * Setiap component berhasil dirender maka data
@@ -74,12 +76,12 @@ const ResultSurvey = (props) => {
 
   let renderingForm;
   if (type === TYPE_QUESTION.SHORT) {
-    renderingForm = <div className="placeholder"></div>;
+    renderingForm = <div className='placeholder'></div>;
   }
 
   if (type === TYPE_QUESTION.MULTIPLE) {
     renderingForm = (
-      <div className="multichoice-answered-question">
+      <div className='multichoice-answered-question'>
         {data.map((item) => (
           <MultiChoiceAnwered
             key={item._id}
@@ -100,6 +102,10 @@ const ResultSurvey = (props) => {
     setAction(false);
   };
 
+  const dialogHandler = () => {
+    setDialog(!dialog);
+  };
+
   const deleteHandler = () => {
     onDeleteHandler({
       _id,
@@ -110,17 +116,17 @@ const ResultSurvey = (props) => {
   let btnEl;
   if (showBtn) {
     btnEl = (
-      <div className="button-handler-form">
+      <div className='button-handler-form'>
         <button
           onClick={() => setAction(RESULT_ACTION.EDIT)}
-          className="btn btn-edit"
+          className='btn btn-edit'
         >
           edit
         </button>
-        <button onClick={() => setAction(RESULT_ACTION.COPY)} className="btn">
+        <button onClick={() => setAction(RESULT_ACTION.COPY)} className='btn'>
           copy
         </button>
-        <button onClick={deleteHandler} className="btn btn-delete">
+        <button onClick={dialogHandler} className='btn btn-delete'>
           delete
         </button>
       </div>
@@ -147,17 +153,36 @@ const ResultSurvey = (props) => {
       <div
         onMouseEnter={() => setShowBtn(true)}
         onMouseLeave={() => setShowBtn(false)}
-        className="result-survey"
+        className='result-survey'
       >
-        <span className="title">{`${index}. ${title}`}</span>
-        <span className="descr">{desc}</span>
+        <span className='title'>{`${index}. ${title}`}</span>
+        <span className='descr'>{desc}</span>
         {renderingForm}
         {btnEl}
       </div>
     );
   }
 
-  return <>{resultEl}</>;
+  /**
+   * Menampilkan dialog, sesuai dengan pilihan
+   */
+  let dialogEl;
+  if (dialog) {
+    dialogEl = (
+      <Dialog
+        title='delete now'
+        onConfirmHandler={deleteHandler}
+        onCancelHandler={dialogHandler}
+      />
+    );
+  }
+
+  return (
+    <>
+      {resultEl}
+      {dialogEl}
+    </>
+  );
 };
 
 const mapDispatchToProps = (dispatch) => {
