@@ -42,3 +42,5 @@ export const RESULT_ACTION = {
     COPY: 'COPY',
     EDIT: 'EDIT',
 }
+
+export const LOADER = "LOADER";

@@ -2,6 +2,7 @@ import React, { useRef, useEffect, memo, useCallback, useReducer } from "react";
 
 import * as THREE from "three";
 import { gsap } from "gsap";
+import {} from 'react-redux';
 
 import "./style.scss";
 

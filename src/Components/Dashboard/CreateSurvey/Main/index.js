@@ -9,9 +9,9 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Loading from "react-loading";
 
-import { setTitleSurvey } from "../../../../Store/redux/action";
+import { setTitleSurvey, triggerLoader } from "../../../../Store/redux/action";
 import Textarea from "react-expanding-textarea";
-import { SURVEY_TITLE } from "../../../../util/varTypes";
+import { SURVEY_TITLE, LOADER } from "../../../../util/varTypes";
 
 import Slider from "../Slider";
 
@@ -27,6 +27,7 @@ const MainCreateSurvey = (props) => {
     placeholder = "Insert the title of the survey here",
     history,
     titleState,
+    triggerLoading,
   } = props;
 
   const titleMemo = useMemo(() => titleState, [titleState]);
@@ -64,13 +65,25 @@ const MainCreateSurvey = (props) => {
     }
   };
 
+  const x = () => {
+    triggerLoader();
+  };
+
   const onSubmit = () => {
     if (validation()) {
       addTitle(title);
       setLoader(true);
+      // setTimeout(() => {
+      //   triggerLoading();
+      // }, 400);
+
       setTimeout(() => {
         history.push("/create/survey-form");
-      }, 1000);
+      }, 2000);
+
+      // setTimeout(() => {
+      //   triggerLoading();
+      // }, 3500);
     }
   };
 
@@ -101,7 +114,7 @@ const MainCreateSurvey = (props) => {
     <div id='main-create'>
       <div className='title'>
         <h5 className='small-title'>{smallPlaceholder}</h5>
-        <div className='main-title-wrapper'>
+        <div onChange={x} className='main-title-wrapper'>
           <Textarea
             ref={titleRef}
             placeholder={placeholder}
@@ -137,6 +150,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addTitle: (title) => dispatch(setTitleSurvey(title)),
+    triggerLoading: () => dispatch(triggerLoader()),
   };
 };
 

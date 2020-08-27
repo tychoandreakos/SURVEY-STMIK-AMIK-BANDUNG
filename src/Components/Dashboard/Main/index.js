@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 import Sidebar from "../Sidebar";
 import Content from "../Content";
 import Loader from "../Loader";
@@ -7,9 +8,12 @@ import Loader from "../Loader";
 import SectionOne from "../CreateSurvey/SectionOne";
 import SurveyForm from "../SurveyForm/Main";
 
+import { LOADER } from "../../../util/varTypes";
+
 import "./style.scss";
 
-function Dashboard() {
+function Dashboard(props) {
+  const { loader } = props;
   return (
     <div id='dashboard-survey'>
       <section id='sidebar-wrapper'>
@@ -21,10 +25,18 @@ function Dashboard() {
           <Route path='/create' exact component={SectionOne} />
           <Route path='/create/survey-form' component={SurveyForm} />
         </Switch>
-        {false ? <Loader /> : undefined}
+        {loader ? <Loader /> : undefined}
       </section>
     </div>
   );
 }
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return {
+    loader: state[LOADER],
+  };
+};
+
+const DashboardJoinRedux = connect(mapStateToProps)(Dashboard);
+
+export default DashboardJoinRedux;
