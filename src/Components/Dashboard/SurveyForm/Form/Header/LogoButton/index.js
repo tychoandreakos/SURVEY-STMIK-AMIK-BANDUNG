@@ -36,6 +36,7 @@ const LogoButton = (props) => {
     if (actualImage) {
         renderEl = (
             <img
+                alt="logo"
                 onClick={uploadHandler}
                 className="logo"
                 src={actualImage}
