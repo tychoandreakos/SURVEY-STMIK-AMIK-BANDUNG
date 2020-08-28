@@ -22,7 +22,6 @@ import "./style.scss";
 const ContentSurveyForm = (props) => {
   const [typeQuestion, setTypeQuestion] = useState();
   const okButton = useRef({});
-
   const { question } = props;
 
   const typeHandler = (val) => {
@@ -49,6 +48,72 @@ const ContentSurveyForm = (props) => {
 
   const [initial, setInitial] = useState(false);
   const [formBuilder, setFormBuilder] = useState(false);
+  const [confirmButton, setConfirmButton] = useState({
+    state: false,
+    anim: false,
+  });
+
+  useEffect(() => {
+    if (
+      question &&
+      Array.isArray(question) &&
+      question.length > 2 &&
+      confirmButton.anim === false
+    ) {
+      setConfirmButton({
+        state: true,
+        anim: true,
+      });
+    }
+
+    if (
+      question &&
+      Array.isArray(question) &&
+      question.length <= 2 &&
+      confirmButton.anim === true
+    ) {
+      setConfirmButton({
+        state: true,
+        anim: false,
+      });
+      setTimeout(() => {
+        setConfirmButton({
+          anim: false,
+          state: false,
+        });
+      }, 5000);
+    }
+  }, [question]);
+
+  useEffect(() => {
+    if (confirmButton.anim) {
+      const from = {
+        y: 150,
+      };
+      const to = {
+        delay: 0.3,
+        duration: 1.4,
+        y: -10,
+        rotation: 360,
+        autoAlpha: 1,
+      };
+      gsap.fromTo(okButton.current, from, to);
+    }
+
+    if (!confirmButton.anim && confirmButton.state) {
+      const from = {
+        y: -10,
+      };
+      const to = {
+        delay: 0.2,
+        duration: 1.4,
+        y: 150,
+        rotation: -360,
+        autoAlpha: 1,
+      };
+      gsap.fromTo(okButton.current, from, to);
+    }
+  }, [confirmButton]);
 
   const formBuilderHidden = () => {
     setFormBuilder(false);
@@ -65,17 +130,6 @@ const ContentSurveyForm = (props) => {
   }, [initial, typeQuestion]);
 
   useEffect(() => {
-    const from = {
-      y: 150,
-    };
-    const to = {
-      delay: 0.5,
-      duration: 1.4,
-      y: -10,
-      rotation: 360,
-      autoAlpha: 1,
-    };
-    gsap.fromTo(okButton.current, from, to);
     memoizedCallback();
   }, [memoizedCallback]);
 
@@ -92,14 +146,21 @@ const ContentSurveyForm = (props) => {
     );
   }
 
-  return (
-    <div className='content-survey-form'>
-      <div ref={okButton} className='btn-wrapper'>
+  let okButtonEl;
+  if (confirmButton.state) {
+    okButtonEl = (
+      <div ref={okButton} className="btn-wrapper">
         <BtnOpt type={TYPE_BUTTON.OK} />
       </div>
-      <div className='survey-wrapper'>
+    );
+  }
+
+  return (
+    <div className="content-survey-form">
+      {okButtonEl}
+      <div className="survey-wrapper">
         <HeaderForm />
-        <div className='form-builder'>
+        <div className="form-builder">
           {renderQuestion}
           {questionEl}
           <NewQuestion formatHandler={typeHandler} />
