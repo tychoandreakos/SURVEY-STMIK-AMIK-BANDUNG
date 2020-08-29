@@ -39,7 +39,7 @@
     }
 
     .btn-remove {
-      &:hover {
+      &:hover:enabled {
         background: #ea4c89;
       }
     }

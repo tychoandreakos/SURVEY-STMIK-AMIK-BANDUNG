@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 
 import MultiChoiceV2 from "../../../Form/MultiChoiceV2";
 import { v4 as uuid } from "uuid";
@@ -11,6 +11,7 @@ import { MULTICHOICE } from "../../../../../../util/varTypes";
 
 const MultiChoiceWrapper = (props) => {
   const { inputState, multiChoiceId, setId, setInput } = props;
+  const [canRemoveDisabled, setCanRemoveDisabled] = useState(true);
 
   const memoizedCallback = useCallback(() => {
     const initialize = [uuid()];
@@ -21,6 +22,18 @@ const MultiChoiceWrapper = (props) => {
   useEffect(() => {
     memoizedCallback();
   }, [memoizedCallback]);
+
+  useEffect(() => {
+    if (multiChoiceId.length <= 1) {
+      setCanRemoveDisabled(true);
+    }
+
+    if (multiChoiceId.length >= 2) {
+      setCanRemoveDisabled(false);
+    }
+
+    console.log(multiChoiceId.length)
+  }, [multiChoiceId]);
 
   const inputStateHandler = (val, _id) => {
     const data = [
@@ -59,6 +72,7 @@ const MultiChoiceWrapper = (props) => {
     <MultiChoiceV2
       key={id}
       _id={id}
+      canRemoveDisabled={canRemoveDisabled}
       removeNewMultiChoise={removeNewMultiChoise}
       addNewMultiChoice={addNewMultiChoice}
       inputStateHandler={inputStateHandler}
