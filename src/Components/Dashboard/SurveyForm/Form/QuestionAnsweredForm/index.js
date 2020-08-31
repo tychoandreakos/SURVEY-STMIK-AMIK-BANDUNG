@@ -64,9 +64,9 @@ const QuestionAnsweredForm = (props) => {
   let answeredForm;
   let actionButtonComponent;
 
-  switch (typeQuestion) {
+  switch (typeQuestion ?? resultData.type) {
     case TYPE_QUESTION.MULTIPLE:
-      answeredForm = <MultiChoiceV2 />;
+      answeredForm = <MultiChoiceV2 editResult={resultData.data} />;
       break;
     case TYPE_QUESTION.STAR:
       answeredForm = <StarRating />;
@@ -101,11 +101,11 @@ const QuestionAnsweredForm = (props) => {
     resultData.type !== TYPE_QUESTION.SHORT
   ) {
     actionButtonComponent = (
-      <div className="action-form-builder">
-        <button onClick={onCancelHandler} className="btn btn-cancel">
+      <div className='action-form-builder'>
+        <button onClick={onCancelHandler} className='btn btn-cancel'>
           cancel
         </button>
-        <button onClick={onSubmitHandler} className="btn btn-save">
+        <button onClick={onSubmitHandler} className='btn btn-save'>
           save
         </button>
       </div>
@@ -132,12 +132,19 @@ const QuestionAnsweredForm = (props) => {
       case RESULT_ACTION.COPY:
         break;
       case RESULT_ACTION.EDIT:
-        onEdit({
-          _id: resultData._id,
-          type: resultData.type,
-          title: questionInput.toLowerCase(),
-        });
-        actionHandler();
+        if (resultData.type === TYPE_QUESTION.SHORT) {
+          onEdit({
+            _id: resultData._id,
+            type: resultData.type,
+            title: questionInput.toLowerCase(),
+          });
+          actionHandler();
+        }
+
+        if (resultData.type === TYPE_QUESTION.MULTIPLE) {
+          console.log("damn you stark");
+        }
+
         break;
       default:
         if (typeQuestion === TYPE_QUESTION.SHORT) {
@@ -173,12 +180,12 @@ const QuestionAnsweredForm = (props) => {
 
   const placeholder = "Please type a question ...";
   return (
-    <div className="question-answered-form">
-      <div className="input-answered-form">
-        <div className="numbered">
+    <div className='question-answered-form'>
+      <div className='input-answered-form'>
+        <div className='numbered'>
           {numbered ? numbered : `q${resultData.index}`}
         </div>
-        <div className="input">
+        <div className='input'>
           <TextArea
             value={questionInput}
             placeholder={placeholder}
@@ -186,17 +193,17 @@ const QuestionAnsweredForm = (props) => {
             onKeyPress={questionInputHandler}
           />
         </div>
-        <div onClick={dropdownHandler} className="dropdown-choice">
-          <span className="title-dropdown">{titleDropdown.title}</span>
-          <div className="icon">
+        <div onClick={dropdownHandler} className='dropdown-choice'>
+          <span className='title-dropdown'>{titleDropdown.title}</span>
+          <div className='icon'>
             <Icon icon={ChevronDown} />
           </div>
           {dropdown ? <DropdownQuestion /> : undefined}
         </div>
-        <div className="help"></div>
+        <div className='help'></div>
       </div>
-      <div className="form-builder-question">
-        <Suspense fallback="loading ....">
+      <div className='form-builder-question'>
+        <Suspense fallback='loading ....'>
           {answeredForm}
           {actionButtonComponent}
         </Suspense>

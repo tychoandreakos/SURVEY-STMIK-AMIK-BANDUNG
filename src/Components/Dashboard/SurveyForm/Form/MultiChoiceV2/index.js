@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import TextArea from "react-expanding-textarea";
 import Icon from "@iconify/react";
@@ -16,10 +16,17 @@ const MultiChoiceV2 = (props) => {
     _id,
     removeNewMultiChoise,
     canRemoveDisabled,
+    title,
   } = props;
   const [value, setValue] = useState("");
   const [valueCache, setValueCache] = useState({});
   const [lockSubmit, setLockSubmit] = useState(true);
+
+  useEffect(() => {
+    if (title && title.length > 1) {
+      setValue(title);
+    }
+  }, [title]);
 
   const placeholder = "Enter an answer choice";
 
@@ -65,9 +72,9 @@ const MultiChoiceV2 = (props) => {
   };
 
   return (
-    <div className="multi-choice-v2">
-      <div className="choice"></div>
-      <div className="input">
+    <div className='multi-choice-v2'>
+      <div className='choice'></div>
+      <div className='input'>
         <TextArea
           onKeyPress={preventDefaultHandler}
           onBlur={onSubmit}
@@ -76,14 +83,14 @@ const MultiChoiceV2 = (props) => {
           placeholder={placeholder}
         />
       </div>
-      <div className="action">
-        <button onClick={addNewMulti} className="btn btn-add">
+      <div className='action'>
+        <button onClick={addNewMulti} className='btn btn-add'>
           <Icon icon={plus} />
         </button>
         <button
           onClick={removeNewMulti}
           disabled={canRemoveDisabled}
-          className="btn btn-remove"
+          className='btn btn-remove'
         >
           <Icon icon={minus} />
         </button>

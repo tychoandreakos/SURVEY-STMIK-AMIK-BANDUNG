@@ -10,7 +10,7 @@ import {
 import { MULTICHOICE } from "../../../../../../util/varTypes";
 
 const MultiChoiceWrapper = (props) => {
-  const { inputState, multiChoiceId, setId, setInput } = props;
+  const { inputState, multiChoiceId, setId, setInput, editResult } = props;
   const [canRemoveDisabled, setCanRemoveDisabled] = useState(true);
 
   const memoizedCallback = useCallback(() => {
@@ -24,6 +24,11 @@ const MultiChoiceWrapper = (props) => {
   }, [memoizedCallback]);
 
   useEffect(() => {
+    console.log("From multichoice id", multiChoiceId);
+    console.log("From edit result", editResult);
+  }, [multiChoiceId, editResult]);
+
+  useEffect(() => {
     if (multiChoiceId.length <= 1) {
       setCanRemoveDisabled(true);
     }
@@ -31,8 +36,6 @@ const MultiChoiceWrapper = (props) => {
     if (multiChoiceId.length >= 2) {
       setCanRemoveDisabled(false);
     }
-
-    console.log(multiChoiceId.length)
   }, [multiChoiceId]);
 
   const inputStateHandler = (val, _id) => {
@@ -68,16 +71,33 @@ const MultiChoiceWrapper = (props) => {
     }
   };
 
-  const multiChoiceEL = multiChoiceId.map((id) => (
-    <MultiChoiceV2
-      key={id}
-      _id={id}
-      canRemoveDisabled={canRemoveDisabled}
-      removeNewMultiChoise={removeNewMultiChoise}
-      addNewMultiChoice={addNewMultiChoice}
-      inputStateHandler={inputStateHandler}
-    />
-  ));
+  let multiChoiceEL;
+  if (multiChoiceId) {
+    multiChoiceEL = multiChoiceId.map((id) => (
+      <MultiChoiceV2
+        key={id}
+        _id={id}
+        canRemoveDisabled={canRemoveDisabled}
+        removeNewMultiChoise={removeNewMultiChoise}
+        addNewMultiChoice={addNewMultiChoice}
+        inputStateHandler={inputStateHandler}
+      />
+    ));
+  }
+
+  if (editResult) {
+    multiChoiceEL = editResult.map((item) => (
+      <MultiChoiceV2
+        key={item._id}
+        _id={item._id}
+        title={item.title}
+        canRemoveDisabled={canRemoveDisabled}
+        removeNewMultiChoise={removeNewMultiChoise}
+        addNewMultiChoice={addNewMultiChoice}
+        inputStateHandler={inputStateHandler}
+      />
+    ));
+  }
 
   return <>{multiChoiceEL}</>;
 };

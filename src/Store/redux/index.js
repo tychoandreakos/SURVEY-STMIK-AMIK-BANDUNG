@@ -53,7 +53,6 @@ function rootReducer(state = initialState, action) {
   }
 
   if (action.type === actionTypes.COPIED_SURVEY_FORM) {
-    console.log("damn");
     return {
       ...state,
       [varTypes.SURVEY_FORM_BUILDER]: {
