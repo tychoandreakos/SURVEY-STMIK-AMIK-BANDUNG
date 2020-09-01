@@ -16,6 +16,7 @@ import {
   saveSingleTextBoxState,
   editSurveyForm,
   editMultiChoiceForm,
+  setTypeQuestion,
 } from "../../../../../Store/redux/action";
 
 import "./style.scss";
@@ -165,7 +166,7 @@ const QuestionAnsweredForm = (props) => {
 
         formBuilderHidden();
         setQuestionInput("");
-        typeHandler("");
+        setTypeQuestion("");
         break;
     }
   }
@@ -224,6 +225,7 @@ const mapDispatchToProps = (dispatch) => {
     onSubmitSingleTextBox: (title) => dispatch(saveSingleTextBoxState(title)),
     onEdit: (item) => dispatch(editSurveyForm(item)),
     editMulti: (item) => dispatch(editMultiChoiceForm(item)),
+    setTypeQuestion: (item) => dispatch(setTypeQuestion(item))
   };
 };
 

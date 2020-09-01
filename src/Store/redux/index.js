@@ -3,6 +3,7 @@ import * as varTypes from "../../util/varTypes";
 import slider from "../../util/sliderDummyData";
 
 const initialState = {
+  [varTypes.SURVEY_TYPE_QUESTION]: "",
   [varTypes.LOADER]: false,
   [varTypes.SURVEY_CATEGORY]: slider,
   [varTypes.SURVEY_FORM_BUILDER]: {
@@ -23,6 +24,13 @@ function rootReducer(state = initialState, action) {
     return {
       ...state,
       [varTypes.SURVEY_TITLE]: action.payload,
+    };
+  }
+
+  if (action.type === actionTypes.SET_TYPE_QUESTION) {
+    return {
+      ...state,
+      [varTypes.SURVEY_TYPE_QUESTION]: action.payload,
     };
   }
 

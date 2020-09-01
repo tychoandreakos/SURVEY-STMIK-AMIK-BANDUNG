@@ -4,6 +4,8 @@ import {
   TYPE_BUTTON,
   SURVEY_FORM_BUILDER,
   SURVEY_FORM_QUESTION,
+  SURVEY_CATEGORY,
+  SURVEY_TYPE_QUESTION,
 } from "../../../../util/varTypes";
 
 import { gsap } from "gsap";
@@ -18,11 +20,11 @@ import BtnOpt from "../BtnOpt";
 import FormBuilderContext from "../../../../Store/Context/formBuilder";
 
 import "./style.scss";
+import { setTypeQuestion } from "../../../../Store/redux/action";
 
 const ContentSurveyForm = (props) => {
-  const [typeQuestion, setTypeQuestion] = useState();
   const okButton = useRef({});
-  const { question } = props;
+  const { question, setTypeQuestion, typeQuestion } = props;
 
   const typeHandler = (val) => {
     setTypeQuestion(val);
@@ -163,7 +165,7 @@ const ContentSurveyForm = (props) => {
         <div className='form-builder'>
           {renderQuestion}
           {questionEl}
-          <NewQuestion formatHandler={typeHandler} />
+          <NewQuestion />
         </div>
       </div>
     </div>
@@ -173,9 +175,19 @@ const ContentSurveyForm = (props) => {
 const mapStateToProps = (state) => {
   return {
     question: state[SURVEY_FORM_BUILDER][SURVEY_FORM_QUESTION],
+    typeQuestion: state[SURVEY_TYPE_QUESTION],
   };
 };
 
-const ContentSurveyFormJoinRedux = connect(mapStateToProps)(ContentSurveyForm);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setTypeQuestion: (item) => dispatch(setTypeQuestion(item)),
+  };
+};
+
+const ContentSurveyFormJoinRedux = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ContentSurveyForm);
 
 export default ContentSurveyFormJoinRedux;

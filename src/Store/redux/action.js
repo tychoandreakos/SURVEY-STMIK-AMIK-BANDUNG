@@ -34,6 +34,13 @@ export function copiedSurveyForm(payload) {
   };
 }
 
+export function setTypeQuestion(payload) {
+  return {
+    type: actionType.SET_TYPE_QUESTION,
+    payload,
+  };
+}
+
 export function editSurveyForm(payload) {
   return {
     type: actionType.EDIT_SURVEY_FORM,
