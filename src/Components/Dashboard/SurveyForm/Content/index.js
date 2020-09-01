@@ -4,7 +4,6 @@ import {
   TYPE_BUTTON,
   SURVEY_FORM_BUILDER,
   SURVEY_FORM_QUESTION,
-  SURVEY_CATEGORY,
   SURVEY_TYPE_QUESTION,
 } from "../../../../util/varTypes";
 
@@ -24,11 +23,7 @@ import { setTypeQuestion } from "../../../../Store/redux/action";
 
 const ContentSurveyForm = (props) => {
   const okButton = useRef({});
-  const { question, setTypeQuestion, typeQuestion } = props;
-
-  const typeHandler = (val) => {
-    setTypeQuestion(val);
-  };
+  const { question, typeQuestion } = props;
 
   let renderQuestion = [];
   if (question) {
@@ -138,9 +133,7 @@ const ContentSurveyForm = (props) => {
   let questionEl;
   if (formBuilder) {
     questionEl = (
-      <FormBuilderContext.Provider
-        value={{ typeHandler, typeQuestion, formBuilderHidden }}
-      >
+      <FormBuilderContext.Provider value={{ typeQuestion, formBuilderHidden }}>
         <QuestionAnsweredForm
           numbered={`q${question ? question.length + 1 : 1}`}
         />

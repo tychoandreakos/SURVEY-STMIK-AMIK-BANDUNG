@@ -19,6 +19,7 @@ const DropdownNewQuestionFirst = (props) => {
   };
 
   const dropdownTypeHandler = (type) => {
+    dropdownHandler();
     setTypeQuestion(type);
   };
 

@@ -37,19 +37,13 @@ const CommentBox = lazy(() => import("../../Form/CommentBox"));
 
 const QuestionAnsweredForm = (props) => {
   const [dropdown, setDropdown] = useState(false);
+  const [canEdit, setCanEdit] = useState(false);
   const [questionInput, setQuestionInput] = useState("");
-  const {
-    numbered,
-    onSubmitMultiple,
-    onSubmitSingleTextBox,
-    onEdit,
-    editMulti,
-  } = props;
+  const { numbered, onSubmitMultiple, onSubmitSingleTextBox, onEdit } = props;
 
   const { elementDropdown } = useContext(DropdownContext);
   const {
     typeQuestion,
-    typeHandler,
     formBuilderHidden,
     action,
     actionHandler,
@@ -180,9 +174,9 @@ const QuestionAnsweredForm = (props) => {
       actionHandler();
     } else {
       formBuilderHidden();
-      setQuestionInput("");
-      typeHandler("");
     }
+    setQuestionInput("");
+    setTypeQuestion("");
   }
 
   const placeholder = "Please type a question ...";
@@ -205,7 +199,12 @@ const QuestionAnsweredForm = (props) => {
           <div className='icon'>
             <Icon icon={ChevronDown} />
           </div>
-          {dropdown ? <DropdownQuestion /> : undefined}
+          {dropdown ? (
+            <DropdownQuestion
+              setCanEdit={() => setCanEdit(false)}
+              canEdit={canEdit}
+            />
+          ) : undefined}
         </div>
         <div className='help'></div>
       </div>
@@ -225,7 +224,7 @@ const mapDispatchToProps = (dispatch) => {
     onSubmitSingleTextBox: (title) => dispatch(saveSingleTextBoxState(title)),
     onEdit: (item) => dispatch(editSurveyForm(item)),
     editMulti: (item) => dispatch(editMultiChoiceForm(item)),
-    setTypeQuestion: (item) => dispatch(setTypeQuestion(item))
+    setTypeQuestion: (item) => dispatch(setTypeQuestion(item)),
   };
 };
 
