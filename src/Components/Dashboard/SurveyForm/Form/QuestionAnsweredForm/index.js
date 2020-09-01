@@ -39,7 +39,13 @@ const QuestionAnsweredForm = (props) => {
   const [dropdown, setDropdown] = useState(false);
   const [canEdit, setCanEdit] = useState(false);
   const [questionInput, setQuestionInput] = useState("");
-  const { numbered, onSubmitMultiple, onSubmitSingleTextBox, onEdit } = props;
+  const {
+    numbered,
+    onSubmitMultiple,
+    onSubmitSingleTextBox,
+    onEdit,
+    setTypeQuestion,
+  } = props;
 
   const { elementDropdown } = useContext(DropdownContext);
   const {
@@ -157,12 +163,13 @@ const QuestionAnsweredForm = (props) => {
             title: questionInput.toLowerCase(),
           });
         }
-
-        formBuilderHidden();
-        setQuestionInput("");
-        setTypeQuestion("");
         break;
     }
+
+    formBuilderHidden();
+    setQuestionInput("");
+    setTypeQuestion("");
+    console.log("damn");
   }
 
   function capitalize(val) {
