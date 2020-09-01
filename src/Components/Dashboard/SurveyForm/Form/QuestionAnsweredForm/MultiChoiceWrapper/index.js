@@ -42,12 +42,6 @@ const MultiChoiceWrapper = (props) => {
   }, [editResult]);
 
   useEffect(() => {
-    if (editData) {
-      console.log(editData);
-    }
-  }, [editData]);
-
-  useEffect(() => {
     memoizedCallback();
   }, [memoizedCallback]);
 
@@ -96,7 +90,6 @@ const MultiChoiceWrapper = (props) => {
   };
 
   const addNewMultiChoice = (_id) => {
-    console.log("mutlichoiceID", multiChoiceId);
     const index = multiChoiceId.findIndex((id) => id === _id);
     const newArray = Array.from(multiChoiceId);
     const start = index + 1;

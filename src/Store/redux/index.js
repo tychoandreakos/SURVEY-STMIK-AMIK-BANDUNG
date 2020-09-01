@@ -48,13 +48,46 @@ function rootReducer(state = initialState, action) {
       ...state,
       [varTypes.MULTICHOICE.SELF]: {
         ...state[varTypes.MULTICHOICE.SELF],
-        [varTypes.MULTICHOICE.EDITMULTICHOICE]: action.payload
+        [varTypes.MULTICHOICE.EDITMULTICHOICE]: action.payload,
       },
     };
   }
 
   if (action.type === actionTypes.EDIT_MULTICHOICE_FORM) {
-    console.log(state[varTypes.MULTICHOICE.SELF]);
+    const data =
+      state[varTypes.SURVEY_FORM_BUILDER][varTypes.SURVEY_FORM_QUESTION];
+    const newTempData =
+      state[varTypes.MULTICHOICE.SELF][varTypes.MULTICHOICE.EDITMULTICHOICE];
+    const multiChoiceId =
+      state[varTypes.MULTICHOICE.SELF][varTypes.MULTICHOICE.MULTICHOICEID];
+
+    let newArr = [];
+    for (const key of multiChoiceId) {
+      const data = newTempData.data.find((item) => item._id === key);
+      if (data !== undefined) {
+        newArr.push(data);
+      }
+    }
+
+    const newData = data.map((item) => {
+      if (item._id === newTempData._id) {
+        item = {
+          ...item,
+          title: newTempData.title,
+          item: newArr,
+        };
+      }
+
+      return item;
+    });
+
+    return {
+      ...state,
+      [varTypes.SURVEY_FORM_BUILDER]: {
+        ...state[varTypes.SURVEY_FORM_BUILDER],
+        [varTypes.SURVEY_FORM_QUESTION]: newData,
+      },
+    };
   }
 
   if (action.type === actionTypes.SET_MULTICHOICE_ID) {

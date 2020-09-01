@@ -10,15 +10,14 @@ export function setTitleSurvey(payload) {
 export function setEditMultiChoice(payload) {
   return {
     type: actionType.SET_EDIT_MULTICHOICE,
-    payload
-  }
+    payload,
+  };
 }
 
-export function editMultiChoiceForm(payload) {
+export function editMultiChoiceForm() {
   return {
     type: actionType.EDIT_MULTICHOICE_FORM,
-    payload
-  }
+  };
 }
 
 export function triggerLoader() {

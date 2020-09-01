@@ -15,6 +15,7 @@ import {
   saveMultichoiceState,
   saveSingleTextBoxState,
   editSurveyForm,
+  editMultiChoiceForm,
 } from "../../../../../Store/redux/action";
 
 import "./style.scss";
@@ -36,7 +37,13 @@ const CommentBox = lazy(() => import("../../Form/CommentBox"));
 const QuestionAnsweredForm = (props) => {
   const [dropdown, setDropdown] = useState(false);
   const [questionInput, setQuestionInput] = useState("");
-  const { numbered, onSubmitMultiple, onSubmitSingleTextBox, onEdit } = props;
+  const {
+    numbered,
+    onSubmitMultiple,
+    onSubmitSingleTextBox,
+    onEdit,
+    editMulti,
+  } = props;
 
   const { elementDropdown } = useContext(DropdownContext);
   const {
@@ -138,13 +145,13 @@ const QuestionAnsweredForm = (props) => {
             type: resultData.type,
             title: questionInput.toLowerCase(),
           });
-          actionHandler();
         }
 
         if (resultData.type === TYPE_QUESTION.MULTIPLE) {
-          console.log("damn you stark");
+          editMulti();
         }
 
+        actionHandler();
         break;
       default:
         if (typeQuestion === TYPE_QUESTION.SHORT) {
@@ -217,6 +224,7 @@ const mapDispatchToProps = (dispatch) => {
     onSubmitMultiple: (title) => dispatch(saveMultichoiceState(title)),
     onSubmitSingleTextBox: (title) => dispatch(saveSingleTextBoxState(title)),
     onEdit: (item) => dispatch(editSurveyForm(item)),
+    editMulti: () => dispatch(editMultiChoiceForm()),
   };
 };
 
