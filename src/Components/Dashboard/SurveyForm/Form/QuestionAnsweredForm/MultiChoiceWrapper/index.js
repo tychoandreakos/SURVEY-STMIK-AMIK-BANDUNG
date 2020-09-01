@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import {
   setMultichoiceID,
   setMultichoiceInputstate,
-  editMultiChoiceForm,
   setEditMultiChoice,
 } from "../../../../../../Store/redux/action";
 import { MULTICHOICE } from "../../../../../../util/varTypes";
@@ -18,9 +17,8 @@ const MultiChoiceWrapper = (props) => {
     setId,
     setInput,
     editResult,
-    editMulti,
     editData,
-    setEditData
+    setEditData,
   } = props;
   const [canRemoveDisabled, setCanRemoveDisabled] = useState(true);
 
@@ -173,7 +171,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setId: (id) => dispatch(setMultichoiceID(id)),
     setInput: (item) => dispatch(setMultichoiceInputstate(item)),
-    editMulti: (item) => dispatch(editMultiChoiceForm(item)),
     setEditData: (item) => dispatch(setEditMultiChoice(item)),
   };
 };
