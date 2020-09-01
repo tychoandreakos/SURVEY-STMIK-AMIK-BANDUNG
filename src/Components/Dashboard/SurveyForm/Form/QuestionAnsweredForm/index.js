@@ -182,7 +182,13 @@ const QuestionAnsweredForm = (props) => {
   }
 
   function onCancelHandler() {
-    console.log("its working");
+    if (resultData && resultData.index) {
+      actionHandler();
+    } else {
+      formBuilderHidden();
+      setQuestionInput("");
+      typeHandler("");
+    }
   }
 
   const placeholder = "Please type a question ...";

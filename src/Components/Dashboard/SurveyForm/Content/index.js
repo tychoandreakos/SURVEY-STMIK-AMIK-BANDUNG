@@ -149,18 +149,18 @@ const ContentSurveyForm = (props) => {
   let okButtonEl;
   if (confirmButton.state) {
     okButtonEl = (
-      <div ref={okButton} className="btn-wrapper">
+      <div ref={okButton} className='btn-wrapper'>
         <BtnOpt type={TYPE_BUTTON.OK} />
       </div>
     );
   }
 
   return (
-    <div className="content-survey-form">
+    <div className='content-survey-form'>
       {okButtonEl}
-      <div className="survey-wrapper">
+      <div className='survey-wrapper'>
         <HeaderForm />
-        <div className="form-builder">
+        <div className='form-builder'>
           {renderQuestion}
           {questionEl}
           <NewQuestion formatHandler={typeHandler} />
