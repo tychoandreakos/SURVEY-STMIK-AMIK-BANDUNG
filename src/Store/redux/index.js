@@ -14,6 +14,7 @@ const initialState = {
   [varTypes.MULTICHOICE.SELF]: {
     [varTypes.MULTICHOICE.MULTICHOICEID]: [],
     [varTypes.MULTICHOICE.INPUTSTATE]: [],
+    [varTypes.MULTICHOICE.EDITMULTICHOICE]: {},
   },
 };
 
@@ -40,6 +41,20 @@ function rootReducer(state = initialState, action) {
         [varTypes.MULTICHOICE.INPUTSTATE]: action.payload,
       },
     };
+  }
+
+  if (action.type === actionTypes.SET_EDIT_MULTICHOICE) {
+    return {
+      ...state,
+      [varTypes.MULTICHOICE.SELF]: {
+        ...state[varTypes.MULTICHOICE.SELF],
+        [varTypes.MULTICHOICE.EDITMULTICHOICE]: action.payload
+      },
+    };
+  }
+
+  if (action.type === actionTypes.EDIT_MULTICHOICE_FORM) {
+    console.log(state[varTypes.MULTICHOICE.SELF]);
   }
 
   if (action.type === actionTypes.SET_MULTICHOICE_ID) {

@@ -12,21 +12,24 @@ import "./style.scss";
 const MultiChoiceV2 = (props) => {
   const {
     inputStateHandler,
+    editStateHandler,
     addNewMultiChoice,
     _id,
     removeNewMultiChoise,
     canRemoveDisabled,
     title,
+    parentId,
+    edit,
   } = props;
   const [value, setValue] = useState("");
   const [valueCache, setValueCache] = useState({});
   const [lockSubmit, setLockSubmit] = useState(true);
 
   useEffect(() => {
-    if (title && title.length > 1) {
+    if (edit) {
       setValue(title);
     }
-  }, [title]);
+  }, [edit, title]);
 
   const placeholder = "Enter an answer choice";
 
@@ -44,17 +47,17 @@ const MultiChoiceV2 = (props) => {
           title: value,
           selected: valueCache.selected,
         };
-        inputStateHandler(data, _id);
       } else {
+        const newId = _id ? _id : uuid();
         data = {
-          _id: uuid(),
+          _id: edit ? newId : uuid(),
           title: value,
           selected: false,
         };
         setValueCache(data);
       }
 
-      inputStateHandler(data, _id);
+      edit ? editStateHandler(data, parentId) : inputStateHandler(data, _id);
       setLockSubmit(true);
     }
   };

@@ -66,7 +66,7 @@ const QuestionAnsweredForm = (props) => {
 
   switch (typeQuestion ?? resultData.type) {
     case TYPE_QUESTION.MULTIPLE:
-      answeredForm = <MultiChoiceV2 editResult={resultData.data} />;
+      answeredForm = <MultiChoiceV2 editResult={resultData} />;
       break;
     case TYPE_QUESTION.STAR:
       answeredForm = <StarRating />;

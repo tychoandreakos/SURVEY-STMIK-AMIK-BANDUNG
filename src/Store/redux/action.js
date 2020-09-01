@@ -7,6 +7,20 @@ export function setTitleSurvey(payload) {
   };
 }
 
+export function setEditMultiChoice(payload) {
+  return {
+    type: actionType.SET_EDIT_MULTICHOICE,
+    payload
+  }
+}
+
+export function editMultiChoiceForm(payload) {
+  return {
+    type: actionType.EDIT_MULTICHOICE_FORM,
+    payload
+  }
+}
+
 export function triggerLoader() {
   return {
     type: actionType.TRIGGER_LOADER,

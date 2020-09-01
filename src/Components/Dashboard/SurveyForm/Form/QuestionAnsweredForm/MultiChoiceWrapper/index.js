@@ -6,27 +6,52 @@ import { connect } from "react-redux";
 import {
   setMultichoiceID,
   setMultichoiceInputstate,
+  editMultiChoiceForm,
+  setEditMultiChoice,
 } from "../../../../../../Store/redux/action";
 import { MULTICHOICE } from "../../../../../../util/varTypes";
 
 const MultiChoiceWrapper = (props) => {
-  const { inputState, multiChoiceId, setId, setInput, editResult } = props;
+  const {
+    inputState,
+    multiChoiceId,
+    setId,
+    setInput,
+    editResult,
+    editMulti,
+    editData,
+    setEditData
+  } = props;
   const [canRemoveDisabled, setCanRemoveDisabled] = useState(true);
 
   const memoizedCallback = useCallback(() => {
-    const initialize = [uuid()];
+    let initialize = [];
+    if (editResult && editResult.index) {
+      for (const item of editResult.data) {
+        initialize = [...initialize, item._id];
+      }
+    } else {
+      initialize = [uuid()];
+    }
     setId(initialize);
     setInput([]);
-  }, [setId, setInput]);
+  }, [setId, setInput, editResult]);
+
+  useEffect(() => {
+    if (editResult && editResult.index) {
+      setEditData(editResult);
+    }
+  }, [editResult]);
+
+  useEffect(() => {
+    if (editData) {
+      console.log(editData);
+    }
+  }, [editData]);
 
   useEffect(() => {
     memoizedCallback();
   }, [memoizedCallback]);
-
-  useEffect(() => {
-    console.log("From multichoice id", multiChoiceId);
-    console.log("From edit result", editResult);
-  }, [multiChoiceId, editResult]);
 
   useEffect(() => {
     if (multiChoiceId.length <= 1) {
@@ -50,7 +75,30 @@ const MultiChoiceWrapper = (props) => {
     setInput(data);
   };
 
+  const editStateHandler = (val, _id) => {
+    const newData = editData.data.map((item) => {
+      if (item._id === val._id) {
+        item = {
+          ...item,
+          title: val.title,
+          selected: val.selected,
+        };
+      }
+      return item;
+    });
+
+    if (editData.data.find((item) => item._id !== val._id)) {
+      newData.push(val);
+    }
+
+    setEditData({
+      ...editData,
+      data: newData,
+    });
+  };
+
   const addNewMultiChoice = (_id) => {
+    console.log("mutlichoiceID", multiChoiceId);
     const index = multiChoiceId.findIndex((id) => id === _id);
     const newArray = Array.from(multiChoiceId);
     const start = index + 1;
@@ -71,8 +119,32 @@ const MultiChoiceWrapper = (props) => {
     }
   };
 
+  const findResultDataID = (id) => {
+    const item = editData.data.find((item) => item._id === id);
+    return item ? item._id : id;
+  };
+
+  const findResultDataTitle = (id) => {
+    const item = editData.data.find((item) => item._id === id);
+    return item ? item.title : "";
+  };
+
   let multiChoiceEL;
-  if (multiChoiceId) {
+  if (multiChoiceId && editData && editData.data) {
+    multiChoiceEL = multiChoiceId.map((id) => (
+      <MultiChoiceV2
+        key={findResultDataID(id)}
+        _id={findResultDataID(id)}
+        parentId={editData._id}
+        title={findResultDataTitle(id)}
+        canRemoveDisabled={canRemoveDisabled}
+        removeNewMultiChoise={removeNewMultiChoise}
+        addNewMultiChoice={addNewMultiChoice}
+        editStateHandler={editStateHandler}
+        edit={true}
+      />
+    ));
+  } else {
     multiChoiceEL = multiChoiceId.map((id) => (
       <MultiChoiceV2
         key={id}
@@ -81,20 +153,7 @@ const MultiChoiceWrapper = (props) => {
         removeNewMultiChoise={removeNewMultiChoise}
         addNewMultiChoice={addNewMultiChoice}
         inputStateHandler={inputStateHandler}
-      />
-    ));
-  }
-
-  if (editResult) {
-    multiChoiceEL = editResult.map((item) => (
-      <MultiChoiceV2
-        key={item._id}
-        _id={item._id}
-        title={item.title}
-        canRemoveDisabled={canRemoveDisabled}
-        removeNewMultiChoise={removeNewMultiChoise}
-        addNewMultiChoice={addNewMultiChoice}
-        inputStateHandler={inputStateHandler}
+        edit={false}
       />
     ));
   }
@@ -106,6 +165,7 @@ const mapStateToProps = (state) => {
   return {
     inputState: state[MULTICHOICE.SELF][MULTICHOICE.INPUTSTATE],
     multiChoiceId: state[MULTICHOICE.SELF][MULTICHOICE.MULTICHOICEID],
+    editData: state[MULTICHOICE.SELF][MULTICHOICE.EDITMULTICHOICE],
   };
 };
 
@@ -113,6 +173,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setId: (id) => dispatch(setMultichoiceID(id)),
     setInput: (item) => dispatch(setMultichoiceInputstate(item)),
+    editMulti: (item) => dispatch(editMultiChoiceForm(item)),
+    setEditData: (item) => dispatch(setEditMultiChoice(item)),
   };
 };
 
