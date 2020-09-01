@@ -62,6 +62,9 @@ function rootReducer(state = initialState, action) {
       state[varTypes.MULTICHOICE.SELF][varTypes.MULTICHOICE.MULTICHOICEID];
 
     let newArr = [];
+    let newData;
+    const title = action.payload.title;
+
     for (const key of multiChoiceId) {
       const data = newTempData.data.find((item) => item._id === key);
       if (data !== undefined) {
@@ -69,11 +72,11 @@ function rootReducer(state = initialState, action) {
       }
     }
 
-    const newData = data.map((item) => {
+    newData = data.map((item) => {
       if (item._id === newTempData._id) {
         item = {
           ...item,
-          title: newTempData.title,
+          title: title.length > 1 ? title : newTempData.title,
           item: newArr,
         };
       }
@@ -83,6 +86,11 @@ function rootReducer(state = initialState, action) {
 
     return {
       ...state,
+      [varTypes.MULTICHOICE.SELF]: {
+        [varTypes.MULTICHOICE.MULTICHOICEID]: [],
+        [varTypes.MULTICHOICE.INPUTSTATE]: [],
+        [varTypes.MULTICHOICE.EDITMULTICHOICE]: {},
+      },
       [varTypes.SURVEY_FORM_BUILDER]: {
         ...state[varTypes.SURVEY_FORM_BUILDER],
         [varTypes.SURVEY_FORM_QUESTION]: newData,
@@ -148,8 +156,13 @@ function rootReducer(state = initialState, action) {
 
   if (action.type === actionTypes.EDIT_SURVEY_FORM) {
     const editedData = action.payload;
+    let newData = [];
+
+    /**
+     * Prorcessing the SHORT COMPONENT
+     */
     if (editedData.type === varTypes.TYPE_QUESTION.SHORT) {
-      const newArrData = state[varTypes.SURVEY_FORM_BUILDER][
+      newData = state[varTypes.SURVEY_FORM_BUILDER][
         varTypes.SURVEY_FORM_QUESTION
       ].map((item) => {
         if (item._id === editedData._id) {
@@ -160,14 +173,54 @@ function rootReducer(state = initialState, action) {
         }
         return item;
       });
-      return {
-        ...state,
-        [varTypes.SURVEY_FORM_BUILDER]: {
-          ...state[varTypes.SURVEY_FORM_BUILDER],
-          [varTypes.SURVEY_FORM_QUESTION]: newArrData,
-        },
-      };
     }
+
+    /**
+     * Prorcessing the MULTIPLE COMPONENT
+     */
+    if (editedData.type === varTypes.TYPE_QUESTION.MULTIPLE) {
+      const data =
+        state[varTypes.SURVEY_FORM_BUILDER][varTypes.SURVEY_FORM_QUESTION];
+      const newTempData =
+        state[varTypes.MULTICHOICE.SELF][varTypes.MULTICHOICE.EDITMULTICHOICE];
+      const multiChoiceId =
+        state[varTypes.MULTICHOICE.SELF][varTypes.MULTICHOICE.MULTICHOICEID];
+
+      let newArr = [];
+      const title = editedData.title;
+
+      for (const key of multiChoiceId) {
+        const data = newTempData.data.find((item) => item._id === key);
+        if (data !== undefined) {
+          newArr.push(data);
+        }
+      }
+
+      newData = data.map((item) => {
+        if (item._id === newTempData._id) {
+          item = {
+            ...item,
+            title: title.length > 1 ? title : newTempData.title,
+            item: newArr,
+          };
+        }
+
+        return item;
+      });
+    }
+
+    return {
+      ...state,
+      [varTypes.MULTICHOICE.SELF]: {
+        [varTypes.MULTICHOICE.MULTICHOICEID]: [],
+        [varTypes.MULTICHOICE.INPUTSTATE]: [],
+        [varTypes.MULTICHOICE.EDITMULTICHOICE]: {},
+      },
+      [varTypes.SURVEY_FORM_BUILDER]: {
+        ...state[varTypes.SURVEY_FORM_BUILDER],
+        [varTypes.SURVEY_FORM_QUESTION]: newData,
+      },
+    };
   }
 
   if (action.type === actionTypes.SAVE_MULTICHOICE_STATE) {

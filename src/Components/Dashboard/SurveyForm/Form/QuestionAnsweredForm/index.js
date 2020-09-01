@@ -139,18 +139,11 @@ const QuestionAnsweredForm = (props) => {
       case RESULT_ACTION.COPY:
         break;
       case RESULT_ACTION.EDIT:
-        if (resultData.type === TYPE_QUESTION.SHORT) {
-          onEdit({
-            _id: resultData._id,
-            type: resultData.type,
-            title: questionInput.toLowerCase(),
-          });
-        }
-
-        if (resultData.type === TYPE_QUESTION.MULTIPLE) {
-          editMulti();
-        }
-
+        onEdit({
+          _id: resultData._id,
+          type: typeQuestion ?? resultData.type,
+          title: questionInput.toLowerCase(),
+        });
         actionHandler();
         break;
       default:
@@ -230,7 +223,7 @@ const mapDispatchToProps = (dispatch) => {
     onSubmitMultiple: (title) => dispatch(saveMultichoiceState(title)),
     onSubmitSingleTextBox: (title) => dispatch(saveSingleTextBoxState(title)),
     onEdit: (item) => dispatch(editSurveyForm(item)),
-    editMulti: () => dispatch(editMultiChoiceForm()),
+    editMulti: (item) => dispatch(editMultiChoiceForm(item)),
   };
 };
 

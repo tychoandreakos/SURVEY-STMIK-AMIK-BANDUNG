@@ -14,9 +14,10 @@ export function setEditMultiChoice(payload) {
   };
 }
 
-export function editMultiChoiceForm() {
+export function editMultiChoiceForm(payload) {
   return {
     type: actionType.EDIT_MULTICHOICE_FORM,
+    payload,
   };
 }
 
