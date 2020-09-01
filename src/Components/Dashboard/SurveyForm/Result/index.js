@@ -9,6 +9,7 @@ import FormBuilderContext from "../../../../Store/Context/formBuilder";
 import {
   deleteSurveyForm,
   copiedSurveyForm,
+  setCanEdit,
 } from "../../../../Store/redux/action";
 
 import { TYPE_QUESTION, RESULT_ACTION } from "../../../../util/varTypes";
@@ -25,6 +26,7 @@ const ResultSurvey = (props) => {
     _id,
     onDeleteHandler,
     onCopiedHandler,
+    onEditHandler,
   } = props;
   const [showBtn, setShowBtn] = useState(false);
   const [action, setAction] = useState(false);
@@ -113,14 +115,16 @@ const ResultSurvey = (props) => {
     });
   };
 
+  const editHandler = () => {
+    setAction(RESULT_ACTION.EDIT);
+    onEditHandler();
+  };
+
   let btnEl;
   if (showBtn) {
     btnEl = (
       <div className='button-handler-form'>
-        <button
-          onClick={() => setAction(RESULT_ACTION.EDIT)}
-          className='btn btn-edit'
-        >
+        <button onClick={editHandler} className='btn btn-edit'>
           edit
         </button>
         <button onClick={() => setAction(RESULT_ACTION.COPY)} className='btn'>
@@ -189,6 +193,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onDeleteHandler: (id) => dispatch(deleteSurveyForm(id)),
     onCopiedHandler: (item) => dispatch(copiedSurveyForm(item)),
+    onEditHandler: () => dispatch(setCanEdit()),
   };
 };
 

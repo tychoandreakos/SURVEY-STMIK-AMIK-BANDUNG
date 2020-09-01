@@ -37,15 +37,8 @@ const CommentBox = lazy(() => import("../../Form/CommentBox"));
 
 const QuestionAnsweredForm = (props) => {
   const [dropdown, setDropdown] = useState(false);
-  const [canEdit, setCanEdit] = useState(false);
   const [questionInput, setQuestionInput] = useState("");
-  const {
-    numbered,
-    onSubmitMultiple,
-    onSubmitSingleTextBox,
-    onEdit,
-    setTypeQuestion,
-  } = props;
+  const { numbered, onSubmitMultiple, onSubmitSingleTextBox, onEdit } = props;
 
   const { elementDropdown } = useContext(DropdownContext);
   const {
@@ -207,10 +200,7 @@ const QuestionAnsweredForm = (props) => {
             <Icon icon={ChevronDown} />
           </div>
           {dropdown ? (
-            <DropdownQuestion
-              setCanEdit={() => setCanEdit(false)}
-              canEdit={canEdit}
-            />
+            <DropdownQuestion />
           ) : undefined}
         </div>
         <div className='help'></div>

@@ -55,6 +55,12 @@ export function deleteSurveyForm(payload) {
   };
 }
 
+export function setCanEdit() {
+  return {
+    type: actionType.SET_CAN_EDIT,
+  };
+}
+
 export function setMultichoiceID(payload) {
   return {
     type: actionType.SET_MULTICHOICE_ID,
