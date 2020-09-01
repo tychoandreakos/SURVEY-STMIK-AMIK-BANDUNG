@@ -1,16 +1,15 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from "react";
 
-import './style.scss';
+import "./style.scss";
 
-const Header = lazy(() => import("../Header"))
-const Welcome = lazy(() => import("../Welcome"))
-const SurveyList = lazy(() => import("../SurveyList"))
-
+const Header = lazy(() => import("../Header"));
+const Welcome = lazy(() => import("../Welcome"));
+const SurveyList = lazy(() => import("../SurveyList"));
 
 const Content = () => {
   return (
     <div id='content-dashboard'>
-      <Suspense fallback="loading...">
+      <Suspense fallback='loading...'>
         <Header />
         <Welcome />
         <SurveyList />

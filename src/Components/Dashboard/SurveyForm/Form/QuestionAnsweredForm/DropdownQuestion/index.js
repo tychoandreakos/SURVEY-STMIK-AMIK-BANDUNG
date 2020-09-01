@@ -8,21 +8,15 @@ import Check from "@iconify/icons-mdi/check";
 import DropdownContext from "../../../../../../Store/Context/dropdownAlternate";
 
 import "./style.scss";
-import {
-  setTypeQuestion,
-  setCanEdit,
-} from "../../../../../../Store/redux/action";
-import {
-  SURVEY_TYPE_QUESTION,
-  SURVEY_CAN_EDIT,
-} from "../../../../../../util/varTypes";
+import { setTypeQuestion } from "../../../../../../Store/redux/action";
+import { SURVEY_TYPE_QUESTION } from "../../../../../../util/varTypes";
 
 const DropdownQuestion = (props) => {
   const { elementDropdown } = useContext(DropdownContext);
   const dropdownRef = useRef();
   const [backdrop, setBackdrop] = useState(true);
 
-  const { typeQuestion, setTypeQuestion, canEdit, canEditHandler } = props;
+  const { typeQuestion, setTypeQuestion } = props;
 
   useEffect(() => {
     dropdownRef.current.scrollTo({
@@ -41,12 +35,9 @@ const DropdownQuestion = (props) => {
   };
 
   const dropdownHandler = (type) => {
-    if (canEdit) {
-      console.log("bang!");
-      canEditHandler();
-    } else {
-      setTypeQuestion(type);
-    }
+    console.log("we got you away!");
+    console.log(type);
+    setTypeQuestion(type);
   };
 
   const renderElementToReact = (item) => (
@@ -93,14 +84,12 @@ const DropdownQuestion = (props) => {
 const mapStateToProps = (state) => {
   return {
     typeQuestion: state[SURVEY_TYPE_QUESTION],
-    canEdit: state[SURVEY_CAN_EDIT],
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setTypeQuestion: (item) => dispatch(setTypeQuestion(item)),
-    canEditHandler: () => dispatch(setCanEdit()),
   };
 };
 

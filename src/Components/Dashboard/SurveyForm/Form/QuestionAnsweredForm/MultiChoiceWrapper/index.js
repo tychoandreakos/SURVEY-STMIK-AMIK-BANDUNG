@@ -24,7 +24,7 @@ const MultiChoiceWrapper = (props) => {
 
   const memoizedCallback = useCallback(() => {
     let initialize = [];
-    if (editResult && editResult.index) {
+    if (editResult && editResult.index && editResult.data) {
       for (const item of editResult.data) {
         initialize = [...initialize, item._id];
       }

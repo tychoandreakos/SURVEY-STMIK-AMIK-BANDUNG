@@ -5,6 +5,7 @@ import {
   SURVEY_FORM_BUILDER,
   SURVEY_FORM_QUESTION,
   SURVEY_TYPE_QUESTION,
+  SURVEY_CAN_EDIT,
 } from "../../../../util/varTypes";
 
 import { gsap } from "gsap";
@@ -23,7 +24,7 @@ import { setTypeQuestion } from "../../../../Store/redux/action";
 
 const ContentSurveyForm = (props) => {
   const okButton = useRef({});
-  const { question, typeQuestion } = props;
+  const { question, typeQuestion, canEdit } = props;
 
   let renderQuestion = [];
   if (question) {
@@ -121,7 +122,7 @@ const ContentSurveyForm = (props) => {
       setInitial(true);
     }
 
-    if (initial && typeQuestion && typeQuestion.length > 1) {
+    if (initial && typeQuestion && typeQuestion.length > 1 && !canEdit) {
       setFormBuilder(true);
     }
   }, [initial, typeQuestion]);
@@ -133,7 +134,7 @@ const ContentSurveyForm = (props) => {
   let questionEl;
   if (formBuilder) {
     questionEl = (
-      <FormBuilderContext.Provider value={{ typeQuestion, formBuilderHidden }}>
+      <FormBuilderContext.Provider value={{ formBuilderHidden }}>
         <QuestionAnsweredForm
           numbered={`q${question ? question.length + 1 : 1}`}
         />
@@ -169,6 +170,7 @@ const mapStateToProps = (state) => {
   return {
     question: state[SURVEY_FORM_BUILDER][SURVEY_FORM_QUESTION],
     typeQuestion: state[SURVEY_TYPE_QUESTION],
+    canEdit: state[SURVEY_CAN_EDIT],
   };
 };
 

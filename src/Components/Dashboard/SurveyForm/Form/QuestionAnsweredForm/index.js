@@ -10,13 +10,19 @@ import DropdownQuestion from "./DropdownQuestion";
 import DropdownContext from "../../../../../Store/Context/dropdownAlternate";
 import FormBuilderContext from "../../../../../Store/Context/formBuilder";
 
-import { TYPE_QUESTION, RESULT_ACTION } from "../../../../../util/varTypes";
+import {
+  TYPE_QUESTION,
+  RESULT_ACTION,
+  SURVEY_CAN_EDIT,
+  SURVEY_TYPE_QUESTION,
+} from "../../../../../util/varTypes";
 import {
   saveMultichoiceState,
   saveSingleTextBoxState,
   editSurveyForm,
   editMultiChoiceForm,
   setTypeQuestion,
+  setCanEdit,
 } from "../../../../../Store/redux/action";
 
 import "./style.scss";
@@ -38,11 +44,18 @@ const CommentBox = lazy(() => import("../../Form/CommentBox"));
 const QuestionAnsweredForm = (props) => {
   const [dropdown, setDropdown] = useState(false);
   const [questionInput, setQuestionInput] = useState("");
-  const { numbered, onSubmitMultiple, onSubmitSingleTextBox, onEdit } = props;
+  const {
+    numbered,
+    onSubmitMultiple,
+    onSubmitSingleTextBox,
+    onEdit,
+    setCanEdit,
+    typeQuestion,
+    setTypeQuestion,
+  } = props;
 
   const { elementDropdown } = useContext(DropdownContext);
   const {
-    typeQuestion,
     formBuilderHidden,
     action,
     actionHandler,
@@ -64,8 +77,9 @@ const QuestionAnsweredForm = (props) => {
 
   let answeredForm;
   let actionButtonComponent;
+  const witchType = typeQuestion ?? resultData.type;
 
-  switch (typeQuestion ?? resultData.type) {
+  switch (witchType) {
     case TYPE_QUESTION.MULTIPLE:
       answeredForm = <MultiChoiceV2 editResult={resultData} />;
       break;
@@ -139,6 +153,7 @@ const QuestionAnsweredForm = (props) => {
           title: questionInput.toLowerCase(),
         });
         actionHandler();
+        setCanEdit();
         break;
       default:
         if (typeQuestion === TYPE_QUESTION.SHORT) {
@@ -156,13 +171,14 @@ const QuestionAnsweredForm = (props) => {
             title: questionInput.toLowerCase(),
           });
         }
+
+        formBuilderHidden();
         break;
     }
 
-    formBuilderHidden();
     setQuestionInput("");
     setTypeQuestion("");
-    console.log("damn");
+    console.log("submit!");
   }
 
   function capitalize(val) {
@@ -199,9 +215,7 @@ const QuestionAnsweredForm = (props) => {
           <div className='icon'>
             <Icon icon={ChevronDown} />
           </div>
-          {dropdown ? (
-            <DropdownQuestion />
-          ) : undefined}
+          {dropdown ? <DropdownQuestion /> : undefined}
         </div>
         <div className='help'></div>
       </div>
@@ -215,6 +229,13 @@ const QuestionAnsweredForm = (props) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    canEdit: state[SURVEY_CAN_EDIT],
+    typeQuestion: state[SURVEY_TYPE_QUESTION],
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     onSubmitMultiple: (title) => dispatch(saveMultichoiceState(title)),
@@ -222,11 +243,12 @@ const mapDispatchToProps = (dispatch) => {
     onEdit: (item) => dispatch(editSurveyForm(item)),
     editMulti: (item) => dispatch(editMultiChoiceForm(item)),
     setTypeQuestion: (item) => dispatch(setTypeQuestion(item)),
+    onEditHandler: () => dispatch(setCanEdit()),
   };
 };
 
 const QuestionAnsweredFormJoinRedux = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(QuestionAnsweredForm);
 
