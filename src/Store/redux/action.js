@@ -42,8 +42,16 @@ export function setTypeQuestion(payload) {
 }
 
 export function editSurveyForm(payload) {
+
   return {
     type: actionType.EDIT_SURVEY_FORM,
+    payload,
+  };
+}
+
+export function setTypeEditQuestion(payload) {
+  return {
+    type: actionType.SET_EDIT_TYPE_QUESTION,
     payload,
   };
 }

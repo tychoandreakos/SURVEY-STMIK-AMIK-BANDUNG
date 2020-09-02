@@ -8,20 +8,38 @@ import Check from "@iconify/icons-mdi/check";
 import DropdownContext from "../../../../../../Store/Context/dropdownAlternate";
 
 import "./style.scss";
-import { setTypeQuestion } from "../../../../../../Store/redux/action";
-import { SURVEY_TYPE_QUESTION } from "../../../../../../util/varTypes";
+import {
+  setTypeQuestion,
+  setTypeEditQuestion,
+} from "../../../../../../Store/redux/action";
+import {
+  SURVEY_TYPE_QUESTION,
+  SURVEY_EDIT_TYPE_QUESTION,
+  SURVEY_CAN_EDIT,
+} from "../../../../../../util/varTypes";
 
 const DropdownQuestion = (props) => {
   const { elementDropdown } = useContext(DropdownContext);
   const dropdownRef = useRef();
   const [backdrop, setBackdrop] = useState(true);
+  const [typeOfQuestion, setTypeOfQuestion] = useState("");
 
-  const { typeQuestion, setTypeQuestion } = props;
+  const {
+    typeQuestion,
+    setTypeQuestion,
+    canEdit,
+    setTypeEditQuestion,
+    editTypeQuestion,
+  } = props;
 
   useEffect(() => {
     dropdownRef.current.scrollTo({
       top: 0,
     });
+    const typeQ = checkTypeQuestion(typeQuestion)
+      ? typeQuestion
+      : editTypeQuestion;
+    setTypeOfQuestion(typeQ);
   }, []);
 
   const checkedEl = (
@@ -31,13 +49,15 @@ const DropdownQuestion = (props) => {
   );
 
   const sortByChecked = (item) => {
-    return item.type === typeQuestion ? -1 : 1;
+    return item.type === typeOfQuestion ? -1 : 1;
   };
 
   const dropdownHandler = (type) => {
-    console.log("we got you away!");
-    console.log(type);
-    setTypeQuestion(type);
+    if (canEdit) {
+      setTypeEditQuestion(type);
+    } else {
+      setTypeQuestion(type);
+    }
   };
 
   const renderElementToReact = (item) => (
@@ -48,13 +68,17 @@ const DropdownQuestion = (props) => {
         </div>
         <span>{item.title}</span>
       </div>
-      {item.type === typeQuestion ? checkedEl : undefined}
+      {item.type === typeOfQuestion ? checkedEl : undefined}
     </li>
   );
 
   const backdropHandler = () => {
     setBackdrop(false);
   };
+
+  function checkTypeQuestion(val) {
+    return val && val.length > 0;
+  }
 
   const newElementDropdown = Array.from(elementDropdown);
   const elDropdown = newElementDropdown
@@ -84,12 +108,15 @@ const DropdownQuestion = (props) => {
 const mapStateToProps = (state) => {
   return {
     typeQuestion: state[SURVEY_TYPE_QUESTION],
+    editTypeQuestion: state[SURVEY_EDIT_TYPE_QUESTION],
+    canEdit: state[SURVEY_CAN_EDIT],
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setTypeQuestion: (item) => dispatch(setTypeQuestion(item)),
+    setTypeEditQuestion: (item) => dispatch(setTypeEditQuestion(item)),
   };
 };
 

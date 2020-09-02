@@ -4,6 +4,7 @@ import slider from "../../util/sliderDummyData";
 
 const initialState = {
   [varTypes.SURVEY_CAN_EDIT]: false,
+  [varTypes.SURVEY_EDIT_TYPE_QUESTION]: "",
   [varTypes.SURVEY_TYPE_QUESTION]: "",
   [varTypes.LOADER]: false,
   [varTypes.SURVEY_CATEGORY]: slider,
@@ -28,11 +29,18 @@ function rootReducer(state = initialState, action) {
     };
   }
 
-  if(action.type === actionTypes.SET_CAN_EDIT) {
+  if (action.type === actionTypes.SET_EDIT_TYPE_QUESTION) {
     return {
       ...state,
-      [varTypes.SURVEY_CAN_EDIT]: !state[varTypes.SURVEY_CAN_EDIT]
-    }
+      [varTypes.SURVEY_EDIT_TYPE_QUESTION]: action.payload,
+    };
+  }
+
+  if (action.type === actionTypes.SET_CAN_EDIT) {
+    return {
+      ...state,
+      [varTypes.SURVEY_CAN_EDIT]: !state[varTypes.SURVEY_CAN_EDIT],
+    };
   }
 
   if (action.type === actionTypes.SET_TYPE_QUESTION) {

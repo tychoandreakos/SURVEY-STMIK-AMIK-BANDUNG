@@ -15,6 +15,7 @@ import {
   RESULT_ACTION,
   SURVEY_CAN_EDIT,
   SURVEY_TYPE_QUESTION,
+  SURVEY_EDIT_TYPE_QUESTION,
 } from "../../../../../util/varTypes";
 import {
   saveMultichoiceState,
@@ -23,6 +24,7 @@ import {
   editMultiChoiceForm,
   setTypeQuestion,
   setCanEdit,
+  setTypeEditQuestion,
 } from "../../../../../Store/redux/action";
 
 import "./style.scss";
@@ -49,9 +51,11 @@ const QuestionAnsweredForm = (props) => {
     onSubmitMultiple,
     onSubmitSingleTextBox,
     onEdit,
-    setCanEdit,
+    onEditHandler,
     typeQuestion,
     setTypeQuestion,
+    editTypeQuestion,
+    onEditTypeQuestion,
   } = props;
 
   const { elementDropdown } = useContext(DropdownContext);
@@ -61,6 +65,7 @@ const QuestionAnsweredForm = (props) => {
     actionHandler,
     resultData = [],
   } = useContext(FormBuilderContext);
+
   const titleDropdown = elementDropdown
     ? elementDropdown.find((item) => {
         if (typeQuestion && item.type === typeQuestion) return true;
@@ -72,12 +77,15 @@ const QuestionAnsweredForm = (props) => {
   useEffect(() => {
     if (resultData && action) {
       setQuestionInput(capitalize(resultData.title));
+      onEditTypeQuestion(resultData.type);
     }
   }, [resultData, action]);
 
   let answeredForm;
   let actionButtonComponent;
-  const witchType = typeQuestion ?? resultData.type;
+  const witchType = checkItemExist(typeQuestion)
+    ? typeQuestion
+    : editTypeQuestion;
 
   switch (witchType) {
     case TYPE_QUESTION.MULTIPLE:
@@ -113,7 +121,7 @@ const QuestionAnsweredForm = (props) => {
 
   if (
     typeQuestion !== TYPE_QUESTION.SHORT &&
-    resultData.type !== TYPE_QUESTION.SHORT
+    editTypeQuestion !== TYPE_QUESTION.SHORT
   ) {
     actionButtonComponent = (
       <div className='action-form-builder'>
@@ -149,11 +157,12 @@ const QuestionAnsweredForm = (props) => {
       case RESULT_ACTION.EDIT:
         onEdit({
           _id: resultData._id,
-          type: typeQuestion ?? resultData.type,
+          type: editTypeQuestion,
           title: questionInput.toLowerCase(),
         });
         actionHandler();
-        setCanEdit();
+        onEditHandler();
+        onEditTypeQuestion("");
         break;
       default:
         if (typeQuestion === TYPE_QUESTION.SHORT) {
@@ -183,6 +192,10 @@ const QuestionAnsweredForm = (props) => {
 
   function capitalize(val) {
     return val.charAt(0).toUpperCase() + val.slice(1, val.length);
+  }
+
+  function checkItemExist(val) {
+    return val && val.length > 0;
   }
 
   function onCancelHandler() {
@@ -233,6 +246,7 @@ const mapStateToProps = (state) => {
   return {
     canEdit: state[SURVEY_CAN_EDIT],
     typeQuestion: state[SURVEY_TYPE_QUESTION],
+    editTypeQuestion: state[SURVEY_EDIT_TYPE_QUESTION],
   };
 };
 
@@ -244,6 +258,7 @@ const mapDispatchToProps = (dispatch) => {
     editMulti: (item) => dispatch(editMultiChoiceForm(item)),
     setTypeQuestion: (item) => dispatch(setTypeQuestion(item)),
     onEditHandler: () => dispatch(setCanEdit()),
+    onEditTypeQuestion: (item) => dispatch(setTypeEditQuestion(item)),
   };
 };
 
