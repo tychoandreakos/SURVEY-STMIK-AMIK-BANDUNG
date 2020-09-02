@@ -41,8 +41,14 @@ export function setTypeQuestion(payload) {
   };
 }
 
-export function editSurveyForm(payload) {
+export function setSurveyHeader(payload) {
+  return {
+    type: actionType.SET_SURVEY_HEADER,
+    payload,
+  };
+}
 
+export function editSurveyForm(payload) {
   return {
     type: actionType.EDIT_SURVEY_FORM,
     payload,

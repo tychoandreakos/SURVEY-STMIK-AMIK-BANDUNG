@@ -10,6 +10,10 @@ const initialState = {
   [varTypes.SURVEY_CATEGORY]: slider,
   [varTypes.SURVEY_FORM_BUILDER]: {
     title: "",
+    [varTypes.SURVEY_HEADER.TITLE]:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos nesciunt praesentium aperiam ex sapiente accusantium!",
+    [varTypes.SURVEY_HEADER.DESC]:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita quia accusamus adipisci, magni officiis dolore!",
     [varTypes.SURVEY_CATEGORY_BUILDER]: {},
     [varTypes.SURVEY_FORM_QUESTION]: [],
     [varTypes.SURVEY_FORM_COPIED]: [],
@@ -26,6 +30,18 @@ function rootReducer(state = initialState, action) {
     return {
       ...state,
       [varTypes.SURVEY_TITLE]: action.payload,
+    };
+  }
+
+  if (action.type === actionTypes.SET_SURVEY_HEADER) {
+    const { title, desc } = action.payload;
+    return {
+      ...state,
+      [varTypes.SURVEY_FORM_BUILDER]: {
+        ...state[varTypes.SURVEY_FORM_BUILDER],
+        [varTypes.SURVEY_HEADER.TITLE]: title,
+        [varTypes.SURVEY_HEADER.DESC]: desc,
+      },
     };
   }
 
