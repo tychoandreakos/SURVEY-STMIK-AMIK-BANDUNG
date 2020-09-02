@@ -1,4 +1,13 @@
 import * as actionType from "../../util/actionTypes";
+import * as sagaType from "../Sagas/types";
+
+// Redux Saga Action
+export function processingLogo(payload) {
+  return {
+    type: sagaType.PROCESSING_LOGO,
+    payload,
+  };
+}
 
 export function setTitleSurvey(payload) {
   return {
@@ -44,8 +53,8 @@ export function setTypeQuestion(payload) {
 export function setSurveyLogo(payload) {
   return {
     type: actionType.SET_SURVEY_LOGO,
-    payload
-  }
+    payload,
+  };
 }
 
 export function setSurveyHeader(payload) {

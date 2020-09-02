@@ -1,0 +1,1 @@
+export const PROCESSING_LOGO = "PROCESSING_LOGO";

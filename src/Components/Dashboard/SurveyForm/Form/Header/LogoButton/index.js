@@ -1,15 +1,17 @@
 import React, { useRef, useState, useEffect } from "react";
+import { connect } from "react-redux";
 
 import Icon from "@iconify/react";
 
 import DefaultIcon from "@iconify/icons-mdi/plus";
 
 import "./style.scss";
+import { processingLogo } from "../../../../../../Store/redux/action";
 
 const LogoButton = (props) => {
   const [image, setImage] = useState();
   const [actualImage, setActualImage] = useState();
-  const { title = "Add a Logo", icon = DefaultIcon } = props;
+  const { title = "Add a Logo", icon = DefaultIcon, processingLogo } = props;
   const inputFileRef = useRef();
 
   useEffect(() => {
@@ -19,6 +21,8 @@ const LogoButton = (props) => {
       reader.onload = () => {
         setActualImage(reader.result);
       };
+
+      processingLogo();
     }
   }, [image]);
 
@@ -65,4 +69,12 @@ const LogoButton = (props) => {
   );
 };
 
-export default LogoButton;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    processingLogo: (item) => dispatch(processingLogo(item)),
+  };
+};
+
+const LogoButtonJoinRedux = connect(null, mapDispatchToProps)(LogoButton);
+
+export default LogoButtonJoinRedux;

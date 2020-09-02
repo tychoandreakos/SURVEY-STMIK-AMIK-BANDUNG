@@ -35,6 +35,13 @@ function rootReducer(state = initialState, action) {
     };
   }
 
+  if (action.type === actionTypes.SET_SURVEY_LOGO) {
+    console.log("its working");
+    return {
+      ...state,
+    };
+  }
+
   if (action.type === actionTypes.SET_SURVEY_HEADER) {
     const { title, desc } = action.payload;
     return {
