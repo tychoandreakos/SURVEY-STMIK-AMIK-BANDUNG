@@ -41,6 +41,13 @@ export function setTypeQuestion(payload) {
   };
 }
 
+export function setSurveyLogo(payload) {
+  return {
+    type: actionType.SET_SURVEY_LOGO,
+    payload
+  }
+}
+
 export function setSurveyHeader(payload) {
   return {
     type: actionType.SET_SURVEY_HEADER,

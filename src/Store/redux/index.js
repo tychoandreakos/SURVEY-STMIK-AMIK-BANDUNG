@@ -10,6 +10,8 @@ const initialState = {
   [varTypes.SURVEY_CATEGORY]: slider,
   [varTypes.SURVEY_FORM_BUILDER]: {
     title: "",
+    [varTypes.SURVEY_LOGO]: "",
+    [varTypes.SURVEY_CATEGORY]: "",
     [varTypes.SURVEY_HEADER.TITLE]:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos nesciunt praesentium aperiam ex sapiente accusantium!",
     [varTypes.SURVEY_HEADER.DESC]:
