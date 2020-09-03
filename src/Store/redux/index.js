@@ -9,7 +9,7 @@ const initialState = {
   [varTypes.LOADER]: false,
   [varTypes.SURVEY_CATEGORY]: slider,
   [varTypes.SURVEY_FORM_BUILDER]: {
-    title: "",
+    [varTypes.SURVEY_TITLE]: "",
     [varTypes.SURVEY_LOGO]: "",
     [varTypes.SURVEY_CATEGORY]: "",
     [varTypes.SURVEY_HEADER.TITLE]:
@@ -31,7 +31,10 @@ function rootReducer(state = initialState, action) {
   if (action.type === actionTypes.SET_TITLE_SURVEY) {
     return {
       ...state,
-      [varTypes.SURVEY_TITLE]: action.payload,
+      [varTypes.SURVEY_FORM_BUILDER]: {
+        ...state[varTypes.SURVEY_FORM_BUILDER],
+        [varTypes.SURVEY_TITLE]: action.payload
+      },
     };
   }
 
