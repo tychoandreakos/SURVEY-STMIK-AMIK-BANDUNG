@@ -1,20 +1,20 @@
-$Roboto: 'Roboto', sans-serif;
+$Roboto: "Roboto", sans-serif;
 
 .breadcrumb-header {
   display: flex;
   align-items: center;
+  width: 100%;
 
   .breadcrumbs {
     display: flex;
     align-items: center;
-    width: 8rem;
     padding: 0.5rem;
 
     .icon-outer {
       display: flex;
       align-items: center;
       font: {
-        size: 1.2rem;
+        size: 1.1rem;
       }
     }
 
@@ -26,21 +26,18 @@ $Roboto: 'Roboto', sans-serif;
       margin-right: 1rem;
       cursor: pointer;
 
-      &:last-child {
-        width: 65%;
-      }
-
       .icon {
         font: {
-          size: 1.2rem;
+          size: 1rem;
         }
         display: flex;
         align-items: center;
       }
 
       h5 {
+        margin-left: 0.5rem;
         font: {
-          size: 0.98rem;
+          size: 0.95rem;
           family: $Roboto;
           weight: 400;
         }
