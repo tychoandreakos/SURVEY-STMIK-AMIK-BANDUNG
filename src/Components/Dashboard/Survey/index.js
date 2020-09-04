@@ -60,6 +60,9 @@ const Survey = () => {
         </div>
         <div className='status'>{statusRender}</div>
       </div>
+      <div className='draft-badge'>
+        <span>draft</span>
+      </div>
       {dropdownRender}
     </div>
   );

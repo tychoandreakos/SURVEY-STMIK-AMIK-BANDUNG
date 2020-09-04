@@ -14,6 +14,28 @@ $Roboto: "Roboto", sans-serif;
   transition: border 0.3s ease-in-out;
   position: relative;
 
+  .draft-badge {
+    position: absolute;
+    background: #ea4c89;
+    padding: {
+      left: 0.3rem;
+      right: 0.3rem;
+      bottom: 0.15rem;
+    }
+    color: #fff;
+    border-radius: 0.2rem;
+    left: 0;
+
+    span {
+      text-transform: uppercase;
+      font: {
+        size: 0.8rem;
+        weight: 500;
+        family: $Roboto;
+      }
+    }
+  }
+
   &:hover {
     border: 1px solid #5661b6;
   }
