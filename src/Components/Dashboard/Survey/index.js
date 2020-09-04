@@ -1,12 +1,34 @@
-import React from 'react';
+import React from "react";
 
-import './style.scss';
+import "./style.scss";
 
-import { Icon } from '@iconify/react';
-import dots from '@iconify/icons-mdi/dots-horizontal';
+import { Icon } from "@iconify/react";
+import dots from "@iconify/icons-mdi/dots-horizontal";
 
 const Survey = () => {
   const sizeDots = 30;
+  const dummy = [
+    {
+      total: 4,
+      title: "questions",
+    },
+    {
+      total: "5%",
+      title: "responses",
+    },
+    {
+      total: 4,
+      title: "comments",
+    },
+  ];
+
+  const statusRender = dummy.map((item) => (
+    <div className='status-info'>
+      <h4>{item.total}</h4>
+      <span>{item.title}</span>
+    </div>
+  ));
+
   return (
     <div className='survey'>
       <div className='first'>
@@ -20,20 +42,7 @@ const Survey = () => {
         </div>
       </div>
       <div className='second'>
-        <div className='status'>
-          <div className='status-info'>
-            <h4>3</h4>
-            <span>info</span>
-          </div>
-          <div className='status-info'>
-            <h4>5%</h4>
-            <span>Respons</span>
-          </div>
-          <div className='status-info'>
-            <h4>4</h4>
-            <span>komentar</span>
-          </div>
-        </div>
+        <div className='status'>{statusRender}</div>
         <div className='settings'>
           <Icon width={sizeDots} height={sizeDots} icon={dots} />
         </div>

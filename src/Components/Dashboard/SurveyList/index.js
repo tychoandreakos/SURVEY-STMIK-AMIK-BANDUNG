@@ -11,7 +11,7 @@ const SurveyList = (props) => {
   const { fetchSurvey } = props;
 
   useState(() => {
-    fetchSurvey();
+    const x = fetchSurvey();
   }, []);
 
   return (
