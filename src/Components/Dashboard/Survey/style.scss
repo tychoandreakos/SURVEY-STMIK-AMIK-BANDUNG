@@ -49,6 +49,45 @@ $Roboto: "Roboto", sans-serif;
 
   .second {
     padding-right: 3rem;
+
+    span {
+      text-transform: capitalize;
+      font-size: 0.9rem;
+    }
+
+    .status {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 1rem;
+      text-align: center;
+      font-family: $Roboto;
+      margin-right: 1rem;
+      font-weight: 300;
+
+      h4 {
+        font-size: 1.1rem;
+        font-weight: 400;
+      }
+    }
+
+    .settings {
+      cursor: pointer;
+      margin-right: 2rem;
+      color: #5661b6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-items: center;
+
+      span {
+        text-transform: capitalize;
+        margin-top: -0.4rem;
+        font: {
+          family: $Roboto;
+          size: 0.95rem;
+        }
+      }
+    }
   }
 
   .logo {
@@ -61,48 +100,23 @@ $Roboto: "Roboto", sans-serif;
     }
   }
 
-  .status {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 1rem;
-    text-align: center;
-    font-family: $Roboto;
-    margin-right: 1rem;
-    font-weight: 300;
-
-    h4 {
-      font-size: 1.1rem;
-      font-weight: 400;
-    }
-
-    span {
-      text-transform: capitalize;
-      font-size: 0.9rem;
-    }
-  }
-
-  .settings {
-    cursor: pointer;
-    margin-right: 2rem;
-    color: #5661b6;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-items: center;
-
-    span {
-      text-transform: capitalize;
-      margin-top: -0.4rem;
-      font: {
-        family: $Roboto;
-        size: 0.95rem;
-      }
-    }
-  }
-
   .info {
     display: flex;
     flex-direction: column;
+
+    .description {
+      display: flex;
+      width: 15rem;
+      justify-content: space-between;
+      align-items: center;
+
+      span {
+        font: {
+          family: $Roboto !important;
+          size: 0.85rem;
+        }
+      }
+    }
 
     h3 {
       text-transform: capitalize;

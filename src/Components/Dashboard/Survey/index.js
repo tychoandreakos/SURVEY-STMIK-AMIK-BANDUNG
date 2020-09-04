@@ -49,8 +49,10 @@ const Survey = () => {
         </div>
         <div className='info'>
           <h3>project slain.LTD</h3>
-          <span>dibuat: 05/20/10</span>
-          <span>tenggat: 05/20/10</span>
+          <div className='description'>
+            <span>dibuat: 05/20/10</span>
+            <span>tenggat: 05/20/10</span>
+          </div>
         </div>
       </div>
       <div className='second'>
