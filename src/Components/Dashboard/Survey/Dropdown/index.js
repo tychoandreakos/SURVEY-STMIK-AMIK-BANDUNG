@@ -2,13 +2,13 @@ import React from "react";
 
 import Icon from "@iconify/react";
 import Edit from "@iconify/icons-mdi/edit-outline";
-import Send from '@iconify/icons-mdi/send';
-import Share from "@iconify/icons-mdi/share-circle"
-import Copy from '@iconify/icons-mdi/layers'
+import Send from "@iconify/icons-mdi/send";
+import Share from "@iconify/icons-mdi/share-circle";
+import Copy from "@iconify/icons-mdi/layers";
 
 import "./style.scss";
 
-const DropdownSurveyList = () => {
+const DropdownSurveyList = (props) => {
   const dropdown = [
     {
       icon: Edit,
@@ -28,6 +28,12 @@ const DropdownSurveyList = () => {
     },
   ];
 
+  const { dropdownHandler } = props;
+
+  const disabledDropdownHandler = () => {
+    dropdownHandler();
+  };
+
   const dropdownRender = dropdown.map((item) => (
     <li>
       <div className='icon'>
@@ -37,7 +43,15 @@ const DropdownSurveyList = () => {
     </li>
   ));
 
-  return <ul className='survey-list-dropdown'>{dropdownRender}</ul>;
+  return (
+    <>
+      <ul className='survey-list-dropdown'>{dropdownRender}</ul>
+      <div
+        onClick={disabledDropdownHandler}
+        className='backdrop-survey-list'
+      ></div>
+    </>
+  );
 };
 
 export default DropdownSurveyList;

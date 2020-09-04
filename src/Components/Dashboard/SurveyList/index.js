@@ -22,6 +22,9 @@ const SurveyList = (props) => {
       </div>
       <div className='survey-list-survey'>
         <Survey />
+        <Survey />
+        <Survey />
+        <Survey />
       </div>
       <div className='count'>
         <span>Showing 2 of 2 total surveys. </span>

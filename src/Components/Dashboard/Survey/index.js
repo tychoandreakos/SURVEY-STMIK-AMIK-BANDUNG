@@ -24,6 +24,7 @@ const Survey = () => {
   ];
 
   const [dropdown, setDropdown] = useState(false);
+  const [draft, setDraft] = useState(true);
 
   const dropdownHandler = () => {
     setDropdown(!dropdown);
@@ -31,7 +32,7 @@ const Survey = () => {
 
   let dropdownRender;
   if (dropdown) {
-    dropdownRender = <DropdownSurveyList />;
+    dropdownRender = <DropdownSurveyList dropdownHandler={dropdownHandler} />;
   }
 
   const statusRender = dummy.map((item) => (
@@ -40,6 +41,15 @@ const Survey = () => {
       <span>{item.title}</span>
     </div>
   ));
+
+  let draftBadgeRender;
+  if (draft) {
+    draftBadgeRender = (
+      <div className='draft-badge'>
+        <span>draft</span>
+      </div>
+    );
+  }
 
   return (
     <div className='survey'>
@@ -62,9 +72,7 @@ const Survey = () => {
         </div>
         <div className='status'>{statusRender}</div>
       </div>
-      <div className='draft-badge'>
-        <span>draft</span>
-      </div>
+      {draftBadgeRender}
       {dropdownRender}
     </div>
   );
