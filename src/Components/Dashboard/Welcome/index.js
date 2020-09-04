@@ -1,39 +1,40 @@
-import React from 'react';
+import React from "react";
 
-import plus from '@iconify/icons-mdi/plus';
-import Panel from '../Panel';
+import plus from "@iconify/icons-mdi/plus";
+import Panel from "../Panel";
 
-import './style.scss';
+import "./style.scss";
 
 const Welcome = () => {
   const welcomeText =
-    'Selamat Datang kembali, Rani Mulyani. Mau buat survey apa hari ini?';
-  const descText = 'Thousand now adware removal never though the could';
-  const start = 'ayo mulai, ';
+    "Selamat Datang kembali, Rani Mulyani. Mau buat survey apa hari ini?";
+  const descText =
+    "Art is the proper task of life - Friedrich Nietzsche.";
+  const start = "lets begin, ";
 
   const panelState = [
     {
       icon: plus,
-      title: 'buat survey',
-      desc: 'rancang survey sekarang juga',
+      title: "create survey",
+      desc: "design your survey now!",
       active: true,
     },
     {
       icon: 20,
-      title: 'open',
-      desc: 'Survey dalam proses',
+      title: "open surveys",
+      desc: "the total amount of surveys you have been created & still opened",
       active: false,
     },
     {
       icon: 20,
-      title: 'total survey',
-      desc: 'hasil seluruh survey yang telah kamu buat',
+      title: "total surveys",
+      desc: "the total amount of surveys you have been created",
       active: false,
     },
     {
       icon: 20,
-      title: 'total respons',
-      desc: 'hasil seluruh respons dari surveymu',
+      title: "total responses",
+      desc: "the total amount of responses or feedback you get",
       active: false,
     },
   ];

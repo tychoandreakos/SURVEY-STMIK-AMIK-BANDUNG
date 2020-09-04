@@ -1,20 +1,56 @@
-$Merriweather: 'Merriweather', sans-serif;
+$Merriweather: "Merriweather", sans-serif;
+$Roboto: "Roboto", sans-serif;
 
 #survey-list {
   margin-top: 2rem;
   padding: 0 1.2rem;
+
+  .count {
+    margin-left: 1.5rem;
+    color: #686f7a;
+    font: {
+      family: $Roboto;
+      size: 0.9rem;
+    }
+  }
 
   .survey-list-survey {
     padding: 0 0.9rem;
     margin-top: 1rem;
   }
 
-  .title {
-    color: #274472;
-    text-transform: capitalize;
-    font: {
-      size: 1.2rem;
-      family: $Merriweather;
+  .header-survey-list {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: {
+      right: 2.5rem;
+      left: 0.3rem;
+    }
+
+    span {
+      cursor: pointer;
+      color: #6e6d7a;
+      font: {
+        family: $Roboto;
+        size: 0.87rem;
+      }
+      text-transform: capitalize;
+      transition: color 0.3s ease-out;
+
+      &:hover {
+        color: #000;
+      }
+    }
+
+    .title {
+      color: #274472;
+      text-transform: capitalize;
+      font: {
+        size: 1.2rem;
+        family: $Merriweather;
+      }
     }
   }
 }

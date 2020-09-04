@@ -16,9 +16,15 @@ const SurveyList = (props) => {
 
   return (
     <div id='survey-list'>
-      <h3 className='title'>Recent Survey</h3>
+      <div className='header-survey-list'>
+        <h3 className='title'>Recent Survey</h3>
+        <span>see all 5 surveys</span>
+      </div>
       <div className='survey-list-survey'>
         <Survey />
+      </div>
+      <div className='count'>
+        <span>Showing 2 of 2 total surveys. </span>
       </div>
     </div>
   );
