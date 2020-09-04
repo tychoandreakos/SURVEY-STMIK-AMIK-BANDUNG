@@ -61,14 +61,15 @@ $Nunito: "Nunito", sans-serif;
 
   .content {
     display: grid;
-    grid-template-columns: 75% auto;
+    grid-template-columns: 100% auto;
 
     .right {
       // background: #5661b6;
     }
     .left {
-      overflow-y: scroll;
-      height: 25rem;
+      overflow-y: auto;
+      height: 24.8rem;
+      margin-bottom: 3rem;
 
       .logo {
         width: 175px;
