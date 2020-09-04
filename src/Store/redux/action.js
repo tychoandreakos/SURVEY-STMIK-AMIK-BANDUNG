@@ -9,6 +9,13 @@ export function processingLogo(payload) {
   };
 }
 
+export function fetchSurvey() {
+  return {
+    type: sagaType.FETCH_SURVEY,
+  };
+}
+
+//
 export function setTitleSurvey(payload) {
   return {
     type: actionType.SET_TITLE_SURVEY,

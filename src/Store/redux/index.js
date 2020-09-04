@@ -6,6 +6,10 @@ const initialState = {
   [varTypes.SURVEY_CAN_EDIT]: false,
   [varTypes.SURVEY_EDIT_TYPE_QUESTION]: "",
   [varTypes.SURVEY_TYPE_QUESTION]: "",
+  [varTypes.SURVEY_LIST]: {
+    [varTypes.SURVEY_LIST.SURVEY_LIST_SUCCESS]: {},
+    [varTypes.SURVEY_LIST.SURVEY_LIST_ERROR]: {},
+  },
   [varTypes.LOADER]: false,
   [varTypes.SURVEY_CATEGORY]: slider,
   [varTypes.SURVEY_FORM_BUILDER]: {
@@ -33,9 +37,19 @@ function rootReducer(state = initialState, action) {
       ...state,
       [varTypes.SURVEY_FORM_BUILDER]: {
         ...state[varTypes.SURVEY_FORM_BUILDER],
-        [varTypes.SURVEY_TITLE]: action.payload
+        [varTypes.SURVEY_TITLE]: action.payload,
       },
     };
+  }
+
+  if (action.type === actionTypes.FETCH_SURVEY_SUCCESS) {
+    console.log(payload);
+    return state;
+  }
+
+  if (action.type === actionTypes.FETCH_SURVEY_FAILED) {
+    console.log(payload);
+    return state;
   }
 
   if (action.type === actionTypes.SET_SURVEY_LOGO) {

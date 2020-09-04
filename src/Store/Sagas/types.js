@@ -1,1 +1,2 @@
 export const PROCESSING_LOGO = "PROCESSING_LOGO";
+export const FETCH_SURVEY = "FETCH_SURVEY";

@@ -2,9 +2,26 @@ import { takeLatest, put, call } from "redux-saga/effects";
 
 import * as types from "./types";
 import * as actionTypes from "../../util/actionTypes";
+import * as api from "../Api";
 
 export default function* rootSaga() {
   yield takeLatest(types.PROCESSING_LOGO, watchProcessingLogo);
+  yield takeLatest(types.FETCH_SURVEY, watchFetchSurvey);
+}
+
+function* watchFetchSurvey() {
+  try {
+    const { data } = yield call(api.fetchSurvey);
+    yield put({
+      type: actionTypes.FETCH_SURVEY_SUCCESS,
+      payload: data,
+    });
+  } catch (e) {
+    yield put({
+      type: actionTypes.FETCH_SURVEY_FAILED,
+      payload: e.message,
+    });
+  }
 }
 
 function* watchProcessingLogo(payload) {
