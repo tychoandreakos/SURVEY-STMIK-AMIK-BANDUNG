@@ -8,6 +8,10 @@ $Roboto: "Roboto", sans-serif;
   align-items: center;
   transition: background 0.2s ease-in;
 
+  &:first-child {
+    margin-top: 1.5rem;
+  }
+
   &:hover {
     background: rgba(216, 218, 240, 0.5);
   }

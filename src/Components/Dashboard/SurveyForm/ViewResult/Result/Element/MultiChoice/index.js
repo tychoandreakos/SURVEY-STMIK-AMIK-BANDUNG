@@ -2,6 +2,8 @@ import React from "react";
 
 import Choice from "./Choice";
 
+import './style.scss'
+
 const MultiChoice = (props) => {
   const { number } = props;
   return (

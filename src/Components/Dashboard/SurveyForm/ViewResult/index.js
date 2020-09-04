@@ -4,8 +4,8 @@ import Icon from "@iconify/react";
 import Monitor from "@iconify/icons-mdi/monitor";
 import Phone from "@iconify/icons-mdi/smartphone-android";
 import Tablet from "@iconify/icons-mdi/tablet-ipad";
-import Classic from "@iconify/icons-mdi/parasol";
-import NewFormat from "@iconify/icons-mdi/grid";
+import Classic from "@iconify/icons-mdi/format-list-bulleted";
+import NewFormat from "@iconify/icons-mdi/format-line-weight";
 
 import ResultWrapper from "./Result/ResultWrapper";
 
@@ -26,10 +26,10 @@ const ViewResult = () => {
 
   const format = [
     {
-      icon: NewFormat,
+      icon: Classic,
     },
     {
-      icon: Classic,
+      icon: NewFormat,
     },
   ];
 
