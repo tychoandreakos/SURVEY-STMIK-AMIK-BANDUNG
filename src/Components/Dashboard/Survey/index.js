@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
-import "./style.scss";
-
+import DropdownSurveyList from "./Dropdown";
 import { Icon } from "@iconify/react";
 import dots from "@iconify/icons-mdi/dots-horizontal";
+
+import "./style.scss";
 
 const Survey = () => {
   const sizeDots = 30;
@@ -21,6 +22,17 @@ const Survey = () => {
       title: "comments",
     },
   ];
+
+  const [dropdown, setDropdown] = useState(false);
+
+  const dropdownHandler = () => {
+    setDropdown(!dropdown);
+  };
+
+  let dropdownRender;
+  if (dropdown) {
+    dropdownRender = <DropdownSurveyList />;
+  }
 
   const statusRender = dummy.map((item) => (
     <div className='status-info'>
@@ -42,11 +54,13 @@ const Survey = () => {
         </div>
       </div>
       <div className='second'>
-        <div className='status'>{statusRender}</div>
-        <div className='settings'>
+        <div onClick={dropdownHandler} className='settings'>
           <Icon width={sizeDots} height={sizeDots} icon={dots} />
+          <span>options</span>
         </div>
+        <div className='status'>{statusRender}</div>
       </div>
+      {dropdownRender}
     </div>
   );
 };
