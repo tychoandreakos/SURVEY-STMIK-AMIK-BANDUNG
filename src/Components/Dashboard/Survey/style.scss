@@ -106,14 +106,14 @@ $Roboto: "Roboto", sans-serif;
 
     .description {
       display: flex;
-      width: 15rem;
-      justify-content: space-between;
+      width: 10rem;
+      justify-content: space-around;
       align-items: center;
 
       span {
         font: {
           family: $Roboto !important;
-          size: 0.85rem;
+          size: 0.86rem;
         }
       }
     }
