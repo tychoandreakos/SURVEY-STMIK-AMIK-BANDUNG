@@ -7,6 +7,8 @@ import Tablet from "@iconify/icons-mdi/tablet-ipad";
 import Classic from "@iconify/icons-mdi/parasol";
 import NewFormat from "@iconify/icons-mdi/grid";
 
+import ResultWrapper from "./Result/ResultWrapper";
+
 import "./style.scss";
 
 const ViewResult = () => {
@@ -59,6 +61,7 @@ const ViewResult = () => {
               ipsam esse doloremque soluta commodi, ea magnam?
             </span>
           </div>
+          {<ResultWrapper />}
         </div>
         <div className='right'></div>
       </div>

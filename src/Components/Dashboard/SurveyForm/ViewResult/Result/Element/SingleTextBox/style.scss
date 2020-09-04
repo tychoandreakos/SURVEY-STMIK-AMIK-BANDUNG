@@ -1,0 +1,27 @@
+$Roboto: "Roboto", sans-serif;
+
+.single-textbox {
+  padding: 0.5rem;
+  user-select: none;
+  cursor: default;
+
+  span {
+    font: {
+      family: $Roboto;
+      size: 1.1rem;
+    }
+  }
+
+  .placeholder {
+    margin-top: 1rem;
+    width: 100%;
+    background: #ebebeb;
+    margin-bottom: 2rem;
+    border: none;
+    padding: 0.5rem;
+    resize: none;
+    font: {
+      family: $Roboto;
+    }
+  }
+}

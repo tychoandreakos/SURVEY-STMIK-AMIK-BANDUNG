@@ -64,10 +64,12 @@ $Nunito: "Nunito", sans-serif;
     grid-template-columns: 75% auto;
 
     .right {
-      background: #5661b6;
+      // background: #5661b6;
     }
     .left {
-      overflow: auto;
+      overflow-y: scroll;
+      height: 25rem;
+
       .logo {
         width: 175px;
         height: 175px;
@@ -79,12 +81,15 @@ $Nunito: "Nunito", sans-serif;
 
       .header {
         padding: 0 1.5rem;
+        user-select: none;
+        cursor: default;
 
         .description {
           display: inline-block;
+          color: #686f7a;
           font: {
-            family: $Nunito;
-            size: 1.1rem;
+            family: $Roboto;
+            size: 1rem;
           }
         }
 
