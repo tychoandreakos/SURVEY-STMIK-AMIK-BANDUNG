@@ -1,19 +1,35 @@
-import React from 'react';
+import React from "react";
+import { connect } from "react-redux";
 
-import Survey from '../Survey';
+import Survey from "../Survey";
+import { fetchSurvey } from "../../../Store/redux/action";
 
-import './style.scss';
+import "./style.scss";
+import { useState } from "react";
 
-const SurveyList = () => {
+const SurveyList = (props) => {
+  const { fetchSurvey } = props;
+
+  useState(() => {
+    fetchSurvey();
+  }, []);
+
   return (
     <div id='survey-list'>
-      <h3 className="title">Recent Survey</h3>
+      <h3 className='title'>Recent Survey</h3>
       <div className='survey-list-survey'>
-        <Survey />
         <Survey />
       </div>
     </div>
   );
 };
 
-export default SurveyList;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchSurvey: () => dispatch(fetchSurvey()),
+  };
+};
+
+const SurveyListJoinRedux = connect(null, mapDispatchToProps)(SurveyList);
+
+export default SurveyListJoinRedux;

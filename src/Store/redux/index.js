@@ -43,12 +43,12 @@ function rootReducer(state = initialState, action) {
   }
 
   if (action.type === actionTypes.FETCH_SURVEY_SUCCESS) {
-    console.log(payload);
+    console.log(action.payload);
     return state;
   }
 
   if (action.type === actionTypes.FETCH_SURVEY_FAILED) {
-    console.log(payload);
+    console.log(action.payload);
     return state;
   }
 
