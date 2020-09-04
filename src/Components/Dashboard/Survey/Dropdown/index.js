@@ -5,6 +5,7 @@ import Edit from "@iconify/icons-mdi/edit-outline";
 import Send from "@iconify/icons-mdi/send";
 import Share from "@iconify/icons-mdi/share-circle";
 import Copy from "@iconify/icons-mdi/layers";
+import Delete from "@iconify/icons-mdi/trash-can";
 
 import "./style.scss";
 
@@ -25,6 +26,10 @@ const DropdownSurveyList = (props) => {
     {
       icon: Copy,
       title: "Make a Copy",
+    },
+    {
+      icon: Delete,
+      title: "Delete",
     },
   ];
 
