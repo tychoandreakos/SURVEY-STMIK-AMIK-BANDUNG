@@ -11,7 +11,11 @@ import Loading from "react-loading";
 
 import { setTitleSurvey, triggerLoader } from "../../../../Store/redux/action";
 import Textarea from "react-expanding-textarea";
-import { SURVEY_TITLE, LOADER } from "../../../../util/varTypes";
+import {
+  SURVEY_TITLE,
+  LOADER,
+  SURVEY_FORM_BUILDER,
+} from "../../../../util/varTypes";
 
 import Slider from "../Slider";
 
@@ -143,7 +147,7 @@ const MainCreateSurvey = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    titleState: state[SURVEY_TITLE],
+    titleState: state[SURVEY_FORM_BUILDER][SURVEY_TITLE],
   };
 };
 
