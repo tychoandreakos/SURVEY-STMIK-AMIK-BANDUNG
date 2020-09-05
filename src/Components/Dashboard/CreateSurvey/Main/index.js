@@ -61,6 +61,12 @@ const MainCreateSurvey = (props) => {
     return val.toUpperCase(val);
   };
 
+  const enterHandler = (e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+    }
+  };
+
   const titleHandler = (e) => {
     if (title.length < 1) {
       setTitle(capitalize(e.target.value));
@@ -123,6 +129,7 @@ const MainCreateSurvey = (props) => {
             ref={titleRef}
             placeholder={placeholder}
             className='main-title'
+            onKeyDown={enterHandler}
             value={title}
             onChange={titleHandler}
           />

@@ -26,6 +26,12 @@ const SurveyHeaderForm = (props) => {
     setHeadTitle(e.target.value);
   };
 
+  const enterHandler = (e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+    }
+  };
+
   const titleSave = () => {
     addTitle(headTitle);
   };
@@ -53,6 +59,7 @@ const SurveyHeaderForm = (props) => {
         </div>
         <h2 className='title'>
           <TextArea
+            onKeyDown={enterHandler}
             value={headTitle}
             onChange={headTitleHandler}
             onBlur={titleSave}
