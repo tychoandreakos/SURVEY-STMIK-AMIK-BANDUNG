@@ -1,5 +1,7 @@
 import React, { lazy, Suspense } from "react";
 
+import FooterResult from "../Footer";
+
 import "./style.scss";
 
 const SingleTextBox = lazy(() => import("../Element/SingleTextBox"));
@@ -13,6 +15,7 @@ const MainViewResult = () => {
         <SingleTextBox number='2' />
         <MultiChoice number='3' />
       </Suspense>
+      <FooterResult />
     </div>
   );
 };
