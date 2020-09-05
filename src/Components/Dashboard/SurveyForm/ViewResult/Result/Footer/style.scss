@@ -39,11 +39,13 @@ $Roboto: "Roboto", sans-serif;
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
-      
+      cursor: pointer;
     }
 
     span {
       color: #686f7a;
+      user-select: none;
+      cursor: default;
       font: {
         family: $Roboto;
         size: 0.8rem;
