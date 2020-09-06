@@ -9,7 +9,7 @@ import {
   SURVEY_FORM_BUILDER,
   TYPE_QUESTION,
 } from "../../../../../../util/varTypes";
-import { useEffect } from "react";
+
 const SingleTextBox = lazy(() => import("../Element/SingleTextBox"));
 const MultiChoice = lazy(() => import("../Element/MultiChoice"));
 
@@ -55,6 +55,8 @@ const MainViewResult = (props) => {
             multiChoiceHandler={multiChoiceHandler}
           />
         );
+      default:
+        return item;
     }
   });
 

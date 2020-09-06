@@ -1,17 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import Survey from "../Survey";
 import { fetchSurvey } from "../../../Store/redux/action";
 
 import "./style.scss";
-import { useState } from "react";
-
 const SurveyList = (props) => {
   const { fetchSurvey } = props;
 
-  useState(() => {
-    const x = fetchSurvey();
+  useEffect(() => {
+    fetchSurvey();
   }, []);
 
   return (
