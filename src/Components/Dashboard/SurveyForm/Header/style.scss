@@ -46,9 +46,17 @@ $Roboto: "Roboto", sans-serif;
       align-items: center;
       background: #ea4c89;
       padding: 0.7rem 1rem;
-      border-radius: 0.8rem;
+      border-radius: 0.3rem;
       cursor: pointer;
       box-shadow: 0 7px 20px rgba(0, 0, 0, 0.15);
+      border: none;
+      color: #fff;
+      transition: background 0.3s ease-in;
+
+      &:disabled {
+        background: rgb(172, 56, 100);
+        cursor: default;
+      }
 
       span {
         margin-left: 0.8rem;

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { SURVEY_TITLE, SURVEY_FORM_BUILDER } from "../../../../util/varTypes";
+import {
+  SURVEY_TITLE,
+  SURVEY_FORM_BUILDER,
+  SURVEY_FORM_QUESTION,
+} from "../../../../util/varTypes";
 import { withRouter } from "react-router-dom";
 
 import Icon from "@iconify/react";
@@ -16,11 +20,18 @@ import { setTitleSurvey } from "../../../../Store/redux/action";
 
 const SurveyHeaderForm = (props) => {
   const [headTitle, setHeadTitle] = useState("");
-  const { title, history, match, addTitle } = props;
+  const [viewResult, setViewResult] = useState(false);
+  const { title, history, match, addTitle, surveyList } = props;
   useEffect(() => {
     if (title) setHeadTitle(title);
     // else history.push('/create')
   }, [title]);
+  useEffect(() => {
+    if (headTitle.length > 5 && !viewResult && surveyList.length >= 3)
+      setViewResult(true);
+    if (headTitle.length < 5 && viewResult && surveyList.length <= 3)
+      setViewResult(false);
+  }, [headTitle, viewResult, surveyList]);
   const placeholderText = "Survey Title";
   const headTitleHandler = (e) => {
     setHeadTitle(e.target.value);
@@ -41,7 +52,9 @@ const SurveyHeaderForm = (props) => {
   };
 
   const viewResultHandler = () => {
-    history.push("/create/survey-form/view");
+    if (viewResult) {
+      history.push("/create/survey-form/view");
+    }
   };
 
   return (
@@ -66,12 +79,16 @@ const SurveyHeaderForm = (props) => {
             placeholder={placeholderText}
           />
         </h2>
-        <div onClick={viewResultHandler} className='btn-result'>
+        <button
+          disabled={!viewResult}
+          onClick={viewResultHandler}
+          className='btn-result'
+        >
           <div className='icon'>
             <Icon icon={Eye} />
           </div>
           <span>View Result</span>
-        </div>
+        </button>
       </div>
     </div>
   );
@@ -80,6 +97,7 @@ const SurveyHeaderForm = (props) => {
 const mapStateToProps = (state) => {
   return {
     title: state[SURVEY_FORM_BUILDER][SURVEY_TITLE],
+    surveyList: state[SURVEY_FORM_BUILDER][SURVEY_FORM_QUESTION],
   };
 };
 
