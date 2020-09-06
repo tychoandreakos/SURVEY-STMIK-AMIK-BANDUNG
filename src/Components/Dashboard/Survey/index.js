@@ -5,8 +5,9 @@ import { Icon } from "@iconify/react";
 import dots from "@iconify/icons-mdi/dots-horizontal";
 
 import "./style.scss";
+import { useEffect } from "react";
 
-const Survey = () => {
+const Survey = (props) => {
   const sizeDots = 30;
   const dummy = [
     {
@@ -23,8 +24,18 @@ const Survey = () => {
     },
   ];
 
+  const { title, logo, status, createdAt, modifiedAt } = props;
   const [dropdown, setDropdown] = useState(false);
-  const [draft, setDraft] = useState(true);
+  const [draft, setDraft] = useState(false);
+  const dateFormat = (val) => {
+    return val.split("T")[0].split("-").join("/");
+  };
+
+  useEffect(() => {
+    if (status === "true") {
+      setDraft(true);
+    }
+  }, []);
 
   const dropdownHandler = () => {
     setDropdown(!dropdown);
@@ -58,10 +69,10 @@ const Survey = () => {
           <div className='logo-wrapper'></div>
         </div>
         <div className='info'>
-          <h3>project slain.LTD</h3>
+          <h3>{title}</h3>
           <div className='description'>
-            <span>created: 05/20/10</span>
-            <span>modified: 05/20/10</span>
+            <span>created: {dateFormat(createdAt)}</span>
+            <span>modified: {dateFormat(modifiedAt)}</span>
           </div>
         </div>
       </div>
