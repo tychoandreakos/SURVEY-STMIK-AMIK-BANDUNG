@@ -5,60 +5,6 @@ $Nunito: "Nunito", sans-serif;
   padding: 2rem;
   position: relative;
 
-  .footer-handler {
-    position: fixed;
-    bottom: 1rem;
-    width: 80%;
-    background: #fff;
-    padding: 0.5rem 1rem;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    span {
-      text-transform: capitalize;
-      font: {
-        family: $Roboto;
-        size: 0.94rem;
-        weight: 500;
-      }
-    }
-
-    .icon-list {
-      margin-left: 1rem;
-      display: flex;
-
-      .icon {
-        color: #686f7a;
-        margin-right: 1rem;
-        cursor: pointer;
-        font: {
-          size: 1.7rem;
-        }
-        transition: 0.2s color ease;
-
-        &:hover {
-          color: #5661b6;
-        }
-
-        &:first-child {
-          color: #5661b6;
-        }
-      }
-    }
-
-    .format {
-      display: flex;
-      align-items: center;
-    }
-
-    .device {
-      display: flex;
-      align-items: center;
-    }
-  }
-
   .content {
     display: grid;
     grid-template-columns: 100% auto;
@@ -93,7 +39,7 @@ $Nunito: "Nunito", sans-serif;
           width: 90%;
           font: {
             family: $Roboto;
-            size: 1.2rem;
+            size: 1.15rem;
           }
         }
 
@@ -102,7 +48,7 @@ $Nunito: "Nunito", sans-serif;
           margin-bottom: 0.5rem;
           font: {
             family: $Roboto;
-            size: 1.9rem;
+            size: 1.75rem;
           }
         }
       }

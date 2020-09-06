@@ -1,49 +1,18 @@
 import React from "react";
 
-import Icon from "@iconify/react";
-import Monitor from "@iconify/icons-mdi/monitor";
-import Phone from "@iconify/icons-mdi/smartphone-android";
-import Tablet from "@iconify/icons-mdi/tablet-ipad";
-import Classic from "@iconify/icons-mdi/format-list-bulleted";
-import NewFormat from "@iconify/icons-mdi/format-line-weight";
+import { connect } from "react-redux";
 
+import Device from "./Device";
 import ResultWrapper from "./Result/ResultWrapper";
 
 import "./style.scss";
+import {
+  SURVEY_FORM_BUILDER,
+  SURVEY_FORM_QUESTION,
+} from "../../../../util/varTypes";
 
-const ViewResult = () => {
-  const deviceView = [
-    {
-      icon: Monitor,
-    },
-    {
-      icon: Phone,
-    },
-    {
-      icon: Tablet,
-    },
-  ];
-
-  const format = [
-    {
-      icon: Classic,
-    },
-    {
-      icon: NewFormat,
-    },
-  ];
-
-  const renderDeviceView = deviceView.map((item) => (
-    <div className='icon'>
-      <Icon icon={item.icon} />
-    </div>
-  ));
-
-  const renderSurveyFormat = format.map((item) => (
-    <div className='icon'>
-      <Icon icon={item.icon} />
-    </div>
-  ));
+const ViewResult = (props) => {
+  const { surveyList } = props;
 
   return (
     <div className='view-result'>
@@ -61,22 +30,21 @@ const ViewResult = () => {
               ipsam esse doloremque soluta commodi, ea magnam?
             </span>
           </div>
-          {<ResultWrapper />}
+          <ResultWrapper />
         </div>
         <div className='right'></div>
       </div>
-      <div className='footer-handler'>
-        <div className='device'>
-          <span>device view</span>
-          <div className='icon-list'>{renderDeviceView}</div>
-        </div>
-        <div className='format'>
-          <span>survey format</span>
-          <div className='icon-list'>{renderSurveyFormat}</div>
-        </div>
-      </div>
+      <Device />
     </div>
   );
 };
 
-export default ViewResult;
+const mapStateToProps = (state) => {
+  return {
+    surveyList: state[SURVEY_FORM_BUILDER][SURVEY_FORM_QUESTION],
+  };
+};
+
+const ViewResultJoinRedux = connect(mapStateToProps)(ViewResult);
+
+export default ViewResultJoinRedux;
