@@ -42,6 +42,17 @@ function rootReducer(state = initialState, action) {
     };
   }
 
+  if(action.type === actionTypes.STORE_SURVEY_SUCCESS) {
+    const data = state[varTypes.SURVEY_FORM_BUILDER][varTypes.SURVEY_FORM_QUESTION]
+    console.log(data);
+    return state;
+  }
+
+  if(action.type === actionTypes.STORE_SURVEY_FAILED) {
+    console.log('store survey failed')
+    return state;
+  }
+
   if (action.type === actionTypes.FETCH_SURVEY_SUCCESS) {
     return {
       ...state,

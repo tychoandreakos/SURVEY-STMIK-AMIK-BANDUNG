@@ -7,6 +7,7 @@ import * as api from "../Api";
 export default function* rootSaga() {
   yield takeLatest(types.PROCESSING_LOGO, watchProcessingLogo);
   yield takeLatest(types.FETCH_SURVEY, watchFetchSurvey);
+  yield takeLatest(types.STORE_SURVEY, watchStoreSurvey);
 }
 
 function* watchFetchSurvey() {
@@ -19,6 +20,21 @@ function* watchFetchSurvey() {
   } catch (e) {
     yield put({
       type: actionTypes.FETCH_SURVEY_FAILED,
+      payload: e.message,
+    });
+  }
+}
+
+function* watchStoreSurvey() {
+  try {
+    const { data } = yield call(api.storeSurvey);
+    yield put({
+      type: actionTypes.STORE_SURVEY_SUCCESS,
+      payload: data,
+    });
+  } catch (e) {
+    yield put({
+      type: actionTypes.STORE_SURVEY_FAILED,
       payload: e.message,
     });
   }

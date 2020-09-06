@@ -15,6 +15,15 @@ const client = axios.create({
 /**
  * Survey API
  */
+
+const URI = {
+  SURVEY: "/survey",
+};
+
 export function fetchSurvey() {
-  return client.get("/survey");
+  return client.get(URI.SURVEY);
+}
+
+export function storeSurvey() {
+  return client.post(URI.SURVEY);
 }
