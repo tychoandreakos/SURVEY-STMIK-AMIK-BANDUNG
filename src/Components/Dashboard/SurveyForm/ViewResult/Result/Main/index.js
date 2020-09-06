@@ -14,6 +14,7 @@ const MainViewResult = () => {
         <SingleTextBox number='1' />
         <SingleTextBox number='2' />
         <MultiChoice number='3' />
+        <MultiChoice number='4' />
       </Suspense>
       <FooterResult />
     </div>
