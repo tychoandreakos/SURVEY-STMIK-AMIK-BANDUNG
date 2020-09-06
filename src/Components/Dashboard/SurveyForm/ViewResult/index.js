@@ -1,6 +1,7 @@
 import React from "react";
 
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import Device from "./Device";
 import ResultWrapper from "./Result/ResultWrapper";
@@ -10,9 +11,16 @@ import {
   SURVEY_FORM_BUILDER,
   SURVEY_FORM_QUESTION,
 } from "../../../../util/varTypes";
+import { useEffect } from "react";
 
 const ViewResult = (props) => {
-  const { surveyList } = props;
+  const { surveyList, history } = props;
+
+  useEffect(() => {
+    if (surveyList.length < 1) {
+      history.push("/create/survey-form");
+    }
+  }, []);
 
   return (
     <div className='view-result'>
@@ -45,6 +53,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const ViewResultJoinRedux = connect(mapStateToProps)(ViewResult);
+const mapWithRouterToProps = withRouter(ViewResult);
+const ViewResultJoinRedux = connect(mapStateToProps)(mapWithRouterToProps);
 
 export default ViewResultJoinRedux;

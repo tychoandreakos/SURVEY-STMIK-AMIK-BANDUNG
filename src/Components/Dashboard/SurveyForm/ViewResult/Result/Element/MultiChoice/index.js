@@ -2,30 +2,27 @@ import React from "react";
 
 import Choice from "./Choice";
 
-import './style.scss'
+import "./style.scss";
 
 const MultiChoice = (props) => {
-  const { number } = props;
+  const { number, title, data } = props;
+  const choiceRender = data.map((item) => (
+    <Choice
+      key={item._id}
+      selected={item.selected}
+      title={uppercase(item.title)}
+    />
+  ));
+
+  function uppercase(val) {
+    return val.charAt(0).toUpperCase() + val.slice(1);
+  }
   return (
     <div className='multichoice-view'>
       <span className='title-view'>
-        {number}. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Tempora iste magni nisi pariatur tenetur sit.
+        {number}. {title}
       </span>
-      <div className='choices'>
-        <Choice
-          selected={false}
-          title={"Lorem ipsum dolor sit amet consectetur"}
-        />
-        <Choice
-          selected={false}
-          title={"Lorem ipsum dolor sit amet consectetur"}
-        />
-        <Choice
-          selected={false}
-          title={"Lorem ipsum dolor sit amet consectetur"}
-        />
-      </div>
+      <div className='choices'>{choiceRender}</div>
     </div>
   );
 };
