@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import { connect } from "react-redux";
 
 import FooterResult from "../Footer";
@@ -9,16 +9,35 @@ import {
   SURVEY_FORM_BUILDER,
   TYPE_QUESTION,
 } from "../../../../../../util/varTypes";
-
+import { useEffect } from "react";
 const SingleTextBox = lazy(() => import("../Element/SingleTextBox"));
 const MultiChoice = lazy(() => import("../Element/MultiChoice"));
 
 const MainViewResult = (props) => {
   const { surveyList } = props;
+  const [survey, setSurvey] = useState(surveyList);
 
-  useEffect(() => console.log(surveyList), []);
+  const multiChoiceHandler = (_id, choiceId) => {
+    const newVal = survey
+      .find((item) => item._id === _id)
+      .item.map((item) => {
+        if (item.selected && item._id !== choiceId) item.selected = false;
+        if (!item.selected && item._id === choiceId) item.selected = true;
 
-  const renderEl = surveyList.map((item, index) => {
+        return item;
+      });
+
+    const newSurvey = survey.map((item) => {
+      if (item._id === newVal._id) {
+        item = newVal;
+      }
+      return item;
+    });
+
+    setSurvey(newSurvey);
+  };
+
+  const renderEl = survey.map((item, index) => {
     const number = index + 1;
     switch (item.type) {
       case TYPE_QUESTION.SHORT:
@@ -29,9 +48,11 @@ const MainViewResult = (props) => {
         return (
           <MultiChoice
             key={item._id}
+            _id={item._id}
             title={item.title}
             data={item.item}
             number={number}
+            multiChoiceHandler={multiChoiceHandler}
           />
         );
     }

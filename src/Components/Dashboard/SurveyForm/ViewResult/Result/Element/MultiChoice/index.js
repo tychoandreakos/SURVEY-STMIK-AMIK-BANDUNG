@@ -5,12 +5,15 @@ import Choice from "./Choice";
 import "./style.scss";
 
 const MultiChoice = (props) => {
-  const { number, title, data } = props;
+  const { number, title, _id, data, multiChoiceHandler } = props;
   const choiceRender = data.map((item) => (
     <Choice
       key={item._id}
+      choiceId={item._id}
+      _id={_id}
       selected={item.selected}
       title={uppercase(item.title)}
+      multiChoiceHandler={multiChoiceHandler}
     />
   ));
 

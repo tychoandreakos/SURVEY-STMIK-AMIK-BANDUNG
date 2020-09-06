@@ -23,6 +23,13 @@ export function setTitleSurvey(payload) {
   };
 }
 
+export function editSelectedMultiChoice(payload) {
+  return {
+    type: actionType.EDIT_SELECTED_MULTIPLECHOICE,
+    payload,
+  };
+}
+
 export function setEditMultiChoice(payload) {
   return {
     type: actionType.SET_EDIT_MULTICHOICE,
