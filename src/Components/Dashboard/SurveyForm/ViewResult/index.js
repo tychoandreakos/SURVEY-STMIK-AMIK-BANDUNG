@@ -10,11 +10,12 @@ import "./style.scss";
 import {
   SURVEY_FORM_BUILDER,
   SURVEY_FORM_QUESTION,
+  SURVEY_HEADER,
 } from "../../../../util/varTypes";
 import { useEffect } from "react";
 
 const ViewResult = (props) => {
-  const { surveyList, history } = props;
+  const { surveyList, history, title, description } = props;
 
   useEffect(() => {
     if (surveyList.length < 1) {
@@ -28,15 +29,8 @@ const ViewResult = (props) => {
         <div className='left'>
           <div className='logo'></div>
           <div className='header'>
-            <h3 className='title'>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Perspiciatis, saepe.
-            </h3>
-            <span className='description'>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt
-              laudantium quis qui obcaecati, rerum, quia aspernatur quae non
-              ipsam esse doloremque soluta commodi, ea magnam?
-            </span>
+            <h3 className='title'>{title}</h3>
+            <span className='description'>{description}</span>
           </div>
           <ResultWrapper />
         </div>
@@ -50,6 +44,8 @@ const ViewResult = (props) => {
 const mapStateToProps = (state) => {
   return {
     surveyList: state[SURVEY_FORM_BUILDER][SURVEY_FORM_QUESTION],
+    title: state[SURVEY_FORM_BUILDER][SURVEY_HEADER.TITLE],
+    description: state[SURVEY_FORM_BUILDER][SURVEY_HEADER.DESC],
   };
 };
 
