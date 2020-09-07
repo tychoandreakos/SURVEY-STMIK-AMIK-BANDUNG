@@ -29,7 +29,5 @@ export function storeSurvey(payload) {
 }
 
 export function deleteSurvey(payload) {
-  return client.delete(URI.SURVEY, {
-    id: payload,
-  });
+  return client.delete(`${URI.SURVEY}/${payload}`);
 }

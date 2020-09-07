@@ -45,13 +45,23 @@ function rootReducer(state = initialState, action) {
   }
 
   if (action.type === actionTypes.DELETE_SURVEY_SUCCESS) {
-    console.log(action.payload);
-    return state;
+    return {
+      ...state,
+      [varTypes.SURVEY_LIST.FETCH_SURVEY_LIST]: {
+        ...state[varTypes.SURVEY_LIST.FETCH_SURVEY_LIST],
+        [varTypes.SURVEY_LIST.SURVEY_SUCCESS]: action.payload,
+      },
+    };
   }
 
   if (action.type === actionTypes.DELETE_SURVEY_FAILED) {
-    console.log(action.payload);
-    return state;
+    return {
+      ...state,
+      [varTypes.SURVEY_LIST.FETCH_SURVEY_LIST]: {
+        ...state[varTypes.SURVEY_LIST.FETCH_SURVEY_LIST],
+        [varTypes.SURVEY_LIST.SURVEY_FAILED]: action.payload,
+      },
+    };
   }
 
   if (action.type === actionTypes.CLEAN_SURVEY_STATE) {

@@ -8,7 +8,7 @@ import Copy from "@iconify/icons-mdi/layers";
 import Delete from "@iconify/icons-mdi/trash-can";
 import Dialog from "../../Dialog";
 
-import { deleteSurvey } from "../../../../Store/redux/action";
+import { deleteSurvey, cleanSurveyState } from "../../../../Store/redux/action";
 
 import "./style.scss";
 
@@ -54,6 +54,7 @@ const DropdownSurveyList = (props) => {
 
   function deleteHandler() {
     if (_id.length > 1) {
+      onCancelHandler();
       onDelete(_id);
     }
   }

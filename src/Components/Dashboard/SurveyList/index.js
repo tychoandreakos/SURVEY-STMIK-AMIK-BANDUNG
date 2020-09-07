@@ -13,10 +13,6 @@ const SurveyList = (props) => {
     fetchSurvey();
   }, []);
 
-  useEffect(() => {
-    console.log(getSurvey);
-  }, [getSurvey]);
-
   let renderSurvey;
   if (getSurvey && getSurvey.data) {
     renderSurvey = getSurvey.data.map((item) => (
