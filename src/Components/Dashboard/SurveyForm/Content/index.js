@@ -16,15 +16,16 @@ import Result from "../Result";
 import NewQuestion from "../Form/NewQuestionFirst";
 import QuestionAnsweredForm from "../Form/QuestionAnsweredForm";
 
+import Dialog from "../../Dialog";
 import BtnOpt from "../BtnOpt";
 import FormBuilderContext from "../../../../Store/Context/formBuilder";
+import { setTypeQuestion, storeSurvey } from "../../../../Store/redux/action";
 
 import "./style.scss";
-import { setTypeQuestion } from "../../../../Store/redux/action";
 
 const ContentSurveyForm = (props) => {
   const okButton = useRef({});
-  const { question, typeQuestion, canEdit } = props;
+  const { question, typeQuestion, canEdit, storeSurvey, surveyForm } = props;
 
   let renderQuestion = [];
   if (question) {
@@ -46,6 +47,7 @@ const ContentSurveyForm = (props) => {
 
   const [initial, setInitial] = useState(false);
   const [formBuilder, setFormBuilder] = useState(false);
+  const [dialog, setDialog] = useState(false);
   const [confirmButton, setConfirmButton] = useState({
     state: false,
     anim: false,
@@ -117,6 +119,16 @@ const ContentSurveyForm = (props) => {
     setFormBuilder(false);
   };
 
+  const dialogHandler = () => {
+    setDialog(!dialog);
+  };
+
+  const onSubmitHandler = () => {
+    if (surveyForm) {
+      storeSurvey(surveyForm);
+    }
+  };
+
   const memoizedCallback = useCallback(() => {
     if (!initial) {
       setInitial(true);
@@ -142,11 +154,22 @@ const ContentSurveyForm = (props) => {
     );
   }
 
+  let renderDialog;
+  if (dialog) {
+    renderDialog = (
+      <Dialog
+        onCancelHandler={dialogHandler}
+        onConfirmHandler={onSubmitHandler}
+        title='Yes, Save'
+      />
+    );
+  }
+
   let okButtonEl;
   if (confirmButton.state) {
     okButtonEl = (
       <div ref={okButton} className='btn-wrapper'>
-        <BtnOpt type={TYPE_BUTTON.OK} />
+        <BtnOpt onClick={dialogHandler} type={TYPE_BUTTON.OK} />
       </div>
     );
   }
@@ -162,6 +185,7 @@ const ContentSurveyForm = (props) => {
           <NewQuestion />
         </div>
       </div>
+      {renderDialog}
     </div>
   );
 };
@@ -171,12 +195,14 @@ const mapStateToProps = (state) => {
     question: state[SURVEY_FORM_BUILDER][SURVEY_FORM_QUESTION],
     typeQuestion: state[SURVEY_TYPE_QUESTION],
     canEdit: state[SURVEY_CAN_EDIT],
+    surveyForm: state[SURVEY_FORM_BUILDER],
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setTypeQuestion: (item) => dispatch(setTypeQuestion(item)),
+    storeSurvey: (item) => dispatch(storeSurvey(item)),
   };
 };
 
