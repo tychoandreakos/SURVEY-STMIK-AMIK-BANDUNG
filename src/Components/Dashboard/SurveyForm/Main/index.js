@@ -10,20 +10,22 @@ import CollectSurvey from "../CollectSurvey";
 import Summary from "../Summary";
 
 import "./style.scss";
+import { cleanSurveyState } from "../../../../Store/redux/action";
 
 function MainSurveyForm(props) {
   useEffect(() => window.scrollTo(0, 0), []);
-  const { match, history, success, failed } = props;
+  const { match, history, success, failed, cleanState } = props;
 
   useEffect(() => {
     if (success && success.success) {
+      cleanState();
       history.push("/");
     }
 
     if (failed && !failed.success) {
       console.log(failed);
     }
-  }, [success, failed]);
+  }, [success, failed, cleanState]);
 
   return (
     <div className='main-survey'>
@@ -47,6 +49,15 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapRouterToPropsJoinRedux = connect(mapStateToProps)(mapRouterToProps);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    cleanState: () => dispatch(cleanSurveyState()),
+  };
+};
+
+const mapRouterToPropsJoinRedux = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(mapRouterToProps);
 
 export default mapRouterToPropsJoinRedux;

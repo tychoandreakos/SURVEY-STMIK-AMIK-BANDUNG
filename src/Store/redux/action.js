@@ -30,6 +30,12 @@ export function setTitleSurvey(payload) {
   };
 }
 
+export function cleanSurveyState() {
+  return {
+    type: actionType.CLEAN_SURVEY_STATE,
+  };
+}
+
 export function editSelectedMultiChoice(payload) {
   return {
     type: actionType.EDIT_SELECTED_MULTIPLECHOICE,
