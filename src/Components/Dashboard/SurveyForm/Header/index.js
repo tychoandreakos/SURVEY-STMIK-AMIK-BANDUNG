@@ -23,7 +23,6 @@ const SurveyHeaderForm = (props) => {
   const [viewResult, setViewResult] = useState(false);
   const { title, history, match, addTitle, surveyList } = props;
   useEffect(() => {
-    console.log(props);
     if (title) setHeadTitle(title);
     else history.push("/create");
   }, [title]);

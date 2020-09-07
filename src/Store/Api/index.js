@@ -24,6 +24,6 @@ export function fetchSurvey() {
   return client.get(URI.SURVEY);
 }
 
-export function storeSurvey() {
-  return client.post(URI.SURVEY);
+export function storeSurvey(payload) {
+  return client.post(URI.SURVEY, payload);
 }

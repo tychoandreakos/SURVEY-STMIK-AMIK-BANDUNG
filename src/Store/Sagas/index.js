@@ -25,9 +25,9 @@ function* watchFetchSurvey() {
   }
 }
 
-function* watchStoreSurvey() {
+function* watchStoreSurvey(action) {
   try {
-    const { data } = yield call(api.storeSurvey);
+    const { data } = yield call(api.storeSurvey, action.payload);
     yield put({
       type: actionTypes.STORE_SURVEY_SUCCESS,
       payload: data,
