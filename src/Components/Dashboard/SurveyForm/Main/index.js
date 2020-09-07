@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { SURVEY_LIST } from "../../../../util/varTypes";
 
 import HeaderFormSurvey from "../Header";
 import ContentFormSurvey from "../Content";
@@ -11,7 +13,18 @@ import "./style.scss";
 
 function MainSurveyForm(props) {
   useEffect(() => window.scrollTo(0, 0), []);
-  const { match } = props;
+  const { match, history, success, failed } = props;
+
+  useEffect(() => {
+    if (success && success.success) {
+      history.push("/");
+    }
+
+    if (failed && !failed.success) {
+      console.log(failed);
+    }
+  }, [success, failed]);
+
   return (
     <div className='main-survey'>
       <HeaderFormSurvey />
@@ -27,4 +40,13 @@ function MainSurveyForm(props) {
 
 const mapRouterToProps = withRouter(MainSurveyForm);
 
-export default mapRouterToProps;
+const mapStateToProps = (state) => {
+  return {
+    success: state[SURVEY_LIST.FETCH_SURVEY_LIST][SURVEY_LIST.SURVEY_SUCCESS],
+    failed: state[SURVEY_LIST.FETCH_SURVEY_LIST][SURVEY_LIST.SURVEY_ERROR],
+  };
+};
+
+const mapRouterToPropsJoinRedux = connect(mapStateToProps)(mapRouterToProps);
+
+export default mapRouterToPropsJoinRedux;

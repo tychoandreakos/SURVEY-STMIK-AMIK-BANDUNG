@@ -9,6 +9,8 @@ const initialState = {
   [varTypes.SURVEY_LIST.FETCH_SURVEY_LIST]: {
     [varTypes.SURVEY_LIST.SURVEY_LIST_SUCCESS]: {},
     [varTypes.SURVEY_LIST.SURVEY_LIST_ERROR]: {},
+    [varTypes.SURVEY_LIST.SURVEY_SUCCESS]: {},
+    [varTypes.SURVEY_LIST.SURVEY_ERROR]: {},
   },
   [varTypes.LOADER]: false,
   [varTypes.SURVEY_CATEGORY]: slider,
@@ -43,12 +45,23 @@ function rootReducer(state = initialState, action) {
   }
 
   if (action.type === actionTypes.STORE_SURVEY_SUCCESS) {
-    return state;
+    return {
+      ...state,
+      [varTypes.SURVEY_LIST.FETCH_SURVEY_LIST]: {
+        ...state[varTypes.SURVEY_LIST.FETCH_SURVEY_LIST],
+        [varTypes.SURVEY_LIST.SURVEY_SUCCESS]: action.payload,
+      },
+    };
   }
 
   if (action.type === actionTypes.STORE_SURVEY_FAILED) {
-    console.log("store survey failed");
-    return state;
+    return {
+      ...state,
+      [varTypes.SURVEY_LIST.FETCH_SURVEY_LIST]: {
+        ...state[varTypes.SURVEY_LIST.FETCH_SURVEY_LIST],
+        [varTypes.SURVEY_LIST.SURVEY_FAILED]: action.payload,
+      },
+    };
   }
 
   if (action.type === actionTypes.FETCH_SURVEY_SUCCESS) {
