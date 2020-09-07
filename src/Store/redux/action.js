@@ -22,6 +22,13 @@ export function fetchSurvey() {
   };
 }
 
+export function deleteSurvey(payload) {
+  return {
+    type: sagaType.DELETE_SURVEY,
+    payload,
+  };
+}
+
 //
 export function setTitleSurvey(payload) {
   return {

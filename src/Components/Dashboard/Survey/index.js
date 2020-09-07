@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import DropdownSurveyList from "./Dropdown";
 import { Icon } from "@iconify/react";
 import dots from "@iconify/icons-mdi/dots-horizontal";
 
 import "./style.scss";
-import { useEffect } from "react";
 
 const Survey = (props) => {
   const sizeDots = 30;
@@ -24,7 +23,7 @@ const Survey = (props) => {
     },
   ];
 
-  const { title, logo, status, createdAt, modifiedAt } = props;
+  const { title, logo, status, createdAt, modifiedAt, _id } = props;
   const [dropdown, setDropdown] = useState(false);
   const [draft, setDraft] = useState(false);
   const dateFormat = (val) => {
@@ -43,7 +42,9 @@ const Survey = (props) => {
 
   let dropdownRender;
   if (dropdown) {
-    dropdownRender = <DropdownSurveyList dropdownHandler={dropdownHandler} />;
+    dropdownRender = (
+      <DropdownSurveyList _id={_id} dropdownHandler={dropdownHandler} />
+    );
   }
 
   const statusRender = dummy.map((item) => (

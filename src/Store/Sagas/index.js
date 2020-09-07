@@ -8,6 +8,22 @@ export default function* rootSaga() {
   yield takeLatest(types.PROCESSING_LOGO, watchProcessingLogo);
   yield takeLatest(types.FETCH_SURVEY, watchFetchSurvey);
   yield takeLatest(types.STORE_SURVEY, watchStoreSurvey);
+  yield takeLatest(types.DELETE_SURVEY, watchDeleteSurvey);
+}
+
+function* watchDeleteSurvey(action) {
+  try {
+    const { data } = yield call(api.deleteSurvey, action.payload);
+    yield put({
+      type: actionTypes.DELETE_SURVEY_SUCCESS,
+      payload: data,
+    });
+  } catch (e) {
+    yield put({
+      type: actionTypes.DELETE_SURVEY_FAILED,
+      payload: e.message,
+    });
+  }
 }
 
 function* watchFetchSurvey() {

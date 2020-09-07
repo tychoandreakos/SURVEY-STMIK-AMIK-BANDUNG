@@ -27,3 +27,9 @@ export function fetchSurvey() {
 export function storeSurvey(payload) {
   return client.post(URI.SURVEY, payload);
 }
+
+export function deleteSurvey(payload) {
+  return client.delete(URI.SURVEY, {
+    id: payload,
+  });
+}

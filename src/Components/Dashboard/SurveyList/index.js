@@ -22,6 +22,7 @@ const SurveyList = (props) => {
     renderSurvey = getSurvey.data.map((item) => (
       <Survey
         key={item._id}
+        _id={item._id}
         title={item.title}
         logo={item.logo}
         status={item.status}

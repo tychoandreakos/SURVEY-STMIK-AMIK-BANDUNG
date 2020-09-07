@@ -44,6 +44,16 @@ function rootReducer(state = initialState, action) {
     };
   }
 
+  if (action.type === actionTypes.DELETE_SURVEY_SUCCESS) {
+    console.log(action.payload);
+    return state;
+  }
+
+  if (action.type === actionTypes.DELETE_SURVEY_FAILED) {
+    console.log(action.payload);
+    return state;
+  }
+
   if (action.type === actionTypes.CLEAN_SURVEY_STATE) {
     return {
       ...state,
