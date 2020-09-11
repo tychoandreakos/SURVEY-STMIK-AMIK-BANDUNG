@@ -29,7 +29,7 @@ const LogoButton = (props) => {
   });
 
   const loaderState = useMemo(() => {
-    const { type, color, height, width } = loaderRef;
+    const { type, color, height, width } = loaderRef.current;
     return {
       type,
       color,
