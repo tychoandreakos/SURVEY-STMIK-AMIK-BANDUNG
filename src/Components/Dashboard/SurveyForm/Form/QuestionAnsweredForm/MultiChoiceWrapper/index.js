@@ -35,11 +35,15 @@ const MultiChoiceWrapper = (props) => {
     setInput([]);
   }, [setId, setInput, editResult]);
 
-  useEffect(() => {
+  const editDataCallback = useCallback(() => {
     if (editResult && editResult.index) {
       setEditData(editResult);
     }
-  }, [editResult]);
+  }, [editResult, setEditData]);
+
+  useEffect(() => {
+    editDataCallback();
+  }, [editDataCallback]);
 
   useEffect(() => {
     memoizedCallback();

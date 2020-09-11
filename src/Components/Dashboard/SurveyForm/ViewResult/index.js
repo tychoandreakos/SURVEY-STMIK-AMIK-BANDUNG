@@ -21,7 +21,7 @@ const ViewResult = (props) => {
     if (surveyList.length < 1) {
       history.push("/create/survey-form");
     }
-  }, []);
+  }, [surveyList, history]);
 
   return (
     <div className='view-result'>

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { connect } from "react-redux";
 
 import Icon from "@iconify/react";
@@ -13,6 +13,12 @@ import { deleteSurvey, cleanSurveyState } from "../../../../Store/redux/action";
 import "./style.scss";
 
 const DropdownSurveyList = (props) => {
+  const [dialog, setDialog] = useState(false);
+  const { dropdownHandler, onDelete, _id } = props;
+  const dialogHandler = useCallback(() => {
+    setDialog(!dialog);
+  }, [dialog]);
+
   const dropdown = useMemo(() => {
     return [
       {
@@ -36,11 +42,7 @@ const DropdownSurveyList = (props) => {
         method: dialogHandler,
       },
     ];
-  }, []);
-
-  const [dialog, setDialog] = useState(false);
-
-  const { dropdownHandler, onDelete, _id } = props;
+  }, [dialogHandler]);
 
   const disabledDropdownHandler = () => {
     dropdownHandler();
@@ -57,10 +59,6 @@ const DropdownSurveyList = (props) => {
       onCancelHandler();
       onDelete(_id);
     }
-  }
-
-  function dialogHandler() {
-    setDialog(!dialog);
   }
 
   function onCancelHandler() {

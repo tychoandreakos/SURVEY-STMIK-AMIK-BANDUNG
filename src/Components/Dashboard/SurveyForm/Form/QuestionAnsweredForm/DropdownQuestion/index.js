@@ -1,4 +1,10 @@
-import React, { useContext, useRef, useEffect, useState } from "react";
+import React, {
+  useContext,
+  useRef,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 
 import { connect } from "react-redux";
 
@@ -32,7 +38,7 @@ const DropdownQuestion = (props) => {
     editTypeQuestion,
   } = props;
 
-  useEffect(() => {
+  const typeQuestionCallback = useCallback(() => {
     dropdownRef.current.scrollTo({
       top: 0,
     });
@@ -40,7 +46,11 @@ const DropdownQuestion = (props) => {
       ? typeQuestion
       : editTypeQuestion;
     setTypeOfQuestion(typeQ);
-  }, []);
+  }, [editTypeQuestion, typeQuestion]);
+
+  useEffect(() => {
+    typeQuestionCallback();
+  }, [typeQuestionCallback]);
 
   const checkedEl = (
     <div className='icon-dropdown'>

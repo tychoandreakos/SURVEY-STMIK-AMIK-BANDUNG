@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import { connect } from "react-redux";
 
 import Icon from "@iconify/react";
@@ -14,7 +14,7 @@ const LogoButton = (props) => {
   const { title = "Add a Logo", icon = DefaultIcon, processingLogo } = props;
   const inputFileRef = useRef();
 
-  useEffect(() => {
+  const processingLogoCallback = useCallback(() => {
     if (image && image.size < 4718592) {
       let reader = new FileReader();
       reader.readAsDataURL(image);
@@ -24,7 +24,11 @@ const LogoButton = (props) => {
 
       processingLogo();
     }
-  }, [image]);
+  }, [image, processingLogo]);
+
+  useEffect(() => {
+    processingLogoCallback();
+  }, [processingLogoCallback]);
 
   const readFile = (e) => {
     const imageFiles = e.target.files[0];

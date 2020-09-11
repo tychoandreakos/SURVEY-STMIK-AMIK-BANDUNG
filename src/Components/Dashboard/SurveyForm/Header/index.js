@@ -25,7 +25,7 @@ const SurveyHeaderForm = (props) => {
   useEffect(() => {
     if (title) setHeadTitle(title);
     else history.push("/create");
-  }, [title]);
+  }, [title, history]);
   useEffect(() => {
     if (headTitle.length > 5 && !viewResult && surveyList.length >= 3)
       setViewResult(true);

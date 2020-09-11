@@ -31,10 +31,10 @@ const Survey = (props) => {
   };
 
   useEffect(() => {
-    if (status === "true") {
+    if (status === "true" || status === true) {
       setDraft(true);
     }
-  }, []);
+  }, [status]);
 
   const dropdownHandler = () => {
     setDropdown(!dropdown);

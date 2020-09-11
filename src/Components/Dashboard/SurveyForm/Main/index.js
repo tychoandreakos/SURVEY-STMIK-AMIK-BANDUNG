@@ -25,7 +25,7 @@ function MainSurveyForm(props) {
     if (failed && !failed.success) {
       console.log(failed);
     }
-  }, [success, failed, cleanState]);
+  }, [success, failed, history, cleanState]);
 
   return (
     <div className='main-survey'>

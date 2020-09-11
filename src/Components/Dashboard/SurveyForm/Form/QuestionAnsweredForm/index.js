@@ -1,4 +1,11 @@
-import React, { useState, useContext, Suspense, lazy, useEffect } from "react";
+import React, {
+  useState,
+  useContext,
+  Suspense,
+  lazy,
+  useEffect,
+  useCallback,
+} from "react";
 import { connect } from "react-redux";
 import { v4 as uuid } from "uuid";
 
@@ -74,12 +81,16 @@ const QuestionAnsweredForm = (props) => {
       })
     : "Loading ...";
 
-  useEffect(() => {
+  const resultDataCallback = useCallback(() => {
     if (resultData && action) {
       setQuestionInput(capitalize(resultData.title));
       onEditTypeQuestion(resultData.type);
     }
-  }, [resultData, action]);
+  }, [resultData, action, onEditTypeQuestion]);
+
+  useEffect(() => {
+    resultDataCallback();
+  }, [resultDataCallback]);
 
   let answeredForm;
   let actionButtonComponent;

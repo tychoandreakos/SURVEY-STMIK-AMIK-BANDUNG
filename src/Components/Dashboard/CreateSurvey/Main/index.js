@@ -43,13 +43,24 @@ const MainCreateSurvey = (props) => {
     }
   }, [titleMemo]);
 
+  const formatTitle = useCallback(() => {
+    return 8;
+  }, []);
+
+  const validation = useCallback(() => {
+    if (title && title.length > formatTitle()) {
+      return true;
+    }
+    return false;
+  }, [title, formatTitle]);
+
   const btnCallback = useCallback(() => {
     if (validation()) {
       setBtnDisabled(false);
     } else {
       setBtnDisabled(true);
     }
-  }, [title, btnDisabled]);
+  }, [validation]);
 
   useEffect(() => btnCallback(), [btnCallback]);
 
@@ -100,18 +111,6 @@ const MainCreateSurvey = (props) => {
   const onCancel = () => {
     history.push("/");
   };
-
-  function formatTitle() {
-    return 8;
-  }
-
-  function validation() {
-    if (title && title.length > formatTitle()) {
-      return true;
-    }
-
-    return false;
-  }
 
   let renderingLoading;
   if (loader) {
