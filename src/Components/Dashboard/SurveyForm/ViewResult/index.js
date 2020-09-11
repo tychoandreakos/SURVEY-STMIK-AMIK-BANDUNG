@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -12,7 +12,6 @@ import {
   SURVEY_FORM_QUESTION,
   SURVEY_HEADER,
 } from "../../../../util/varTypes";
-import { useEffect } from "react";
 
 const ViewResult = (props) => {
   const { surveyList, history, title, description } = props;

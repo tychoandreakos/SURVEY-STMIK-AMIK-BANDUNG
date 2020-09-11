@@ -1,14 +1,16 @@
-import React, { lazy, Suspense, useState } from "react";
+import React, { lazy, Suspense, useState, useRef, useMemo } from "react";
+
 import { connect } from "react-redux";
-
 import FooterResult from "../Footer";
-
-import "./style.scss";
+import Loader from "react-loading";
 import {
   SURVEY_FORM_QUESTION,
   SURVEY_FORM_BUILDER,
   TYPE_QUESTION,
 } from "../../../../../../util/varTypes";
+
+import "./style.scss";
+import { useEffect } from "react";
 
 const SingleTextBox = lazy(() => import("../Element/SingleTextBox"));
 const MultiChoice = lazy(() => import("../Element/MultiChoice"));
@@ -16,6 +18,39 @@ const MultiChoice = lazy(() => import("../Element/MultiChoice"));
 const MainViewResult = (props) => {
   const { surveyList } = props;
   const [survey, setSurvey] = useState(surveyList);
+  const [loader, setLoader] = useState(true);
+
+  const loaderRef = useRef({
+    type: "spin",
+    color: "#5661b6",
+    height: "3.5%",
+    width: "3.5%",
+  });
+
+  const loaderState = useMemo(() => {
+    const { type, color, height, width } = loaderRef.current;
+    return {
+      type,
+      color,
+      height,
+      width,
+    };
+  }, [loaderRef.current]);
+
+  const loaderEl = (
+    <div className='loading'>
+      <Loader
+        type={loaderState.type}
+        color={loaderState.color}
+        height={loaderState.height}
+        width={loaderState.width}
+      />
+    </div>
+  );
+
+  useEffect(() => {
+    if (survey && survey.length > 1) setTimeout(() => setLoader(false), 1000);
+  }, [survey]);
 
   const multiChoiceHandler = (_id, choiceId) => {
     const newVal = survey
@@ -62,7 +97,7 @@ const MainViewResult = (props) => {
 
   return (
     <div className='main-survey-view'>
-      <Suspense fallback='loading...'>{renderEl}</Suspense>
+      <Suspense fallback={loaderEl}>{loader ? loaderEl : renderEl}</Suspense>
       <FooterResult />
     </div>
   );
