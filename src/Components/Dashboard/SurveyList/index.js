@@ -1,13 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import { connect } from "react-redux";
 
 import Survey from "../Survey";
+import Loader from "react-loading";
+
 import { fetchSurvey } from "../../../Store/redux/action";
+import { SURVEY_LIST } from "../../../util/varTypes";
 
 import "./style.scss";
-import { SURVEY_LIST } from "../../../util/varTypes";
 const SurveyList = (props) => {
   const { fetchSurvey, getSurvey } = props;
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     fetchSurvey();
@@ -28,16 +31,63 @@ const SurveyList = (props) => {
     ));
   }
 
+  useEffect(() => {
+    if (renderSurvey && renderSurvey.length > 1) {
+      setTimeout(() => {
+        setLoader(false);
+      }, 1000);
+    }
+  }, [renderSurvey]);
+
+  const loaderRef = useRef({
+    type: "spin",
+    color: "#5661b6",
+    height: "3.5%",
+    width: "3.5%",
+  });
+
+  const loaderState = useMemo(() => {
+    const { type, color, height, width } = loaderRef.current;
+    return {
+      type,
+      color,
+      height,
+      width,
+    };
+  }, [loaderRef.current]);
+
+  const loaderEl = (
+    <div className='loading'>
+      <Loader
+        type={loaderState.type}
+        color={loaderState.color}
+        height={loaderState.height}
+        width={loaderState.width}
+      />
+    </div>
+  );
+
+  let content;
+  if (loader) {
+    content = loaderEl;
+  } else {
+    content = (
+      <>
+        <div className='survey-list-survey'>{renderSurvey}</div>
+        <div className='count'>
+          <span>Showing 2 of 2 total surveys. </span>
+        </div>
+      </>
+    );
+  }
+
   return (
     <div id='survey-list'>
       <div className='header-survey-list'>
         <h3 className='title'>Recent Survey</h3>
         <span>see all 5 surveys</span>
       </div>
-      <div className='survey-list-survey'>{renderSurvey}</div>
-      <div className='count'>
-        <span>Showing 2 of 2 total surveys. </span>
-      </div>
+      {content}
     </div>
   );
 };
