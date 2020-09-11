@@ -2,7 +2,7 @@ import React, { useRef, useEffect, memo, useCallback, useReducer } from "react";
 
 import * as THREE from "three";
 import { gsap } from "gsap";
-import {} from 'react-redux';
+import {} from "react-redux";
 
 import "./style.scss";
 
@@ -78,14 +78,11 @@ const Loader = () => {
   }, []);
 
   useEffect(() => {
-    gsap.to(
-      bodyRef.current,
-      {
-        duration: 2,
-        autoAlpha: 1,
-      }
-    );
-  }, []);
+    gsap.to(bodyRef.current, {
+      duration: 2,
+      autoAlpha: 1,
+    });
+  }, [bodyRef]);
 
   useEffect(() => {
     renderingLoader();

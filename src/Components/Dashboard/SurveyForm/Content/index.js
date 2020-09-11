@@ -53,7 +53,21 @@ const ContentSurveyForm = (props) => {
     anim: false,
   });
 
-  useEffect(() => {
+  const formBuilderHidden = () => {
+    setFormBuilder(false);
+  };
+
+  const dialogHandler = () => {
+    setDialog(!dialog);
+  };
+
+  const onSubmitHandler = () => {
+    if (surveyForm) {
+      storeSurvey(surveyForm);
+    }
+  };
+
+  const memoizeQuestionCallback = useCallback(() => {
     if (
       question &&
       Array.isArray(question) &&
@@ -83,10 +97,11 @@ const ContentSurveyForm = (props) => {
         });
       }, 5000);
     }
-  }, [question]);
+  }, [question, confirmButton.anim]);
 
-  useEffect(() => {
-    if (confirmButton.anim) {
+  const memoizeAnimCallback = useCallback(() => {
+    const { anim, state } = confirmButton;
+    if (anim) {
       const from = {
         y: 150,
       };
@@ -100,7 +115,7 @@ const ContentSurveyForm = (props) => {
       gsap.fromTo(okButton.current, from, to);
     }
 
-    if (!confirmButton.anim && confirmButton.state) {
+    if (!anim && state) {
       const from = {
         y: -10,
       };
@@ -115,20 +130,6 @@ const ContentSurveyForm = (props) => {
     }
   }, [confirmButton]);
 
-  const formBuilderHidden = () => {
-    setFormBuilder(false);
-  };
-
-  const dialogHandler = () => {
-    setDialog(!dialog);
-  };
-
-  const onSubmitHandler = () => {
-    if (surveyForm) {
-      storeSurvey(surveyForm);
-    }
-  };
-
   const memoizedCallback = useCallback(() => {
     if (!initial) {
       setInitial(true);
@@ -137,11 +138,19 @@ const ContentSurveyForm = (props) => {
     if (initial && typeQuestion && typeQuestion.length > 1 && !canEdit) {
       setFormBuilder(true);
     }
-  }, [initial, typeQuestion]);
+  }, [initial, typeQuestion, canEdit]);
 
   useEffect(() => {
     memoizedCallback();
   }, [memoizedCallback]);
+
+  useEffect(() => {
+    memoizeAnimCallback();
+  }, [memoizeAnimCallback]);
+
+  useEffect(() => {
+    memoizeQuestionCallback();
+  }, [memoizeQuestionCallback]);
 
   let questionEl;
   if (formBuilder) {
