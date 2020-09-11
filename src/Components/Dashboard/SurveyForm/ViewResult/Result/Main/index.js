@@ -28,14 +28,14 @@ const MainViewResult = (props) => {
   });
 
   const loaderState = useMemo(() => {
-    const { type, color, height, width } = loaderRef.current;
+    const { type, color, height, width } = loaderRef;
     return {
       type,
       color,
       height,
       width,
     };
-  }, [loaderRef.current]);
+  }, [loaderRef]);
 
   const loaderEl = (
     <div className='loading'>
