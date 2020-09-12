@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Sidebar from "../Sidebar";
 import Content from "../Content";
 import Loader from "../Loader";
+import Message from "../Message";
 
 import SectionOne from "../CreateSurvey/SectionOne";
 import SurveyForm from "../SurveyForm/Main";
@@ -34,6 +35,7 @@ function Dashboard(props) {
           <Route path='/edit/survey-form' component={SurveyForm} />
         </Switch>
         {loader ? <Loader /> : undefined}
+        <Message />
       </section>
     </div>
   );

@@ -1,0 +1,49 @@
+$Roboto: "Roboto", sans-serif;
+
+.message-wrapper {
+  position: fixed;
+  background: #5661b6;
+  bottom: 5%;
+  width: 28%;
+  padding: 1rem;
+  padding-left: 2rem;
+  color: #e6f2ff;
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 0.5rem;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  justify-content: center;
+  align-items: center;
+  transform: translateX();
+  font: {
+    family: $Roboto;
+    size: 0.95rem;
+  }
+
+  .icon-wrapper {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    background: #e6f2ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .loading {
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon {
+      color: #5661b6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font: {
+        size: 1.8rem;
+      }
+    }
+  }
+}
