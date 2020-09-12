@@ -62,3 +62,4 @@ export const RESULT_ACTION = {
 };
 
 export const LOADER = "LOADER";
+export const MESSAGE_PROMPT = "MESSAGE_PROMPT";

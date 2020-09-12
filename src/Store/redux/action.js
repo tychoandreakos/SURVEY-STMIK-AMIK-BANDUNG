@@ -43,11 +43,17 @@ export function deleteSurvey(payload) {
   };
 }
 
-//
+// action redux handler
 export function setTitleSurvey(payload) {
   return {
     type: actionType.SET_TITLE_SURVEY,
     payload,
+  };
+}
+
+export function triggerMessage() {
+  return {
+    type: actionType.TRIGGER_MESSAGE,
   };
 }
 

@@ -15,6 +15,7 @@ const initialState = {
     [varTypes.SURVEY_LIST.EDIT_ERROR]: {},
   },
   [varTypes.LOADER]: false,
+  [varTypes.MESSAGE_PROMPT]: false,
   [varTypes.SURVEY_CATEGORY]: slider,
   [varTypes.SURVEY_FORM_BUILDER]: {
     [varTypes.SURVEY_TITLE]: "",
@@ -43,6 +44,13 @@ function rootReducer(state = initialState, action) {
         ...state[varTypes.SURVEY_FORM_BUILDER],
         [varTypes.SURVEY_TITLE]: action.payload,
       },
+    };
+  }
+
+  if (action.type === actionTypes.TRIGGER_MESSAGE) {
+    return {
+      ...state,
+      [varTypes.MESSAGE_PROMPT]: !state[varTypes.MESSAGE_PROMPT],
     };
   }
 

@@ -2,7 +2,6 @@ $Roboto: "Roboto", sans-serif;
 
 .message-wrapper {
   position: fixed;
-  background: #5661b6;
   bottom: 5%;
   width: 28%;
   padding: 1rem;
@@ -14,7 +13,6 @@ $Roboto: "Roboto", sans-serif;
   grid-template-columns: 4fr 1fr;
   justify-content: center;
   align-items: center;
-  transform: translateX();
   font: {
     family: $Roboto;
     size: 0.95rem;
