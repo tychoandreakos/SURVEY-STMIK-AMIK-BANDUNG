@@ -27,6 +27,7 @@ const SurveyList = (props) => {
         status={item.status}
         createdAt={item.createdAt}
         modifiedAt={item.updatedAt}
+        totalQuestion={item.surveyForm.surveyQuestion.length}
       />
     ));
   }

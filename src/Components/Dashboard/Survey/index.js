@@ -5,25 +5,38 @@ import { Icon } from "@iconify/react";
 import dots from "@iconify/icons-mdi/dots-horizontal";
 
 import "./style.scss";
+import { useMemo } from "react";
 
 const Survey = (props) => {
+  const {
+    title,
+    logo,
+    status,
+    createdAt,
+    modifiedAt,
+    _id,
+    totalQuestion = 0,
+    totalResponse = 0,
+    totalComments = 0,
+  } = props;
   const sizeDots = 30;
-  const dummy = [
-    {
-      total: 4,
-      title: "questions",
-    },
-    {
-      total: "5%",
-      title: "responses",
-    },
-    {
-      total: 4,
-      title: "comments",
-    },
-  ];
+  const mapPropsTotal = useMemo(() => {
+    return [
+      {
+        total: totalQuestion,
+        title: "questions",
+      },
+      {
+        total: totalResponse,
+        title: "responses",
+      },
+      {
+        total: totalComments,
+        title: "comments",
+      },
+    ];
+  }, [totalComments, totalQuestion, totalResponse]);
 
-  const { title, logo, status, createdAt, modifiedAt, _id } = props;
   const [dropdown, setDropdown] = useState(false);
   const [draft, setDraft] = useState(false);
   const dateFormat = (val) => {
@@ -40,6 +53,14 @@ const Survey = (props) => {
     setDropdown(!dropdown);
   };
 
+  const checkingIfLessThanZero = (val) => {
+    if (val <= 0) {
+      return 0;
+    }
+
+    return val;
+  };
+
   let dropdownRender;
   if (dropdown) {
     dropdownRender = (
@@ -47,9 +68,9 @@ const Survey = (props) => {
     );
   }
 
-  const statusRender = dummy.map((item) => (
-    <div className='status-info'>
-      <h4>{item.total}</h4>
+  const statusRender = mapPropsTotal.map((item, index) => (
+    <div key={index} className='status-info'>
+      <h4>{checkingIfLessThanZero(item.total)}</h4>
       <span>{item.title}</span>
     </div>
   ));
