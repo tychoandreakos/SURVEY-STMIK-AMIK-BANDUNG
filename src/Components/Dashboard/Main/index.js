@@ -1,22 +1,21 @@
-import React, { useMemo, useState, useEffect, useCallback } from "react";
+import React, { useMemo } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import Sidebar from "../Sidebar";
 import Content from "../Content";
 import Loader from "../Loader";
-import Message from "../Message";
+import Message from "../MessageWrapper/Success";
 
 import SectionOne from "../CreateSurvey/SectionOne";
 import SurveyForm from "../SurveyForm/Main";
 
-import { LOADER, MESSAGE_PROMPT } from "../../../util/varTypes";
+import { LOADER } from "../../../util/varTypes";
 import { triggerMessage } from "../../../Store/redux/action";
 
 import "./style.scss";
 
 function Dashboard(props) {
-  const { loader, messagePrompt, xo } = props;
-  const [msg, setMsg] = useState(true);
+  const { loader, xo } = props;
   const dashboardStyle = useMemo(() => {
     if (loader) {
       return {
@@ -24,22 +23,6 @@ function Dashboard(props) {
       };
     }
   }, [loader]);
-
-  const msgCallback = useCallback(() => {
-    if (messagePrompt) {
-      setTimeout(() => {
-        setMsg(false);
-      }, 500);
-    } else {
-      setTimeout(() => {
-        setMsg(true);
-      }, 500);
-    }
-  }, [messagePrompt]);
-
-  useEffect(() => {
-    msgCallback();
-  }, [msgCallback]);
 
   return (
     <div style={dashboardStyle} id='dashboard-survey'>
@@ -56,8 +39,6 @@ function Dashboard(props) {
         </Switch>
         {loader ? <Loader /> : undefined}
         <Message
-          show={msg}
-          background='#5661b6'
           title='Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis,
         officiis.'
         />
@@ -69,7 +50,6 @@ function Dashboard(props) {
 const mapStateToProps = (state) => {
   return {
     loader: state[LOADER],
-    messagePrompt: state[MESSAGE_PROMPT],
   };
 };
 
