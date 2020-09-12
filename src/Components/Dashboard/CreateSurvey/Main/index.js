@@ -15,6 +15,7 @@ import {
   SURVEY_TITLE,
   LOADER,
   SURVEY_FORM_BUILDER,
+  SURVEY_LIST,
 } from "../../../../util/varTypes";
 
 import Slider from "../Slider";
@@ -32,7 +33,14 @@ const MainCreateSurvey = (props) => {
     history,
     titleState,
     triggerLoading,
+    editState,
   } = props;
+
+  useEffect(() => {
+    if (editState && editState.hasOwnProperty("success") && editState.success) {
+      history.push("/edit/survey-form");
+    }
+  }, [editState]);
 
   const titleMemo = useMemo(() => titleState, [titleState]);
   useEffect(() => {
@@ -154,6 +162,7 @@ const MainCreateSurvey = (props) => {
 const mapStateToProps = (state) => {
   return {
     titleState: state[SURVEY_FORM_BUILDER][SURVEY_TITLE],
+    editState: state[SURVEY_LIST.FETCH_SURVEY_LIST][SURVEY_LIST.EDIT_SUCCESS],
   };
 };
 

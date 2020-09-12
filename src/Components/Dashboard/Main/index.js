@@ -24,6 +24,7 @@ function Dashboard(props) {
           <Route path='/' exact component={Content} />
           <Route path='/create' exact component={SectionOne} />
           <Route path='/create/survey-form' component={SurveyForm} />
+          <Route path='/edit/survey-form' component={SurveyForm} />
         </Switch>
         {loader ? <Loader /> : undefined}
       </section>

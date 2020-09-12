@@ -11,6 +11,8 @@ const initialState = {
     [varTypes.SURVEY_LIST.SURVEY_LIST_ERROR]: {},
     [varTypes.SURVEY_LIST.SURVEY_SUCCESS]: {},
     [varTypes.SURVEY_LIST.SURVEY_ERROR]: {},
+    [varTypes.SURVEY_LIST.EDIT_SUCESS]: {},
+    [varTypes.SURVEY_LIST.EDIT_ERROR]: {},
   },
   [varTypes.LOADER]: false,
   [varTypes.SURVEY_CATEGORY]: slider,
@@ -45,8 +47,29 @@ function rootReducer(state = initialState, action) {
   }
 
   if (action.type === actionTypes.FETCH_EDIT_SURVEY_SUCCESS) {
-    console.log(action.payload);
-    return state;
+    const { _id, title, logo, status, surveyForm } = action.payload.data;
+    return {
+      ...state,
+      [varTypes.SURVEY_LIST.FETCH_SURVEY_LIST]: {
+        ...state[varTypes.SURVEY_LIST.FETCH_SURVEY_LIST],
+        [varTypes.SURVEY_LIST.EDIT_SUCCESS]: {
+          success: action.payload.success,
+          time: action.payload.time,
+          _id: _id,
+          status,
+        },
+      },
+      [varTypes.SURVEY_FORM_BUILDER]: {
+        [varTypes.SURVEY_TITLE]: title,
+        [varTypes.SURVEY_LOGO]: logo,
+        [varTypes.SURVEY_CATEGORY]: "",
+        [varTypes.SURVEY_HEADER.TITLE]: surveyForm.title,
+        [varTypes.SURVEY_HEADER.DESC]: surveyForm.description,
+        [varTypes.SURVEY_CATEGORY_BUILDER]: surveyForm.surveyCategoryBuilder,
+        [varTypes.SURVEY_FORM_QUESTION]: surveyForm.surveyQuestion,
+        [varTypes.SURVEY_FORM_COPIED]: [],
+      },
+    };
   }
 
   if (action.type === actionTypes.FETCH_EDIT_SURVEY_FAILED) {

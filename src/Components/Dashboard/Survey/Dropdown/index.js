@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useCallback } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import Icon from "@iconify/react";
 import Edit from "@iconify/icons-mdi/edit-outline";
@@ -14,7 +15,7 @@ import "./style.scss";
 
 const DropdownSurveyList = (props) => {
   const [dialog, setDialog] = useState(false);
-  const { dropdownHandler, onDelete, _id, onEdit } = props;
+  const { dropdownHandler, onDelete, _id, onEdit, history } = props;
   const dialogHandler = useCallback(() => {
     setDialog(!dialog);
   }, [dialog]);
@@ -53,6 +54,7 @@ const DropdownSurveyList = (props) => {
   function editHandler() {
     if (_id.length > 1) {
       onEdit(_id);
+      history.push("/edit/survey-form");
     }
   }
 
@@ -106,9 +108,11 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+const mapRoutertoProps = withRouter(DropdownSurveyList);
+
 const DropdownSurveyListJoinRedux = connect(
   null,
   mapDispatchToProps
-)(DropdownSurveyList);
+)(mapRoutertoProps);
 
 export default DropdownSurveyListJoinRedux;
