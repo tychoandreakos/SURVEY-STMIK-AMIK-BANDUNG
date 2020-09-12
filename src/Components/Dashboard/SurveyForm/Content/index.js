@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import {
   TYPE_BUTTON,
   SURVEY_FORM_BUILDER,
   SURVEY_FORM_QUESTION,
   SURVEY_TYPE_QUESTION,
   SURVEY_CAN_EDIT,
+  SURVEY_LIST,
 } from "../../../../util/varTypes";
 
 import { gsap } from "gsap";
@@ -19,13 +21,26 @@ import QuestionAnsweredForm from "../Form/QuestionAnsweredForm";
 import Dialog from "../../Dialog";
 import BtnOpt from "../BtnOpt";
 import FormBuilderContext from "../../../../Store/Context/formBuilder";
-import { setTypeQuestion, storeSurvey } from "../../../../Store/redux/action";
+import {
+  setTypeQuestion,
+  storeSurvey,
+  updateSurvey,
+} from "../../../../Store/redux/action";
 
 import "./style.scss";
 
 const ContentSurveyForm = (props) => {
   const okButton = useRef({});
-  const { question, typeQuestion, canEdit, storeSurvey, surveyForm } = props;
+  const {
+    question,
+    typeQuestion,
+    canEdit,
+    storeSurvey,
+    surveyForm,
+    editState,
+    history,
+    updateSurvey,
+  } = props;
 
   let renderQuestion = [];
   if (question) {
@@ -62,9 +77,14 @@ const ContentSurveyForm = (props) => {
   };
 
   const onSubmitHandler = () => {
-    if (surveyForm) {
+    if (surveyForm && !editState.success) {
       storeSurvey(surveyForm);
+    } else {
+      const _id = editState._id;
+      const newData = { ...surveyForm, _id };
+      updateSurvey(newData);
     }
+    history.push("/");
   };
 
   const memoizeQuestionCallback = useCallback(() => {
@@ -205,6 +225,7 @@ const mapStateToProps = (state) => {
     typeQuestion: state[SURVEY_TYPE_QUESTION],
     canEdit: state[SURVEY_CAN_EDIT],
     surveyForm: state[SURVEY_FORM_BUILDER],
+    editState: state[SURVEY_LIST.FETCH_SURVEY_LIST][SURVEY_LIST.EDIT_SUCCESS],
   };
 };
 
@@ -212,12 +233,15 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setTypeQuestion: (item) => dispatch(setTypeQuestion(item)),
     storeSurvey: (item) => dispatch(storeSurvey(item)),
+    updateSurvey: (item) => dispatch(updateSurvey(item)),
   };
 };
+
+const mapRouterToProps = withRouter(ContentSurveyForm);
 
 const ContentSurveyFormJoinRedux = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ContentSurveyForm);
+)(mapRouterToProps);
 
 export default ContentSurveyFormJoinRedux;

@@ -46,6 +46,16 @@ function rootReducer(state = initialState, action) {
     };
   }
 
+  if (action.type === actionTypes.UPDATE_SURVEY_SUCCESS) {
+    console.log(action.payload);
+    return state;
+  }
+
+  if (action.type === actionTypes.UPDATE_SURVEY_FAILED) {
+    console.log(action.payload);
+    return state;
+  }
+
   if (action.type === actionTypes.FETCH_EDIT_SURVEY_SUCCESS) {
     const { _id, title, logo, status, surveyForm } = action.payload.data;
     return {
@@ -55,7 +65,7 @@ function rootReducer(state = initialState, action) {
         [varTypes.SURVEY_LIST.EDIT_SUCCESS]: {
           success: action.payload.success,
           time: action.payload.time,
-          _id: _id,
+          _id,
           status,
         },
       },

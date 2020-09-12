@@ -32,6 +32,10 @@ export function editSurvey(payload) {
   return client.get(`${URI.SURVEY}/${payload}`);
 }
 
+export function updateSurvey(payload) {
+  return client.post(`${URI.SURVEY}/update`, payload);
+}
+
 export function deleteSurvey(payload) {
   return client.delete(`${URI.SURVEY}/${payload}`);
 }
