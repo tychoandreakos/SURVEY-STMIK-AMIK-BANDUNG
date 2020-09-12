@@ -19,7 +19,7 @@ const Survey = (props) => {
     totalResponse = 0,
     totalComments = 0,
   } = props;
-  const sizeDots = 30;
+  const sizeDots = useMemo(() => 30, []);
   const mapPropsTotal = useMemo(() => {
     return [
       {
