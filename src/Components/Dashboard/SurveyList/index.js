@@ -40,7 +40,7 @@ const SurveyList = (props) => {
   }
 
   useEffect(() => {
-    if (renderSurvey && renderSurvey.length > 1) {
+    if (renderSurvey && renderSurvey.length >= 1) {
       setTimeout(() => {
         setLoader(false);
       }, 1000);
@@ -83,7 +83,7 @@ const SurveyList = (props) => {
       <>
         <div className='survey-list-survey'>{renderSurvey}</div>
         <div className='count'>
-          <span>Showing 2 of 2 total surveys. </span>
+          <span>Showing 2 of {getSurvey.total} total surveys. </span>
         </div>
       </>
     );

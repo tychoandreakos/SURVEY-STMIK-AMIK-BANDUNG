@@ -28,6 +28,10 @@ export function storeSurvey(payload) {
   return client.post(URI.SURVEY, payload);
 }
 
+export function editSurvey(payload) {
+  return client.get(`${URI.SURVEY}/${payload}`);
+}
+
 export function deleteSurvey(payload) {
   return client.delete(`${URI.SURVEY}/${payload}`);
 }
