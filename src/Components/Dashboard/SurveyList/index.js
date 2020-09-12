@@ -10,14 +10,21 @@ import { SURVEY_LIST } from "../../../util/varTypes";
 import "./style.scss";
 const SurveyList = (props) => {
   const { fetchSurvey, getSurvey } = props;
-  const [loader, setLoader] = useState(true);
+  const [loader, setLoader] = useState(false);
+
+  const getSurveyCheck = useMemo(() => {
+    return getSurvey && getSurvey.data;
+  }, [getSurvey]);
 
   useEffect(() => {
-    fetchSurvey();
-  }, [fetchSurvey]);
+    if (!getSurveyCheck) {
+      setLoader(true);
+      fetchSurvey();
+    }
+  }, [fetchSurvey, getSurveyCheck]);
 
   let renderSurvey;
-  if (getSurvey && getSurvey.data) {
+  if (getSurveyCheck) {
     renderSurvey = getSurvey.data.map((item) => (
       <Survey
         key={item._id}
