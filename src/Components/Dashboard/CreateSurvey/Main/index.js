@@ -13,7 +13,6 @@ import { setTitleSurvey, triggerLoader } from "../../../../Store/redux/action";
 import Textarea from "react-expanding-textarea";
 import {
   SURVEY_TITLE,
-  LOADER,
   SURVEY_FORM_BUILDER,
   SURVEY_LIST,
 } from "../../../../util/varTypes";
@@ -102,17 +101,17 @@ const MainCreateSurvey = (props) => {
     if (validation()) {
       addTitle(title);
       setLoader(true);
-      // setTimeout(() => {
-      //   triggerLoading();
-      // }, 400);
+      setTimeout(() => {
+        triggerLoading(); // enabled loader
+      }, 400);
 
       setTimeout(() => {
         history.push("/create/survey-form");
       }, 2000);
 
-      // setTimeout(() => {
-      //   triggerLoading();
-      // }, 3500);
+      setTimeout(() => {
+        triggerLoading(); // disabled loader
+      }, 3500);
     }
   };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import Sidebar from "../Sidebar";
@@ -14,8 +14,15 @@ import "./style.scss";
 
 function Dashboard(props) {
   const { loader } = props;
+  const dashboardStyle = useMemo(() => {
+    if (loader) {
+      return {
+        overflowY: "hidden",
+      };
+    }
+  }, [loader]);
   return (
-    <div id='dashboard-survey'>
+    <div style={dashboardStyle} id='dashboard-survey'>
       <section id='sidebar-wrapper'>
         <Sidebar />
       </section>

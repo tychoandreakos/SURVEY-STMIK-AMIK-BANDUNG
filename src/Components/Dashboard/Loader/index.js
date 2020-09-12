@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, memo, useCallback, useReducer } from "react";
+import React, { useRef, useEffect, memo, useCallback } from "react";
 
 import * as THREE from "three";
 import { gsap } from "gsap";
@@ -8,7 +8,7 @@ import "./style.scss";
 
 const Loader = () => {
   const canvasRef = useRef({});
-  const bodyRef = useReducer({});
+  const bodyRef = useRef({});
 
   const renderingLoader = useCallback(() => {
     let $canvas = canvasRef.current;
@@ -86,17 +86,10 @@ const Loader = () => {
 
   useEffect(() => {
     renderingLoader();
-    gsap.fromTo(
-      canvasRef.current,
-      {
-        duration: 3,
-        autoAlpha: 0,
-      },
-      {
-        duration: 2,
-        autoAlpha: 1,
-      }
-    );
+    gsap.to(canvasRef.current, {
+      duration: 2,
+      autoAlpha: 1,
+    });
   }, [renderingLoader]);
 
   return (
