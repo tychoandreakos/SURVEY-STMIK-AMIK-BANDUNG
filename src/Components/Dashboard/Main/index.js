@@ -1,21 +1,23 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useReducer, lazy, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import Sidebar from "../Sidebar";
 import Content from "../Content";
 import Loader from "../Loader";
-import Message from "../MessageWrapper/Success";
 
 import SectionOne from "../CreateSurvey/SectionOne";
 import SurveyForm from "../SurveyForm/Main";
 
-import { LOADER } from "../../../util/varTypes";
-import { triggerMessage } from "../../../Store/redux/action";
+import { LOADER, MESSAGE } from "../../../util/varTypes";
 
 import "./style.scss";
 
+const FailedMsg = lazy(() => import("../MessageWrapper/Failed"));
+const SuccessMsg = lazy(() => import("../MessageWrapper/Success"));
+const WarningMsg = lazy(() => import("../MessageWrapper/Warning"));
+
 function Dashboard(props) {
-  const { loader, xo } = props;
+  const { loader } = props;
   const dashboardStyle = useMemo(() => {
     if (loader) {
       return {
@@ -24,13 +26,27 @@ function Dashboard(props) {
     }
   }, [loader]);
 
+  const reducer = (_, action) => {
+    switch (action.type) {
+      case MESSAGE.WARNING:
+        return <WarningMsg title={action.title} />;
+      case MESSAGE.FAILED:
+        return <FailedMsg title={action.title} />;
+      case MESSAGE.SUCCESS:
+        return <SuccessMsg title={action.title} />;
+      default:
+        return [];
+    }
+  };
+
+  const [renderMessage, dispatchMessage] = useReducer(reducer, []);
+
   return (
     <div style={dashboardStyle} id='dashboard-survey'>
       <section id='sidebar-wrapper'>
         <Sidebar />
       </section>
       <section id='main'>
-        <button onClick={xo}>damn me</button>
         <Switch>
           <Route path='/' exact component={Content} />
           <Route path='/create' exact component={SectionOne} />
@@ -38,10 +54,7 @@ function Dashboard(props) {
           <Route path='/edit/survey-form' component={SurveyForm} />
         </Switch>
         {loader ? <Loader /> : undefined}
-        <Message
-          title='Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis,
-        officiis.'
-        />
+        <Suspense>{renderMessage}</Suspense>
       </section>
     </div>
   );
@@ -53,12 +66,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-const x = (dispatch) => {
-  return {
-    xo: () => dispatch(triggerMessage()),
-  };
-};
-
-const DashboardJoinRedux = connect(mapStateToProps, x)(Dashboard);
+const DashboardJoinRedux = connect(mapStateToProps)(Dashboard);
 
 export default DashboardJoinRedux;
