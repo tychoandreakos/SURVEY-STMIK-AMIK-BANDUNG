@@ -9,13 +9,24 @@ import Copy from "@iconify/icons-mdi/layers";
 import Delete from "@iconify/icons-mdi/trash-can";
 import Dialog from "../../Dialog";
 
-import { deleteSurvey, editSurvey } from "../../../../Store/redux/action";
+import {
+  deleteSurvey,
+  editSurvey,
+  triggerLoader,
+} from "../../../../Store/redux/action";
 
 import "./style.scss";
 
 const DropdownSurveyList = (props) => {
   const [dialog, setDialog] = useState(false);
-  const { dropdownHandler, onDelete, _id, onEdit, history } = props;
+  const {
+    dropdownHandler,
+    onDelete,
+    _id,
+    onEdit,
+    history,
+    triggerLoader,
+  } = props;
   const dialogHandler = useCallback(() => {
     setDialog(!dialog);
   }, [dialog]);
@@ -53,8 +64,11 @@ const DropdownSurveyList = (props) => {
 
   function editHandler() {
     if (_id.length > 1) {
+      triggerLoader();
       onEdit(_id);
-      history.push("/edit/survey-form");
+      setTimeout(() => {
+        history.push("/edit/survey-form");
+      }, 1500);
     }
   }
 
@@ -105,6 +119,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onDelete: (id) => dispatch(deleteSurvey(id)),
     onEdit: (id) => dispatch(editSurvey(id)),
+    triggerLoader: () => dispatch(triggerLoader()),
   };
 };
 

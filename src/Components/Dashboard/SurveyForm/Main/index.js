@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { SURVEY_LIST } from "../../../../util/varTypes";
+import { LOADER, SURVEY_LIST } from "../../../../util/varTypes";
 
 import HeaderFormSurvey from "../Header";
 import ContentFormSurvey from "../Content";
@@ -9,12 +9,34 @@ import ViewResultSurvey from "../ViewResult";
 import CollectSurvey from "../CollectSurvey";
 import Summary from "../Summary";
 
+import {
+  cleanSurveyState,
+  triggerLoader,
+} from "../../../../Store/redux/action";
 import "./style.scss";
-import { cleanSurveyState } from "../../../../Store/redux/action";
 
 function MainSurveyForm(props) {
   useEffect(() => window.scrollTo(0, 0), []);
-  const { match, history, success, failed, cleanState } = props;
+  const {
+    match,
+    history,
+    success,
+    failed,
+    cleanState,
+    edit,
+    triggerLoader,
+    loader,
+  } = props;
+
+  const loaderControl = useCallback(() => {
+    if (edit && edit.success && loader) {
+      setTimeout(() => triggerLoader(), 500);
+    }
+  }, [edit]);
+
+  useEffect(() => {
+    loaderControl();
+  }, [loaderControl]);
 
   useEffect(() => {
     if (success && success.success) {
@@ -46,12 +68,15 @@ const mapStateToProps = (state) => {
   return {
     success: state[SURVEY_LIST.FETCH_SURVEY_LIST][SURVEY_LIST.SURVEY_SUCCESS],
     failed: state[SURVEY_LIST.FETCH_SURVEY_LIST][SURVEY_LIST.SURVEY_ERROR],
+    edit: state[SURVEY_LIST.FETCH_SURVEY_LIST][SURVEY_LIST.EDIT_SUCCESS],
+    loader: state[LOADER],
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     cleanState: () => dispatch(cleanSurveyState()),
+    triggerLoader: () => dispatch(triggerLoader()),
   };
 };
 
