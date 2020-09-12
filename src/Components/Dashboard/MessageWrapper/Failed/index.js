@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-import Message from "../../Message";
 import { connect } from "react-redux";
+import Message from "../../Message";
 import { MESSAGE_PROMPT } from "../../../../util/varTypes";
 
 const FailedMsg = (props) => {

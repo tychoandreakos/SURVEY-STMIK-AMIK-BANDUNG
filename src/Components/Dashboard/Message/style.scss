@@ -9,13 +9,16 @@ $Roboto: "Roboto", sans-serif;
   color: #e6f2ff;
   box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
   border-radius: 0.5rem;
-  display: grid;
-  grid-template-columns: 4fr 1fr;
-  justify-content: center;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   font: {
     family: $Roboto;
     size: 0.95rem;
+  }
+
+  span {
+    width: 85%;
   }
 
   .icon-wrapper {
@@ -26,6 +29,7 @@ $Roboto: "Roboto", sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 
     .loading {
       margin-top: 0.5rem;
@@ -35,7 +39,6 @@ $Roboto: "Roboto", sans-serif;
     }
 
     .icon {
-      color: #5661b6;
       display: flex;
       align-items: center;
       justify-content: center;

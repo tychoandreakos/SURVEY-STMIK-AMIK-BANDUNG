@@ -86,7 +86,7 @@ const Message = (props) => {
       return (
         <div ref={loaderRef} className='loading'>
           <Loading
-            color='#5661b6'
+            color={background}
             height={"70%"}
             width={"70%"}
             type='bubbles'
@@ -97,7 +97,7 @@ const Message = (props) => {
 
     if (check) {
       return (
-        <div ref={checkRef} className='icon'>
+        <div ref={checkRef} style={{ color: background }} className='icon'>
           <Icon icon={Check} />
         </div>
       );

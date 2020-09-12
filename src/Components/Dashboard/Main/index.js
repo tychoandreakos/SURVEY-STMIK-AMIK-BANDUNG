@@ -11,6 +11,7 @@ import SurveyForm from "../SurveyForm/Main";
 import { LOADER, MESSAGE } from "../../../util/varTypes";
 
 import "./style.scss";
+import { useEffect } from "react";
 
 const FailedMsg = lazy(() => import("../MessageWrapper/Failed"));
 const SuccessMsg = lazy(() => import("../MessageWrapper/Success"));
@@ -54,7 +55,7 @@ function Dashboard(props) {
           <Route path='/edit/survey-form' component={SurveyForm} />
         </Switch>
         {loader ? <Loader /> : undefined}
-        <Suspense>{renderMessage}</Suspense>
+        <Suspense fallback={"loading..."}>{renderMessage}</Suspense>
       </section>
     </div>
   );
