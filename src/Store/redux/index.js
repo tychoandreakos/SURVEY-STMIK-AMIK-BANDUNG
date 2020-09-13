@@ -116,11 +116,11 @@ function rootReducer(state = initialState, action) {
     };
   }
 
-  if(action.type === actionTypes.SET_MESSAGE_PROMPT) {
+  if (action.type === actionTypes.SET_MESSAGE_PROMPT) {
     return {
       ...state,
-      [varTypes.MESSAGE.STATUS]: action.payload
-    }
+      [varTypes.MESSAGE.STATUS]: action.payload,
+    };
   }
 
   if (action.type === actionTypes.CLEAN_SURVEY_STATE) {
@@ -135,6 +135,7 @@ function rootReducer(state = initialState, action) {
         [varTypes.SURVEY_LIST.SURVEY_SUCCESS]: {},
         [varTypes.SURVEY_LIST.SURVEY_ERROR]: {},
       },
+      [varTypes.MESSAGE.STATUS]: {},
       [varTypes.LOADER]: false,
       [varTypes.SURVEY_FORM_BUILDER]: {
         [varTypes.SURVEY_TITLE]: "",
