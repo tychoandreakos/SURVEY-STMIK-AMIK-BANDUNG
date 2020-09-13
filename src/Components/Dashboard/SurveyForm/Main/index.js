@@ -9,24 +9,12 @@ import ViewResultSurvey from "../ViewResult";
 import CollectSurvey from "../CollectSurvey";
 import Summary from "../Summary";
 
-import {
-  cleanSurveyState,
-  triggerLoader,
-} from "../../../../Store/redux/action";
+import { triggerLoader } from "../../../../Store/redux/action";
 import "./style.scss";
 
 function MainSurveyForm(props) {
   useEffect(() => window.scrollTo(0, 0), []);
-  const {
-    match,
-    history,
-    success,
-    failed,
-    cleanState,
-    edit,
-    triggerLoader,
-    loader,
-  } = props;
+  const { match, edit, triggerLoader, loader } = props;
 
   const loaderControl = useCallback(() => {
     if (edit && edit.success && loader) {
@@ -38,19 +26,8 @@ function MainSurveyForm(props) {
     loaderControl();
   }, [loaderControl]);
 
-  useEffect(() => {
-    if (success && success.success) {
-      cleanState();
-      history.push("/");
-    }
-
-    if (failed && !failed.success) {
-      console.log(failed);
-    }
-  }, [success, failed, history, cleanState]);
-
   return (
-    <div className='main-survey'>
+    <div className="main-survey">
       <HeaderFormSurvey />
       <Switch>
         <Route path={`${match.path}/`} exact component={ContentFormSurvey} />
@@ -66,8 +43,6 @@ const mapRouterToProps = withRouter(MainSurveyForm);
 
 const mapStateToProps = (state) => {
   return {
-    success: state[SURVEY_LIST.FETCH_SURVEY_LIST][SURVEY_LIST.SURVEY_SUCCESS],
-    failed: state[SURVEY_LIST.FETCH_SURVEY_LIST][SURVEY_LIST.SURVEY_ERROR],
     edit: state[SURVEY_LIST.FETCH_SURVEY_LIST][SURVEY_LIST.EDIT_SUCCESS],
     loader: state[LOADER],
   };
@@ -75,7 +50,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    cleanState: () => dispatch(cleanSurveyState()),
     triggerLoader: () => dispatch(triggerLoader()),
   };
 };

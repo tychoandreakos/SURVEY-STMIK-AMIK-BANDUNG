@@ -116,6 +116,13 @@ function rootReducer(state = initialState, action) {
     };
   }
 
+  if(action.type === actionTypes.SET_MESSAGE_PROMPT) {
+    return {
+      ...state,
+      [varTypes.MESSAGE.STATUS]: action.payload
+    }
+  }
+
   if (action.type === actionTypes.CLEAN_SURVEY_STATE) {
     return {
       ...state,

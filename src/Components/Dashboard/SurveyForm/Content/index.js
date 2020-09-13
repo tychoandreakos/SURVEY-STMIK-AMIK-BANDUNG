@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  useMemo,
+} from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import {
@@ -8,6 +14,7 @@ import {
   SURVEY_TYPE_QUESTION,
   SURVEY_CAN_EDIT,
   SURVEY_LIST,
+  MESSAGE,
 } from "../../../../util/varTypes";
 
 import { gsap } from "gsap";
@@ -22,13 +29,15 @@ import Dialog from "../../Dialog";
 import BtnOpt from "../BtnOpt";
 import FormBuilderContext from "../../../../Store/Context/formBuilder";
 import {
+  cleanSurveyState,
+  setMessagePrompt,
   setTypeQuestion,
   storeSurvey,
+  triggerLoader,
   updateSurvey,
 } from "../../../../Store/redux/action";
 
 import "./style.scss";
-import { useMemo } from "react";
 
 const ContentSurveyForm = (props) => {
   const okButton = useRef({});
@@ -41,6 +50,9 @@ const ContentSurveyForm = (props) => {
     editState,
     history,
     updateSurvey,
+    showMessage,
+    cleanState,
+    triggerLoader,
   } = props;
 
   let renderQuestion = [];
@@ -82,14 +94,32 @@ const ContentSurveyForm = (props) => {
   };
 
   const onSubmitHandler = () => {
+    let title;
     if (checkingSubmit) {
       storeSurvey(surveyForm);
+      title = "The survey it's sucess saved";
     } else {
       const _id = editState._id;
       const newData = { ...surveyForm, _id };
       updateSurvey(newData);
+      title = "The survey it's sucess updated";
     }
-    history.push("/");
+    dialogHandler();
+    showMessage({
+      type: MESSAGE.SUCCESS,
+      title,
+    });
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    setTimeout(() => {
+      triggerLoader();
+    }, 3000);
+    setTimeout(() => {
+      history.push("/");
+      cleanState();
+    }, 5000);
   };
 
   const memoizeQuestionCallback = useCallback(() => {
@@ -194,7 +224,7 @@ const ContentSurveyForm = (props) => {
       <Dialog
         onCancelHandler={dialogHandler}
         onConfirmHandler={onSubmitHandler}
-        title='Yes, Save'
+        title="Yes, Save"
       />
     );
   }
@@ -202,18 +232,18 @@ const ContentSurveyForm = (props) => {
   let okButtonEl;
   if (confirmButton.state) {
     okButtonEl = (
-      <div ref={okButton} className='btn-wrapper'>
+      <div ref={okButton} className="btn-wrapper">
         <BtnOpt onClick={dialogHandler} type={TYPE_BUTTON.OK} />
       </div>
     );
   }
 
   return (
-    <div className='content-survey-form'>
+    <div className="content-survey-form">
       {okButtonEl}
-      <div className='survey-wrapper'>
+      <div className="survey-wrapper">
         <HeaderForm />
-        <div className='form-builder'>
+        <div className="form-builder">
           {renderQuestion}
           {questionEl}
           <NewQuestion />
@@ -239,6 +269,9 @@ const mapDispatchToProps = (dispatch) => {
     setTypeQuestion: (item) => dispatch(setTypeQuestion(item)),
     storeSurvey: (item) => dispatch(storeSurvey(item)),
     updateSurvey: (item) => dispatch(updateSurvey(item)),
+    showMessage: (item) => dispatch(setMessagePrompt(item)),
+    cleanState: () => dispatch(cleanSurveyState()),
+    triggerLoader: () => dispatch(triggerLoader()),
   };
 };
 
