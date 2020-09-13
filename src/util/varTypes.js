@@ -21,6 +21,7 @@ export const MESSAGE = {
   WARNING: "WARNING",
   FAILED: "FAILED",
   SUCCESS: "SUCCESS",
+  STATUS: "STATUS",
 };
 export const SURVEY_HEADER = {
   TITLE: "SURVEY_HEADER_TITLE",

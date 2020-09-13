@@ -1,4 +1,4 @@
-import React, { useMemo, useReducer, lazy, Suspense } from "react";
+import React, { useMemo, useReducer, lazy, Suspense, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import Sidebar from "../Sidebar";
@@ -11,14 +11,13 @@ import SurveyForm from "../SurveyForm/Main";
 import { LOADER, MESSAGE } from "../../../util/varTypes";
 
 import "./style.scss";
-import { useEffect } from "react";
 
 const FailedMsg = lazy(() => import("../MessageWrapper/Failed"));
 const SuccessMsg = lazy(() => import("../MessageWrapper/Success"));
 const WarningMsg = lazy(() => import("../MessageWrapper/Warning"));
 
 function Dashboard(props) {
-  const { loader } = props;
+  const { loader, message } = props;
   const dashboardStyle = useMemo(() => {
     if (loader) {
       return {
@@ -41,6 +40,15 @@ function Dashboard(props) {
   };
 
   const [renderMessage, dispatchMessage] = useReducer(reducer, []);
+  useEffect(() => {
+    if (message && message.hasOwnProperty("type")) {
+      const { type, title } = message;
+      dispatchMessage({
+        type,
+        title,
+      });
+    }
+  }, [message]);
 
   return (
     <div style={dashboardStyle} id='dashboard-survey'>
@@ -64,6 +72,7 @@ function Dashboard(props) {
 const mapStateToProps = (state) => {
   return {
     loader: state[LOADER],
+    message: state[MESSAGE.STATUS],
   };
 };
 

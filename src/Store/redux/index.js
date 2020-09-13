@@ -14,6 +14,7 @@ const initialState = {
     [varTypes.SURVEY_LIST.EDIT_SUCESS]: {},
     [varTypes.SURVEY_LIST.EDIT_ERROR]: {},
   },
+  [varTypes.MESSAGE.STATUS]: {},
   [varTypes.LOADER]: false,
   [varTypes.MESSAGE_PROMPT]: false,
   [varTypes.SURVEY_CATEGORY]: slider,
