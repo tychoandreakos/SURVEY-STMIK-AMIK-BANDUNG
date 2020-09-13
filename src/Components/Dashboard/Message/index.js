@@ -24,7 +24,7 @@ const Message = (props) => {
         left: "-1%",
         duration: 1,
         ease: "power2.inOut",
-        autoAlpha: 1,
+        visibility: "visible",
       },
       beforeShowFalse: {
         left: "-1%",

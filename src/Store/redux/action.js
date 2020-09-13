@@ -51,6 +51,13 @@ export function setTitleSurvey(payload) {
   };
 }
 
+export function setMessagePrompt(payload) {
+  return {
+    type: actionType.SET_MESSAGE_PROMPT,
+    payload
+  }
+}
+
 export function triggerMessage() {
   return {
     type: actionType.TRIGGER_MESSAGE,
