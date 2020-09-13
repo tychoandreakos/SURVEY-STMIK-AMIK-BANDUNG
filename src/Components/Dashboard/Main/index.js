@@ -8,16 +8,17 @@ import Loader from "../Loader";
 import SectionOne from "../CreateSurvey/SectionOne";
 import SurveyForm from "../SurveyForm/Main";
 
-import { LOADER, MESSAGE } from "../../../util/varTypes";
+import { LOADER, MESSAGE, MESSAGE_PROMPT } from "../../../util/varTypes";
 
 import "./style.scss";
+import { triggerMessage } from "../../../Store/redux/action";
 
 const FailedMsg = lazy(() => import("../MessageWrapper/Failed"));
 const SuccessMsg = lazy(() => import("../MessageWrapper/Success"));
 const WarningMsg = lazy(() => import("../MessageWrapper/Warning"));
 
 function Dashboard(props) {
-  const { loader, message } = props;
+  const { loader, message, triggerMsg, msgPrompt } = props;
   const dashboardStyle = useMemo(() => {
     if (loader) {
       return {
@@ -50,17 +51,23 @@ function Dashboard(props) {
     }
   }, [message]);
 
+  useEffect(() => {
+    if (msgPrompt) {
+      setTimeout(() => triggerMsg(), 3000);
+    }
+  }, [msgPrompt]);
+
   return (
-    <div style={dashboardStyle} id='dashboard-survey'>
-      <section id='sidebar-wrapper'>
+    <div style={dashboardStyle} id="dashboard-survey">
+      <section id="sidebar-wrapper">
         <Sidebar />
       </section>
-      <section id='main'>
+      <section id="main">
         <Switch>
-          <Route path='/' exact component={Content} />
-          <Route path='/create' exact component={SectionOne} />
-          <Route path='/create/survey-form' component={SurveyForm} />
-          <Route path='/edit/survey-form' component={SurveyForm} />
+          <Route path="/" exact component={Content} />
+          <Route path="/create" exact component={SectionOne} />
+          <Route path="/create/survey-form" component={SurveyForm} />
+          <Route path="/edit/survey-form" component={SurveyForm} />
         </Switch>
         {loader ? <Loader /> : undefined}
         <Suspense fallback={"loading..."}>{renderMessage}</Suspense>
@@ -73,9 +80,19 @@ const mapStateToProps = (state) => {
   return {
     loader: state[LOADER],
     message: state[MESSAGE.STATUS],
+    msgPrompt: state[MESSAGE_PROMPT],
   };
 };
 
-const DashboardJoinRedux = connect(mapStateToProps)(Dashboard);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    triggerMsg: () => dispatch(triggerMessage()),
+  };
+};
+
+const DashboardJoinRedux = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dashboard);
 
 export default DashboardJoinRedux;
