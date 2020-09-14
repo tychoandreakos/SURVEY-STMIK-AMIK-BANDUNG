@@ -4,24 +4,31 @@ import { connect } from "react-redux";
 import Survey from "../Survey";
 import Loader from "react-loading";
 
-import { fetchSurvey } from "../../../Store/redux/action";
+import { cancelEditClean, fetchSurvey } from "../../../Store/redux/action";
 import { SURVEY_LIST } from "../../../util/varTypes";
 
 import "./style.scss";
+import { useCallback } from "react";
 const SurveyList = (props) => {
-  const { fetchSurvey, getSurvey } = props;
+  const { fetchSurvey, getSurvey, cancelEditClean } = props;
   const [loader, setLoader] = useState(false);
 
   const getSurveyCheck = useMemo(() => {
     return getSurvey && getSurvey.data;
   }, [getSurvey]);
 
+  const cancelEditCleanCallback = useCallback(() => {
+    cancelEditClean();
+    console.log("damn");
+  }, [cancelEditClean]);
+
   useEffect(() => {
     if (!getSurveyCheck) {
       setLoader(true);
       fetchSurvey();
     }
-  }, [fetchSurvey, getSurveyCheck]);
+    cancelEditCleanCallback();
+  }, [fetchSurvey, getSurveyCheck, cancelEditCleanCallback]);
 
   let renderSurvey;
   if (getSurveyCheck) {
@@ -110,6 +117,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchSurvey: () => dispatch(fetchSurvey()),
+    cancelEditClean: () => dispatch(cancelEditClean()),
   };
 };
 

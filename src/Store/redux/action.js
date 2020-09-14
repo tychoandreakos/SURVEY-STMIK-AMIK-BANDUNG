@@ -54,8 +54,8 @@ export function setTitleSurvey(payload) {
 export function setMessagePrompt(payload) {
   return {
     type: actionType.SET_MESSAGE_PROMPT,
-    payload
-  }
+    payload,
+  };
 }
 
 export function triggerMessage() {
@@ -108,6 +108,12 @@ export function setTypeQuestion(payload) {
   return {
     type: actionType.SET_TYPE_QUESTION,
     payload,
+  };
+}
+
+export function cancelEditClean() {
+  return {
+    type: actionType.CANCEL_EDIT_CLEAN,
   };
 }
 

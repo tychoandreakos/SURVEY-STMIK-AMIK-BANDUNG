@@ -11,7 +11,7 @@ const initialState = {
     [varTypes.SURVEY_LIST.SURVEY_LIST_ERROR]: {},
     [varTypes.SURVEY_LIST.SURVEY_SUCCESS]: {},
     [varTypes.SURVEY_LIST.SURVEY_ERROR]: {},
-    [varTypes.SURVEY_LIST.EDIT_SUCESS]: {},
+    [varTypes.SURVEY_LIST.EDIT_SUCCESS]: {},
     [varTypes.SURVEY_LIST.EDIT_ERROR]: {},
   },
   [varTypes.MESSAGE.STATUS]: {},
@@ -123,6 +123,37 @@ function rootReducer(state = initialState, action) {
     };
   }
 
+  if (action.type === actionTypes.CANCEL_EDIT_CLEAN) {
+    return {
+      ...state,
+      [varTypes.SURVEY_CAN_EDIT]: false,
+      [varTypes.SURVEY_EDIT_TYPE_QUESTION]: "",
+      [varTypes.SURVEY_TYPE_QUESTION]: "",
+      [varTypes.SURVEY_LIST.FETCH_SURVEY_LIST]: {
+        ...state[varTypes.SURVEY_LIST.FETCH_SURVEY_LIST],
+        [varTypes.SURVEY_LIST.EDIT_SUCCESS]: {},
+        [varTypes.SURVEY_LIST.EDIT_ERROR]: {},
+      },
+      [varTypes.SURVEY_FORM_BUILDER]: {
+        [varTypes.SURVEY_TITLE]: "",
+        [varTypes.SURVEY_LOGO]: "",
+        [varTypes.SURVEY_CATEGORY]: "",
+        [varTypes.SURVEY_HEADER.TITLE]:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos nesciunt praesentium aperiam ex sapiente accusantium!",
+        [varTypes.SURVEY_HEADER.DESC]:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita quia accusamus adipisci, magni officiis dolore!",
+        [varTypes.SURVEY_CATEGORY_BUILDER]: {},
+        [varTypes.SURVEY_FORM_QUESTION]: [],
+        [varTypes.SURVEY_FORM_COPIED]: [],
+      },
+      [varTypes.MULTICHOICE.SELF]: {
+        [varTypes.MULTICHOICE.MULTICHOICEID]: [],
+        [varTypes.MULTICHOICE.INPUTSTATE]: [],
+        [varTypes.MULTICHOICE.EDITMULTICHOICE]: {},
+      },
+    };
+  }
+
   if (action.type === actionTypes.CLEAN_SURVEY_STATE) {
     return {
       ...state,
@@ -134,6 +165,8 @@ function rootReducer(state = initialState, action) {
         [varTypes.SURVEY_LIST.SURVEY_LIST_ERROR]: {},
         [varTypes.SURVEY_LIST.SURVEY_SUCCESS]: {},
         [varTypes.SURVEY_LIST.SURVEY_ERROR]: {},
+        [varTypes.SURVEY_LIST.EDIT_SUCCESS]: {},
+        [varTypes.SURVEY_LIST.EDIT_ERROR]: {},
       },
       [varTypes.MESSAGE.STATUS]: {},
       [varTypes.LOADER]: false,
