@@ -18,7 +18,12 @@ const LogoButton = (props) => {
   const [image, setImage] = useState();
   const [actualImage, setActualImage] = useState();
   const [loader, setLoader] = useState(false);
-  const { title = "Add a Logo", icon = DefaultIcon, processingLogo } = props;
+  const {
+    title = "Add a Logo",
+    icon = DefaultIcon,
+    processingLogo,
+    logo,
+  } = props;
   const inputFileRef = useRef();
 
   const loaderRef = useRef({
@@ -64,6 +69,11 @@ const LogoButton = (props) => {
   useEffect(() => {
     processingLogoCallback();
   }, [processingLogoCallback]);
+
+  useEffect(() => {
+    const url = process.env.REACT_APP_BASE_URL_API + "/images/" + logo;
+    setActualImage(url);
+  }, [logo]);
 
   useEffect(() => {
     if (actualImage && actualImage.length > 0) {

@@ -28,7 +28,6 @@ const SurveyHeaderForm = (props) => {
     if (title) {
       const capitalizeTitle = title.charAt(0).toUpperCase() + title.slice(1);
       setHeadTitle(capitalizeTitle);
-      console.log("aku");
     }
 
     if (!title && urlChecker === "create") {

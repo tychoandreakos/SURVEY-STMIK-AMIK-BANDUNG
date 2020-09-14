@@ -16,6 +16,7 @@ import {
   SURVEY_LIST,
   MESSAGE,
   MESSAGE_PROMPT,
+  SURVEY_LOGO,
 } from "../../../../util/varTypes";
 
 import { gsap } from "gsap";
@@ -236,7 +237,7 @@ const ContentSurveyForm = (props) => {
       <Dialog
         onCancelHandler={dialogHandler}
         onConfirmHandler={onSubmitHandler}
-        title="Yes, Save"
+        title='Yes, Save'
       />
     );
   }
@@ -244,18 +245,18 @@ const ContentSurveyForm = (props) => {
   let okButtonEl;
   if (confirmButton.state) {
     okButtonEl = (
-      <div ref={okButton} className="btn-wrapper">
+      <div ref={okButton} className='btn-wrapper'>
         <BtnOpt onClick={dialogHandler} type={TYPE_BUTTON.OK} />
       </div>
     );
   }
 
   return (
-    <div className="content-survey-form">
+    <div className='content-survey-form'>
       {okButtonEl}
-      <div className="survey-wrapper">
-        <HeaderForm />
-        <div className="form-builder">
+      <div className='survey-wrapper'>
+        <HeaderForm logo={surveyForm[SURVEY_LOGO]} />
+        <div className='form-builder'>
           {renderQuestion}
           {questionEl}
           <NewQuestion />
