@@ -37,7 +37,7 @@ const SurveyHeaderForm = (props) => {
     if (!title && urlChecker === "edit") {
       history.push("/");
     }
-  }, [title, history]);
+  }, [title, history, match]);
   useEffect(() => {}, []);
   useEffect(() => {
     if (headTitle.length > 5 && !viewResult && surveyList.length >= 3)
