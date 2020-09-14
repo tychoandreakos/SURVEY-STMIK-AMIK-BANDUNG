@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -11,10 +11,11 @@ import {
   SURVEY_FORM_BUILDER,
   SURVEY_FORM_QUESTION,
   SURVEY_HEADER,
+  SURVEY_LOGO,
 } from "../../../../util/varTypes";
 
 const ViewResult = (props) => {
-  const { surveyList, history, title, description } = props;
+  const { surveyList, history, title, description, logo } = props;
 
   useEffect(() => {
     if (surveyList.length < 1) {
@@ -22,11 +23,30 @@ const ViewResult = (props) => {
     }
   }, [surveyList, history]);
 
+  const styleLogo = useMemo(() => {
+    if (logo) {
+      const url = process.env.REACT_APP_BASE_URL_API + "/images/" + logo;
+      return {
+        background: "url('" + url + "')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      };
+    }
+  }, [logo]);
+
+  const renderLogo = useMemo(() => {
+    if (logo) {
+      return <div style={styleLogo} className='logo'></div>;
+    }
+    return undefined;
+  }, [styleLogo, logo]);
+
   return (
     <div className='view-result'>
       <div className='content'>
         <div className='left'>
-          <div className='logo'></div>
+          {renderLogo}
           <div className='header'>
             <h3 className='title'>{title}</h3>
             <span className='description'>{description}</span>
@@ -45,6 +65,7 @@ const mapStateToProps = (state) => {
     surveyList: state[SURVEY_FORM_BUILDER][SURVEY_FORM_QUESTION],
     title: state[SURVEY_FORM_BUILDER][SURVEY_HEADER.TITLE],
     description: state[SURVEY_FORM_BUILDER][SURVEY_HEADER.DESC],
+    logo: state[SURVEY_FORM_BUILDER][SURVEY_LOGO],
   };
 };
 

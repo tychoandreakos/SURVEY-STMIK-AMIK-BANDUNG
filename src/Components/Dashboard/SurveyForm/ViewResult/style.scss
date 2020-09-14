@@ -2,7 +2,7 @@ $Nunito: "Nunito", sans-serif;
 $MerriWeather: "MerriWeather", sans-serif;
 
 .view-result {
-  padding: 2rem;
+  padding-top: 2rem;
   position: relative;
 
   .content {
@@ -13,14 +13,12 @@ $MerriWeather: "MerriWeather", sans-serif;
       overflow-y: auto;
       height: 23rem;
       margin-bottom: 3rem;
+      padding: 0 1rem;
 
       .logo {
-        width: 175px;
-        height: 175px;
-        background: url("https://surveymonkey-assets.s3.amazonaws.com/survey/288658619/e60c9c3a-67e0-4aa4-8c4e-c58b3f6330af.png");
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
+        width: 150px;
+        height: 150px;
+        padding-left: 1.5rem;
       }
 
       .header {

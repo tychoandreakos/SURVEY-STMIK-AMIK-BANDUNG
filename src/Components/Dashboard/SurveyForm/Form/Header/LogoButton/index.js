@@ -71,8 +71,10 @@ const LogoButton = (props) => {
   }, [processingLogoCallback]);
 
   useEffect(() => {
-    const url = process.env.REACT_APP_BASE_URL_API + "/images/" + logo;
-    setActualImage(url);
+    if (logo) {
+      const url = process.env.REACT_APP_BASE_URL_API + "/images/" + logo;
+      setActualImage(url);
+    }
   }, [logo]);
 
   useEffect(() => {
