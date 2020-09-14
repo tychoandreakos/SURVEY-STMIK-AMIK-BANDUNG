@@ -28,9 +28,20 @@ const DropdownSurveyList = (props) => {
     history,
     triggerLoader,
   } = props;
+
   const dialogHandler = useCallback(() => {
     setDialog(!dialog);
   }, [dialog]);
+
+  const editHandler = useCallback(() => {
+    if (_id.length > 1) {
+      triggerLoader();
+      onEdit(_id);
+      setTimeout(() => {
+        history.push("/edit/survey-form");
+      }, 1500);
+    }
+  }, [_id, history, triggerLoader, onEdit]);
 
   const dropdown = useMemo(() => {
     return [
@@ -55,23 +66,13 @@ const DropdownSurveyList = (props) => {
         method: dialogHandler,
       },
     ];
-  }, [dialogHandler]);
+  }, [dialogHandler, editHandler]);
 
   const disabledDropdownHandler = () => {
     dropdownHandler();
   };
 
   function copyHandler() {}
-
-  function editHandler() {
-    if (_id.length > 1) {
-      triggerLoader();
-      onEdit(_id);
-      setTimeout(() => {
-        history.push("/edit/survey-form");
-      }, 1500);
-    }
-  }
 
   function shareHandler() {}
 

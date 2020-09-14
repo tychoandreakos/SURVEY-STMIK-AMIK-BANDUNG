@@ -71,7 +71,7 @@ const Message = (props) => {
         }, 1500);
       }
     }
-  }, [messageRef, show]);
+  }, [messageRef, show, messageMemo]);
 
   useEffect(() => {
     if (show) {
@@ -102,7 +102,7 @@ const Message = (props) => {
         </div>
       );
     }
-  }, [loading, check]);
+  }, [loading, check, background]);
 
   return (
     <div ref={messageRef} style={{ background }} className='message-wrapper'>

@@ -35,11 +35,15 @@ const MainCreateSurvey = (props) => {
     editState,
   } = props;
 
-  useEffect(() => {
+  const redirectIfSuccess = useCallback(() => {
     if (editState && editState.hasOwnProperty("success") && editState.success) {
       history.push("/edit/survey-form");
     }
-  }, [editState]);
+  }, [editState, history]);
+
+  useEffect(() => {
+    redirectIfSuccess();
+  }, [redirectIfSuccess]);
 
   const titleMemo = useMemo(() => titleState, [titleState]);
   useEffect(() => {

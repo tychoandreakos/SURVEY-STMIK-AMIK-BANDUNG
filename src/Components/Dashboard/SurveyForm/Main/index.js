@@ -20,14 +20,14 @@ function MainSurveyForm(props) {
     if (edit && edit.success && loader) {
       setTimeout(() => triggerLoader(), 500);
     }
-  }, [edit]);
+  }, [edit, triggerLoader, loader]);
 
   useEffect(() => {
     loaderControl();
   }, [loaderControl]);
 
   return (
-    <div className="main-survey">
+    <div className='main-survey'>
       <HeaderFormSurvey />
       <Switch>
         <Route path={`${match.path}/`} exact component={ContentFormSurvey} />
