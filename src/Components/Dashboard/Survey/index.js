@@ -57,12 +57,6 @@ const Survey = (props) => {
     }, 500);
   }, [surveyRef]);
 
-  useEffect(() => {
-    if (surveyRef && surveyRef.current !== null) {
-      console.log(surveyRef);
-    }
-  }, [surveyRef]);
-
   const dateFormat = (val) => {
     return val.split("T")[0].split("-").join("/");
   };
