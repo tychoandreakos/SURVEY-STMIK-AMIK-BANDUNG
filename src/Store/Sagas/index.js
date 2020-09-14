@@ -88,9 +88,17 @@ function* watchStoreSurvey(action) {
   }
 }
 
-function* watchProcessingLogo(payload) {
-  yield put({
-    type: actionTypes.SET_SURVEY_LOGO,
-    payload: payload,
-  });
+function* watchProcessingLogo(action) {
+  try {
+    const { data } = yield call(api.processingImage, action.payload);
+    yield put({
+      type: actionTypes.PROCESSING_LOGO_SUCCESS,
+      payload: data,
+    });
+  } catch (e) {
+    yield put({
+      type: actionTypes.PROCESSING_LOGO_FAILED,
+      payload: e.message,
+    });
+  }
 }

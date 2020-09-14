@@ -37,3 +37,7 @@ export function updateSurvey(payload) {
 export function deleteSurvey(payload) {
   return client.delete(`${URI.SURVEY}/${payload}`);
 }
+
+export function processingImage(payload) {
+  return client.post(`${URI.SURVEY}/upload-image`, payload);
+}

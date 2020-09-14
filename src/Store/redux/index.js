@@ -192,8 +192,15 @@ function rootReducer(state = initialState, action) {
     return state;
   }
 
-  if (action.type === actionTypes.SET_SURVEY_LOGO) {
-    console.log("its working");
+  if (action.type === actionTypes.PROCESSING_LOGO_SUCCESS) {
+    console.log(action.payload);
+    return {
+      ...state,
+    };
+  }
+
+  if (action.type === actionTypes.PROCESSING_LOGO_FAILED) {
+    console.log(action.payload);
     return {
       ...state,
     };

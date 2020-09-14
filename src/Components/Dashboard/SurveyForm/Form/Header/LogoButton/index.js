@@ -57,10 +57,9 @@ const LogoButton = (props) => {
         setActualImage(reader.result);
       };
 
-      processingLogo();
       setLoader(true);
     }
-  }, [image, processingLogo]);
+  }, [image]);
 
   useEffect(() => {
     processingLogoCallback();
@@ -71,8 +70,11 @@ const LogoButton = (props) => {
       setTimeout(() => {
         setLoader(false);
       }, 1500);
+      processingLogo({
+        image: actualImage,
+      });
     }
-  }, [actualImage]);
+  }, [actualImage, processingLogo]);
 
   const readFile = (e) => {
     const imageFiles = e.target.files[0];
