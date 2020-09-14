@@ -49,7 +49,7 @@ const Survey = (props) => {
     if (logo) {
       style = {
         background: "url('" + url + "')",
-        backgroundSize: "contain",
+        backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       };

@@ -82,12 +82,16 @@ const ContentSurveyForm = (props) => {
   const [formBuilder, setFormBuilder] = useState(false);
   const [dialog, setDialog] = useState(false);
   const checkingSubmit = useMemo(() => {
-    if (surveyForm && !editState) return true;
+    if (surveyForm && !editState._id) return true;
     if (editState && editState._id) return false;
   }, [surveyForm, editState]);
   const [confirmButton, setConfirmButton] = useState({
     state: false,
     anim: false,
+  });
+
+  useEffect(() => {
+    console.log(editState);
   });
 
   const formBuilderHidden = () => {
