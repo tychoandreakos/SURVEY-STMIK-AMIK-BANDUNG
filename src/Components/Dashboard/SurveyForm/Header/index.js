@@ -23,9 +23,23 @@ const SurveyHeaderForm = (props) => {
   const [viewResult, setViewResult] = useState(false);
   const { title, history, match, addTitle, surveyList } = props;
   useEffect(() => {
-    if (title) setHeadTitle(title);
-    else history.push("/create");
+    const urlChecker = match.url.split("/")[1];
+
+    if (title) {
+      const capitalizeTitle = title.charAt(0).toUpperCase() + title.slice(1);
+      setHeadTitle(capitalizeTitle);
+      console.log("aku");
+    }
+
+    if (!title && urlChecker === "create") {
+      history.push("/create");
+    }
+
+    if (!title && urlChecker === "edit") {
+      history.push("/");
+    }
   }, [title, history]);
+  useEffect(() => {}, []);
   useEffect(() => {
     if (headTitle.length > 5 && !viewResult && surveyList.length >= 3)
       setViewResult(true);
@@ -44,7 +58,9 @@ const SurveyHeaderForm = (props) => {
   };
 
   const titleSave = () => {
-    addTitle(headTitle);
+    if (headTitle.length >= 3) {
+      addTitle(headTitle);
+    }
   };
 
   const goBack = () => {
