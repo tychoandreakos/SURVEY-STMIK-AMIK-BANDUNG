@@ -193,9 +193,12 @@ function rootReducer(state = initialState, action) {
   }
 
   if (action.type === actionTypes.PROCESSING_LOGO_SUCCESS) {
-    console.log(action.payload);
     return {
       ...state,
+      [varTypes.SURVEY_FORM_BUILDER]: {
+        ...state[varTypes.SURVEY_FORM_BUILDER],
+        [varTypes.SURVEY_LOGO]: action.payload.data.image,
+      },
     };
   }
 

@@ -43,6 +43,25 @@ const Survey = (props) => {
     ];
   }, [totalComments, totalQuestion, totalResponse]);
 
+  const imageStyle = useMemo(() => {
+    let style;
+    const url = process.env.REACT_APP_BASE_URL_API + "/images/" + logo;
+    if (logo) {
+      style = {
+        background: "url('" + url + "')",
+        backgroundSize: "contain",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      };
+    } else {
+      style = {
+        background: "#edf0f0",
+      };
+    }
+
+    return style;
+  }, [logo]);
+
   const [dropdown, setDropdown] = useState(false);
   const [draft, setDraft] = useState(false);
   const [show, setShow] = useState(true);
@@ -112,7 +131,7 @@ const Survey = (props) => {
       <div ref={surveyRef} className='survey'>
         <div className='first'>
           <div className='logo'>
-            <div className='logo-wrapper'></div>
+            <div style={imageStyle} className='logo-wrapper'></div>
           </div>
           <div className='info'>
             <h3>{title}</h3>
