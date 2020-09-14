@@ -15,6 +15,7 @@ import {
   SURVEY_CAN_EDIT,
   SURVEY_LIST,
   MESSAGE,
+  MESSAGE_PROMPT,
 } from "../../../../util/varTypes";
 
 import { gsap } from "gsap";
@@ -55,6 +56,7 @@ const ContentSurveyForm = (props) => {
     cleanState,
     triggerLoader,
     triggerMsg,
+    msgPrompt,
   } = props;
 
   let renderQuestion = [];
@@ -203,6 +205,13 @@ const ContentSurveyForm = (props) => {
   }, [memoizedCallback]);
 
   useEffect(() => {
+    if (msgPrompt) {
+      console.log("trojan");
+      triggerMsg();
+    }
+  }, [msgPrompt]);
+
+  useEffect(() => {
     memoizeAnimCallback();
   }, [memoizeAnimCallback]);
 
@@ -264,6 +273,7 @@ const mapStateToProps = (state) => {
     canEdit: state[SURVEY_CAN_EDIT],
     surveyForm: state[SURVEY_FORM_BUILDER],
     editState: state[SURVEY_LIST.FETCH_SURVEY_LIST][SURVEY_LIST.EDIT_SUCCESS],
+    msgPrompt: state[MESSAGE_PROMPT],
   };
 };
 

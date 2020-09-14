@@ -21,7 +21,7 @@ const SuccessMsg = (props) => {
   useEffect(() => {
     msgCallback();
   }, [msgCallback]);
-  return <Message show={msg} background='#5661b6' title={title} />;
+  return <Message show={msg} background="#5661b6" title={title} />;
 };
 
 const mapStateToProps = (state) => {

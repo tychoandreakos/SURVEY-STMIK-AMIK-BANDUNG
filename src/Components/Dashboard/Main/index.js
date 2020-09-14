@@ -11,14 +11,14 @@ import SurveyForm from "../SurveyForm/Main";
 import { LOADER, MESSAGE, MESSAGE_PROMPT } from "../../../util/varTypes";
 
 import "./style.scss";
-import { triggerMessage } from "../../../Store/redux/action";
+import { triggerLoader, triggerMessage } from "../../../Store/redux/action";
 
 const FailedMsg = lazy(() => import("../MessageWrapper/Failed"));
 const SuccessMsg = lazy(() => import("../MessageWrapper/Success"));
 const WarningMsg = lazy(() => import("../MessageWrapper/Warning"));
 
 function Dashboard(props) {
-  const { loader, message, triggerMsg, msgPrompt } = props;
+  const { loader, message, msgPrompt, triggerMsg } = props;
   const dashboardStyle = useMemo(() => {
     if (loader) {
       return {
@@ -50,12 +50,6 @@ function Dashboard(props) {
       });
     }
   }, [message]);
-
-  useEffect(() => {
-    if (msgPrompt) {
-      setTimeout(() => triggerMsg(), 3000);
-    }
-  }, [msgPrompt]);
 
   return (
     <div style={dashboardStyle} id="dashboard-survey">
