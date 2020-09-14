@@ -26,7 +26,7 @@ const initialState = {
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos nesciunt praesentium aperiam ex sapiente accusantium!",
     [varTypes.SURVEY_HEADER.DESC]:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita quia accusamus adipisci, magni officiis dolore!",
-    [varTypes.SURVEY_CATEGORY_BUILDER]: {},
+    [varTypes.SURVEY_CATEGORY_BUILDER]: slider[1],
     [varTypes.SURVEY_FORM_QUESTION]: [],
     [varTypes.SURVEY_FORM_COPIED]: [],
   },
