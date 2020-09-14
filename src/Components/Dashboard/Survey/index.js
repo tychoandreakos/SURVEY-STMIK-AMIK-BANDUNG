@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useRef,
+  useCallback,
+} from "react";
 
 import DropdownSurveyList from "./Dropdown";
 import { Icon } from "@iconify/react";
 import dots from "@iconify/icons-mdi/dots-horizontal";
+import { gsap } from "gsap";
 
 import "./style.scss";
-import { useMemo } from "react";
 
 const Survey = (props) => {
   const {
@@ -39,6 +45,24 @@ const Survey = (props) => {
 
   const [dropdown, setDropdown] = useState(false);
   const [draft, setDraft] = useState(false);
+  const [show, setShow] = useState(true);
+  const surveyRef = useRef();
+  const deleteAnim = useCallback(() => {
+    gsap.to(surveyRef.current, {
+      x: 100,
+      autoAlpha: 0,
+    });
+    setTimeout(() => {
+      setShow(false);
+    }, 500);
+  }, [surveyRef]);
+
+  useEffect(() => {
+    if (surveyRef && surveyRef.current !== null) {
+      console.log(surveyRef);
+    }
+  }, [surveyRef]);
+
   const dateFormat = (val) => {
     return val.split("T")[0].split("-").join("/");
   };
@@ -64,7 +88,11 @@ const Survey = (props) => {
   let dropdownRender;
   if (dropdown) {
     dropdownRender = (
-      <DropdownSurveyList _id={_id} dropdownHandler={dropdownHandler} />
+      <DropdownSurveyList
+        onDeleteAnim={deleteAnim}
+        _id={_id}
+        dropdownHandler={dropdownHandler}
+      />
     );
   }
 
@@ -84,31 +112,36 @@ const Survey = (props) => {
     );
   }
 
-  return (
-    <div className='survey'>
-      <div className='first'>
-        <div className='logo'>
-          <div className='logo-wrapper'></div>
-        </div>
-        <div className='info'>
-          <h3>{title}</h3>
-          <div className='description'>
-            <span>created: {dateFormat(createdAt)}</span>
-            <span>modified: {dateFormat(modifiedAt)}</span>
+  let renderSurvey;
+  if (show) {
+    renderSurvey = (
+      <div ref={surveyRef} className='survey'>
+        <div className='first'>
+          <div className='logo'>
+            <div className='logo-wrapper'></div>
+          </div>
+          <div className='info'>
+            <h3>{title}</h3>
+            <div className='description'>
+              <span>created: {dateFormat(createdAt)}</span>
+              <span>modified: {dateFormat(modifiedAt)}</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div className='second'>
-        <div onClick={dropdownHandler} className='settings'>
-          <Icon width={sizeDots} height={sizeDots} icon={dots} />
-          <span>options</span>
+        <div className='second'>
+          <div onClick={dropdownHandler} className='settings'>
+            <Icon width={sizeDots} height={sizeDots} icon={dots} />
+            <span>options</span>
+          </div>
+          <div className='status'>{statusRender}</div>
         </div>
-        <div className='status'>{statusRender}</div>
+        {draftBadgeRender}
+        {dropdownRender}
       </div>
-      {draftBadgeRender}
-      {dropdownRender}
-    </div>
-  );
+    );
+  }
+
+  return renderSurvey ?? null;
 };
 
 export default Survey;

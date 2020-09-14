@@ -22,6 +22,7 @@ const DropdownSurveyList = (props) => {
   const {
     dropdownHandler,
     onDelete,
+    onDeleteAnim,
     _id,
     onEdit,
     history,
@@ -77,6 +78,7 @@ const DropdownSurveyList = (props) => {
   function deleteHandler() {
     if (_id.length > 1) {
       onCancelHandler();
+      onDeleteAnim();
       onDelete(_id);
     }
   }
