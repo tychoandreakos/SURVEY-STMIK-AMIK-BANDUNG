@@ -22,7 +22,6 @@ const Welcome = (props) => {
   }, [checkGetSurvey, getSurvey]);
 
   const openSurvey = useMemo(() => {
-    console.log(getSurvey);
     if (checkGetSurvey()) {
       return getSurvey.result.data.filter((item) => !item.status).length;
     }
