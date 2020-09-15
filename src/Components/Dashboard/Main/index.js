@@ -7,18 +7,29 @@ import Loader from "../Loader";
 
 import SectionOne from "../CreateSurvey/SectionOne";
 import SurveyForm from "../SurveyForm/Main";
+import Analytics from "../Analytics";
+import SurveyStatus from "../SurveyStatus";
+import Settings from "../Settings";
 
 import { LOADER, MESSAGE, MESSAGE_PROMPT } from "../../../util/varTypes";
+import { triggerLoader, triggerMessage } from "../../../Store/redux/action";
+import {
+  CREATE_SURVEY,
+  CREATE_SURVEY_FORM,
+  EDIT_SURVEY_FORM,
+  SETTINGS_DASHBOARD,
+  ANALYTICS_DASHBOARD,
+  SURVEY_STATUS_DASHBOARD,
+} from "../../../util/route";
 
 import "./style.scss";
-import { triggerLoader, triggerMessage } from "../../../Store/redux/action";
 
 const FailedMsg = lazy(() => import("../MessageWrapper/Failed"));
 const SuccessMsg = lazy(() => import("../MessageWrapper/Success"));
 const WarningMsg = lazy(() => import("../MessageWrapper/Warning"));
 
 function Dashboard(props) {
-  const { loader, message, msgPrompt, triggerMsg } = props;
+  const { loader, message, msgPrompt, triggerMsg, match } = props;
   const dashboardStyle = useMemo(() => {
     if (loader) {
       return {
@@ -52,16 +63,19 @@ function Dashboard(props) {
   }, [message]);
 
   return (
-    <div style={dashboardStyle} id="dashboard-survey">
-      <section id="sidebar-wrapper">
+    <div style={dashboardStyle} id='dashboard-survey'>
+      <section id='sidebar-wrapper'>
         <Sidebar />
       </section>
-      <section id="main">
+      <section id='main'>
         <Switch>
-          <Route path="/" exact component={Content} />
-          <Route path="/create" exact component={SectionOne} />
-          <Route path="/create/survey-form" component={SurveyForm} />
-          <Route path="/edit/survey-form" component={SurveyForm} />
+          <Route path={match.path} exact component={Content} />
+          <Route path={CREATE_SURVEY} component={SectionOne} />
+          <Route path={CREATE_SURVEY_FORM} component={SurveyForm} />
+          <Route path={EDIT_SURVEY_FORM} component={SurveyForm} />
+          <Route path={SURVEY_STATUS_DASHBOARD} component={SurveyStatus} />
+          <Route path={ANALYTICS_DASHBOARD} component={Analytics} />
+          <Route path={SETTINGS_DASHBOARD} component={Settings} />
         </Switch>
         {loader ? <Loader /> : undefined}
         <Suspense fallback={"loading..."}>{renderMessage}</Suspense>

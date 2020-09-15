@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./Store/redux";
@@ -8,6 +8,9 @@ import createMiddlewareSaga from "redux-saga";
 import rootSaga from "./Store/Sagas";
 
 import Dashboard from "./Components/Dashboard/Main";
+import Login from "./Components/Login/Main";
+
+import { HOME_DASHBOARD, LOGIN } from "./util/route";
 
 const sagaMiddleware = createMiddlewareSaga();
 const store = createStore(
@@ -21,7 +24,10 @@ function App() {
     <div id='app'>
       <Provider store={store}>
         <BrowserRouter>
-          <Dashboard />
+          <Switch>
+            <Route path={LOGIN} component={Login} />
+            <Route path={HOME_DASHBOARD} component={Dashboard} />
+          </Switch>
         </BrowserRouter>
       </Provider>
     </div>

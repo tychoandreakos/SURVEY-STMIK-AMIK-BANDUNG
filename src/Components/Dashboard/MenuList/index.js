@@ -1,36 +1,43 @@
-import React from 'react';
+import React from "react";
 
-import './style.scss';
-import { Icon } from '@iconify/react';
-import { Link } from 'react-router-dom';
+import "./style.scss";
+import { Icon } from "@iconify/react";
+import { Link } from "react-router-dom";
 
-import home from '@iconify/icons-mdi/home';
-import settings from '@iconify/icons-mdi/settings-outline';
-import mySurvey from '@iconify/icons-mdi/check-circle-outline';
-import listSurvey from '@iconify/icons-mdi/clipboard-text-outline';
+import home from "@iconify/icons-mdi/home";
+import settings from "@iconify/icons-mdi/settings-outline";
+import mySurvey from "@iconify/icons-mdi/check-circle-outline";
+import listSurvey from "@iconify/icons-mdi/clipboard-text-outline";
+
+import {
+  HOME_DASHBOARD,
+  SETTINGS_DASHBOARD,
+  SURVEY_STATUS_DASHBOARD,
+  ANALYTICS_DASHBOARD,
+} from "../../../util/route";
 
 const MenuList = () => {
   const menus = [
     {
-      title: 'home',
+      title: "home",
       icon: home,
-      link: '/',
+      link: HOME_DASHBOARD,
       active: true,
     },
     {
-      title: 'my survey',
+      title: "my survey",
       icon: mySurvey,
-      link: '#',
+      link: SURVEY_STATUS_DASHBOARD,
     },
     {
-      title: 'view',
+      title: "view",
       icon: listSurvey,
-      link: '#',
+      link: ANALYTICS_DASHBOARD,
     },
     {
-      title: 'settings',
+      title: "settings",
       icon: settings,
-      link: '#',
+      link: SETTINGS_DASHBOARD,
     },
   ];
 
