@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useMemo,
+  useCallback,
+} from "react";
 import { connect } from "react-redux";
 
 import Survey from "../Survey";
@@ -8,18 +14,37 @@ import { cancelEditClean, fetchSurvey } from "../../../Store/redux/action";
 import { SURVEY_LIST } from "../../../util/varTypes";
 
 import "./style.scss";
-import { useCallback } from "react";
+
 const SurveyList = (props) => {
   const { fetchSurvey, getSurvey, cancelEditClean } = props;
   const [loader, setLoader] = useState(false);
 
+  const defaultParam = useMemo(() => {
+    return {
+      total: 0,
+    };
+  }, []);
+
+  const surveyResult = useMemo(() => {
+    if (getSurvey.hasOwnProperty("success")) return getSurvey.result;
+    return defaultParam;
+  }, [getSurvey, defaultParam]);
+
+  const showingResultData = useMemo(() => {
+    if (surveyResult) {
+      if (surveyResult.total <= 5) return surveyResult.total;
+      return 5;
+    }
+
+    return defaultParam;
+  }, [surveyResult, defaultParam]);
+
   const getSurveyCheck = useMemo(() => {
-    return getSurvey && getSurvey.data;
-  }, [getSurvey]);
+    return getSurvey && getSurvey.success && surveyResult && surveyResult.data;
+  }, [getSurvey, surveyResult]);
 
   const cancelEditCleanCallback = useCallback(() => {
     cancelEditClean();
-    console.log("damn");
   }, [cancelEditClean]);
 
   useEffect(() => {
@@ -32,7 +57,7 @@ const SurveyList = (props) => {
 
   let renderSurvey;
   if (getSurveyCheck) {
-    renderSurvey = getSurvey.data.map((item) => (
+    renderSurvey = surveyResult.data.map((item) => (
       <Survey
         key={item._id}
         _id={item._id}
@@ -90,7 +115,9 @@ const SurveyList = (props) => {
       <>
         <div className='survey-list-survey'>{renderSurvey}</div>
         <div className='count'>
-          <span>Showing 2 of {getSurvey.total} total surveys. </span>
+          <span>
+            Showing {showingResultData} of {surveyResult.total} total surveys.{" "}
+          </span>
         </div>
       </>
     );
@@ -100,7 +127,7 @@ const SurveyList = (props) => {
     <div id='survey-list'>
       <div className='header-survey-list'>
         <h3 className='title'>Recent Survey</h3>
-        <span>see all 5 surveys</span>
+        <span>see all {surveyResult.total} surveys</span>
       </div>
       {content}
     </div>
