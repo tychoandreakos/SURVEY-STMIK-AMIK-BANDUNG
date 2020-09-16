@@ -4,10 +4,12 @@ import { connect } from "react-redux";
 import Icon from "@iconify/react";
 import FingerPrint from "@iconify/icons-mdi/fingerprint";
 import ButtonSubmit from "../ButtonSubmit";
+import { withRouter } from "react-router-dom";
 
 import "./style.scss";
 import { AUTH_FORM, AUTH_MESSAGE, AUTH_STATUS } from "../../../util/varTypes";
 import { signUp } from "../../../Store/redux/action";
+import { HOME_DASHBOARD } from "../../../util/route";
 
 const AuthWrapper = (props) => {
   const {
@@ -20,6 +22,7 @@ const AuthWrapper = (props) => {
     signUp,
     success,
     failed,
+    history,
   } = props;
   const [validation, setValidation] = useState(false);
   const [btnDisabled, setBtnDisabled] = useState(false);
@@ -67,6 +70,12 @@ const AuthWrapper = (props) => {
   }, [failed, validationCallback]);
 
   useEffect(() => {
+    if (success.hasOwnProperty("success") && success.success) {
+      history.push(HOME_DASHBOARD);
+    }
+  }, [success]);
+
+  useEffect(() => {
     if (save) {
       signUp(authForm);
     }
@@ -112,9 +121,11 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+const wrapAuthWrapperWithRouter = withRouter(AuthWrapper);
+
 const AuthWrapperJoinRedux = connect(
   mapStateToProps,
   mapDispatchToProps
-)(AuthWrapper);
+)(wrapAuthWrapperWithRouter);
 
 export default AuthWrapperJoinRedux;
