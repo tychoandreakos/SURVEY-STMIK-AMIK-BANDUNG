@@ -1,12 +1,21 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { gsap } from "gsap";
 
 import "./style.scss";
 
 const TextBox = (props) => {
   const { placeholder, type, name } = props;
-  const [input, setInput] = useState();
+  const [input, setInput] = useState("");
   const [placeholderActivate, setPlaceholderActivate] = useState(true);
   const [inputActivate, setInputActivate] = useState(false);
+
+  const placeholderRef = useRef();
 
   useEffect(() => {
     if (inputActivate && input.hasOwnProperty("length") && input.length < 1) {
@@ -24,13 +33,25 @@ const TextBox = (props) => {
   });
 
   const placeholderHandler = useCallback(() => {
-    setPlaceholderActivate(!placeholderActivate);
+    if (placeholderActivate) {
+      gsap.to(placeholderRef.current, {
+        autoAlpha: 0,
+        duration: 0.2,
+      });
+    }
+    setTimeout(() => {
+      setPlaceholderActivate(!placeholderActivate);
+    }, 300);
   });
 
   const inputRender = useMemo(() => {
     if (placeholderActivate) {
       return (
-        <p onClick={placeholderHandler} className='placeholder'>
+        <p
+          ref={placeholderRef}
+          onClick={placeholderHandler}
+          className='placeholder'
+        >
           {placeholder}
         </p>
       );

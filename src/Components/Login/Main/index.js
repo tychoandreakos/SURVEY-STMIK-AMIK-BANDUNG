@@ -15,7 +15,7 @@ const MainLogin = () => {
           <Icon icon={FingerPrint} />
         </div>
         <div className='form'>
-          <TextBox placeholder='Your Email' name='email' type='text' />
+          <TextBox placeholder='E-mail address' name='email' type='text' />
           <TextBox
             placeholder='Your Password'
             name='password'

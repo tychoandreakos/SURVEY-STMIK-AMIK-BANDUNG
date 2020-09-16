@@ -3,19 +3,20 @@ $Nunito: "Nunito", sans-serif;
 @mixin input {
   font: {
     family: $Nunito;
-    size: 1.05rem;
+    size: 1rem;
   }
   padding-bottom: 1rem;
-  color: #ddd;
+  color: #fff;
   width: 100%;
 }
 
 .textbox-input {
-  border-bottom: 1px solid #2a837e;
+  border-bottom: 1px solid #7682db;
   width: 100%;
   margin-bottom: 1rem;
 
   .input-wrapper {
+    height: 2.3rem;
     .placeholder {
       @include input;
       cursor: pointer;
