@@ -39,14 +39,7 @@ function Dashboard(props) {
     }
   }, [loader]);
 
-  const isAuth = useMemo(() => {
-    const auth = window.localStorage.getItem("isAuth");
-    if (auth) {
-      return true;
-    }
-
-    return false;
-  }, []);
+  const isAuth = window.localStorage.getItem("isAuth");
 
   useEffect(() => {
     if (!isAuth) history.push(LOGIN);

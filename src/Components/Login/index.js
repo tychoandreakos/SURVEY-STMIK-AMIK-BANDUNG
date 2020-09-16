@@ -25,6 +25,7 @@ const Login = () => {
 
   return (
     <AuthWrapper
+      method='login'
       onSubmit={onSubmit}
       formSize={2}
       footer={footer}

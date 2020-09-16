@@ -90,6 +90,25 @@ function rootReducer(state = initialState, action) {
     };
   }
 
+  if (action.type === actionTypes.LOGIN_SUCCESS) {
+    return {
+      ...state,
+      [varTypes.AUTH_STATUS]: {
+        ...state[varTypes.AUTH_STATUS],
+        [varTypes.AUTH_MESSAGE.AUTH_SUCCESS]: action.payload,
+      },
+    };
+  }
+  if (action.type === actionTypes.LOGIN_FAILED) {
+    return {
+      ...state,
+      [varTypes.AUTH_STATUS]: {
+        ...state[varTypes.AUTH_STATUS],
+        [varTypes.AUTH_MESSAGE.AUTH_FAILED]: action.payload,
+      },
+    };
+  }
+
   if (action.type === actionTypes.SIGNUP_SUCCESS) {
     return {
       ...state,

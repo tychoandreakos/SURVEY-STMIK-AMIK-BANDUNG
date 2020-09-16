@@ -19,7 +19,13 @@ const SignUp = (props) => {
   }, []);
 
   return (
-    <AuthWrapper term={true} footer={footer} btnTitle='Sign up' formSize={3}>
+    <AuthWrapper
+      method='signup'
+      term={true}
+      footer={footer}
+      btnTitle='Sign up'
+      formSize={3}
+    >
       <TextBox placeholder='Your Name' name='name' type='text' />
       <TextBox placeholder='E-mail address' name='email' type='text' />
       <TextBox placeholder='Your Password' name='password' type='password' />

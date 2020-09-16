@@ -8,7 +8,7 @@ import { withRouter } from "react-router-dom";
 
 import "./style.scss";
 import { AUTH_FORM, AUTH_MESSAGE, AUTH_STATUS } from "../../../util/varTypes";
-import { signUp } from "../../../Store/redux/action";
+import { login, signUp } from "../../../Store/redux/action";
 import { HOME_DASHBOARD } from "../../../util/route";
 
 const AuthWrapper = (props) => {
@@ -23,6 +23,8 @@ const AuthWrapper = (props) => {
     success,
     failed,
     history,
+    method,
+    login,
   } = props;
   const [validation, setValidation] = useState(false);
   const [btnDisabled, setBtnDisabled] = useState(false);
@@ -80,7 +82,16 @@ const AuthWrapper = (props) => {
 
   useEffect(() => {
     if (save) {
-      signUp(authForm);
+      switch (method) {
+        case "signup":
+          signUp(authForm);
+          break;
+        case "login":
+          login(authForm);
+          break;
+        default:
+          return true;
+      }
     }
   }, [authForm, save]);
 
@@ -121,6 +132,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     signUp: (item) => dispatch(signUp(item)),
+    login: (item) => dispatch(login(item)),
   };
 };
 

@@ -13,6 +13,7 @@ export default function* rootSaga() {
   yield takeLatest(types.UPDATE_SURVEY, watchUpdateSurvey);
   yield takeLatest(types.SIGNUP, watchSignup);
   yield takeLatest(types.FETCH_USER, watchFetchUser);
+  yield takeLatest(types.LOGIN, watchLogin);
 }
 
 function* watchFetchUser(action) {
@@ -25,6 +26,21 @@ function* watchFetchUser(action) {
   } catch (e) {
     yield put({
       type: actionTypes.FETCH_USER_FAILED,
+      payload: e.message,
+    });
+  }
+}
+
+function* watchLogin(action) {
+  try {
+    const { data } = yield call(api.login, action.payload);
+    yield put({
+      type: actionTypes.LOGIN_SUCCESS,
+      payload: data,
+    });
+  } catch (e) {
+    yield put({
+      type: actionTypes.LOGIN_FAILED,
       payload: e.message,
     });
   }

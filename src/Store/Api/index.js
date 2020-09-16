@@ -31,6 +31,10 @@ export function signUp(payload) {
   return auth.post(`${URI.AUTH}/signup`, payload);
 }
 
+export function login(payload) {
+  return auth.post(`${URI.AUTH}/login`, payload);
+}
+
 export function fetchUser(payload) {
   return client.post(`${URI.AUTH}/user`, payload);
 }
