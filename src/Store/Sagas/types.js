@@ -5,3 +5,4 @@ export const DELETE_SURVEY = "DELETE_SURVEY";
 export const EDIT_SURVEY = "EDIT_SURVEY";
 export const UPDATE_SURVEY = "UPDATE_SURVEY";
 export const SIGNUP = "SIGNUP";
+export const FETCH_USER = "FETCH_USER";

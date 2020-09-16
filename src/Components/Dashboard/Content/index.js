@@ -1,12 +1,28 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
+import { useMemo } from "react";
 
+import { connect } from "react-redux";
+import { fetchUser } from "../../../Store/redux/action";
 import "./style.scss";
 
 const Header = lazy(() => import("../Header"));
 const Welcome = lazy(() => import("../Welcome"));
 const SurveyList = lazy(() => import("../SurveyList"));
 
-const Content = () => {
+const Content = (props) => {
+  const { fetchUser } = props;
+
+  const _id = useMemo(() => {
+    return window.localStorage.getItem("_id");
+  }, []);
+
+  useEffect(() => {
+    if (_id) {
+      fetchUser({
+        _id,
+      });
+    }
+  }, [fetchUser, _id]);
   return (
     <div id='content-dashboard'>
       <Suspense fallback='loading...'>
@@ -18,4 +34,12 @@ const Content = () => {
   );
 };
 
-export default Content;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchUser: (item) => dispatch(fetchUser(item)),
+  };
+};
+
+const ContentJoinRedux = connect(null, mapDispatchToProps)(Content);
+
+export default ContentJoinRedux;

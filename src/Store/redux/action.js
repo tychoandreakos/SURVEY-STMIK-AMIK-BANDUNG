@@ -9,6 +9,13 @@ export function processingLogo(payload) {
   };
 }
 
+export function fetchUser(payload) {
+  return {
+    type: sagaType.FETCH_USER,
+    payload,
+  };
+}
+
 export function signUp(payload) {
   return {
     type: sagaType.SIGNUP,

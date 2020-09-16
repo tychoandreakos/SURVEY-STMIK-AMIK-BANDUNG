@@ -6,6 +6,14 @@ import axios from "axios";
 const client = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL_API + "/api",
   headers: {
+    Authorization: `bearer ${localStorage.getItem("_token")}`,
+    "Content-Type": "application/json",
+  },
+});
+
+const auth = axios.create({
+  baseURL: process.env.REACT_APP_BASE_URL_API + "/api",
+  headers: {
     "Content-Type": "application/json",
   },
 });
@@ -20,7 +28,11 @@ const URI = {
 };
 
 export function signUp(payload) {
-  return client.post(`${URI.AUTH}/signup`, payload);
+  return auth.post(`${URI.AUTH}/signup`, payload);
+}
+
+export function fetchUser(payload) {
+  return client.post(`${URI.AUTH}/user`, payload);
 }
 
 export function fetchSurvey() {

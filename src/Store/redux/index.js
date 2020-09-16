@@ -54,6 +54,31 @@ function rootReducer(state = initialState, action) {
     };
   }
 
+  if (action.type === actionTypes.FETCH_USER_SUCCESS) {
+    const { name, email } = action.payload.data.result;
+
+    return {
+      ...state,
+      [varTypes.USER]: {
+        name,
+        email,
+      },
+      [varTypes.AUTH_STATUS]: {
+        ...state[varTypes.AUTH_STATUS],
+        [varTypes.AUTH_MESSAGE.AUTH_SUCCESS]: action.payload,
+      },
+    };
+  }
+  if (action.type === actionTypes.FETCH_USER_FAILED) {
+    return {
+      ...state,
+      [varTypes.AUTH_STATUS]: {
+        ...state[varTypes.AUTH_STATUS],
+        [varTypes.AUTH_MESSAGE.AUTH_FAILED]: action.payload,
+      },
+    };
+  }
+
   if (action.type === actionTypes.SET_AUTH_FORM) {
     const { name, value } = action.payload;
     return {

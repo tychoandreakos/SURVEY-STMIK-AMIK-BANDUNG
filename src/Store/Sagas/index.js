@@ -12,6 +12,22 @@ export default function* rootSaga() {
   yield takeLatest(types.EDIT_SURVEY, watchEditSurvey);
   yield takeLatest(types.UPDATE_SURVEY, watchUpdateSurvey);
   yield takeLatest(types.SIGNUP, watchSignup);
+  yield takeLatest(types.FETCH_USER, watchFetchUser);
+}
+
+function* watchFetchUser(action) {
+  try {
+    const { data } = yield call(api.fetchUser, action.payload);
+    yield put({
+      type: actionTypes.FETCH_USER_SUCCESS,
+      payload: data,
+    });
+  } catch (e) {
+    yield put({
+      type: actionTypes.FETCH_USER_FAILED,
+      payload: e.message,
+    });
+  }
 }
 
 function* watchSignup(action) {
