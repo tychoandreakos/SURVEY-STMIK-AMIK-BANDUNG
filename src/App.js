@@ -9,8 +9,10 @@ import rootSaga from "./Store/Sagas";
 
 import Dashboard from "./Components/Dashboard/Main";
 import Login from "./Components/Login/Main";
+import Signup from "./Components/SignUp";
+import Landing from "./Components/Landing";
 
-import { HOME_DASHBOARD, LOGIN } from "./util/route";
+import { HOME_DASHBOARD, LANDING, LOGIN, SIGNUP } from "./util/route";
 
 const sagaMiddleware = createMiddlewareSaga();
 const store = createStore(
@@ -27,6 +29,8 @@ function App() {
           <Switch>
             <Route path={LOGIN} component={Login} />
             <Route path={HOME_DASHBOARD} component={Dashboard} />
+            <Route path={SIGNUP} component={Signup} />
+            <Route path={LANDING} component={Landing} />
           </Switch>
         </BrowserRouter>
       </Provider>

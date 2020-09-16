@@ -2,16 +2,17 @@ import React from "react";
 
 import Icon from "@iconify/react";
 import FingerPrint from "@iconify/icons-mdi/fingerprint";
-import TextBox from "../../Util/TextBox";
-import ButtonSubmit from "../../Util/ButtonSubmit";
+import TextBox from "../Util/TextBox";
+import ButtonSubmit from "../Util/ButtonSubmit";
 
-const MainLogin = () => {
+const MainSignUp = () => {
   return (
-    <div className='login'>
-      <div className='login-wrapper'>
+    <div className='signup'>
+      <div className='signup-wrapper'>
         <div className='icon'>
           <Icon icon={FingerPrint} />
           <div className='form'>
+            <TextBox placeholder='Your Name' name='name' type='text' />
             <TextBox placeholder='Your Email' name='email' type='text' />
             <TextBox
               placeholder='Your Password'
@@ -19,10 +20,14 @@ const MainLogin = () => {
               type='password'
             />
             <ButtonSubmit />
+            <p>
+              By creating an account, you agree and accept our{" "}
+              <span>terms</span> and <span>privacy policy</span>
+            </p>
           </div>
           <div className='footer'>
             <p>
-              Don't have an account? <span>Sign up</span>.
+              Already have an account? <span>Log in</span>.
             </p>
           </div>
         </div>
@@ -31,4 +36,4 @@ const MainLogin = () => {
   );
 };
 
-export default MainLogin;
+export default MainSignUp;
