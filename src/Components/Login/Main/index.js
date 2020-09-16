@@ -5,26 +5,28 @@ import FingerPrint from "@iconify/icons-mdi/fingerprint";
 import TextBox from "../../Util/TextBox";
 import ButtonSubmit from "../../Util/ButtonSubmit";
 
+import "./style.scss";
+
 const MainLogin = () => {
   return (
     <div className='login'>
       <div className='login-wrapper'>
         <div className='icon'>
           <Icon icon={FingerPrint} />
-          <div className='form'>
-            <TextBox placeholder='Your Email' name='email' type='text' />
-            <TextBox
-              placeholder='Your Password'
-              name='password'
-              type='password'
-            />
-            <ButtonSubmit />
-          </div>
-          <div className='footer'>
-            <p>
-              Don't have an account? <span>Sign up</span>.
-            </p>
-          </div>
+        </div>
+        <div className='form'>
+          <TextBox placeholder='Your Email' name='email' type='text' />
+          <TextBox
+            placeholder='Your Password'
+            name='password'
+            type='password'
+          />
+          <ButtonSubmit />
+        </div>
+        <div className='footer'>
+          <p>
+            Don't have an account? <span>Sign up</span>.
+          </p>
         </div>
       </div>
     </div>

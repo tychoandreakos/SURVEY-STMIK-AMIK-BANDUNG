@@ -1,0 +1,52 @@
+$Nunito: "Nunito", sans-serif;
+
+.login {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .login-wrapper {
+    background: #00544f;
+
+    border-radius: 5px;
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2rem;
+
+    .form {
+      padding: {
+        top: 2rem;
+        left: 2rem;
+        right: 2rem;
+        bottom: 1rem;
+      }
+    }
+
+    .footer {
+      border-top: 1px solid #206864;
+      padding: 1rem 0;
+
+      p {
+        font : {
+          family: $Nunito;
+        }
+        color: #ddd;
+
+        span {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .icon {
+      color: #fff;
+      font: {
+        size: 3.5rem;
+      }
+    }
+  }
+}
