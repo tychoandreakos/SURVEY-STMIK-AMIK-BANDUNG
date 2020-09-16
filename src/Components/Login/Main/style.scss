@@ -8,7 +8,6 @@ $Nunito: "Nunito", sans-serif;
   align-items: center;
   .login-wrapper {
     background: #00544f;
-
     border-radius: 5px;
     box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
     display: flex;
@@ -16,6 +15,7 @@ $Nunito: "Nunito", sans-serif;
     flex-direction: column;
     align-items: center;
     padding-top: 2rem;
+    width: 25%;
 
     .form {
       padding: {
@@ -24,17 +24,20 @@ $Nunito: "Nunito", sans-serif;
         right: 2rem;
         bottom: 1rem;
       }
+      width: 100%;
     }
 
     .footer {
-      border-top: 1px solid #206864;
+      border-top: 1px solid #2a837e;
       padding: 1rem 0;
+      width: 100%;
 
       p {
         font : {
           family: $Nunito;
         }
         color: #ddd;
+        text-align: center;
 
         span {
           text-decoration: underline;
