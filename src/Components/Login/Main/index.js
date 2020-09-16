@@ -21,7 +21,7 @@ const MainLogin = () => {
             name='password'
             type='password'
           />
-          <ButtonSubmit />
+          <ButtonSubmit title='Log in' />
         </div>
         <div className='footer'>
           <p>

@@ -6,6 +6,11 @@ $Nunito: "Nunito", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: url("https://images.pexels.com/photos/544112/pexels-photo-544112.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+
   .login-wrapper {
     background: #00544f;
     border-radius: 5px;

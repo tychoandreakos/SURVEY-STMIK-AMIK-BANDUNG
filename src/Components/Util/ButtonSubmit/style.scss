@@ -1,0 +1,21 @@
+$Nunito: "Nunito", sans-serif;
+
+.submit-me {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+
+  button {
+    font: {
+      family: $Nunito;
+      weight: bold;
+      size: 1rem;
+    }
+    color: #00544f;
+    padding: 0.4rem 4rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 1rem;
+    background: #fff;
+  }
+}
