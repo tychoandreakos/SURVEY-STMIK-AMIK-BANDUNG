@@ -1,4 +1,5 @@
 $Nunito: "Nunito", sans-serif;
+$Roboto: "Roboto", sans-serif;
 
 .auth {
   width: 100%;
@@ -30,6 +31,21 @@ $Nunito: "Nunito", sans-serif;
         bottom: 1rem;
       }
       width: 100%;
+
+      .term {
+        color: #eee;
+        font: {
+          family: $Roboto;
+          size: 0.9rem;
+        }
+        text-align: center;
+
+        .term-link {
+          text-decoration: underline;
+          text-transform: capitalize;
+          cursor: pointer;
+        }
+      }
     }
 
     .footer {
