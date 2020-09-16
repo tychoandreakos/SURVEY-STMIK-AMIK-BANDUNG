@@ -8,7 +8,7 @@ import createMiddlewareSaga from "redux-saga";
 import rootSaga from "./Store/Sagas";
 
 import Dashboard from "./Components/Dashboard/Main";
-import Login from "./Components/Login/Main";
+import Login from "./Components/Login";
 import Signup from "./Components/SignUp";
 import Landing from "./Components/Landing";
 
