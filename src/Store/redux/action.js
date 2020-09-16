@@ -10,7 +10,6 @@ export function processingLogo(payload) {
 }
 
 export function signUp(payload) {
-  console.log(payload);
   return {
     type: sagaType.SIGNUP,
     payload,

@@ -4,6 +4,10 @@ import slider from "../../util/sliderDummyData";
 
 const initialState = {
   [varTypes.USER]: {},
+  [varTypes.AUTH_STATUS]: {
+    [varTypes.AUTH_MESSAGE.AUTH_SUCCESS]: {},
+    [varTypes.AUTH_MESSAGE.AUTH_FAILED]: "",
+  },
   [varTypes.SURVEY_CAN_EDIT]: false,
   [varTypes.SURVEY_EDIT_TYPE_QUESTION]: "",
   [varTypes.SURVEY_TYPE_QUESTION]: "",
@@ -62,20 +66,23 @@ function rootReducer(state = initialState, action) {
   }
 
   if (action.type === actionTypes.SIGNUP_SUCCESS) {
-    const { email, _token, _id } = action.payload.data;
-    if (_token) {
-      window.cookie = `_token=${_token}`;
-    }
     return {
       ...state,
-      [varTypes.USER]: {
-        _id,
-        email,
+      [varTypes.AUTH_STATUS]: {
+        ...state[varTypes.AUTH_STATUS],
+        [varTypes.AUTH_MESSAGE.AUTH_SUCCESS]: action.payload,
       },
     };
   }
 
   if (action.type === actionTypes.SIGNUP_FAILED) {
+    return {
+      ...state,
+      [varTypes.AUTH_STATUS]: {
+        ...state[varTypes.AUTH_STATUS],
+        [varTypes.AUTH_MESSAGE.AUTH_FAILED]: action.payload,
+      },
+    };
   }
 
   if (action.type === actionTypes.TRIGGER_MESSAGE) {
@@ -122,7 +129,6 @@ function rootReducer(state = initialState, action) {
   }
 
   if (action.type === actionTypes.FETCH_EDIT_SURVEY_FAILED) {
-    console.log(action.payload);
     return state;
   }
 

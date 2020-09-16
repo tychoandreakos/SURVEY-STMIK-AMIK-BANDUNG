@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 
 import { connect } from "react-redux";
 import Icon from "@iconify/react";
@@ -6,7 +6,7 @@ import FingerPrint from "@iconify/icons-mdi/fingerprint";
 import ButtonSubmit from "../ButtonSubmit";
 
 import "./style.scss";
-import { AUTH_FORM } from "../../../util/varTypes";
+import { AUTH_FORM, AUTH_MESSAGE, AUTH_STATUS } from "../../../util/varTypes";
 import { signUp } from "../../../Store/redux/action";
 
 const AuthWrapper = (props) => {
@@ -18,10 +18,12 @@ const AuthWrapper = (props) => {
     authForm,
     formSize,
     signUp,
+    success,
+    failed,
   } = props;
   const [validation, setValidation] = useState(false);
   const [btnDisabled, setBtnDisabled] = useState(false);
-  const [sendForm, setSendForm] = useState({});
+  const [save, setSave] = useState(false);
   const termRender = useMemo(() => {
     if (term) {
       return (
@@ -49,16 +51,29 @@ const AuthWrapper = (props) => {
     return [];
   }, [validation]);
 
-  const validationHandler = () => {
-    setValidation(!validation);
-  };
+  const validationCallback = useCallback(
+    (status) => {
+      setValidation(status);
+    },
+    [setValidation]
+  );
+
+  useEffect(() => {
+    if (failed.length >= 1) {
+      validationCallback(true);
+    } else {
+      validationCallback(false);
+    }
+  }, [failed, validationCallback]);
+
+  useEffect(() => {
+    if (save) {
+      signUp(authForm);
+    }
+  }, [authForm, save]);
 
   const onSubmit = () => {
-    signUp({
-      name: "dani eka",
-      email: "danieka1234@protonmail.com",
-      password: "123456575",
-    });
+    setSave(true);
   };
 
   return (
@@ -86,6 +101,8 @@ const AuthWrapper = (props) => {
 const mapStateToProps = (state) => {
   return {
     authForm: state[AUTH_FORM],
+    success: state[AUTH_STATUS][AUTH_MESSAGE.AUTH_SUCCESS],
+    failed: state[AUTH_STATUS][AUTH_MESSAGE.AUTH_FAILED],
   };
 };
 
