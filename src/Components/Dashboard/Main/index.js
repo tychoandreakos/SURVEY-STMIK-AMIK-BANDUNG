@@ -20,6 +20,7 @@ import {
   SETTINGS_DASHBOARD,
   ANALYTICS_DASHBOARD,
   SURVEY_STATUS_DASHBOARD,
+  LOGIN,
 } from "../../../util/route";
 
 import "./style.scss";
@@ -29,7 +30,7 @@ const SuccessMsg = lazy(() => import("../MessageWrapper/Success"));
 const WarningMsg = lazy(() => import("../MessageWrapper/Warning"));
 
 function Dashboard(props) {
-  const { loader, message, msgPrompt, triggerMsg, match } = props;
+  const { loader, message, msgPrompt, triggerMsg, match, history } = props;
   const dashboardStyle = useMemo(() => {
     if (loader) {
       return {
@@ -37,6 +38,19 @@ function Dashboard(props) {
       };
     }
   }, [loader]);
+
+  const isAuth = useMemo(() => {
+    const auth = window.localStorage.getItem("isAuth");
+    if (auth) {
+      return true;
+    }
+
+    return false;
+  }, []);
+
+  useEffect(() => {
+    if (!isAuth) history.push(LOGIN);
+  }, [history, isAuth]);
 
   const reducer = (_, action) => {
     switch (action.type) {

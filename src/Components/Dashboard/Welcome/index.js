@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 
 import plus from "@iconify/icons-mdi/plus";
 import Panel from "../Panel";
+import { SURVEY_LIST, USER } from "../../../util/varTypes";
 
 import "./style.scss";
-import { SURVEY_LIST } from "../../../util/varTypes";
 
 const Welcome = (props) => {
-  const { getSurvey } = props;
+  const { getSurvey, authInfo } = props;
   const checkGetSurvey = useCallback(
     () => getSurvey.hasOwnProperty("success"),
     [getSurvey]
@@ -61,12 +61,11 @@ const Welcome = (props) => {
 
   const mainText = useMemo(() => {
     return {
-      welcomeText:
-        "Selamat Datang kembali, Rani Mulyani. Mau buat survey apa hari ini?",
+      welcomeText: `Selamat Datang kembali, ${authInfo && authInfo.name ? authInfo.name : "RANI MULYANI"}. Mau buat survey apa hari ini?`,
       descText: "Art is the proper task of life - Friedrich Nietzsche.",
       letStart: "let's, begin",
     };
-  });
+  }, [authInfo]);
 
   const panelEl = panelState.map((item, i) => (
     <Panel
@@ -96,6 +95,7 @@ const mapStateToProps = (state) => {
   return {
     getSurvey:
       state[SURVEY_LIST.FETCH_SURVEY_LIST][SURVEY_LIST.SURVEY_LIST_SUCCESS],
+    authInfo: state[USER],
   };
 };
 
