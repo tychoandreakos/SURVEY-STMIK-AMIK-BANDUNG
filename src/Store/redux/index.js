@@ -15,6 +15,7 @@ const initialState = {
     [varTypes.SURVEY_LIST.EDIT_SUCCESS]: {},
     [varTypes.SURVEY_LIST.EDIT_ERROR]: {},
   },
+  [varTypes.AUTH_FORM]: {},
   [varTypes.MESSAGE.STATUS]: {},
   [varTypes.LOADER]: false,
   [varTypes.MESSAGE_PROMPT]: false,
@@ -45,6 +46,17 @@ function rootReducer(state = initialState, action) {
       [varTypes.SURVEY_FORM_BUILDER]: {
         ...state[varTypes.SURVEY_FORM_BUILDER],
         [varTypes.SURVEY_TITLE]: action.payload,
+      },
+    };
+  }
+
+  if (action.type === actionTypes.SET_AUTH_FORM) {
+    const { name, value } = action.payload;
+    return {
+      ...state,
+      [varTypes.AUTH_FORM]: {
+        ...state[varTypes.AUTH_FORM],
+        [name]: value,
       },
     };
   }

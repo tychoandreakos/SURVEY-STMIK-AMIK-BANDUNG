@@ -3,10 +3,9 @@ import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import TextBox from "../Util/TextBox";
 import AuthWrapper from "../Util/AuthWrapper";
-
 import { LOGIN } from "../../util/route";
 
-const SignUp = () => {
+const SignUp = (props) => {
   const footer = useMemo(() => {
     return (
       <p>
@@ -18,8 +17,9 @@ const SignUp = () => {
       </p>
     );
   }, []);
+
   return (
-    <AuthWrapper term={true} footer={footer} btnTitle='Sign up'>
+    <AuthWrapper term={true} footer={footer} btnTitle='Sign up' formSize={3}>
       <TextBox placeholder='Your Name' name='name' type='text' />
       <TextBox placeholder='E-mail address' name='email' type='text' />
       <TextBox placeholder='Your Password' name='password' type='password' />

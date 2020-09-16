@@ -7,6 +7,7 @@ export const SURVEY_FORM_COPIED = "SURVEY_FORM_COPIED";
 export const SURVEY_TYPE_QUESTION = "SURVEY_TYPE_QUESTON";
 export const SURVEY_CAN_EDIT = "SURVEY_CAN_EDIT";
 export const USER = "USER";
+export const AUTH_FORM = "AUTH_FORM";
 export const SURVEY_EDIT_TYPE_QUESTION = "SURVEY_EDIT_TYPE_QUESTION";
 export const SURVEY_LOGO = "SURVEY_LOGO";
 export const SURVEY_LIST = {

@@ -5,12 +5,14 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { connect } from "react-redux";
 import { gsap } from "gsap";
+import { setAuthForm } from "../../../Store/redux/action";
 
 import "./style.scss";
 
 const TextBox = (props) => {
-  const { placeholder, type, name } = props;
+  const { placeholder, type, name, setAuthForm } = props;
   const [input, setInput] = useState("");
   const [placeholderActivate, setPlaceholderActivate] = useState(true);
   const [inputActivate, setInputActivate] = useState(false);
@@ -30,6 +32,12 @@ const TextBox = (props) => {
 
   const inputActivateHandler = useCallback(() => {
     setInputActivate(true);
+    if (input.length >= 5) {
+      setAuthForm({
+        name,
+        value: input,
+      });
+    }
   });
 
   const placeholderHandler = useCallback(() => {
@@ -75,4 +83,12 @@ const TextBox = (props) => {
   );
 };
 
-export default TextBox;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setAuthForm: (item) => dispatch(setAuthForm(item)),
+  };
+};
+
+const TextBoxJoinRedux = connect(null, mapDispatchToProps)(TextBox);
+
+export default TextBoxJoinRedux;

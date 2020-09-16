@@ -17,5 +17,11 @@ $Nunito: "Nunito", sans-serif;
     cursor: pointer;
     border-radius: 1rem;
     background: #fff;
+    transition: background 0.3s ease-in-out;
+
+    &:disabled {
+      cursor: no-drop;
+      background: #ddd;
+    }
   }
 }

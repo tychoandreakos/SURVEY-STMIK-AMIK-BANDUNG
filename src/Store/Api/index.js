@@ -16,11 +16,11 @@ const client = axios.create({
 
 const URI = {
   SURVEY: "/survey",
-  AUTH: "/survey/auth",
+  AUTH: "/auth",
 };
 
 export function signUp(payload) {
-  return client.get(`${URI.AUTH}/signup`, payload);
+  return client.post(`${URI.AUTH}/signup`, payload);
 }
 
 export function fetchSurvey() {

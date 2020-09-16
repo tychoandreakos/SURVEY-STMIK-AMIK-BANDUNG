@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 import "./style.scss";
 
 const ButtonSubmit = (props) => {
-  const { title } = props;
+  const { title, onSubmit, disabled } = props;
   const [loading, setLoading] = useState(false);
   const btnRef = useRef();
 
@@ -29,7 +29,12 @@ const ButtonSubmit = (props) => {
   };
   const renderButton = useMemo(() => {
     if (loading) return <Loader {...loaderStyle} />;
-    else return <button ref={btnRef}>{title}</button>;
+    else
+      return (
+        <button disabled={disabled} onClick={onSubmit} ref={btnRef}>
+          {title}
+        </button>
+      );
   }, [loading]);
   return <div className='submit-me'>{renderButton}</div>;
 };

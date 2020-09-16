@@ -18,8 +18,18 @@ const Login = () => {
       </p>
     );
   }, []);
+
+  const onSubmit = () => {
+    console.log("damn you login");
+  };
+
   return (
-    <AuthWrapper footer={footer} btnTitle='Log in'>
+    <AuthWrapper
+      onSubmit={onSubmit}
+      formSize={2}
+      footer={footer}
+      btnTitle='Log in'
+    >
       <TextBox placeholder='E-mail address' name='email' type='text' />
       <TextBox placeholder='Your Password' name='password' type='password' />
     </AuthWrapper>

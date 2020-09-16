@@ -9,7 +9,8 @@ export function processingLogo(payload) {
   };
 }
 
-export function signup(payload) {
+export function signUp(payload) {
+  console.log(payload);
   return {
     type: sagaType.SIGNUP,
     payload,
@@ -54,6 +55,13 @@ export function deleteSurvey(payload) {
 export function setTitleSurvey(payload) {
   return {
     type: actionType.SET_TITLE_SURVEY,
+    payload,
+  };
+}
+
+export function setAuthForm(payload) {
+  return {
+    type: actionType.SET_AUTH_FORM,
     payload,
   };
 }
