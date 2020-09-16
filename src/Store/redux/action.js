@@ -9,6 +9,13 @@ export function processingLogo(payload) {
   };
 }
 
+export function signup(payload) {
+  return {
+    type: sagaType.SIGNUP,
+    payload,
+  };
+}
+
 export function updateSurvey(payload) {
   return {
     type: sagaType.UPDATE_SURVEY,

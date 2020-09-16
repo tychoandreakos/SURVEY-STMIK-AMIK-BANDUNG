@@ -3,6 +3,7 @@ import * as varTypes from "../../util/varTypes";
 import slider from "../../util/sliderDummyData";
 
 const initialState = {
+  [varTypes.USER]: {},
   [varTypes.SURVEY_CAN_EDIT]: false,
   [varTypes.SURVEY_EDIT_TYPE_QUESTION]: "",
   [varTypes.SURVEY_TYPE_QUESTION]: "",
@@ -46,6 +47,23 @@ function rootReducer(state = initialState, action) {
         [varTypes.SURVEY_TITLE]: action.payload,
       },
     };
+  }
+
+  if (action.type === actionTypes.SIGNUP_SUCCESS) {
+    const { email, _token, _id } = action.payload.data;
+    if (_token) {
+      window.cookie = `_token=${_token}`;
+    }
+    return {
+      ...state,
+      [varTypes.USER]: {
+        _id,
+        email,
+      },
+    };
+  }
+
+  if (action.type === actionTypes.SIGNUP_FAILED) {
   }
 
   if (action.type === actionTypes.TRIGGER_MESSAGE) {
