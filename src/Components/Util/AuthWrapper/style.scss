@@ -32,6 +32,18 @@ $Roboto: "Roboto", sans-serif;
       }
       width: 100%;
 
+      .validation {
+        padding: 1rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: capitalize;
+        font: {
+          size: 0.9rem;
+        }
+        color: #fffefe;
+      }
+
       .term {
         color: #eee;
         font: {
