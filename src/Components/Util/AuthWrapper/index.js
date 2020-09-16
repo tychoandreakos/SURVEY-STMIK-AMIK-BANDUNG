@@ -71,6 +71,8 @@ const AuthWrapper = (props) => {
 
   useEffect(() => {
     if (success.hasOwnProperty("success") && success.success) {
+      window.localStorage.setItem("_token", success.data._token);
+      window.localStorage.setItem("_id", success.data._id);
       history.push(HOME_DASHBOARD);
     }
   }, [success]);
