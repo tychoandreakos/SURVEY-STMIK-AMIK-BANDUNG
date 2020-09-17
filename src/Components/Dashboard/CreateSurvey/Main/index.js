@@ -18,7 +18,7 @@ import {
 } from "../../../../util/varTypes";
 
 import Slider from "../Slider";
-import { CREATE_SURVEY_FORM, EDIT_SURVEY_FORM } from "../../../../util/route";
+import { CREATE_SURVEY_FORM, EDIT_SURVEY_FORM, HOME_DASHBOARD } from "../../../../util/route";
 
 import "./style.scss";
 const MainCreateSurvey = (props) => {
@@ -121,7 +121,7 @@ const MainCreateSurvey = (props) => {
   };
 
   const onCancel = () => {
-    history.push("/");
+    history.push(HOME_DASHBOARD);
   };
 
   let renderingLoading;

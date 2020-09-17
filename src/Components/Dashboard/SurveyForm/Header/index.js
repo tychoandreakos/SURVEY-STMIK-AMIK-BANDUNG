@@ -88,7 +88,7 @@ const SurveyHeaderForm = (props) => {
           <div className='icon'>
             <Icon icon={ArrowLeft} />
           </div>
-          <span>create survey</span>
+          <span>back</span>
         </div>
         <h2 className='title'>
           <TextArea

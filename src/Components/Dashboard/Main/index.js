@@ -77,7 +77,7 @@ function Dashboard(props) {
       <section id='main'>
         <Switch>
           <Route path={match.path} exact component={Content} />
-          <Route path={CREATE_SURVEY} component={SectionOne} />
+          <Route path={CREATE_SURVEY} exact component={SectionOne} />
           <Route path={CREATE_SURVEY_FORM} component={SurveyForm} />
           <Route path={EDIT_SURVEY_FORM} component={SurveyForm} />
           <Route path={SURVEY_STATUS_DASHBOARD} component={SurveyStatus} />

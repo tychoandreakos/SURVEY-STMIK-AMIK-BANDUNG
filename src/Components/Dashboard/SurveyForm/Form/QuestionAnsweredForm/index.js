@@ -198,7 +198,6 @@ const QuestionAnsweredForm = (props) => {
 
     setQuestionInput("");
     setTypeQuestion("");
-    console.log("submit!");
   }
 
   function capitalize(val) {

@@ -77,10 +77,8 @@ const AuthWrapper = (props) => {
       window.localStorage.setItem("_token", success.data._token);
       window.localStorage.setItem("_id", success.data._id);
       window.localStorage.setItem("isAuth", true);
-      new Cookies().set("_token", success.data._token);
-      setTimeout(() => {
-        history.push(HOME_DASHBOARD);
-      }, 1000);
+      new Cookies().set("_token", success.data._token, { path: "/" });
+      history.push(HOME_DASHBOARD);
     }
   }, [success]);
 
