@@ -43,6 +43,7 @@ import BtnOpt from "../BtnOpt";
 import FormBuilderContext from "../../../../Store/Context/formBuilder";
 
 import "./style.scss";
+import { Helmet } from "react-helmet";
 
 const ContentSurveyForm = (props) => {
   const okButton = useRef({});
@@ -259,6 +260,15 @@ const ContentSurveyForm = (props) => {
     );
   }
 
+  const header = useMemo(() => {
+    return (
+      <Helmet title={process.env.REACT_APP_NAME + " - Design Survey"}>
+        <meta charSet='utf-8' />
+        <link rel='canonical' />
+      </Helmet>
+    );
+  }, []);
+
   return (
     <div className='content-survey-form'>
       {okButtonEl}
@@ -271,6 +281,7 @@ const ContentSurveyForm = (props) => {
         </div>
       </div>
       {renderDialog}
+      {header}
     </div>
   );
 };

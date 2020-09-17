@@ -18,9 +18,15 @@ import {
 } from "../../../../util/varTypes";
 
 import Slider from "../Slider";
-import { CREATE_SURVEY_FORM, EDIT_SURVEY_FORM, HOME_DASHBOARD } from "../../../../util/route";
+import {
+  CREATE_SURVEY,
+  CREATE_SURVEY_FORM,
+  EDIT_SURVEY_FORM,
+  HOME_DASHBOARD,
+} from "../../../../util/route";
 
 import "./style.scss";
+import { Helmet } from "react-helmet";
 const MainCreateSurvey = (props) => {
   const [title, setTitle] = useState("");
   const [btnDisabled, setBtnDisabled] = useState(true);
@@ -131,6 +137,18 @@ const MainCreateSurvey = (props) => {
     renderingLoading = "create now";
   }
 
+  const header = useMemo(() => {
+    return (
+      <Helmet title={process.env.REACT_APP_NAME + " - Create Survey"}>
+        <meta charSet='utf-8' />
+        <link
+          rel='canonical'
+          href={process.env.REACT_APP_BASE_URL_API + CREATE_SURVEY}
+        />
+      </Helmet>
+    );
+  }, []);
+
   return (
     <div id='main-create'>
       <div className='title'>
@@ -159,6 +177,7 @@ const MainCreateSurvey = (props) => {
           {renderingLoading}
         </button>
       </div>
+      {header}
     </div>
   );
 };

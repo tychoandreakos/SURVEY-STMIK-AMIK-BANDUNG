@@ -14,6 +14,7 @@ import {
   SURVEY_LOGO,
 } from "../../../../util/varTypes";
 import { CREATE_SURVEY_FORM } from "../../../../util/route";
+import { Helmet } from "react-helmet";
 
 const ViewResult = (props) => {
   const { surveyList, history, title, description, logo } = props;
@@ -43,6 +44,15 @@ const ViewResult = (props) => {
     return undefined;
   }, [styleLogo, logo]);
 
+  const header = useMemo(() => {
+    return (
+      <Helmet title={process.env.REACT_APP_NAME + " - View Result"}>
+        <meta charSet='utf-8' />
+        <link rel='canonical' />
+      </Helmet>
+    );
+  }, []);
+
   return (
     <div className='view-result'>
       <div className='content'>
@@ -57,6 +67,7 @@ const ViewResult = (props) => {
         <div className='right'></div>
       </div>
       <Device />
+      {header}
     </div>
   );
 };
