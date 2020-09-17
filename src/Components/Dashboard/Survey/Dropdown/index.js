@@ -9,6 +9,7 @@ import Copy from "@iconify/icons-mdi/layers";
 import Delete from "@iconify/icons-mdi/trash-can";
 import Dialog from "../../Dialog";
 import { EDIT_SURVEY_FORM } from "../../../../util/route";
+import Trash from "@iconify/icons-mdi/trash";
 
 import {
   deleteSurvey,
@@ -102,6 +103,8 @@ const DropdownSurveyList = (props) => {
   const renderDialog = dialog ? (
     <Dialog
       onCancelHandler={onCancelHandler}
+      desc='Are you sure want to delete this survey? your data will never comeback.'
+      icon={Trash}
       title='Yes, Delete'
       onConfirmHandler={deleteHandler}
     />

@@ -17,6 +17,19 @@ $Roboto: "Roboto", sans-serif;
     width: 95px;
     height: 95px;
     margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font: {
+        size: 4rem;
+      }
+    }
   }
 
   .title {

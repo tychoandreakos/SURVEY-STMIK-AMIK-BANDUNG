@@ -1,18 +1,26 @@
 import React from "react";
+import Icon from "@iconify/react";
 
 import "./style.scss";
 
 const Dialog = (props) => {
-  const { onCancelHandler, title = "Next", onConfirmHandler } = props;
+  const {
+    onCancelHandler,
+    icon,
+    desc,
+    title = "Next",
+    onConfirmHandler,
+  } = props;
   return (
     <>
       <div className='dialog'>
         <div className='body'>
-          <div className='icon-image'></div>
-          <div className='title'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
-            accusamus a modi est fugiat numquam?
+          <div className='icon-image'>
+            <div className='icon'>
+              <Icon icon={icon} />
+            </div>
           </div>
+          <div className='title'>{desc}</div>
         </div>
         <div className='footer'>
           <div onClick={onCancelHandler} className='btn-dialog btn-left-dialog'>

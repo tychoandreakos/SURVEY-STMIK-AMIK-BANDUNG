@@ -20,16 +20,6 @@ import {
 } from "../../../../util/varTypes";
 
 import { gsap } from "gsap";
-
-// formBuilder
-import HeaderForm from "../Form/Header";
-import Result from "../Result";
-import NewQuestion from "../Form/NewQuestionFirst";
-import QuestionAnsweredForm from "../Form/QuestionAnsweredForm";
-
-import Dialog from "../../Dialog";
-import BtnOpt from "../BtnOpt";
-import FormBuilderContext from "../../../../Store/Context/formBuilder";
 import {
   cleanSurveyState,
   setMessagePrompt,
@@ -40,6 +30,17 @@ import {
   updateSurvey,
 } from "../../../../Store/redux/action";
 import { HOME_DASHBOARD } from "../../../../util/route";
+import OK from "@iconify/icons-mdi/hand-okay";
+
+// formBuilder
+import HeaderForm from "../Form/Header";
+import Result from "../Result";
+import NewQuestion from "../Form/NewQuestionFirst";
+import QuestionAnsweredForm from "../Form/QuestionAnsweredForm";
+
+import Dialog from "../../Dialog";
+import BtnOpt from "../BtnOpt";
+import FormBuilderContext from "../../../../Store/Context/formBuilder";
 
 import "./style.scss";
 
@@ -240,6 +241,8 @@ const ContentSurveyForm = (props) => {
   if (dialog) {
     renderDialog = (
       <Dialog
+        desc='Are you sure want to save survey? please push the red button.'
+        icon={OK}
         onCancelHandler={dialogHandler}
         onConfirmHandler={onSubmitHandler}
         title='Yes, Save'

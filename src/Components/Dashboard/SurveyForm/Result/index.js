@@ -11,6 +11,7 @@ import {
   copiedSurveyForm,
   setCanEdit,
 } from "../../../../Store/redux/action";
+import Trash from "@iconify/icons-mdi/trash";
 
 import { TYPE_QUESTION, RESULT_ACTION } from "../../../../util/varTypes";
 
@@ -174,6 +175,8 @@ const ResultSurvey = (props) => {
   if (dialog) {
     dialogEl = (
       <Dialog
+        desc='Are you sure want to delete this survey? your data will never comeback.'
+        icon={Trash}
         title='delete now'
         onConfirmHandler={deleteHandler}
         onCancelHandler={dialogHandler}
