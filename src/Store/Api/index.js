@@ -1,8 +1,6 @@
 import axios from "axios";
 import Cookies from "universal-cookie";
 
-console.log("damn");
-
 const _token = new Cookies().get("_token");
 
 /**

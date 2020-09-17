@@ -1,9 +1,9 @@
-import React, { Suspense, lazy, useEffect, useState } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import { useMemo } from "react";
 
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { fetchUser } from "../../../Store/redux/action";
-import { HOME_DASHBOARD } from "../../../util/route";
+import Cookies from "universal-cookie";
 import "./style.scss";
 
 const Header = lazy(() => import("../Header"));
@@ -13,9 +13,19 @@ const SurveyList = lazy(() => import("../SurveyList"));
 const Content = (props) => {
   const { fetchUser } = props;
 
+  const _token = useMemo(() => {
+    return new Cookies().get("_token");
+  }, []);
+
   const _id = useMemo(() => {
     return window.localStorage.getItem("_id");
   }, []);
+
+  useEffect(() => {
+    if (_token) {
+      console.log("welcome!");
+    }
+  }, [_token]);
 
   useEffect(() => {
     if (_id) {
