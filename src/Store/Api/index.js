@@ -1,4 +1,9 @@
 import axios from "axios";
+import Cookies from "universal-cookie";
+
+console.log("damn");
+
+const _token = new Cookies().get("_token");
 
 /**
  * Axios Instance
@@ -6,7 +11,7 @@ import axios from "axios";
 const client = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL_API + "/api",
   headers: {
-    Authorization: `bearer ${localStorage.getItem("_token")}`,
+    Authorization: `bearer ${_token}`,
     "Content-Type": "application/json",
   },
 });

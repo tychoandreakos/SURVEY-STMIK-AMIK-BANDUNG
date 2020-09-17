@@ -1,8 +1,9 @@
-import React, { Suspense, lazy, useEffect } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { useMemo } from "react";
 
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { fetchUser } from "../../../Store/redux/action";
+import { HOME_DASHBOARD } from "../../../util/route";
 import "./style.scss";
 
 const Header = lazy(() => import("../Header"));

@@ -5,6 +5,7 @@ import Icon from "@iconify/react";
 import FingerPrint from "@iconify/icons-mdi/fingerprint";
 import ButtonSubmit from "../ButtonSubmit";
 import { withRouter } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 import "./style.scss";
 import { AUTH_FORM, AUTH_MESSAGE, AUTH_STATUS } from "../../../util/varTypes";
@@ -76,7 +77,10 @@ const AuthWrapper = (props) => {
       window.localStorage.setItem("_token", success.data._token);
       window.localStorage.setItem("_id", success.data._id);
       window.localStorage.setItem("isAuth", true);
-      history.push(HOME_DASHBOARD);
+      new Cookies().set("_token", success.data._token);
+      setTimeout(() => {
+        history.push(HOME_DASHBOARD);
+      }, 1000);
     }
   }, [success]);
 
