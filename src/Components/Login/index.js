@@ -19,14 +19,9 @@ const Login = () => {
     );
   }, []);
 
-  const onSubmit = () => {
-    console.log("damn you login");
-  };
-
   return (
     <AuthWrapper
       method='login'
-      onSubmit={onSubmit}
       formSize={2}
       footer={footer}
       btnTitle='Log in'

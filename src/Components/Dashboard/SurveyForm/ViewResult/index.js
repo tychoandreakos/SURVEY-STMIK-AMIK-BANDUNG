@@ -13,13 +13,14 @@ import {
   SURVEY_HEADER,
   SURVEY_LOGO,
 } from "../../../../util/varTypes";
+import { CREATE_SURVEY_FORM } from "../../../../util/route";
 
 const ViewResult = (props) => {
   const { surveyList, history, title, description, logo } = props;
 
   useEffect(() => {
     if (surveyList.length < 1) {
-      history.push("/create/survey-form");
+      history.push(CREATE_SURVEY_FORM);
     }
   }, [surveyList, history]);
 

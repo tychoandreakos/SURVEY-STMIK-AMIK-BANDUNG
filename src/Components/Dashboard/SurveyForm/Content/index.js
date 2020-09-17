@@ -39,6 +39,7 @@ import {
   triggerMessage,
   updateSurvey,
 } from "../../../../Store/redux/action";
+import { HOME_DASHBOARD } from "../../../../util/route";
 
 import "./style.scss";
 
@@ -126,7 +127,7 @@ const ContentSurveyForm = (props) => {
       triggerLoader();
     }, 3000);
     setTimeout(() => {
-      history.push("/");
+      history.push(HOME_DASHBOARD);
       cleanState();
       triggerMsg();
     }, 5000);

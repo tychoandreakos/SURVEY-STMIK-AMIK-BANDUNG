@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Icon } from '@iconify/react';
 import PropTypes from 'prop-types';
+import { CREATE_SURVEY } from '../../../util/route';
 
 import './style.scss';
 
@@ -13,7 +14,7 @@ const Panel = ({ active, title, desc, icon }) => {
 
   if (active) {
     panelEl = (
-      <Link to="/create" className='panel-dashboard'>
+      <Link to={CREATE_SURVEY} className='panel-dashboard'>
         <div className='icon-wrapper'>
           <Icon color={color} width={size} height={size} icon={icon} />
         </div>

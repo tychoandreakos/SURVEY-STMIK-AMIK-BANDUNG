@@ -17,6 +17,11 @@ import BreadcrumbHeader from "../Breadcrumbs";
 
 import "./style.scss";
 import { setTitleSurvey } from "../../../../Store/redux/action";
+import {
+  CREATE_SURVEY,
+  HOME_DASHBOARD,
+  VIEW_RESULT,
+} from "../../../../util/route";
 
 const SurveyHeaderForm = (props) => {
   const [headTitle, setHeadTitle] = useState("");
@@ -31,11 +36,11 @@ const SurveyHeaderForm = (props) => {
     }
 
     if (!title && urlChecker === "create") {
-      history.push("/create");
+      history.push(CREATE_SURVEY);
     }
 
     if (!title && urlChecker === "edit") {
-      history.push("/");
+      history.push(HOME_DASHBOARD);
     }
   }, [title, history, match]);
   useEffect(() => {}, []);
@@ -68,7 +73,7 @@ const SurveyHeaderForm = (props) => {
 
   const viewResultHandler = () => {
     if (viewResult) {
-      history.push("/create/survey-form/view");
+      history.push(`${match.path}/view`);
     }
   };
 

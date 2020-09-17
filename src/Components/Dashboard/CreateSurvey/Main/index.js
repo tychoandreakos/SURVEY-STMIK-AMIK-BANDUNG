@@ -18,6 +18,7 @@ import {
 } from "../../../../util/varTypes";
 
 import Slider from "../Slider";
+import { CREATE_SURVEY_FORM, EDIT_SURVEY_FORM } from "../../../../util/route";
 
 import "./style.scss";
 const MainCreateSurvey = (props) => {
@@ -37,7 +38,7 @@ const MainCreateSurvey = (props) => {
 
   const redirectIfSuccess = useCallback(() => {
     if (editState && editState.hasOwnProperty("success") && editState.success) {
-      history.push("/edit/survey-form");
+      history.push(EDIT_SURVEY_FORM);
     }
   }, [editState, history]);
 
@@ -110,7 +111,7 @@ const MainCreateSurvey = (props) => {
       }, 400);
 
       setTimeout(() => {
-        history.push("/create/survey-form");
+        history.push(CREATE_SURVEY_FORM);
       }, 2000);
 
       setTimeout(() => {

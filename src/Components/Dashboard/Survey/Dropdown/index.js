@@ -8,6 +8,7 @@ import Share from "@iconify/icons-mdi/share-circle";
 import Copy from "@iconify/icons-mdi/layers";
 import Delete from "@iconify/icons-mdi/trash-can";
 import Dialog from "../../Dialog";
+import { EDIT_SURVEY_FORM } from "../../../../util/route";
 
 import {
   deleteSurvey,
@@ -38,7 +39,7 @@ const DropdownSurveyList = (props) => {
       triggerLoader();
       onEdit(_id);
       setTimeout(() => {
-        history.push("/edit/survey-form");
+        history.push(EDIT_SURVEY_FORM);
       }, 1500);
     }
   }, [_id, history, triggerLoader, onEdit]);

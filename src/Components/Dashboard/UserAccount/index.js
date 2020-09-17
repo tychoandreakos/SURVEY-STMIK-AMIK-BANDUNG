@@ -13,7 +13,6 @@ const UserAccount = (props) => {
   const { authInfo } = props;
 
   const email = useMemo(() => {
-    console.log(authInfo);
     if (authInfo && authInfo.email) {
       return authInfo.email;
     }
