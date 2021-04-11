@@ -1,5 +1,5 @@
-$Merriweather: "Merriweather", sans-serif;
-$Roboto: "Roboto", sans-serif;
+$Merriweather: 'Merriweather', sans-serif;
+$Roboto: 'Roboto', sans-serif;
 
 #survey-list {
   margin-top: 2rem;
@@ -11,6 +11,18 @@ $Roboto: "Roboto", sans-serif;
     font: {
       family: $Roboto;
       size: 0.9rem;
+    }
+  }
+
+  .survey-not-found {
+    margin-top: 3rem;
+    text-align: center;
+    color: #686f7a;
+    user-select: none;
+    font: {
+      family: $Roboto;
+      weight: 400;
+      size: 1em;
     }
   }
 
