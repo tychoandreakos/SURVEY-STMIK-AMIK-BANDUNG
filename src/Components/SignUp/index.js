@@ -37,7 +37,7 @@ const SignUp = (props) => {
         btnTitle='Sign up'
         formSize={3}
       >
-        <TextBox placeholder='Your Name' name='name' type='text' />
+        <TextBox placeholder='Your Name or Username' name='name' type='text' />
         <TextBox placeholder='E-mail address' name='email' type='text' />
         <TextBox placeholder='Your Password' name='password' type='password' />
       </AuthWrapper>

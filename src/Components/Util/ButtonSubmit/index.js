@@ -1,6 +1,4 @@
-import React, { useMemo, useState, useRef } from "react";
-import Loader from "react-loading";
-import { gsap } from "gsap";
+import React, { useMemo, useState, useEffect, useRef } from "react";
 
 import "./style.scss";
 
@@ -9,30 +7,18 @@ const ButtonSubmit = (props) => {
   const [loading, setLoading] = useState(false);
   const btnRef = useRef();
 
-  const loaderStyle = useMemo(() => {
-    return {
-      type: "spin",
-      color: "#fff",
-      height: 50,
-      width: 50,
-    };
-  }, []);
-
   const loadingHandler = () => {
-    gsap.to(btnRef.current, {
-      autoAlpha: 0,
-      duration: 0.4,
-    });
     setTimeout(() => {
       setLoading(!loading);
     }, 500);
   };
+
+  useEffect(() => console.log(props))
+
   const renderButton = useMemo(() => {
-    if (loading) return <Loader {...loaderStyle} />;
-    else
       return (
         <button disabled={disabled} onClick={onSubmit} ref={btnRef}>
-          {title}
+          {loading ? props.children : title}
         </button>
       );
   }, [loading]);
