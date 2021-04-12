@@ -1,163 +1,149 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  useMemo,
-} from "react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import Loading from "react-loading";
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import Loading from 'react-loading'
 
-import { setTitleSurvey, triggerLoader } from "../../../../Store/redux/action";
-import Textarea from "react-expanding-textarea";
+import { setTitleSurvey, triggerLoader } from '../../../../Store/redux/action'
+import Textarea from 'react-expanding-textarea'
 import {
   SURVEY_TITLE,
   SURVEY_FORM_BUILDER,
   SURVEY_LIST,
-} from "../../../../util/varTypes";
+} from '../../../../util/varTypes'
 
-import Slider from "../Slider";
+import Slider from '../Slider'
 import {
   CREATE_SURVEY,
   CREATE_SURVEY_FORM,
   EDIT_SURVEY_FORM,
   HOME_DASHBOARD,
-} from "../../../../util/route";
+} from '../../../../util/route'
 
-import "./style.scss";
-import { Helmet } from "react-helmet";
+import './style.scss'
+import { Helmet } from 'react-helmet'
 const MainCreateSurvey = (props) => {
-  const [title, setTitle] = useState("");
-  const [btnDisabled, setBtnDisabled] = useState(true);
-  const [loader, setLoader] = useState(false);
-  const titleRef = useRef({});
+  const [title, setTitle] = useState('')
+  const [btnDisabled, setBtnDisabled] = useState(true)
+  const [loader, setLoader] = useState(false)
+  const titleRef = useRef({})
   const {
     addTitle,
-    smallPlaceholder = "Create Survey Now",
-    placeholder = "Insert the title of the survey here",
+    smallPlaceholder = 'Create Survey Now',
+    placeholder = 'Insert the title of the survey here',
     history,
     titleState,
-    triggerLoading,
     editState,
-  } = props;
+  } = props
 
   const redirectIfSuccess = useCallback(() => {
-    if (editState && editState.hasOwnProperty("success") && editState.success) {
-      history.push(EDIT_SURVEY_FORM);
+    if (editState && editState.hasOwnProperty('success') && editState.success) {
+      history.push(EDIT_SURVEY_FORM)
     }
-  }, [editState, history]);
+  }, [editState, history])
 
   useEffect(() => {
-    redirectIfSuccess();
-  }, [redirectIfSuccess]);
+    redirectIfSuccess()
+  }, [redirectIfSuccess])
 
-  const titleMemo = useMemo(() => titleState, [titleState]);
+  const titleMemo = useMemo(() => titleState, [titleState])
   useEffect(() => {
     if (titleMemo !== undefined) {
-      setTitle(capitalizeAlter(titleMemo));
+      setTitle(capitalizeAlter(titleMemo))
     } else {
-      titleRef.current.focus();
+      titleRef.current.focus()
     }
-  }, [titleMemo]);
+  }, [titleMemo])
 
   const formatTitle = useCallback(() => {
-    return 8;
-  }, []);
+    return 8
+  }, [])
 
   const validation = useCallback(() => {
     if (title && title.length > formatTitle()) {
-      return true;
+      return true
     }
-    return false;
-  }, [title, formatTitle]);
+    return false
+  }, [title, formatTitle])
 
   const btnCallback = useCallback(() => {
     if (validation()) {
-      setBtnDisabled(false);
+      setBtnDisabled(false)
     } else {
-      setBtnDisabled(true);
+      setBtnDisabled(true)
     }
-  }, [validation]);
+  }, [validation])
 
-  useEffect(() => btnCallback(), [btnCallback]);
+  useEffect(() => btnCallback(), [btnCallback])
 
   function capitalizeAlter(val) {
-    return val.charAt(0).toUpperCase() + val.slice(1, val.length);
+    return val.charAt(0).toUpperCase() + val.slice(1, val.length)
   }
 
   const capitalize = (val) => {
-    return val.toUpperCase(val);
-  };
+    return val.toUpperCase(val)
+  }
 
   const enterHandler = (e) => {
     if (e.keyCode === 13) {
-      e.preventDefault();
+      e.preventDefault()
     }
-  };
+  }
 
   const titleHandler = (e) => {
     if (title.length < 1) {
-      setTitle(capitalize(e.target.value));
+      setTitle(capitalize(e.target.value))
     } else {
-      setTitle(e.target.value);
+      setTitle(e.target.value)
     }
-  };
+  }
 
   const x = () => {
-    triggerLoader();
-  };
+    triggerLoader()
+  }
 
   const onSubmit = () => {
     if (validation()) {
-      addTitle(title);
-      setLoader(true);
-      setTimeout(() => {
-        triggerLoading(); // enabled loader
-      }, 400);
+      addTitle(title)
+      setLoader(true)
 
       setTimeout(() => {
-        history.push(CREATE_SURVEY_FORM);
-      }, 2000);
-
-      setTimeout(() => {
-        triggerLoading(); // disabled loader
-      }, 3500);
+        history.push(CREATE_SURVEY_FORM)
+      }, 2000)
     }
-  };
+  }
 
   const onCancel = () => {
-    history.push(HOME_DASHBOARD);
-  };
+    history.push(HOME_DASHBOARD)
+  }
 
-  let renderingLoading;
+  let renderingLoading
   if (loader) {
-    renderingLoading = <Loading type='spin' width='25px' height='25px' />;
+    renderingLoading = <Loading type="spin" width="20px" height="20px" />
   } else {
-    renderingLoading = "create now";
+    renderingLoading = 'create now'
   }
 
   const header = useMemo(() => {
     return (
-      <Helmet title={process.env.REACT_APP_NAME + " - Create Survey"}>
-        <meta charSet='utf-8' />
+      <Helmet title={process.env.REACT_APP_NAME + ' - Create Survey'}>
+        <meta charSet="utf-8" />
         <link
-          rel='canonical'
+          rel="canonical"
           href={process.env.REACT_APP_BASE_URL_API + CREATE_SURVEY}
         />
       </Helmet>
-    );
-  }, []);
+    )
+  }, [])
 
   return (
-    <div id='main-create'>
-      <div className='title'>
-        <h5 className='small-title'>{smallPlaceholder}</h5>
-        <div onChange={x} className='main-title-wrapper'>
+    <div id="main-create">
+      <div className="title">
+        <h5 className="small-title">{smallPlaceholder}</h5>
+        <div onChange={x} className="main-title-wrapper">
           <Textarea
             ref={titleRef}
             placeholder={placeholder}
-            className='main-title'
+            className="main-title"
             onKeyDown={enterHandler}
             value={title}
             onChange={titleHandler}
@@ -165,40 +151,39 @@ const MainCreateSurvey = (props) => {
         </div>
       </div>
       <Slider />
-      <div className='create-survey'>
-        <button onClick={onCancel} className='btn btn-cancel'>
+      <div className="create-survey">
+        <button onClick={onCancel} className="btn btn-cancel">
           back to home
         </button>
         <button
           disabled={btnDisabled}
           onClick={onSubmit}
-          className='btn btn-create'
+          className="btn btn-create"
         >
           {renderingLoading}
         </button>
       </div>
       {header}
     </div>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => {
   return {
     titleState: state[SURVEY_FORM_BUILDER][SURVEY_TITLE],
     editState: state[SURVEY_LIST.FETCH_SURVEY_LIST][SURVEY_LIST.EDIT_SUCCESS],
-  };
-};
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
     addTitle: (title) => dispatch(setTitleSurvey(title)),
-    triggerLoading: () => dispatch(triggerLoader()),
-  };
-};
+  }
+}
 
 const MainCreateSurveyJoinRedux = connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(MainCreateSurvey));
+)(withRouter(MainCreateSurvey))
 
-export default MainCreateSurveyJoinRedux;
+export default MainCreateSurveyJoinRedux
