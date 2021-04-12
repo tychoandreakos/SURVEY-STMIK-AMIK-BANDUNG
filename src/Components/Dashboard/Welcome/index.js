@@ -51,7 +51,7 @@ const Welcome = (props) => {
         active: false,
       },
       {
-        icon: 20,
+        icon: 0,
         title: "total responses",
         desc: "the total amount of responses or feedback you get",
         active: false,
