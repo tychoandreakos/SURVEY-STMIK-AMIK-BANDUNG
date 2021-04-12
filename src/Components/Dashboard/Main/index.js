@@ -12,7 +12,7 @@ import SurveyStatus from "../SurveyStatus";
 import Settings from "../Settings";
 
 import { LOADER, MESSAGE, MESSAGE_PROMPT } from "../../../util/varTypes";
-import { triggerLoader, triggerMessage } from "../../../Store/redux/action";
+import { triggerMessage } from "../../../Store/redux/action";
 import {
   CREATE_SURVEY,
   CREATE_SURVEY_FORM,

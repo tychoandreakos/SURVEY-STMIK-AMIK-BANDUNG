@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import Loading from 'react-loading'
 
-import { setTitleSurvey, triggerLoader } from '../../../../Store/redux/action'
+import { setTitleSurvey } from '../../../../Store/redux/action'
 import Textarea from 'react-expanding-textarea'
 import {
   SURVEY_TITLE,
@@ -97,10 +97,6 @@ const MainCreateSurvey = (props) => {
     }
   }
 
-  const x = () => {
-    triggerLoader()
-  }
-
   const onSubmit = () => {
     if (validation()) {
       addTitle(title)
@@ -139,7 +135,7 @@ const MainCreateSurvey = (props) => {
     <div id="main-create">
       <div className="title">
         <h5 className="small-title">{smallPlaceholder}</h5>
-        <div onChange={x} className="main-title-wrapper">
+        <div className="main-title-wrapper">
           <Textarea
             ref={titleRef}
             placeholder={placeholder}

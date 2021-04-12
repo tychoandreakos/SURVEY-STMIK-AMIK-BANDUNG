@@ -119,11 +119,6 @@ export function editMultiChoiceForm(payload) {
   };
 }
 
-export function triggerLoader() {
-  return {
-    type: actionType.TRIGGER_LOADER,
-  };
-}
 
 export function copiedSurveyForm(payload) {
   return {

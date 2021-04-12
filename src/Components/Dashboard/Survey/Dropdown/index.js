@@ -14,7 +14,6 @@ import Trash from "@iconify/icons-mdi/trash";
 import {
   deleteSurvey,
   editSurvey,
-  triggerLoader,
 } from "../../../../Store/redux/action";
 
 import "./style.scss";
@@ -28,7 +27,6 @@ const DropdownSurveyList = (props) => {
     _id,
     onEdit,
     history,
-    triggerLoader,
   } = props;
 
   const dialogHandler = useCallback(() => {
@@ -37,13 +35,12 @@ const DropdownSurveyList = (props) => {
 
   const editHandler = useCallback(() => {
     if (_id.length > 1) {
-      triggerLoader();
       onEdit(_id);
       setTimeout(() => {
         history.push(EDIT_SURVEY_FORM);
       }, 1500);
     }
-  }, [_id, history, triggerLoader, onEdit]);
+  }, [_id, history, onEdit]);
 
   const dropdown = useMemo(() => {
     return [
@@ -126,7 +123,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onDelete: (id) => dispatch(deleteSurvey(id)),
     onEdit: (id) => dispatch(editSurvey(id)),
-    triggerLoader: () => dispatch(triggerLoader()),
   };
 };
 

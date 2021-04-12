@@ -25,7 +25,6 @@ import {
   setMessagePrompt,
   setTypeQuestion,
   storeSurvey,
-  triggerLoader,
   triggerMessage,
   updateSurvey,
 } from "../../../../Store/redux/action";
@@ -58,7 +57,6 @@ const ContentSurveyForm = (props) => {
     updateSurvey,
     showMessage,
     cleanState,
-    triggerLoader,
     triggerMsg,
     msgPrompt,
   } = props;
@@ -125,9 +123,6 @@ const ContentSurveyForm = (props) => {
       top: 0,
       behavior: "smooth",
     });
-    setTimeout(() => {
-      triggerLoader();
-    }, 3000);
     setTimeout(() => {
       history.push(HOME_DASHBOARD);
       cleanState();
@@ -304,7 +299,6 @@ const mapDispatchToProps = (dispatch) => {
     updateSurvey: (item) => dispatch(updateSurvey(item)),
     showMessage: (item) => dispatch(setMessagePrompt(item)),
     cleanState: () => dispatch(cleanSurveyState()),
-    triggerLoader: () => dispatch(triggerLoader()),
     triggerMsg: () => dispatch(triggerMessage()),
   };
 };
